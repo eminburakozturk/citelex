@@ -5,7 +5,7 @@ parçası da maddeyi sayar). Kapsam dışı sorularda isabet ölçülmez, ilk so
 ("bilmiyorum" eşiği için ön bilgi).
 
 NOT: 10 soru küçük bir örneklem; bu bir sağlık kontrolüdür, yöntem karşılaştırması değildir.
-Beklenen maddeler taslaktır, kullanıcı kanun metninden doğrular.
+Beklenen maddeler ve kanıt cümleleri eval/retrieval_smoke.jsonl içinde (durum=ajan_dogruladi).
 
 Kullanım: python -m eval.retrieval_check --mode hibrit -k 5
 """
@@ -47,7 +47,7 @@ def main() -> None:
 
     lines = [
         f"# Arama sağlık kontrolü ({args.mode}, ilk {args.k})", "",
-        "Beklenen maddeler taslaktır (kullanıcı doğrulaması bekliyor). 10 soru: sağlık kontrolü, "
+        "Beklenen maddeler ajan tarafından ayrıştırılmış metinden doğrulandı (kanit alanı); bağımsız insan doğrulaması değil. 10 soru: sağlık kontrolü, "
         "karşılaştırma değil. Hücre: beklenen maddenin sırası (— = ilk k'da yok).", "",
         "| # | Soru | Beklenen | " + " | ".join(METHODS) + " | Hibrit ilk 3 |",
         "|---|---|---|" + "---|" * len(METHODS) + "---|",
