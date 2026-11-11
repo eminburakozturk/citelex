@@ -14,14 +14,56 @@ from __future__ import annotations
 import json
 import re
 import sys
+from collections import Counter
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 
 import pdfplumber
 
-BODY_MIN_SIZE = 11.5          # bundan küçük karakterler: dipnot / dipnot işareti
-INDENT_X0 = (95.0, 115.0)     # paragraf başı girintisi
-CENTER_X0_MIN = 150.0         # ortalanmış bölüm başlıkları
+# Sayfa düzeni belgeden belgeye değişir (mevzuat.gov.tr Word PDF'i: gövde 12 pt, kenar 71, girinti 106;
+# "GeneratePdf" HTML çıktısı: gövde 10.2 pt, kenar 96, girinti 118). Değerler belgeden ölçülür: Layout.
+@dataclass
+class Layout:
+    body_size: float
+    margin: float
+    indent: float
+
+    @property
+    def body_min(self) -> float:          # bundan küçük: dipnot / dipnot işareti
+        return self.body_size - 0.5
+
+    @property
+    def marker(self) -> tuple[float, float]:   # metin içi dipnot işareti (12 pt gövdede 8 pt)
+        return (self.body_size * 0.62, self.body_size * 0.79)
+
+    @property
+    def footnote_no_max(self) -> float:   # sayfa altı dipnot numarası (12 pt gövdede 6.5-7 pt)
+        return self.body_size * 0.62
+
+    def is_indented(self, x0: float) -> bool:
+        return abs(x0 - self.indent) <= 9
+
+    def is_centered(self, x0: float) -> bool:
+        return x0 >= self.indent + 40
+
+
+def measure_layout(pdf) -> Layout:
+    sizes: Counter = Counter()
+    for page in pdf.pages:
+        for c in page.chars:
+            if c["text"].strip():
+                sizes[round(c["size"], 1)] += 1
+    body = sizes.most_common(1)[0][0]
+    xs: Counter = Counter()
+    for page in pdf.pages:
+        b = page.filter(lambda o: o.get("object_type") != "char" or o.get("size", 0) >= body - 0.5)
+        for ln in b.extract_text_lines():
+            xs[round(ln["x0"])] += 1
+    total = sum(xs.values())
+    margin = min(x for x, n in xs.items() if n >= 0.05 * total)
+    near = {x: n for x, n in xs.items() if margin + 10 <= x <= margin + 50}
+    indent = max(near, key=near.get) if near else margin + 35
+    return Layout(body, margin, indent)
 
 SOURCES_PATH = Path("configs/sources.json")
 
@@ -31,10 +73,14 @@ RE_MADDE = re.compile(
 )
 RE_FIKRA_NO = re.compile(r"^\((?P<n>\d+)\)\s*")
 RE_BENT = re.compile(r"^([a-zçğıöşü]{1,2}\)|\([IVX]+\)|[IVX]+\s*[-–.]\s|\([a-zçğıöşü]\)\s|\d+\.\s|[a-zçğıöşü]\.\s)")
-RE_ANNOT = re.compile(r"\((?:[^()]*?)(?:Ek|Değişik|Mülga|İptal|Başlığı|Yeniden)[^()]*?\d+/\d+/\d{4}[^()]*?md\s*\.?\)")
+# Değişiklik notu: "(Değişik: 6/5/2016-6715/1 md.)", "(Ek fıkra:11/6/2003-4884/10 md.)", yönetmeliklerde "(Değişik:RG-28/4/2019-30758)"
+RE_ANNOT = re.compile(r"\((?:[^()]*?)(?:Ek|Değişik|Mülga|İptal|Başlığı|Yeniden)[^()]*?\d+/\d+/\d{4}[^()]*?\)")
 RE_MULGA_FULL = re.compile(r"^\(\s*Mülga\s*:[^)]*\)\s*$")
 RE_ISLENDI = re.compile(r"^\(.*ilgili olup.*yerine işlenmiştir\.?\)\s*$", re.S)
-END_MARKERS = ("SAYILI CETVEL", "SAYILI KANUNA EK VE DEĞİŞİKLİK")
+# Kalın yazı tipi adı: "TimesNewRomanPS-BoldMT" veya Türkçe "TimesNewRomanKalın" (PDF'te "Kal?n" bozulabilir)
+RE_BOLD_FONT = re.compile(r"Bold|Kal.{1,2}n", re.I)
+END_MARKERS = ("SAYILI CETVEL", "SAYILI KANUNA EK VE DEĞİŞİKLİK", "İŞLENEMEYEN HÜKÜMLER",
+               "Yayımlandığı Resmî Gazete")   # sadece ilk madde görüldükten sonra kontrol edilir
 
 
 @dataclass
@@ -67,13 +113,10 @@ class Article:
     _paras: list[str] = field(default_factory=list, repr=False)
 
 
-MARKER_SIZE = (7.5, 9.5)       # metin içi dipnot işareti (8 pt)
-FOOTNOTE_NO_MAX = 7.5          # sayfa altındaki dipnot numarası (6.5-7 pt)
-
-
-def _marker_groups(page) -> list[tuple[float, float, str]]:
+def _marker_groups(page, L: Layout) -> list[tuple[float, float, str]]:
     """Metin içindeki dipnot işaretleri: (üst, alt, rakamlar). Bitişik rakamlar tek grup."""
-    chars = sorted((c for c in page.chars if MARKER_SIZE[0] <= c["size"] < MARKER_SIZE[1] and c["text"].strip()),
+    lo, hi = L.marker
+    chars = sorted((c for c in page.chars if lo <= c["size"] < hi and c["text"].strip() and c["text"].isdigit()),
                    key=lambda c: (round(c["top"]), c["x0"]))
     groups: list[list[dict]] = []
     for c in chars:
@@ -84,10 +127,11 @@ def _marker_groups(page) -> list[tuple[float, float, str]]:
     return [(g[0]["top"], g[0]["bottom"], "".join(c["text"] for c in g)) for g in groups]
 
 
-def _footnotes(page) -> dict[int, str]:
-    """Sayfa altı dipnotlar: küçük (<7.5 pt) numara + 11 pt italik metin."""
+def _footnotes(page, L: Layout) -> dict[int, str]:
+    """Sayfa altı dipnotlar: küçük numara (12 pt gövdede <7.5 pt) + gövdeden küçük italik metin."""
+    FOOTNOTE_NO_MAX = L.footnote_no_max
     fn = page.filter(lambda o: o.get("object_type") != "char" or o.get("size", 12) < FOOTNOTE_NO_MAX
-                     or ("Italic" in o.get("fontname", "") and o.get("size", 12) < BODY_MIN_SIZE))
+                     or ("Italic" in o.get("fontname", "") and o.get("size", 12) < L.body_min))
     notes: dict[int, str] = {}
     cur = None
     for ln in fn.extract_text_lines(return_chars=True):
@@ -109,24 +153,25 @@ def _footnotes(page) -> dict[int, str]:
     return notes
 
 
-def read_lines(pdf_path: Path) -> tuple[list[Line], dict[int, str]]:
+def read_lines(pdf_path: Path) -> tuple[list[Line], dict[int, str], Layout]:
     out: list[Line] = []
     notes: dict[int, str] = {}
     with pdfplumber.open(pdf_path) as pdf:
+        L = measure_layout(pdf)
         for pno, page in enumerate(pdf.pages, start=1):
-            groups = _marker_groups(page)
-            notes.update(_footnotes(page))
-            body = page.filter(lambda o: o.get("object_type") != "char" or o.get("size", 0) >= BODY_MIN_SIZE)
+            groups = _marker_groups(page, L)
+            notes.update(_footnotes(page, L))
+            body = page.filter(lambda o: o.get("object_type") != "char" or o.get("size", 0) >= L.body_min)
             for ln in body.extract_text_lines(return_chars=True):
                 text = re.sub(r"\s+", " ", ln["text"]).strip()
                 if not text:
                     continue
                 chars = [c for c in ln["chars"] if c["text"].strip()]
-                bold_flags = ["Bold" in c["fontname"] for c in chars]
+                bold_flags = [bool(RE_BOLD_FONT.search(c["fontname"])) for c in chars]
                 mk = [g for (top, bottom, g) in groups if ln["top"] - 4 <= top <= ln["bottom"]]
                 out.append(Line(text, ln["x0"], bold_flags[0] if bold_flags else False,
                                 all(bold_flags) if bold_flags else False, pno, mk))
-    return out, notes
+    return out, notes, L
 
 
 def split_markers(raw: str, known: set[int], last: int) -> list[int]:
@@ -174,7 +219,7 @@ def load_sources() -> dict:
 
 
 def parse(pdf_path: Path, meta: dict) -> list[Article]:
-    lines, notes = read_lines(pdf_path)
+    lines, notes, L = read_lines(pdf_path)
     known = set(notes)
     articles: list[Article] = []
     marker_map: dict[int, list[str]] = {}   # id(article) -> işaretler
@@ -185,10 +230,10 @@ def parse(pdf_path: Path, meta: dict) -> list[Article]:
     started = False
 
     def is_indented(ln: Line) -> bool:
-        return INDENT_X0[0] <= ln.x0 <= INDENT_X0[1]
+        return L.is_indented(ln.x0)
 
     for ln in lines:
-        if any(m in ln.text for m in END_MARKERS):
+        if started and any(m in ln.text for m in END_MARKERS):
             break
         m = RE_MADDE.match(ln.text)
         if m and ln.bold and is_indented(ln):
@@ -205,10 +250,10 @@ def parse(pdf_path: Path, meta: dict) -> list[Article]:
             if m["rest"]:
                 cur._paras.append(m["rest"])
             continue
-        if ln.all_bold and not ln.text.startswith("(") and (is_indented(ln) or ln.x0 >= CENTER_X0_MIN):
+        if ln.all_bold and not ln.text.startswith("(") and (is_indented(ln) or L.is_centered(ln.x0)):
             # başlık: ortalanmışsa bölüm başlığı, girintiliyse madde başlığı.
             # Sol kenardaki kalın satırlar (x0~71) başlık değil, kalın gövde metninin devamıdır.
-            if ln.x0 >= CENTER_X0_MIN:
+            if L.is_centered(ln.x0):
                 if "BÖLÜM" in ln.text or "KISIM" in ln.text:
                     bolum_parts = [ln.text]
                 else:
