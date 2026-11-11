@@ -1,0 +1,18 @@
+# Gizli
+.env
+
+# Veri (git'e girmez; results/ girer)
+data/
+qdrant_storage/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Editör / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

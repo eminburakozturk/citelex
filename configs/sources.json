@@ -1,0 +1,8 @@
+{
+  "_aciklama": "data/raw altındaki her PDF için bir kayıt. Anahtar: dosya adı. belge_id parça kimliklerinde kullanılır; kisa_ad atıfta görünür.",
+  "1.5.6698.pdf":  {"belge_id": "kvkk",        "belge_tur": "kanun",     "belge_no": "6698", "belge_adi": "Kişisel Verilerin Korunması Kanunu", "kisa_ad": "KVKK"},
+  "1.5.4857.pdf":  {"belge_id": "is-kanunu",   "belge_tur": "kanun",     "belge_no": "4857", "belge_adi": "İş Kanunu", "kisa_ad": "İş Kanunu"},
+  "1.5.1475.pdf":  {"belge_id": "is-kanunu-1475", "belge_tur": "kanun",  "belge_no": "1475", "belge_adi": "İş Kanunu (1475, mülga; m.14 yürürlükte)", "kisa_ad": "1475 s. İş Kanunu", "yururlukte_maddeler": ["14"]},
+  "7.5.5451.pdf":  {"belge_id": "yillik-izin-yon", "belge_tur": "yonetmelik", "belge_no": "RG 25391", "belge_adi": "Yıllık Ücretli İzin Yönetmeliği", "kisa_ad": "Yıllık Ücretli İzin Yön.", "dayanak": "4857 s. İş Kanunu m. 60"},
+  "7.5.24038.pdf": {"belge_id": "imha-yon",    "belge_tur": "yonetmelik", "belge_no": "RG 30224", "belge_adi": "Kişisel Verilerin Silinmesi, Yok Edilmesi veya Anonim Hale Getirilmesi Hakkında Yönetmelik", "kisa_ad": "Silme-İmha Yön.", "dayanak": "6698 s. KVKK m. 7"}
+}
