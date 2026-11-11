@@ -1,0 +1,10 @@
+{"id": "r01", "soru": "Açık rıza alınmadan kişisel veriler hangi şartlarda işlenebilir?", "beklenen": ["kvkk:5"], "tur": "kanun", "durum": "taslak"}
+{"id": "r02", "soru": "Sağlık ve cinsel hayata ilişkin veriler hangi durumlarda işlenebilir?", "beklenen": ["kvkk:6"], "tur": "kanun", "durum": "taslak"}
+{"id": "r03", "soru": "Veri sorumlusu ilgili kişinin başvurusunu en geç kaç gün içinde sonuçlandırmalı?", "beklenen": ["kvkk:13", "basvuru-teblig:6"], "tur": "kanun+teblig", "durum": "taslak"}
+{"id": "r04", "soru": "İş sözleşmesine konulan deneme süresi en fazla ne kadar olabilir?", "beklenen": ["is-kanunu:15"], "tur": "kanun", "durum": "taslak"}
+{"id": "r05", "soru": "Fazla mesai ücreti normal ücrete göre yüzde kaç zamlı ödenir?", "beklenen": ["is-kanunu:41"], "tur": "kanun", "durum": "taslak"}
+{"id": "r06", "soru": "Beş yıldan fazla çalışmış bir işçinin yıllık izni kaç gündür?", "beklenen": ["is-kanunu:53", "yillik-izin-yon:9"], "tur": "kanun+yonetmelik", "durum": "taslak"}
+{"id": "r07", "soru": "Haftalık çalışma süresi en çok kaç saattir?", "beklenen": ["is-kanunu:63"], "tur": "kanun", "durum": "taslak"}
+{"id": "r08", "soru": "Kıdem tazminatına hak kazanmak için işyerinde en az ne kadar çalışmak gerekir?", "beklenen": ["is-kanunu-1475:14"], "tur": "kanun", "durum": "taslak"}
+{"id": "r09", "soru": "Saklama ve imha politikası olan şirket periyodik imhayı en geç kaç ayda bir yapmalı?", "beklenen": ["imha-yon:11"], "tur": "yonetmelik", "durum": "taslak"}
+{"id": "r10", "soru": "2026 yılında net asgari ücret ne kadardır?", "beklenen": [], "tur": "kapsam_disi", "durum": "taslak"}
