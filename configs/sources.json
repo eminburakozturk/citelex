@@ -24,14 +24,6 @@
       "14"
     ]
   },
-  "7.5.5451.pdf": {
-    "belge_id": "yillik-izin-yon",
-    "belge_tur": "yonetmelik",
-    "belge_no": "RG 25391",
-    "belge_adi": "Yıllık Ücretli İzin Yönetmeliği",
-    "kisa_ad": "Yıllık Ücretli İzin Yön.",
-    "dayanak": "4857 s. İş Kanunu m. 60"
-  },
   "7.5.24038.pdf": {
     "belge_id": "imha-yon",
     "belge_tur": "yonetmelik",
@@ -87,5 +79,13 @@
     "belge_adi": "İş Kanununa İlişkin Fazla Çalışma ve Fazla Sürelerle Çalışma Yönetmeliği",
     "kisa_ad": "Fazla Çalışma Yön.",
     "dayanak": "4857 s. İş Kanunu m. 41"
+  },
+  "yon_yillik_izin.pdf": {
+    "belge_id": "yillik-izin-yon",
+    "belge_tur": "yonetmelik",
+    "belge_no": "RG 25391",
+    "belge_adi": "Yıllık Ücretli İzin Yönetmeliği",
+    "kisa_ad": "Yıllık Ücretli İzin Yön.",
+    "dayanak": "4857 s. İş Kanunu m. 60"
   }
 }

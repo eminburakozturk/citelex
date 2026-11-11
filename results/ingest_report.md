@@ -13,12 +13,13 @@ Kaynak: mevzuat.gov.tr PDF (data/raw, 11 Kasım 2026'da indirildi)
 | Çalışma Süreleri Yön. | yonetmelik | 13 | 0 | 0 | 1 | 0 | 25 | 0 |
 | Fazla Çalışma Yön. | yonetmelik | 12 | 0 | 0 | 0 | 0 | 22 | 0 |
 | Sicil Yön. | yonetmelik | 20 | 0 | 0 | 0 | 0 | 40 | 0 |
+| Yıllık Ücretli İzin Yön. | yonetmelik | 23 | 0 | 0 | 0 | 0 | 55 | 0 |
 
 | Mod | Parça | Aktif | Medyan karakter | Maks karakter |
 |---|---|---|---|---|
-| madde | 260 | 232 | 563 | 7482 |
-| hibrit | 491 | 457 | 337 | 3661 |
-| fikra | 688 | 649 | 239 | 3661 |
+| madde | 283 | 255 | 545 | 7482 |
+| hibrit | 522 | 488 | 332 | 3661 |
+| fikra | 743 | 704 | 233 | 3661 |
 
 Mülga maddeler: 1475 s. İş Kanunu m. 1, 1475 s. İş Kanunu m. 15, 1475 s. İş Kanunu m. Ek 1, 1475 s. İş Kanunu m. Geçici 1, 1475 s. İş Kanunu m. 111, İş Kanunu m. 33, İş Kanunu m. 65, İş Kanunu m. 77, İş Kanunu m. 78, İş Kanunu m. 79, İş Kanunu m. 80, İş Kanunu m. 81, İş Kanunu m. 82, İş Kanunu m. 83, İş Kanunu m. 84, İş Kanunu m. 85, İş Kanunu m. 86, İş Kanunu m. 87, İş Kanunu m. 88, İş Kanunu m. 89, İş Kanunu m. 95, İş Kanunu m. 105, İş Kanunu m. Geçici 2, Çalışma Süreleri Yön. m. 10
 

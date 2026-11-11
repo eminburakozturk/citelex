@@ -18,3 +18,4 @@ Format: `- YYYY-MM-DD [ajan] karar — gerekçe`
 - 2026-11-11 [claude] Kalın yazı tespiti "Bold" veya Türkçe "Kalın" yazı tipi adıyla (Fazla Çalışma Yön. PDF'inde font adı "TimesNewRomanKal?n"; ilk denemede 0 madde çıktı).
 - 2026-11-11 [claude] ÇSGB'den indirilen Çalışma Süreleri ve Fazla Çalışma yönetmelikleri GeneratePdf sürümleriyle metin olarak birebir aynı; data/raw/_kopya'ya taşındı, okunmuyor. GeneratePdf dosyaları anlamlı adlarla yeniden adlandırıldı.
 - 2026-11-11 [claude] 1475'te mülga maddeler aralık olarak yazılı ("Madde 1-13/E- (Mülga...)"); her aralık tek kayıt olarak tutulur, m.14 dışındakiler mülga. "İŞLENEMEYEN HÜKÜMLER" bölümü (başka kanunların 1475'e işlenemeyen maddeleri) kapsam dışı.
+- 2026-11-11 [claude] Yönetmelik sonundaki "EK-I" gibi form/cetvel bölümleri madde metninden sayılmaz (Yıllık Ücretli İzin Yön. m.23'e izin kayıt formu karışıyordu).

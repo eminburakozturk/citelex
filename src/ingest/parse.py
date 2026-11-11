@@ -78,6 +78,7 @@ RE_ANNOT = re.compile(r"\((?:[^()]*?)(?:Ek|Değişik|Mülga|İptal|Başlığı|Y
 RE_MULGA_FULL = re.compile(r"^\(\s*Mülga\s*:[^)]*\)\s*$")
 RE_ISLENDI = re.compile(r"^\(.*ilgili olup.*yerine işlenmiştir\.?\)\s*$", re.S)
 # Kalın yazı tipi adı: "TimesNewRomanPS-BoldMT" veya Türkçe "TimesNewRomanKalın" (PDF'te "Kal?n" bozulabilir)
+RE_EK_FORM = re.compile(r"EK\s*[-–]?\s*[IVX0-9]+")   # "EK-I": yönetmelik sonundaki form/cetvel başlığı
 RE_BOLD_FONT = re.compile(r"Bold|Kal.{1,2}n", re.I)
 END_MARKERS = ("SAYILI CETVEL", "SAYILI KANUNA EK VE DEĞİŞİKLİK", "İŞLENEMEYEN HÜKÜMLER",
                "Yayımlandığı Resmî Gazete")   # sadece ilk madde görüldükten sonra kontrol edilir
@@ -233,8 +234,8 @@ def parse(pdf_path: Path, meta: dict) -> list[Article]:
         return L.is_indented(ln.x0)
 
     for ln in lines:
-        if started and any(m in ln.text for m in END_MARKERS):
-            break
+        if started and (any(m in ln.text for m in END_MARKERS) or RE_EK_FORM.fullmatch(ln.text)):
+            break   # ek cetvel / form / değişiklik tablosu: madde metni bitti
         m = RE_MADDE.match(ln.text)
         if m and ln.bold and is_indented(ln):
             started = True
