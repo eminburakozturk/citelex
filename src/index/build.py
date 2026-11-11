@@ -28,7 +28,9 @@ NS = uuid.UUID("6f0c2b52-58c6-4a8e-9a43-1f0e3c7d9b21")  # citelex chunk namespac
 PAYLOAD_KEYS = [
     "chunk_id", "belge_id", "belge_tur", "belge_no", "belge_adi", "madde_tur", "madde_no",
     "fikra_no", "baslik", "bolum", "atif", "mulga", "diger_kanuna_islendi", "dipnotlar", "metin",
+    "kategori", "url", "karar_tarihi",  # yalnız karar parçalarında dolu
 ]
+KARAR_CHUNKS = Path("data/processed/chunks_karar.jsonl")  # mod bağımsız; her koleksiyona eklenir
 INDEXES = {
     "belge_tur": models.PayloadSchemaType.KEYWORD,
     "belge_id": models.PayloadSchemaType.KEYWORD,
@@ -66,9 +68,13 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["madde", "fikra", "hibrit"], default="hibrit")
     ap.add_argument("--recreate", action="store_true")
+    ap.add_argument("--no-karar", action="store_true", help="KVKK karar parçalarını ekleme")
     args = ap.parse_args()
 
     chunks = [json.loads(l) for l in open(f"data/processed/chunks_{args.mode}.jsonl", encoding="utf-8")]
+    n_mevzuat = len(chunks)
+    if not args.no_karar and KARAR_CHUNKS.exists():
+        chunks += [json.loads(l) for l in open(KARAR_CHUNKS, encoding="utf-8")]
     texts = [c["embed_text"] for c in chunks]
     name = collection_name(args.mode)
     client = QdrantClient(url=QDRANT_URL)
@@ -87,7 +93,7 @@ def main() -> None:
     points = []
     for c, vec, text in zip(chunks, dense, texts):
         idx, val = bm25.doc_vector(text, params)
-        payload = {k: c[k] for k in PAYLOAD_KEYS}
+        payload = {k: c.get(k) for k in PAYLOAD_KEYS}
         payload["katman"] = "derin"
         payload["content_hash"] = hashlib.sha256(text.encode("utf-8")).hexdigest()
         points.append(models.PointStruct(
@@ -99,7 +105,8 @@ def main() -> None:
         client.upsert(name, points[i:i + 128], wait=True)
 
     info = client.get_collection(name)
-    print(f"{name}: {info.points_count} nokta | embed: {n_new} yeni / {len(texts)} ({t_emb:.1f} sn) | "
+    print(f"{name}: {info.points_count} nokta ({n_mevzuat} mevzuat + {len(chunks) - n_mevzuat} karar) | "
+          f"embed: {n_new} yeni / {len(texts)} ({t_emb:.1f} sn) | "
           f"BM25 k1={params.k1} b={params.b} avgdl={params.avgdl:.1f} (N={params.n_docs})")
 
 
