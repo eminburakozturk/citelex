@@ -1,0 +1,325 @@
+{
+ "_aciklama": "KVKK Kurul karar özetleri, elle kaydedilecek 40 karar (kullanıcı onayı, 11 Kas). Dosyalar data/raw/kvkk_karar/ altına 'dosya' adıyla, 'Web sayfası, yalnızca HTML' olarak kaydedilir.",
+ "kararlar": [
+  {
+   "karar_no": "2023/2007",
+   "tarih": "30.11.2023",
+   "kategori": "isyeri",
+   "konu": "İşverenin işyerinde kamerayla görüntü ve ses kaydı alması",
+   "url": "https://www.kvkk.gov.tr/Icerik/8846/2023-2007",
+   "dosya": "karar_2023-2007.html"
+  },
+  {
+   "karar_no": "2024/540",
+   "tarih": "28.03.2024",
+   "kategori": "isyeri",
+   "konu": "İşyerinin kamerayla izlenmesi",
+   "url": "https://www.kvkk.gov.tr/Icerik/8880/2024-540",
+   "dosya": "karar_2024-540.html"
+  },
+  {
+   "karar_no": "2022/797",
+   "tarih": "04.08.2022",
+   "kategori": "isyeri",
+   "konu": "İşyerinde güvenlik kamerası ve giriş-çıkışta yüz tanıma",
+   "url": "https://www.kvkk.gov.tr/Icerik/7434/2022-797",
+   "dosya": "karar_2022-797.html"
+  },
+  {
+   "karar_no": "2024/197",
+   "tarih": "08.02.2024",
+   "kategori": "isyeri",
+   "konu": "Üniversitede parmak iziyle devamsızlık takibi",
+   "url": "https://www.kvkk.gov.tr/Icerik/8860/2024-197",
+   "dosya": "karar_2024-197.html"
+  },
+  {
+   "karar_no": "2023/86",
+   "tarih": "19.01.2023",
+   "kategori": "isyeri",
+   "konu": "Çalışanların kurumsal e-postalarının izlenmesi",
+   "url": "https://www.kvkk.gov.tr/Icerik/7593/2023-86",
+   "dosya": "karar_2023-86.html"
+  },
+  {
+   "karar_no": "2022/1147",
+   "tarih": "20.10.2022",
+   "kategori": "isyeri",
+   "konu": "İş akdinin feshinden sonra verilerin işlenmeye devam edilmesi",
+   "url": "https://www.kvkk.gov.tr/Icerik/7581/2022-1147",
+   "dosya": "karar_2022-1147.html"
+  },
+  {
+   "karar_no": "2021/1258",
+   "tarih": "16.12.2021",
+   "kategori": "isyeri",
+   "konu": "İş akdi sona erdikten sonra şirketçe hukuka aykırı işleme",
+   "url": "https://www.kvkk.gov.tr/Icerik/7286/2021-1258",
+   "dosya": "karar_2021-1258.html"
+  },
+  {
+   "karar_no": "2023/646",
+   "tarih": "27.04.2023",
+   "kategori": "isyeri",
+   "konu": "Çalışanların özlük bilgilerinin tüm personelle paylaşılması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7757/2023-646",
+   "dosya": "karar_2023-646.html"
+  },
+  {
+   "karar_no": "2022/386",
+   "tarih": "21.04.2022",
+   "kategori": "isyeri",
+   "konu": "İş akdinin sonlandırılmasının sosyal medyada paylaşılması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7562/2022-386",
+   "dosya": "karar_2022-386.html"
+  },
+  {
+   "karar_no": "2022/172",
+   "tarih": "24.02.2022",
+   "kategori": "isyeri",
+   "konu": "İşe alımda adaylardan özel nitelikli veri talep edilmesi",
+   "url": "https://www.kvkk.gov.tr/Icerik/7294/2022-172",
+   "dosya": "karar_2022-172.html"
+  },
+  {
+   "karar_no": "2021/1051",
+   "tarih": "14.10.2021",
+   "kategori": "isyeri",
+   "konu": "İstihdam platformunun KVKK'ya aykırı uygulamaları",
+   "url": "https://www.kvkk.gov.tr/Icerik/7261/2021-1051",
+   "dosya": "karar_2021-1051.html"
+  },
+  {
+   "karar_no": "2022/491",
+   "tarih": "18.05.2022",
+   "kategori": "isyeri",
+   "konu": "İş ilişkisi bittikten sonra katalog fotoğraflarının kullanılması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7564/2022-491",
+   "dosya": "karar_2022-491.html"
+  },
+  {
+   "karar_no": "2022/662",
+   "tarih": "07.07.2022",
+   "kategori": "isyeri",
+   "konu": "Bina girişinde açık rızasız el geometrisi verisi",
+   "url": "https://www.kvkk.gov.tr/Icerik/7399/2022-662",
+   "dosya": "karar_2022-662.html"
+  },
+  {
+   "karar_no": "2024/1393",
+   "tarih": "15.08.2024",
+   "kategori": "acik_riza",
+   "konu": "Uçakta internet hizmetinin açık rıza şartına bağlanması",
+   "url": "https://www.kvkk.gov.tr/Icerik/8885/2024-1393",
+   "dosya": "karar_2024-1393.html"
+  },
+  {
+   "karar_no": "2023/890",
+   "tarih": "25.05.2023",
+   "kategori": "acik_riza",
+   "konu": "Havayolu yolcu programının açık rıza şartına bağlanması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7760/2023-890",
+   "dosya": "karar_2023-890.html"
+  },
+  {
+   "karar_no": "2023/692",
+   "tarih": "02.05.2023",
+   "kategori": "acik_riza",
+   "konu": "Sağlık hizmetinin açık rıza şartına bağlanması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7691/2023-692",
+   "dosya": "karar_2023-692.html"
+  },
+  {
+   "karar_no": "2026/1183",
+   "tarih": "10.06.2026",
+   "kategori": "pazarlama",
+   "konu": "İzinsiz pazarlama SMS'i ve araması",
+   "url": "https://www.kvkk.gov.tr/Icerik/8887/2026-1183",
+   "dosya": "karar_2026-1183.html"
+  },
+  {
+   "karar_no": "2022/902",
+   "tarih": "02.09.2022",
+   "kategori": "pazarlama",
+   "konu": "Açık rızasız pazarlama SMS'i",
+   "url": "https://www.kvkk.gov.tr/Icerik/7585/2022-902",
+   "dosya": "karar_2022-902.html"
+  },
+  {
+   "karar_no": "2022/31",
+   "tarih": "18.01.2022",
+   "kategori": "pazarlama",
+   "konu": "Sağlık sektöründe açık rızasız ticari elektronik ileti",
+   "url": "https://www.kvkk.gov.tr/Icerik/7292/2022-31",
+   "dosya": "karar_2022-31.html"
+  },
+  {
+   "karar_no": "2022/863",
+   "tarih": "01.09.2022",
+   "kategori": "aydinlatma",
+   "konu": "Bankanın aydınlatmasız ve rızasız telefonla araması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7582/2022-863",
+   "dosya": "karar_2022-863.html"
+  },
+  {
+   "karar_no": "2022/1358",
+   "tarih": "23.12.2022",
+   "kategori": "aydinlatma",
+   "konu": "Çerezler için aydınlatma ve açık rıza metni sunulmaması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7595/2022-1358",
+   "dosya": "karar_2022-1358.html"
+  },
+  {
+   "karar_no": "2024/1361",
+   "tarih": "08.08.2024",
+   "kategori": "aydinlatma",
+   "konu": "Kamera ses kaydı, çerezler, hizmetin ön şartı olarak pazarlama rızası",
+   "url": "https://www.kvkk.gov.tr/Icerik/8884/2024-1361",
+   "dosya": "karar_2024-1361.html"
+  },
+  {
+   "karar_no": "2022/1357",
+   "tarih": "23.12.2022",
+   "kategori": "ozel_nitelikli",
+   "konu": "Spor salonunun açık rızasız kan grubu verisi alması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7594/2022-1357",
+   "dosya": "karar_2022-1357.html"
+  },
+  {
+   "karar_no": "2023/767",
+   "tarih": "11.05.2023",
+   "kategori": "ozel_nitelikli",
+   "konu": "Sağlık verilerinin gazetede yayımlanması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7758/2023-767",
+   "dosya": "karar_2023-767.html"
+  },
+  {
+   "karar_no": "2023/1310",
+   "tarih": "03.08.2023",
+   "kategori": "ozel_nitelikli",
+   "konu": "Banka mobil uygulamasında yüz verisiyle parola",
+   "url": "https://www.kvkk.gov.tr/Icerik/7775/2023-1310",
+   "dosya": "karar_2023-1310.html"
+  },
+  {
+   "karar_no": "2023/787",
+   "tarih": "11.05.2023",
+   "kategori": "ozel_nitelikli",
+   "konu": "Hastanenin reklamda sağlık verisi kullanması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7692/2023-787",
+   "dosya": "karar_2023-787.html"
+  },
+  {
+   "karar_no": "2022/630",
+   "tarih": "29.06.2022",
+   "kategori": "ozel_nitelikli",
+   "konu": "Ameliyat fotoğraflarının doktorca sosyal medyada paylaşılması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7567/2022-630",
+   "dosya": "karar_2022-630.html"
+  },
+  {
+   "karar_no": "2024/592",
+   "tarih": "18.04.2024",
+   "kategori": "basvuru_haklar",
+   "konu": "Telefon kayıtlarına erişim talebinin reddi",
+   "url": "https://www.kvkk.gov.tr/Icerik/8881/2024-592",
+   "dosya": "karar_2024-592.html"
+  },
+  {
+   "karar_no": "2024/444",
+   "tarih": "14.03.2024",
+   "kategori": "basvuru_haklar",
+   "konu": "Kapatılan borcun risk raporundan silinmesi talebinin reddi",
+   "url": "https://www.kvkk.gov.tr/Icerik/8879/2024-444",
+   "dosya": "karar_2024-444.html"
+  },
+  {
+   "karar_no": "2023/892",
+   "tarih": "25.05.2023",
+   "kategori": "basvuru_haklar",
+   "konu": "Kooperatiften ayrıldıktan sonra verilerin işlenmeye devamı",
+   "url": "https://www.kvkk.gov.tr/Icerik/7761/2023-892",
+   "dosya": "karar_2023-892.html"
+  },
+  {
+   "karar_no": "2023/1321",
+   "tarih": "03.08.2023",
+   "kategori": "basvuru_haklar",
+   "konu": "Eski ortağın e-posta verilerinin işlenmeye devamı",
+   "url": "https://www.kvkk.gov.tr/Icerik/7776/2023-1321",
+   "dosya": "karar_2023-1321.html"
+  },
+  {
+   "karar_no": "2023/570",
+   "tarih": "11.04.2023",
+   "kategori": "olculuk",
+   "konu": "Kripto platformunun gereğinden fazla veri talebi",
+   "url": "https://www.kvkk.gov.tr/Icerik/7756/2023-570",
+   "dosya": "karar_2023-570.html"
+  },
+  {
+   "karar_no": "2023/426",
+   "tarih": "22.03.2023",
+   "kategori": "olculuk",
+   "konu": "Finansman şirketinin e-Devlet şifresi talep etmesi",
+   "url": "https://www.kvkk.gov.tr/Icerik/7599/2023-426",
+   "dosya": "karar_2023-426.html"
+  },
+  {
+   "karar_no": "2024/2196",
+   "tarih": "26.12.2024",
+   "kategori": "ihlal_guvenlik",
+   "konu": "Veri ihlali bildirimi incelemesi (üretim şirketi)",
+   "url": "https://www.kvkk.gov.tr/Icerik/8870/2024-2196",
+   "dosya": "karar_2024-2196.html"
+  },
+  {
+   "karar_no": "2024/1385",
+   "tarih": "08.08.2024",
+   "kategori": "ihlal_guvenlik",
+   "konu": "E-ticaret platformunun veri ihlali bildirimi",
+   "url": "https://www.kvkk.gov.tr/Icerik/8140/2024-1385",
+   "dosya": "karar_2024-1385.html"
+  },
+  {
+   "karar_no": "2023/4",
+   "tarih": "05.01.2023",
+   "kategori": "ihlal_guvenlik",
+   "konu": "Kargo barkod hatasıyla verilerin paylaşılması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7598/2023-4",
+   "dosya": "karar_2023-4.html"
+  },
+  {
+   "karar_no": "2023/67",
+   "tarih": "12.01.2023",
+   "kategori": "ihlal_guvenlik",
+   "konu": "Bankanın hesap bilgilerini üçüncü kişinin e-postasına göndermesi",
+   "url": "https://www.kvkk.gov.tr/Icerik/7592/2023-67",
+   "dosya": "karar_2023-67.html"
+  },
+  {
+   "karar_no": "2023/1796",
+   "tarih": "19.10.2023",
+   "kategori": "ihlal_guvenlik",
+   "konu": "İnternet sitesinde verilerin üçüncü kişilere açılması",
+   "url": "https://www.kvkk.gov.tr/Icerik/8843/2023-1796",
+   "dosya": "karar_2023-1796.html"
+  },
+  {
+   "karar_no": "2023/1309",
+   "tarih": "03.08.2023",
+   "kategori": "aktarim",
+   "konu": "Havayolunun verileri üçüncü kişilerle paylaşması",
+   "url": "https://www.kvkk.gov.tr/Icerik/7774/2023-1309",
+   "dosya": "karar_2023-1309.html"
+  },
+  {
+   "karar_no": "2023/437",
+   "tarih": "22.03.2023",
+   "kategori": "aktarim",
+   "konu": "Avukatlık ortaklığının borçluya SMS göndermesi",
+   "url": "https://www.kvkk.gov.tr/Icerik/7600/2023-437",
+   "dosya": "karar_2023-437.html"
+  }
+ ]
+}
