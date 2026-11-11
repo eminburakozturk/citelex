@@ -13,6 +13,12 @@
   doğrulaması gerektiğini belirt.
 - Gün sonunda kullanıcıya o gün yapılanı 3-4 cümleyle, mülakatta anlatabileceği şekilde açıkla.
 
+## Ortam (Windows)
+- Python her zaman citelex conda ortamından çalıştırılır; kabukta ortam açık olmayabilir (masaüstü uygulaması).
+  Doğrudan yol: `C:\Users\Burak\anaconda3\envs\citelex\python.exe` (örn. `... python.exe -m src.ingest.parse`).
+  Paket kurulumu: `C:\Users\Burak\anaconda3\envs\citelex\python.exe -m pip install <paket>`.
+- `python`/`pip` komutunu çıplak kullanma; base ortama veya sistem Python'una gider.
+
 ## İşbölümü protokolü (iki ajan için ortak)
 
 Bu repoda iki yapay zeka ajanı çalışır: **Claude (Claude Code)** ve **Antigravity (Gemini 4 Argon)**.
