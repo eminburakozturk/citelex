@@ -41,7 +41,7 @@ def main() -> None:
     for grp in ["dis_yakin", "dis_uzak"]:
         g = [sc for q, sc, _ in rows if q["kapsam"] == grp]
         lines.append(f"\n{grp}: {sum(sc < esik for sc in g)}/{len(g)} soru eşikte kesiliyor (skor aralığı {min(g):.3f}–{max(g):.3f})")
-    lines.append("\nNot: 10 soru; eşik kaba bir ilk filtredir. Eşiği geçen kapsam dışı sorular LLM katmanına (CEVAP_YOK) kalır.")
+    lines.append(f"\nNot: {len(rows)} soru; eşik kaba bir ilk filtredir. Eşiği geçen kapsam dışı sorular LLM katmanına (CEVAP_YOK) kalır.")
     Path("results/calibration.md").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print("\n".join(lines))
     if args.yaz:

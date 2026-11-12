@@ -8,3 +8,23 @@
 {"id": "c08", "soru": "İşsizlik maaşı kaç ay boyunca ödenir?", "kapsam": "dis_yakin", "not": "4447; derlemde yok"}
 {"id": "c09", "soru": "Boşanma davasında nafaka nasıl belirlenir?", "kapsam": "dis_uzak", "not": "Medeni Kanun; derlemde yok"}
 {"id": "c10", "soru": "Ehliyet sınavında kaç soru sorulur?", "kapsam": "dis_uzak", "not": "mevzuat dışı"}
+{"id": "c11", "soru": "Maaşım ödenmiyor, hemen istifa edebilir miyim?", "kapsam": "ic", "kaynak": "is-kanunu:24", "not": "… kırıcı asılsız ağır isnad veya ithamlarda bulunursa. d) İşçinin diğer bir işçi veya üçüncü kişiler tarafından işyerinde cinsel tacize uğraması ve bu durumu iş"}
+{"id": "c12", "soru": "İşveren hangi davranışlar yüzünden işçiyi bildirimsiz işten çıkarabilir?", "kapsam": "ic", "kaynak": "is-kanunu:25", "not": "… bildirim sürelerini altı hafta aşmasından sonra doğar. Doğum ve gebelik hallerinde bu süre 74 üncü maddedeki sürenin bitiminde başlar. Ancak işçinin iş sözleş"}
+{"id": "c13", "soru": "İşveren çalışma koşullarımı tek taraflı değiştirebilir mi?", "kapsam": "ic", "kaynak": "is-kanunu:22", "not": "… personel yönetmeliği ve benzeri kaynaklar ya da işyeri uygulamasıyla oluşan çalışma koşullarında esaslı bir değişikliği ancak durumu işçiye yazılı olarak bild"}
+{"id": "c14", "soru": "Belirli süreli iş sözleşmesi üst üste yenilenebilir mi?", "kapsam": "ic", "kaynak": "is-kanunu:11", "not": "… işin tamamlanması veya belirli bir olgunun ortaya çıkması gibi objektif koşullara bağlı olarak işveren ile işçi arasında yazılı şekilde yapılan iş sözleşmesi "}
+{"id": "c15", "soru": "Bayramda çalışan işçiye ne kadar ücret ödenir?", "kapsam": "ic", "kaynak": "is-kanunu:47", "not": "… giren işyerlerinde çalışan işçilere, kanunlarda ulusal bayram ve genel tatil günü olarak kabul edilen günlerde çalışmazlarsa, bir iş karşılığı olmaksızın o gü"}
+{"id": "c16", "soru": "İşten ayrılırken kullanmadığım yıllık izinler ne olur?", "kapsam": "ic", "kaynak": "is-kanunu:59", "not": "İş sözleşmesinin, herhangi bir nedenle sona ermesi halinde işçinin hak kazanıp da kullanmadığı yıllık izin sürelerine ait ücreti, sözleşmenin sona erdiği tariht"}
+{"id": "c17", "soru": "On sekiz yaşından küçük işçiler gece çalıştırılabilir mi?", "kapsam": "ic", "kaynak": "is-kanunu:73", "not": "Sanayie ait işlerde onsekiz yaşını doldurmamış çocuk ve genç işçilerin gece çalıştırılması yasaktır. Onsekiz yaşını doldurmuş kadın işçilerin gece postalarında "}
+{"id": "c18", "soru": "Kişisel veriler başka bir şirkete hangi şartla aktarılabilir?", "kapsam": "ic", "kaynak": "kvkk:8", "not": "(1) Kişisel veriler, ilgili kişinin açık rızası olmaksızın aktarılamaz. (2) Kişisel veriler; a) 5 inci maddenin ikinci fıkrasında, b) Yeterli önlemler alınmak k"}
+{"id": "c19", "soru": "KVKK hangi durumlarda uygulanmaz?", "kapsam": "ic", "kaynak": "kvkk:28", "not": "(1) Bu Kanun hükümleri aşağıdaki hâllerde uygulanmaz: a) Kişisel verilerin, üçüncü kişilere verilmemek ve veri güvenliğine ilişkin yükümlülüklere uyulmak kaydıy"}
+{"id": "c20", "soru": "Kripto borsası üyelik seviyemi yükseltmek için fazladan belge isteyebilir mi?", "kapsam": "ic", "kaynak": "kvkk-karar-2023-570", "not": "Kurul kararı"}
+{"id": "c21", "soru": "Banka mobil uygulamada yüz tanımayla şifre belirletebilir mi?", "kapsam": "ic", "kaynak": "kvkk-karar-2023-1310", "not": "Kurul kararı"}
+{"id": "c22", "soru": "Borcumu kapattım, kredi kayıt bürosundaki kaydımın silinmesini isteyebilir miyim?", "kapsam": "ic", "kaynak": "kvkk-karar-2024-444", "not": "Kurul kararı"}
+{"id": "c23", "soru": "Uçakta internet kullanmak için açık rıza istenmesi doğru mu?", "kapsam": "ic", "kaynak": "kvkk-karar-2024-1393", "not": "Kurul kararı"}
+{"id": "c24", "soru": "Yıllık izin ücretinden gelir vergisi kesilir mi?", "kapsam": "dis_yakin", "not": "derlemde yok (kalıp aranarak doğrulandı)"}
+{"id": "c25", "soru": "Toplu iş sözleşmesi en fazla kaç yıl için yapılabilir?", "kapsam": "dis_yakin", "not": "derlemde yok (kalıp aranarak doğrulandı)"}
+{"id": "c26", "soru": "İşyeri hekimi bulundurma zorunluluğu kaç işçiden itibaren başlar?", "kapsam": "dis_yakin", "not": "derlemde yok (kalıp aranarak doğrulandı)"}
+{"id": "c27", "soru": "Avrupa Birliği'nde kişisel verilerin korunması hangi tüzükle düzenlenir?", "kapsam": "dis_yakin", "not": "derlemde yok (kalıp aranarak doğrulandı)"}
+{"id": "c28", "soru": "Apartman aidatını ödemeyen kat malikine hangi gecikme faizi uygulanır?", "kapsam": "dis_uzak", "not": "derlemde yok (kalıp aranarak doğrulandı)"}
+{"id": "c29", "soru": "Pasaport harcı ne kadardır?", "kapsam": "dis_uzak", "not": "derlemde yok (kalıp aranarak doğrulandı)"}
+{"id": "c30", "soru": "Yıllık gelir vergisi beyannamesi hangi ayda verilir?", "kapsam": "dis_uzak", "not": "derlemde yok (kalıp aranarak doğrulandı)"}

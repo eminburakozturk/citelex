@@ -1,5 +1,5 @@
 {
   "_aciklama": "esik: dense top-1 benzerlik eşiği (eval/calibrate.py ile, eval setinden ayrı kalibrasyon setinden). null = eşik kapalı. derlem_tarihi: kaynakların indirildiği/son kontrol edildiği tarih (15 Kas'ta SQLite deposundan gelecek).",
-  "esik": 0.637,
+  "esik": 0.574,
   "derlem_tarihi": "2026-11-11"
 }
