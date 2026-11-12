@@ -78,8 +78,8 @@ citelex/
 | 13 Kas | Embedding + Qdrant + BM25 hibrit arama; geniş katman embedding'i gece çalışır | 10 elle soruda doğru kaynak ilk 5'te | Claude Code |
 | 14 Kas | LLM bağlantısı, kaynaklı cevap formatı, "bilmiyorum"; 40–50 soruluk eval seti (taslak ajan, doğrulama kullanıcı) | Uçtan uca soru-cevap + ilk eval tablosu | Claude Code |
 | 15 Kas | Kendini güncelleme: zamanlayıcı (APScheduler / Görev Zamanlayıcı), hash ile değişiklik tespiti, artımlı upsert, sürümleme, eval regresyonu, günlük | Elle "sahte değişiklik" ile test: sadece değişen doküman yeniden işlendi | Claude Code |
-| 16 Kas | FastAPI + Gradio (tür filtresi, kaynak + tarih gösterimi) + Docker Compose (Qdrant dahil) | `docker compose up` ile sistem açılıyor | Antigravity |
-| 17 Kas | README (mimari şeması, sonuç tablosu, sınırlar), küçük karşılaştırma (dense vs hibrit; yerel vs API, 10–15 soru), GitHub | Repo public | İkisi |
+| 16 Kas | FastAPI + Gradio (tür filtresi, kaynak + tarih gösterimi) + Docker Compose (Qdrant dahil) | `docker compose up` ile sistem açılıyor | Claude Code |
+| 17 Kas | README (mimari şeması, sonuç tablosu, sınırlar), küçük karşılaştırma (dense vs hibrit; yerel vs API, 10–15 soru), GitHub | Repo public | Claude Code |
 
 Sadeleştirme sırası (zaman yetmezse): reranker -> yerel vs API karşılaştırması -> geniş katman.
 Kendini güncelleme ve değerlendirme setinden VAZGEÇİLMEZ.
