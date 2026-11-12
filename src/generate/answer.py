@@ -29,6 +29,11 @@ def load_cfg() -> dict:
     return json.loads(CFG_PATH.read_text(encoding="utf-8")) if CFG_PATH.exists() else {}
 
 
+def source_key(payload: dict) -> str:
+    """Değerlendirmede kullanılan kaynak anahtarı: mevzuat 'belge_id:madde_no', karar 'kvkk-karar-YYYY-N'."""
+    return payload["belge_id"] if payload["belge_tur"] == "karar" else f"{payload['belge_id']}:{payload['madde_no']}"
+
+
 def build_context(searcher: Searcher, query: str, esik: float | None) -> tuple[list, dict]:
     """Bağlamı kur: iki kanal ayrı aranır; dense top-1'i eşiğin altında kalan kanal bağlama girmez.
 
@@ -67,6 +72,7 @@ class Answerer:
         if esik is not None and top1 < esik:
             return {**base, "bilmiyorum": True, "bilmiyorum_katmani": "arama_esigi", "cevap": prompt.NO_ANSWER_TEXT,
                     "neden": "Soru, derlemdeki kaynaklara yeterince yakın değil.", "kaynaklar": [],
+                    "baglam_anahtar": [source_key(h.payload) for h in hits], "gecersiz_atif": [],
                     "sure_sn": round(time.time() - t0, 2)}
         t1 = time.time()
         raw = self.llm.generate(prompt.SYSTEM, prompt.build_user(query, hits))
@@ -80,12 +86,14 @@ class Answerer:
         if not parsed["bilmiyorum"] and not parsed["atif_no"]:
             parsed.update(bilmiyorum=True, cevap=prompt.NO_ANSWER_TEXT, neden="Model kaynak göstermeden cevap verdi; cevap atıldı.")
             katman = "atif_dogrulama"
-        kaynaklar = [{"no": n, "atif": hits[n - 1].payload["atif"], "belge_tur": hits[n - 1].payload["belge_tur"],
+        kaynaklar = [{"no": n, "atif": hits[n - 1].payload["atif"], "anahtar": source_key(hits[n - 1].payload),
+                      "belge_tur": hits[n - 1].payload["belge_tur"],
                       "url": hits[n - 1].payload.get("url"), "alinti": hits[n - 1].payload["metin"][:300]}
                      for n in parsed["atif_no"]]
         return {**base, "bilmiyorum": parsed["bilmiyorum"], "bilmiyorum_katmani": katman, "cevap": parsed["cevap"],
                 "neden": parsed["neden"], "kaynaklar": kaynaklar, "gecersiz_atif": parsed["gecersiz_atif"],
-                "baglam": [h.payload["atif"] for h in hits], "ham": raw,
+                "baglam": [h.payload["atif"] for h in hits], "baglam_anahtar": [source_key(h.payload) for h in hits],
+                "ham": raw,
                 "sure_sn": round(time.time() - t0, 2), "arama_sn": round(t1 - t0, 2), "llm_sn": round(t2 - t1, 2)}
 
 
