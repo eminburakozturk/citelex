@@ -22,7 +22,7 @@ from qdrant_client import QdrantClient, models
 from . import bm25
 from .embed import DIM, Embedder
 
-QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
+from src.config import QDRANT_URL  # noqa: E402  (.env okunur; localhost -> 127.0.0.1)
 NS = uuid.UUID("6f0c2b52-58c6-4a8e-9a43-1f0e3c7d9b21")  # citelex chunk namespace (sabit)
 
 PAYLOAD_KEYS = [

@@ -26,7 +26,8 @@ def _key(text: str) -> str:
 
 
 class Embedder:
-    def __init__(self, cache_path: Path = CACHE_PATH, batch_size: int = 16):
+    def __init__(self, cache_path: Path = CACHE_PATH, batch_size: int = 16, device: str | None = None):
+        self.device = device  # None: varsa GPU. "cpu": sorgu anında VRAM'i LLM'e bırakmak için.
         cache_path.parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(cache_path)
         self.db.execute("CREATE TABLE IF NOT EXISTS emb (key TEXT PRIMARY KEY, dense BLOB, sparse TEXT)")
@@ -37,7 +38,10 @@ class Embedder:
     def model(self):
         if self._model is None:
             from FlagEmbedding import BGEM3FlagModel
-            self._model = BGEM3FlagModel(MODEL_NAME, use_fp16=True)
+            if self.device == "cpu":
+                self._model = BGEM3FlagModel(MODEL_NAME, use_fp16=False, devices=["cpu"])
+            else:
+                self._model = BGEM3FlagModel(MODEL_NAME, use_fp16=True)
         return self._model
 
     def _encode(self, texts: list[str]) -> tuple[np.ndarray, list[dict[str, float]]]:

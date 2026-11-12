@@ -8,6 +8,7 @@ Kullanım: python -m src.retrieve.search "yıllık izin kaç gün" --mode hibrit
 from __future__ import annotations
 
 import argparse
+import re
 from dataclasses import dataclass
 
 from qdrant_client import QdrantClient, models
@@ -19,6 +20,7 @@ from src.index.embed import Embedder
 RRF_K = 60
 PREFETCH = 50
 MEVZUAT_TURLERI = ["kanun", "yonetmelik", "teblig"]
+MAX_MADDE_CHARS = 3000  # bağlama tam madde girer; daha uzunsa eşleşen fıkra + komşuları
 
 
 def build_filter(belge_tur: list[str] | None = None, include_inactive: bool = False) -> models.Filter | None:
@@ -75,22 +77,79 @@ class Searcher:
                 raise ValueError(method)
         return [Hit(p.score, p.payload) for p in res.points]
 
+    def expand_to_articles(self, hits: list[Hit], k: int) -> list[Hit]:
+        """Fıkra üzerinden ara, maddenin tamamını ver ("small-to-big").
+
+        Arama birimi fıkra (isabetli eşleşme), bağlam birimi madde: eşleşen fıkranın kardeş fıkraları
+        da bağlama girer. Aksi halde tanım fıkrası bulunup asıl hükmü taşıyan fıkra dışarıda kalıyordu
+        (4857 m.69: "gece" tanımı 69/1 bulundu, 7,5 saat sınırı 69/3 bağlama girmedi).
+        Madde MAX_MADDE_CHARS'ı aşıyorsa yalnız eşleşen fıkralar ve birer komşuları alınır.
+        Sonuç: sıralaması korunmuş en çok k FARKLI madde; atıf madde düzeyinde.
+        """
+        groups: dict[tuple, list[Hit]] = {}
+        for h in hits:
+            p = h.payload
+            groups.setdefault((p["belge_id"], p["madde_tur"], p["madde_no"]), []).append(h)
+        out: list[Hit] = []
+        for (bid, mtur, mno), grp in list(groups.items())[:k]:
+            first = grp[0]
+            if first.payload.get("fikra_no") is None:  # madde zaten tek parça
+                out.append(first)
+                continue
+            pts, _ = self.client.scroll(self.name, scroll_filter=models.Filter(must=[
+                models.FieldCondition(key="belge_id", match=models.MatchValue(value=bid)),
+                models.FieldCondition(key="madde_tur", match=models.MatchValue(value=mtur)),
+                models.FieldCondition(key="madde_no", match=models.MatchValue(value=mno)),
+                models.FieldCondition(key="mulga", match=models.MatchValue(value=False)),
+            ]), limit=200, with_payload=True)
+            fk = sorted((p.payload for p in pts if p.payload.get("fikra_no") is not None), key=lambda x: x["fikra_no"])
+            eslesen = sorted({h.payload["fikra_no"] for h in grp})
+            if sum(len(x["metin"]) for x in fk) > MAX_MADDE_CHARS:
+                keep = {n + d for n in eslesen for d in (-1, 0, 1)}
+                fk = [x for x in fk if x["fikra_no"] in keep]
+            payload = dict(first.payload)
+            payload.update(
+                fikra_no=None, eslesen_fikralar=eslesen,
+                atif=re.sub(r"/\d+$", "", first.payload["atif"]),
+                metin="\n".join(f"{x['fikra_no']}. fıkra: {x['metin']}" for x in fk),
+            )
+            out.append(Hit(first.score, payload))
+        return out
+
     def search_context(self, query: str, method: str = "hybrid", k_mevzuat: int = 5,
-                       k_karar: int = 3, per_karar: int = 2) -> dict[str, list[Hit]]:
+                       k_karar: int = 3, per_karar: int = 2, max_chars: int = 14000) -> dict[str, list[Hit]]:
         """İki kanallı arama: mevzuat ve karar AYRI aranır (KARARLAR.md 2026-11-12).
 
         Tek havuzda kararlar, alıntıladıkları kanun maddesini ilk 5'in dışına itiyordu ve ilk
         sonuçların hepsi aynı karardan geliyordu. Burada birincil kaynak (mevzuat) için k_mevzuat
         yer ayrılır; karar kanalında en çok k_karar farklı karar, karar başına per_karar parça alınır.
         """
-        mevzuat = self.search(query, method, top_k=k_mevzuat, belge_tur=MEVZUAT_TURLERI)
-        aday = self.search(query, method, top_k=k_karar * per_karar * 5, belge_tur=["karar"])
-        per: dict[str, list[Hit]] = {}
-        for h in aday:
-            grp = per.setdefault(h.payload["belge_id"], [])
-            if len(grp) < per_karar and (len(per) <= k_karar):
-                grp.append(h)
-        karar = [h for bid in list(per)[:k_karar] for h in per[bid]]
+        mevzuat = self.expand_to_articles(
+            self.search(query, method, top_k=k_mevzuat * 3, belge_tur=MEVZUAT_TURLERI), k_mevzuat)
+        aday = self.search(query, method, top_k=30, belge_tur=["karar"])
+        # 1) Kararı OLGULARDAN bul: herhangi bir bölümü eşleşen ilk k_karar farklı karar.
+        sira: list[str] = list(dict.fromkeys(h.payload["belge_id"] for h in aday))[:k_karar]
+        # 2) Cevabı HÜKÜMDEN ver: bağlama şikâyet/savunma (taraf beyanı) değil, o kararın hüküm
+        #    bölümü + en iyi eşleşen Kurul değerlendirmesi girer. Aksi halde model veri sorumlusunun
+        #    savunmasını Kurul görüşü gibi aktarıyordu (KARARLAR.md 2026-11-12).
+        karar: list[Hit] = []
+        for bid in sira:
+            en_iyi = next(h for h in aday if h.payload["belge_id"] == bid)
+            deg = [h for h in aday if h.payload["belge_id"] == bid and h.payload["bolum"] == "degerlendirme"][:per_karar - 1]
+            pts, _ = self.client.scroll(self.name, scroll_filter=models.Filter(must=[
+                models.FieldCondition(key="belge_id", match=models.MatchValue(value=bid)),
+                models.FieldCondition(key="bolum", match=models.MatchValue(value="hukum")),
+            ]), limit=4, with_payload=True)
+            hukum = sorted((Hit(en_iyi.score, p.payload) for p in pts), key=lambda h: h.payload["chunk_id"])[:2]
+            karar += deg + hukum if hukum else [en_iyi]
+        # Bağlam bütçesi (yerel modelin 8k penceresi için): aşılırsa en düşük sıralı kaynaklar atılır.
+        def size() -> int:
+            return sum(len(h.payload["metin"]) for h in mevzuat + karar)
+        while size() > max_chars and (len(mevzuat) > 2 or len(karar) > 2):
+            if len(karar) > 2 and (len(mevzuat) <= 2 or sum(len(h.payload["metin"]) for h in karar) >= sum(len(h.payload["metin"]) for h in mevzuat)):
+                karar.pop()
+            else:
+                mevzuat.pop()
         return {"mevzuat": mevzuat, "karar": karar}
 
 

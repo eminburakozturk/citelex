@@ -1,0 +1,10 @@
+{"id": "c01", "soru": "İşçi iş sözleşmesini feshederken ne kadar önceden haber vermeli?", "kapsam": "ic", "not": "4857 m.17 bildirim süreleri"}
+{"id": "c02", "soru": "Gece çalışması en fazla kaç saat sürebilir?", "kapsam": "ic", "not": "4857 m.69"}
+{"id": "c03", "soru": "Kişisel veriler hangi durumlarda yurt dışına aktarılabilir?", "kapsam": "ic", "not": "KVKK m.9, Yurt Dışı Aktarım Yön."}
+{"id": "c04", "soru": "Veri sorumlusu aydınlatma yaparken hangi bilgileri vermek zorunda?", "kapsam": "ic", "not": "KVKK m.10, Aydınlatma Tebliği"}
+{"id": "c05", "soru": "Hastane reklamlarında hasta fotoğrafı kullanılabilir mi?", "kapsam": "ic", "not": "Kurul kararı 2023/787"}
+{"id": "c06", "soru": "Ev sahibi kirayı yılda en fazla yüzde kaç artırabilir?", "kapsam": "dis_yakin", "not": "Türk Borçlar Kanunu; derlemde yok"}
+{"id": "c07", "soru": "Emekli olmak için kaç gün prim ödemek gerekir?", "kapsam": "dis_yakin", "not": "5510; derlemde yok"}
+{"id": "c08", "soru": "İşsizlik maaşı kaç ay boyunca ödenir?", "kapsam": "dis_yakin", "not": "4447; derlemde yok"}
+{"id": "c09", "soru": "Boşanma davasında nafaka nasıl belirlenir?", "kapsam": "dis_uzak", "not": "Medeni Kanun; derlemde yok"}
+{"id": "c10", "soru": "Ehliyet sınavında kaç soru sorulur?", "kapsam": "dis_uzak", "not": "mevzuat dışı"}
