@@ -64,6 +64,55 @@ def create_collection(client: QdrantClient, name: str) -> None:
         client.create_payload_index(name, field, field_schema=schema)
 
 
+def load_chunks(mode: str, with_karar: bool = True) -> tuple[list[dict], int]:
+    """Bir koleksiyonun güncel parça listesi (mevzuat + karar) ve mevzuat parça sayısı."""
+    chunks = [json.loads(l) for l in open(f"data/processed/chunks_{mode}.jsonl", encoding="utf-8")]
+    n_mevzuat = len(chunks)
+    if with_karar and KARAR_CHUNKS.exists():
+        chunks += [json.loads(l) for l in open(KARAR_CHUNKS, encoding="utf-8")]
+    return chunks, n_mevzuat
+
+
+def content_hash(chunk: dict) -> str:
+    return hashlib.sha256(chunk["embed_text"].encode("utf-8")).hexdigest()
+
+
+def upsert_chunks(client: QdrantClient, name: str, chunks: list[dict], params: bm25.BM25Params,
+                  embedder: Embedder | None = None) -> tuple[int, float]:
+    """Parçaları yaz (aynı chunk_id -> üzerine yazar). (modele giden yeni metin sayısı, embed süresi)."""
+    if not chunks:
+        return 0, 0.0
+    texts = [c["embed_text"] for c in chunks]
+    t0 = time.time()
+    dense, _sparse, n_new = (embedder or Embedder()).embed(texts)
+    t_emb = time.time() - t0
+    points = []
+    for c, vec, text in zip(chunks, dense, texts):
+        idx, val = bm25.doc_vector(text, params)
+        payload = {k: c.get(k) for k in PAYLOAD_KEYS}
+        payload["katman"] = "derin"
+        payload["content_hash"] = content_hash(c)
+        points.append(models.PointStruct(
+            id=point_id(c["chunk_id"]),
+            vector={"dense": vec.tolist(), "bm25": models.SparseVector(indices=idx, values=val)},
+            payload=payload,
+        ))
+    for i in range(0, len(points), 128):
+        client.upsert(name, points[i:i + 128], wait=True)
+    return n_new, t_emb
+
+
+def indexed_state(client: QdrantClient, name: str) -> dict[str, str]:
+    """Koleksiyondaki chunk_id -> content_hash (artımlı güncellemenin karşılaştırma tabanı)."""
+    state, offset = {}, None
+    while True:
+        pts, offset = client.scroll(name, limit=1000, offset=offset, with_payload=["chunk_id", "content_hash"],
+                                    with_vectors=False)
+        state.update({p.payload["chunk_id"]: p.payload["content_hash"] for p in pts})
+        if offset is None:
+            return state
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["madde", "fikra", "hibrit"], default="hibrit")
@@ -71,10 +120,7 @@ def main() -> None:
     ap.add_argument("--no-karar", action="store_true", help="KVKK karar parçalarını ekleme")
     args = ap.parse_args()
 
-    chunks = [json.loads(l) for l in open(f"data/processed/chunks_{args.mode}.jsonl", encoding="utf-8")]
-    n_mevzuat = len(chunks)
-    if not args.no_karar and KARAR_CHUNKS.exists():
-        chunks += [json.loads(l) for l in open(KARAR_CHUNKS, encoding="utf-8")]
+    chunks, n_mevzuat = load_chunks(args.mode, not args.no_karar)
     texts = [c["embed_text"] for c in chunks]
     name = collection_name(args.mode)
     client = QdrantClient(url=QDRANT_URL)
@@ -86,23 +132,7 @@ def main() -> None:
     else:
         params = bm25.BM25Params.load(params_path(args.mode))
 
-    t0 = time.time()
-    dense, _sparse, n_new = Embedder().embed(texts)
-    t_emb = time.time() - t0
-
-    points = []
-    for c, vec, text in zip(chunks, dense, texts):
-        idx, val = bm25.doc_vector(text, params)
-        payload = {k: c.get(k) for k in PAYLOAD_KEYS}
-        payload["katman"] = "derin"
-        payload["content_hash"] = hashlib.sha256(text.encode("utf-8")).hexdigest()
-        points.append(models.PointStruct(
-            id=point_id(c["chunk_id"]),
-            vector={"dense": vec.tolist(), "bm25": models.SparseVector(indices=idx, values=val)},
-            payload=payload,
-        ))
-    for i in range(0, len(points), 128):
-        client.upsert(name, points[i:i + 128], wait=True)
+    n_new, t_emb = upsert_chunks(client, name, chunks, params)
 
     info = client.get_collection(name)
     print(f"{name}: {info.points_count} nokta ({n_mevzuat} mevzuat + {len(chunks) - n_mevzuat} karar) | "
