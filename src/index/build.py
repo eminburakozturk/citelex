@@ -35,6 +35,10 @@ INDEXES = {
     "belge_tur": models.PayloadSchemaType.KEYWORD,
     "belge_id": models.PayloadSchemaType.KEYWORD,
     "katman": models.PayloadSchemaType.KEYWORD,
+    # Qdrant Cloud filtrelenen her alan için indeks ister (yerel sürüm istemez): madde genişletme ve /kaynak filtreleri
+    "madde_tur": models.PayloadSchemaType.KEYWORD,
+    "madde_no": models.PayloadSchemaType.KEYWORD,
+    "bolum": models.PayloadSchemaType.KEYWORD,
     "mulga": models.PayloadSchemaType.BOOL,
     "diger_kanuna_islendi": models.PayloadSchemaType.BOOL,
 }

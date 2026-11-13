@@ -24,6 +24,7 @@ load_env()
 
 # 127.0.0.1: Windows'ta "localhost" önce IPv6'ya (::1) gidip istek başına saniyeler kaybettirebiliyor.
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://127.0.0.1:6333").replace("//localhost", "//127.0.0.1")
+QDRANT_API_KEY = os.environ.get("QDRANT_API_KEY") or None   # yalnız Qdrant Cloud (yayın); yerelde boş
 OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").replace("//localhost", "//127.0.0.1")
 if not OLLAMA_HOST.startswith("http"):
     OLLAMA_HOST = "http://" + OLLAMA_HOST

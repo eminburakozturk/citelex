@@ -14,6 +14,7 @@ Güvenlik:
 
 Ortam değişkenleri: CITELEX_LLM (gemini | ollama[:model]), CITELEX_EMBED_DEVICE (cpu | boş),
   CITELEX_RATE_DK (10), CITELEX_RATE_GUN (200), CITELEX_GUNLUK_TOPLAM (0 = kapalı),
+  CITELEX_WEB_DIR (statik arayüz klasörü), CITELEX_SON_KONTROL (depo yoksa gösterilecek tarih),
   CITELEX_TRUST_PROXY (1: istemci IP'si X-Forwarded-For'un son değerinden), CITELEX_CORS (virgüllü köken listesi).
 
 Çalıştırma: python -m uvicorn src.api.app:app --host 127.0.0.1 --port 8000
@@ -33,6 +34,7 @@ from typing import Literal
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from src.api.ratelimit import RateLimiter
@@ -70,8 +72,8 @@ def make_answerer():
 
 def last_check() -> str | None:
     """Kaynakların en son hatasız kontrol edildiği an (güncelleme hattının runs tablosu)."""
-    if not DB_PATH.exists():
-        return None
+    if not DB_PATH.exists():   # yayın ortamında depo yok: tarih yayın anında ortam değişkeniyle verilir
+        return os.environ.get("CITELEX_SON_KONTROL") or None
     try:
         con = sqlite3.connect(f"file:{DB_PATH.as_posix()}?mode=ro", uri=True)
         try:
@@ -193,6 +195,10 @@ def create_app(answerer=None) -> FastAPI:
                               "metin": p["metin"], "mulga": bool(p.get("mulga"))} for p in ps],
                 "dipnotlar": ilk.get("dipnotlar") or []}
 
+    # Statik arayüz (web/out) aynı adresten sunulur: yayında tek adres, CORS gerekmez. API yolları önce eşleşir.
+    web_dir = Path(os.environ.get("CITELEX_WEB_DIR", "web/out"))
+    if web_dir.is_dir():
+        app.mount("/", StaticFiles(directory=web_dir, html=True), name="web")
     return app
 
 

@@ -1,6 +1,8 @@
 // Citelex API istemcisi: /sor (SSE akışı), /kaynak, /saglik.
 
-export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+// "same-origin": arayüz API ile aynı adresten sunuluyor (yayın). Aksi halde tam adres (geliştirme, Tauri).
+const HAM = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+export const API_URL = HAM === "same-origin" ? "" : HAM.replace(/\/$/, "");
 
 export type Tur = "kanun" | "yonetmelik" | "teblig" | "karar";
 

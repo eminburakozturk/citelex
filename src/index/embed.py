@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sqlite3
 from pathlib import Path
 
@@ -19,6 +20,8 @@ MODEL_NAME = "BAAI/bge-m3"
 MAX_LENGTH = 2048
 DIM = 1024
 CACHE_PATH = Path("data/index/emb_cache.sqlite")
+# Yayın imajında model imaja gömülüdür (yalnız gereken dosyalar); yol bu değişkenle verilir. Önbellek anahtarı değişmez.
+MODEL_PATH = os.environ.get("CITELEX_BGE_PATH") or MODEL_NAME
 
 
 def _key(text: str) -> str:
@@ -39,9 +42,9 @@ class Embedder:
         if self._model is None:
             from FlagEmbedding import BGEM3FlagModel
             if self.device == "cpu":
-                self._model = BGEM3FlagModel(MODEL_NAME, use_fp16=False, devices=["cpu"])
+                self._model = BGEM3FlagModel(MODEL_PATH, use_fp16=False, devices=["cpu"])
             else:
-                self._model = BGEM3FlagModel(MODEL_NAME, use_fp16=True)
+                self._model = BGEM3FlagModel(MODEL_PATH, use_fp16=True)
         return self._model
 
     def _encode(self, texts: list[str]) -> tuple[np.ndarray, list[dict[str, float]]]:

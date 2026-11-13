@@ -106,11 +106,13 @@ Durum (13 Kas sabahı): 11–15 Kas satırlarının çekirdeği bitti (ayrıntı
 Son durum: 13 Kas akşamı. Biten: 6331 derlemde; eval seti 56 soru; **13 Kas satırı tamam** (FastAPI + Compose);
 **14 Kas satırı tamam** (Next.js arayüz `web/`: akış, kaynak paneli, tür filtresi; tarayıcıda uçtan uca doğrulandı).
 Çalıştırma: `docker compose up -d` (API 8000 + Qdrant), `npm --prefix web run dev` (3000). Statik çıktı: `npm --prefix web run build` -> `web/out`.
+15 Kas (bulutta yayın) YARIM: Qdrant Cloud'da indeks kurulu; yayın betikleri hazır (scripts/yayin_qdrant.py,
+scripts/yayin_space.py); yapılandırma yerelde bulut Qdrant'a karşı doğrulandı. ENGEL: Hugging Face Docker Space artık PRO
+abonelik istiyor (402) -> barındırma kararı kullanıcıda. Ayrıca Gemini ücretsiz kota günde 20 istek (gemini-3.6-flash).
 Sıradaki işler, sırayla ve DURMADAN:
-1. **15 Kas satırı:** bulutta yayın (Hugging Face Spaces: API + bge-m3 CPU; Qdrant Cloud; statik arayüz). Kullanıcıdan
-   Hugging Face ve Qdrant Cloud hesapları/anahtarları gerekir -> BURADA DURULUR. Hazırlık: bge-m3'ün yalnız gereken
-   dosyalarını indir, CITELEX_GUNLUK_TOPLAM ve CITELEX_CORS'u ayarla, indeksi Qdrant Cloud'a kur (1 GB sınırını ölç).
-2. Hesaplar gelene kadar: 16 Kas satırı (GitHub Actions + arama regresyonu kapısı, LLM hakemli sadakat, izlenebilirlik).
+1. Kullanıcının barındırma kararına göre yayını bitir (PRO ise: `python -m scripts.yayin_space`, derlemeyi izle, herkese
+   açık adresten soru-cevabı dene). Kararı beklerken 2'ye geç.
+2. 16 Kas satırı (GitHub Actions + arama regresyonu kapısı, LLM hakemli sadakat, izlenebilirlik).
 3. Takvim v2'nin kalan satırları.
 Kullanıcıdan beklenenler: eval setinin doğrulanması (56 soru, 4'ü yeni İSG sorusu); 15 Kas'ta Hugging Face ve Qdrant Cloud
 hesapları.
@@ -142,6 +144,7 @@ Kendini güncelleme ve değerlendirme setinden VAZGEÇİLMEZ.
 - `sources/resmigazete.py` (erken uyarı) ve `sources/hf_corpus.py` yazılmadı.
 - Mevzuat PDF'i değişiklik yolu canlı test edilmedi.
 - Eval seti kullanıcı doğrulaması bekliyor.
+- Gemini ile tam eval yapılamadı (ücretsiz kota günde 20 istek); model/faturalama kararı kullanıcıda.
 - madde/fikra koleksiyonları 6331 ve bent parçalamasıyla güncellenmedi (19 Kas'ta yeniden kurulacak).
 - Günlük toplam istek tavanı (CITELEX_GUNLUK_TOPLAM) yayından önce Gemini günlük kotasına göre ayarlanmalı.
 - HF Spaces'te bge-m3'ün yalnız gereken dosyaları indirilmeli (tam depo 4,3 GB, ~20 dk).

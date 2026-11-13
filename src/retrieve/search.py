@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 from qdrant_client import QdrantClient, models
 
+from src import config
 from src.index import bm25
 from src.index.build import QDRANT_URL, collection_name
 from src.index.embed import Embedder
@@ -43,7 +44,7 @@ class Hit:
 
 class Searcher:
     def __init__(self, mode: str = "hibrit", embedder: Embedder | None = None):
-        self.client = QdrantClient(url=QDRANT_URL)
+        self.client = QdrantClient(url=QDRANT_URL, api_key=config.QDRANT_API_KEY, timeout=30)
         self.name = collection_name(mode)
         self.embedder = embedder or Embedder()
         self._qcache: dict[str, list[float]] = {}
