@@ -1,8 +1,71 @@
 {
-  "uretim_tarihi": "2026-11-13T17:30:43+00:00",
+  "uretim_tarihi": "2026-11-13T17:39:31+00:00",
   "modeller": [
     {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan",
       "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "ajan",
+      "yapilandirma_adi": "ajan",
+      "rerank": false,
+      "ajan": true,
+      "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_ajan",
+      "tarih": "2026-11-13T20:39",
+      "commit": "a6958d2",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 45,
+      "icerik": 47,
+      "dogru": 44,
+      "dogru_orani": 0.88,
+      "yanlis_ret": 1,
+      "yanlis_ret_orani": 0.02,
+      "yanlis_ret_katmanlari": {
+        "arama_esigi": 1
+      },
+      "dogru_ret": 6,
+      "dogru_ret_orani": 1.0,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 2.42,
+      "sadakat": null
+    },
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "reranker",
+      "yapilandirma_adi": "reranker",
+      "rerank": true,
+      "ajan": false,
+      "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_rerank",
+      "tarih": "2026-11-13T20:33",
+      "commit": "ca327a3",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 47,
+      "atif": 41,
+      "icerik": 42,
+      "dogru": 40,
+      "dogru_orani": 0.8,
+      "yanlis_ret": 7,
+      "yanlis_ret_orani": 0.14,
+      "yanlis_ret_katmanlari": {
+        "arama_esigi": 7
+      },
+      "dogru_ret": 6,
+      "dogru_ret_orani": 1.0,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 3.66,
+      "sadakat": null
+    },
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017",
       "tarih": "2026-11-13T14:43",
       "commit": "8e4d3f2",
@@ -15,6 +78,9 @@
       "dogru_orani": 0.8,
       "yanlis_ret": 7,
       "yanlis_ret_orani": 0.14,
+      "yanlis_ret_katmanlari": {
+        "arama_esigi": 7
+      },
       "dogru_ret": 6,
       "dogru_ret_orani": 1.0,
       "gecersiz_atif": 0,
@@ -36,7 +102,12 @@
       }
     },
     {
+      "anahtar": "openrouter:qwen/qwen3.7-flash|tek_adim",
       "llm": "openrouter:qwen/qwen3.7-flash",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "tag": "openrouter_qwen_qwen3.7_flash",
       "tarih": "2026-11-13T14:41",
       "commit": "8e4d3f2",
@@ -49,6 +120,10 @@
       "dogru_orani": 0.78,
       "yanlis_ret": 8,
       "yanlis_ret_orani": 0.16,
+      "yanlis_ret_katmanlari": {
+        "arama_esigi": 7,
+        "llm": 1
+      },
       "dogru_ret": 6,
       "dogru_ret_orani": 1.0,
       "gecersiz_atif": 0,
@@ -70,7 +145,12 @@
       }
     },
     {
+      "anahtar": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim",
       "llm": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "tag": "openrouter_nvidia_nemotron_3_ultra_550b_a55b_free",
       "tarih": "2026-11-13T14:48",
       "commit": "8e4d3f2",
@@ -83,6 +163,10 @@
       "dogru_orani": 0.78,
       "yanlis_ret": 8,
       "yanlis_ret_orani": 0.16,
+      "yanlis_ret_katmanlari": {
+        "arama_esigi": 7,
+        "atif_dogrulama": 1
+      },
       "dogru_ret": 6,
       "dogru_ret_orani": 1.0,
       "gecersiz_atif": 0,
@@ -104,7 +188,12 @@
       }
     },
     {
+      "anahtar": "ollama:qwen2.5:7b|tek_adim",
       "llm": "ollama:qwen2.5:7b",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "tag": "ollama_qwen2.5_7b",
       "tarih": "2026-11-13T13:40",
       "commit": "c3dac88",
@@ -117,6 +206,11 @@
       "dogru_orani": 0.66,
       "yanlis_ret": 12,
       "yanlis_ret_orani": 0.24,
+      "yanlis_ret_katmanlari": {
+        "arama_esigi": 7,
+        "llm": 3,
+        "atif_dogrulama": 2
+      },
       "dogru_ret": 6,
       "dogru_ret_orani": 1.0,
       "gecersiz_atif": 0,
@@ -125,10 +219,164 @@
       "sadakat": null
     }
   ],
+  "yapilandirma_karsilastirmasi": [
+    {
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirmalar": [
+        {
+          "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim",
+          "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+          "yapilandirma": "tek_adim",
+          "yapilandirma_adi": "tek adım",
+          "rerank": false,
+          "ajan": false,
+          "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017",
+          "tarih": "2026-11-13T14:43",
+          "commit": "8e4d3f2",
+          "n_ic": 50,
+          "n_dis": 6,
+          "baglam": 45,
+          "atif": 40,
+          "icerik": 42,
+          "dogru": 40,
+          "dogru_orani": 0.8,
+          "yanlis_ret": 7,
+          "yanlis_ret_orani": 0.14,
+          "yanlis_ret_katmanlari": {
+            "arama_esigi": 7
+          },
+          "dogru_ret": 6,
+          "dogru_ret_orani": 1.0,
+          "gecersiz_atif": 0,
+          "hata": 0,
+          "medyan_sure_sn": 1.9,
+          "sadakat": {
+            "hakem": "anthropic/claude-haiku-5.5",
+            "dosya": "sadakat_openrouter_deepseek_deepseek_v4.1_flash_1017__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl",
+            "cevap": 43,
+            "sadik": 43,
+            "sadik_orani": 1.0,
+            "tam_destekli": 41,
+            "tam_destekli_orani": 0.9535,
+            "destekli": 161,
+            "kismen": 2,
+            "desteksiz": 0,
+            "n_iddia": 163,
+            "destekli_orani": 0.9877
+          }
+        },
+        {
+          "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker",
+          "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+          "yapilandirma": "reranker",
+          "yapilandirma_adi": "reranker",
+          "rerank": true,
+          "ajan": false,
+          "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_rerank",
+          "tarih": "2026-11-13T20:33",
+          "commit": "ca327a3",
+          "n_ic": 50,
+          "n_dis": 6,
+          "baglam": 47,
+          "atif": 41,
+          "icerik": 42,
+          "dogru": 40,
+          "dogru_orani": 0.8,
+          "yanlis_ret": 7,
+          "yanlis_ret_orani": 0.14,
+          "yanlis_ret_katmanlari": {
+            "arama_esigi": 7
+          },
+          "dogru_ret": 6,
+          "dogru_ret_orani": 1.0,
+          "gecersiz_atif": 0,
+          "hata": 0,
+          "medyan_sure_sn": 3.66,
+          "sadakat": null
+        },
+        {
+          "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan",
+          "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+          "yapilandirma": "ajan",
+          "yapilandirma_adi": "ajan",
+          "rerank": false,
+          "ajan": true,
+          "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_ajan",
+          "tarih": "2026-11-13T20:39",
+          "commit": "a6958d2",
+          "n_ic": 50,
+          "n_dis": 6,
+          "baglam": 45,
+          "atif": 45,
+          "icerik": 47,
+          "dogru": 44,
+          "dogru_orani": 0.88,
+          "yanlis_ret": 1,
+          "yanlis_ret_orani": 0.02,
+          "yanlis_ret_katmanlari": {
+            "arama_esigi": 1
+          },
+          "dogru_ret": 6,
+          "dogru_ret_orani": 1.0,
+          "gecersiz_atif": 0,
+          "hata": 0,
+          "medyan_sure_sn": 2.42,
+          "sadakat": null
+        }
+      ]
+    }
+  ],
+  "rerank_karsilastirma": {
+    "dosya": "rerank_compare.md",
+    "satirlar": [
+      {
+        "kanal": "mevzuat",
+        "yontem": "hibrit",
+        "n": 51,
+        "r1": 43,
+        "r3": 48,
+        "r5": 48,
+        "mrr": 0.898
+      },
+      {
+        "kanal": "mevzuat",
+        "yontem": "hibrit + reranker",
+        "n": 51,
+        "r1": 48,
+        "r3": 49,
+        "r5": 50,
+        "mrr": 0.957
+      },
+      {
+        "kanal": "karar",
+        "yontem": "hibrit",
+        "n": 12,
+        "r1": 11,
+        "r3": 12,
+        "r5": 12,
+        "mrr": 0.958
+      },
+      {
+        "kanal": "karar",
+        "yontem": "hibrit + reranker",
+        "n": 12,
+        "r1": 12,
+        "r3": 12,
+        "r5": 12,
+        "mrr": 1.0
+      }
+    ],
+    "not": "Rerank süresi: medyan 0.74 sn/sorgu (30 aday, GPU fp16)."
+  },
   "gecmis": [
     {
+      "anahtar": "ollama:qwen2.5:7b|tek_adim",
       "tarih": "2026-11-12T17:48",
       "llm": "ollama:qwen2.5:7b",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "commit": "9076480",
       "n_ic": 46,
       "n_dis": 6,
@@ -144,8 +392,13 @@
       "tam": true
     },
     {
+      "anahtar": "ollama:qwen2.5:7b|tek_adim",
       "tarih": "2026-11-12T22:44",
       "llm": "ollama:qwen2.5:7b",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "commit": "9755794",
       "n_ic": 46,
       "n_dis": 6,
@@ -161,8 +414,13 @@
       "tam": true
     },
     {
+      "anahtar": "ollama:qwen2.5:7b|tek_adim",
       "tarih": "2026-11-13T13:28",
       "llm": "ollama:qwen2.5:7b",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "commit": "c3dac88",
       "n_ic": 50,
       "n_dis": 6,
@@ -178,8 +436,13 @@
       "tam": true
     },
     {
+      "anahtar": "ollama:qwen2.5:7b|tek_adim",
       "tarih": "2026-11-13T13:40",
       "llm": "ollama:qwen2.5:7b",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "commit": "c3dac88",
       "n_ic": 50,
       "n_dis": 6,
@@ -195,8 +458,13 @@
       "tam": true
     },
     {
+      "anahtar": "openrouter:qwen/qwen3.7-flash|tek_adim",
       "tarih": "2026-11-13T14:41",
       "llm": "openrouter:qwen/qwen3.7-flash",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "commit": "8e4d3f2",
       "n_ic": 50,
       "n_dis": 6,
@@ -212,8 +480,13 @@
       "tam": true
     },
     {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim",
       "tarih": "2026-11-13T14:43",
       "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "commit": "8e4d3f2",
       "n_ic": 50,
       "n_dis": 6,
@@ -229,8 +502,13 @@
       "tam": true
     },
     {
+      "anahtar": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim",
       "tarih": "2026-11-13T14:48",
       "llm": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+      "yapilandirma": "tek_adim",
+      "yapilandirma_adi": "tek adım",
+      "rerank": false,
+      "ajan": false,
       "commit": "8e4d3f2",
       "n_ic": 50,
       "n_dis": 6,
@@ -244,6 +522,50 @@
       "gecersiz_atif": 0,
       "hata": 0,
       "tam": true
+    },
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker",
+      "tarih": "2026-11-13T20:33",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "reranker",
+      "yapilandirma_adi": "reranker",
+      "rerank": true,
+      "ajan": false,
+      "commit": "ca327a3",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 47,
+      "atif": 41,
+      "icerik": 42,
+      "dogru": 40,
+      "dogru_orani": 0.8,
+      "yanlis_ret": 7,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    },
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan",
+      "tarih": "2026-11-13T20:39",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "ajan",
+      "yapilandirma_adi": "ajan",
+      "rerank": false,
+      "ajan": true,
+      "commit": "a6958d2",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 45,
+      "icerik": 47,
+      "dogru": 44,
+      "dogru_orani": 0.88,
+      "yanlis_ret": 1,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
     }
   ],
   "sorular": [
@@ -252,7 +574,27 @@
       "tur": "kanun",
       "soru": "Hangi iş sözleşmelerinin yazılı yapılması zorunludur?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 118.65,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 29.9,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -262,7 +604,7 @@
           "sure_sn": 25.98,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -272,7 +614,7 @@
           "sure_sn": 39.85,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -282,7 +624,7 @@
           "sure_sn": 33.45,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -299,7 +641,27 @@
       "tur": "kanun",
       "soru": "İş güvencesi hükümlerinden yararlanmak için işyerinde en az kaç işçi çalışıyor olmalı?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 7.06,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 2.01,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -309,7 +671,7 @@
           "sure_sn": 0.16,
           "tam_destekli": null
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -319,7 +681,7 @@
           "sure_sn": 0.25,
           "tam_destekli": null
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -329,7 +691,7 @@
           "sure_sn": 0.2,
           "tam_destekli": null
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -346,7 +708,27 @@
       "tur": "kanun",
       "soru": "İşe iade başvurusu sonrası işveren işçiyi işe başlatmazsa ne kadar tazminat öder?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.49,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.75,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -356,7 +738,7 @@
           "sure_sn": 4.3,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -366,7 +748,7 @@
           "sure_sn": 2.71,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -376,7 +758,7 @@
           "sure_sn": 2.89,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -393,7 +775,27 @@
       "tur": "kanun",
       "soru": "Ücret en geç ne sıklıkla ödenmek zorundadır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.38,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.66,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -403,7 +805,7 @@
           "sure_sn": 1.71,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -413,7 +815,7 @@
           "sure_sn": 1.43,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -423,7 +825,7 @@
           "sure_sn": 2.13,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -440,7 +842,27 @@
       "tur": "kanun",
       "soru": "Ücreti kaç gün ödenmeyen işçi çalışmaktan kaçınabilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.03,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.79,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -450,7 +872,7 @@
           "sure_sn": 1.14,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -460,7 +882,7 @@
           "sure_sn": 4.59,
           "tam_destekli": null
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -470,7 +892,7 @@
           "sure_sn": 3.32,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -487,7 +909,27 @@
       "tur": "kanun",
       "soru": "İşveren bir ayda işçinin ücretinden ceza olarak en fazla ne kadar kesinti yapabilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.19,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.49,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -497,7 +939,7 @@
           "sure_sn": 2.02,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -507,7 +949,7 @@
           "sure_sn": 2.51,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -517,7 +959,7 @@
           "sure_sn": 3.21,
           "tam_destekli": false
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -534,7 +976,27 @@
       "tur": "kanun+yonetmelik",
       "soru": "Bir yılda en fazla kaç saat fazla çalışma yaptırılabilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.19,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.79,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -544,7 +1006,7 @@
           "sure_sn": 2.0,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -554,7 +1016,7 @@
           "sure_sn": 2.08,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -564,7 +1026,7 @@
           "sure_sn": 2.67,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": true,
@@ -581,7 +1043,27 @@
       "tur": "kanun",
       "soru": "Fazla çalışma karşılığında ücret yerine serbest zaman kullanılırsa her saat için ne kadar süre verilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.48,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.25,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -591,7 +1073,7 @@
           "sure_sn": 1.93,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -601,7 +1083,7 @@
           "sure_sn": 2.14,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -611,7 +1093,7 @@
           "sure_sn": 5.06,
           "tam_destekli": false
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -628,7 +1110,27 @@
       "tur": "kanun",
       "soru": "Hafta tatili en az kaç saat olmalıdır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.42,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.47,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -638,7 +1140,7 @@
           "sure_sn": 1.62,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -648,7 +1150,7 @@
           "sure_sn": 1.76,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -658,7 +1160,7 @@
           "sure_sn": 2.67,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -675,7 +1177,27 @@
       "tur": "kanun+yonetmelik",
       "soru": "On beş yıl ve daha fazla kıdemi olan işçinin yıllık ücretli izni en az kaç gündür?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.52,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 12.77,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -685,7 +1207,7 @@
           "sure_sn": 1.66,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -695,7 +1217,7 @@
           "sure_sn": 2.36,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -705,7 +1227,7 @@
           "sure_sn": 1.99,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -722,7 +1244,27 @@
       "tur": "kanun",
       "soru": "Yıllık izin bölünerek kullanılırsa bölümlerden biri en az kaç gün olmalıdır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.7,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.23,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -732,7 +1274,7 @@
           "sure_sn": 1.88,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -742,7 +1284,7 @@
           "sure_sn": 3.02,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -752,7 +1294,7 @@
           "sure_sn": 1.89,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -769,7 +1311,27 @@
       "tur": "kanun",
       "soru": "Yıllık iznini başka şehirde geçirecek işçiye kaç güne kadar yol izni verilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.47,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 14.99,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -779,7 +1341,7 @@
           "sure_sn": 2.66,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -789,7 +1351,7 @@
           "sure_sn": 1.62,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -799,7 +1361,7 @@
           "sure_sn": 2.29,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -816,7 +1378,27 @@
       "tur": "kanun",
       "soru": "Günlük çalışma süresi en fazla kaç saat olabilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.85,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.45,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -826,7 +1408,7 @@
           "sure_sn": 1.98,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -836,7 +1418,7 @@
           "sure_sn": 3.59,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -846,7 +1428,7 @@
           "sure_sn": 1.47,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -863,7 +1445,27 @@
       "tur": "kanun",
       "soru": "Yedi buçuk saatten uzun süren işlerde ara dinlenmesi ne kadardır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.57,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 10.64,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -873,7 +1475,7 @@
           "sure_sn": 2.34,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -883,7 +1485,7 @@
           "sure_sn": 1.97,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -893,7 +1495,7 @@
           "sure_sn": 2.07,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -910,7 +1512,27 @@
       "tur": "kanun",
       "soru": "Kadın işçinin doğum izni toplam kaç haftadır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.17,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.92,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -920,7 +1542,7 @@
           "sure_sn": 14.41,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -930,7 +1552,7 @@
           "sure_sn": 2.39,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -940,7 +1562,7 @@
           "sure_sn": 4.37,
           "tam_destekli": null
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -957,7 +1579,27 @@
       "tur": "kanun",
       "soru": "Özel sektör işyerinde kaç işçiden itibaren ve yüzde kaç oranında engelli çalıştırmak zorunludur?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.4,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.41,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -967,7 +1609,7 @@
           "sure_sn": 3.04,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -977,7 +1619,7 @@
           "sure_sn": 1.92,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -987,7 +1629,7 @@
           "sure_sn": 13.43,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1004,7 +1646,27 @@
       "tur": "kanun",
       "soru": "Eşit davranma ilkesine aykırılık halinde işçi ne kadar tazminat isteyebilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.7,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.5,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1014,7 +1676,7 @@
           "sure_sn": 2.08,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1024,7 +1686,7 @@
           "sure_sn": 3.81,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1034,7 +1696,7 @@
           "sure_sn": 3.21,
           "tam_destekli": false
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1051,7 +1713,27 @@
       "tur": "kanun",
       "soru": "Bildirim süresi içinde yeni iş arama izni günde en az kaç saattir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.86,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.62,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1061,7 +1743,7 @@
           "sure_sn": 2.23,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1071,7 +1753,7 @@
           "sure_sn": 1.75,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1081,7 +1763,7 @@
           "sure_sn": 1.54,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1098,7 +1780,27 @@
       "tur": "kanun",
       "soru": "Kıdem tazminatı her tam yıl için kaç günlük ücret üzerinden ödenir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.9,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.66,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1108,7 +1810,7 @@
           "sure_sn": 3.58,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1118,7 +1820,7 @@
           "sure_sn": 1.87,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1128,7 +1830,7 @@
           "sure_sn": 1.91,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1145,7 +1847,27 @@
       "tur": "kanun",
       "soru": "İşe iade için arabulucuya başvuru süresi ne kadardır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.48,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.02,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1155,7 +1877,7 @@
           "sure_sn": 2.07,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1165,7 +1887,7 @@
           "sure_sn": 1.66,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1175,7 +1897,7 @@
           "sure_sn": 2.29,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1192,7 +1914,27 @@
       "tur": "yonetmelik",
       "soru": "İzin kurulu hangi büyüklükteki işyerlerinde kurulur ve kaç kişiden oluşur?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.06,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.59,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1202,7 +1944,7 @@
           "sure_sn": 3.1,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1212,7 +1954,7 @@
           "sure_sn": 3.65,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1222,7 +1964,7 @@
           "sure_sn": 3.01,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": true,
@@ -1239,7 +1981,27 @@
       "tur": "yonetmelik",
       "soru": "İşçi yıllık izin talebini ne kadar önceden işverene bildirmelidir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.96,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.81,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1249,7 +2011,7 @@
           "sure_sn": 2.41,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1259,7 +2021,7 @@
           "sure_sn": 2.83,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1269,7 +2031,7 @@
           "sure_sn": 1.17,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1286,7 +2048,27 @@
       "tur": "yonetmelik",
       "soru": "Fazla çalışma yaptırmak için işçiden ne alınması gerekir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.44,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.36,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1296,7 +2078,7 @@
           "sure_sn": 1.72,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1306,7 +2088,7 @@
           "sure_sn": 1.92,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1316,7 +2098,7 @@
           "sure_sn": 3.29,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1333,7 +2115,27 @@
       "tur": "yonetmelik",
       "soru": "Denkleştirme hangi süre içinde tamamlanmalıdır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.26,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.43,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1343,7 +2145,7 @@
           "sure_sn": 0.12,
           "tam_destekli": null
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1353,7 +2155,7 @@
           "sure_sn": 0.18,
           "tam_destekli": null
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1363,7 +2165,7 @@
           "sure_sn": 0.18,
           "tam_destekli": null
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1380,7 +2182,27 @@
       "tur": "kanun",
       "soru": "KVKK'ya göre açık rıza nasıl tanımlanır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.12,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.57,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1390,7 +2212,7 @@
           "sure_sn": 3.54,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1400,7 +2222,7 @@
           "sure_sn": 3.36,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1410,7 +2232,7 @@
           "sure_sn": 4.4,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1427,7 +2249,27 @@
       "tur": "kanun",
       "soru": "Kişisel verilerin işlenmesinde amaçla ilgili genel ilke nedir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.35,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.64,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1437,7 +2279,7 @@
           "sure_sn": 1.02,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1447,7 +2289,7 @@
           "sure_sn": 3.9,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1457,7 +2299,7 @@
           "sure_sn": 11.09,
           "tam_destekli": false
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1474,7 +2316,27 @@
       "tur": "kanun",
       "soru": "Kişisel veriler hangi durumda silinmek, yok edilmek veya anonim hale getirilmek zorundadır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.23,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.29,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1484,7 +2346,7 @@
           "sure_sn": 1.9,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1494,7 +2356,7 @@
           "sure_sn": 3.31,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1504,7 +2366,7 @@
           "sure_sn": 4.53,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1521,7 +2383,27 @@
       "tur": "kanun",
       "soru": "Kişisel veriler başkalarınca hukuka aykırı elde edilirse veri sorumlusu kime ve ne zaman bildirir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.8,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.06,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1531,7 +2413,7 @@
           "sure_sn": 5.38,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1541,7 +2423,7 @@
           "sure_sn": 2.56,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1551,7 +2433,7 @@
           "sure_sn": 2.65,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1568,7 +2450,27 @@
       "tur": "kanun",
       "soru": "Veri sorumlusunun cevabından sonra Kurula şikâyet süresi ne kadardır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.99,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.96,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1578,7 +2480,7 @@
           "sure_sn": 1.67,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1588,7 +2490,7 @@
           "sure_sn": 2.68,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1598,7 +2500,7 @@
           "sure_sn": 3.95,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1615,7 +2517,27 @@
       "tur": "kanun",
       "soru": "Kurul şikâyete süresinde cevap vermezse ne olur?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.79,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.58,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1625,7 +2547,7 @@
           "sure_sn": 1.68,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1635,7 +2557,7 @@
           "sure_sn": 3.01,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1645,7 +2567,7 @@
           "sure_sn": 2.97,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1662,7 +2584,27 @@
       "tur": "kanun+yonetmelik",
       "soru": "Veri Sorumluları Siciline ne zaman kaydolunmalıdır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.83,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.3,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1672,7 +2614,7 @@
           "sure_sn": 3.31,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1682,7 +2624,7 @@
           "sure_sn": 2.58,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1692,7 +2634,7 @@
           "sure_sn": 5.25,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1709,7 +2651,27 @@
       "tur": "kanun+yonetmelik",
       "soru": "Standart sözleşme imzalandıktan sonra Kuruma kaç gün içinde bildirilmelidir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.4,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.5,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1719,7 +2681,7 @@
           "sure_sn": 1.51,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1729,7 +2691,7 @@
           "sure_sn": 2.65,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1739,7 +2701,7 @@
           "sure_sn": 1.98,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1756,7 +2718,27 @@
       "tur": "yonetmelik",
       "soru": "İlgili kişi verilerinin silinmesini talep ederse veri sorumlusu kaç gün içinde sonuçlandırmalıdır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.35,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.82,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1766,7 +2748,7 @@
           "sure_sn": 2.03,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1776,7 +2758,7 @@
           "sure_sn": 3.07,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1786,7 +2768,7 @@
           "sure_sn": 30.11,
           "tam_destekli": false
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1803,7 +2785,27 @@
       "tur": "yonetmelik",
       "soru": "Saklama ve imha politikası hazırlama yükümlülüğü olmayan veri sorumlusu verileri ne kadar sürede silmelidir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 8.08,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.13,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1813,7 +2815,7 @@
           "sure_sn": 1.81,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1823,7 +2825,7 @@
           "sure_sn": 2.0,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1833,7 +2835,7 @@
           "sure_sn": 2.43,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1850,7 +2852,27 @@
       "tur": "yonetmelik",
       "soru": "Silme ve yok etme işlemlerine ilişkin kayıtlar en az kaç yıl saklanır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.69,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.94,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1860,7 +2882,7 @@
           "sure_sn": 0.17,
           "tam_destekli": null
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1870,7 +2892,7 @@
           "sure_sn": 0.14,
           "tam_destekli": null
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1880,7 +2902,7 @@
           "sure_sn": 0.16,
           "tam_destekli": null
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -1897,7 +2919,27 @@
       "tur": "teblig",
       "soru": "Veri sorumlusu başvuruya yazılı cevap verirken kaç sayfaya kadar ücret alamaz?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.24,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.2,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1907,7 +2949,7 @@
           "sure_sn": 3.77,
           "tam_destekli": false
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1917,7 +2959,7 @@
           "sure_sn": 2.61,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1927,7 +2969,7 @@
           "sure_sn": 1.58,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -1944,7 +2986,27 @@
       "tur": "teblig",
       "soru": "Açık rızaya dayanan işlemede aydınlatma ile açık rıza birlikte alınabilir mi?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 14.49,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.85,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1954,7 +3016,7 @@
           "sure_sn": 0.13,
           "tam_destekli": null
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1964,7 +3026,7 @@
           "sure_sn": 0.12,
           "tam_destekli": null
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1974,7 +3036,7 @@
           "sure_sn": 0.1,
           "tam_destekli": null
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": false,
           "atif": false,
@@ -1991,7 +3053,27 @@
       "tur": "karar",
       "soru": "İşveren, işten çıkardığı çalışanı şirketin sosyal medya hesabından duyurursa Kurul ne karar vermiştir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": false,
+          "baglam": true,
+          "atif": true,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.66,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": true,
+          "atif": true,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.94,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2001,7 +3083,7 @@
           "sure_sn": 3.18,
           "tam_destekli": false
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2011,7 +3093,7 @@
           "sure_sn": 3.88,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2021,7 +3103,7 @@
           "sure_sn": 59.77,
           "tam_destekli": false
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2038,7 +3120,27 @@
       "tur": "karar",
       "soru": "İnternet sitesinde reklam çerezlerinin açık rıza alınmadan kullanılması hakkında Kurul hangi yaptırımı uygulamıştır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.12,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 2.05,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2048,7 +3150,7 @@
           "sure_sn": 0.11,
           "tam_destekli": null
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2058,7 +3160,7 @@
           "sure_sn": 0.12,
           "tam_destekli": null
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2068,7 +3170,7 @@
           "sure_sn": 0.11,
           "tam_destekli": null
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2085,7 +3187,27 @@
       "tur": "karar",
       "soru": "Bir çalışanın izin bilgisinin birimdeki diğer personelle paylaşılması hakkında Kurul ne karar vermiştir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.24,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.32,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2095,7 +3217,7 @@
           "sure_sn": 2.33,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2105,7 +3227,7 @@
           "sure_sn": 3.13,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2115,7 +3237,7 @@
           "sure_sn": 6.46,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2132,7 +3254,27 @@
       "tur": "karar",
       "soru": "Üniversitenin ders yoklamasını parmak iziyle alması Kurulca hukuka uygun bulunmuş mudur?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.3,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.73,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2142,7 +3284,7 @@
           "sure_sn": 1.55,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2152,7 +3294,7 @@
           "sure_sn": 3.9,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2162,7 +3304,7 @@
           "sure_sn": 9.1,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2179,7 +3321,27 @@
       "tur": "karar",
       "soru": "İşyerindeki kameraların konumu hakkında Kurul işverene ne talimat vermiştir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.75,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 2.04,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2189,7 +3351,7 @@
           "sure_sn": 0.14,
           "tam_destekli": null
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2199,7 +3361,7 @@
           "sure_sn": 0.15,
           "tam_destekli": null
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2209,7 +3371,7 @@
           "sure_sn": 0.12,
           "tam_destekli": null
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2226,7 +3388,27 @@
       "tur": "karar",
       "soru": "Banka çalışanı kendi telefon görüşmesi kayıtlarını isterse, Kurul kararına göre banka bunları nasıl vermelidir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.53,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.19,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2236,7 +3418,7 @@
           "sure_sn": 4.02,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2246,7 +3428,7 @@
           "sure_sn": 3.22,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2256,7 +3438,7 @@
           "sure_sn": 2.35,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2273,7 +3455,27 @@
       "tur": "karar",
       "soru": "Havayolunun özel yolcu programı için açık rıza istemesi hakkında Kurul işlem yapmış mıdır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.34,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.09,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2283,7 +3485,7 @@
           "sure_sn": 1.93,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2293,7 +3495,7 @@
           "sure_sn": 3.38,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2303,7 +3505,7 @@
           "sure_sn": 5.33,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2320,7 +3522,27 @@
       "tur": "karar",
       "soru": "Doktorun hastanın ameliyat fotoğrafını kendi sosyal medyasında paylaşması üzerine Kurul ilgili kişiyi hangi konuda bilgilendirmiştir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.13,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.3,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2330,7 +3552,7 @@
           "sure_sn": 2.25,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2340,7 +3562,7 @@
           "sure_sn": 2.55,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2350,7 +3572,7 @@
           "sure_sn": 10.68,
           "tam_destekli": false
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2367,7 +3589,27 @@
       "tur": "karar",
       "soru": "İş kazası Sosyal Güvenlik Kurumuna kaç gün içinde bildirilmelidir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.64,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.21,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2377,7 +3619,7 @@
           "sure_sn": 1.32,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2387,7 +3629,7 @@
           "sure_sn": 2.13,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2397,7 +3639,7 @@
           "sure_sn": 5.41,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2414,7 +3656,27 @@
       "tur": "kanun",
       "soru": "İş sağlığı ve güvenliği kurulu en az kaç çalışanı olan işyerlerinde oluşturulur?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.01,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.82,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2424,7 +3686,7 @@
           "sure_sn": 2.87,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2434,7 +3696,7 @@
           "sure_sn": 2.66,
           "tam_destekli": false
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2444,7 +3706,7 @@
           "sure_sn": 2.27,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2461,7 +3723,27 @@
       "tur": "kanun",
       "soru": "İşveren, işin durdurulması kararına kaç gün içinde ve nereye itiraz edebilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.38,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.42,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2471,7 +3753,7 @@
           "sure_sn": 1.55,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2481,7 +3763,7 @@
           "sure_sn": 2.57,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2491,7 +3773,7 @@
           "sure_sn": 2.06,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2508,7 +3790,27 @@
       "tur": "kanun",
       "soru": "Ciddi ve yakın tehlike nedeniyle çalışmaktan kaçınan çalışanın o dönemdeki ücreti ne olur?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.34,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 2.05,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2518,7 +3820,7 @@
           "sure_sn": 0.19,
           "tam_destekli": null
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2528,7 +3830,7 @@
           "sure_sn": 0.15,
           "tam_destekli": null
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2538,7 +3840,7 @@
           "sure_sn": 0.15,
           "tam_destekli": null
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2555,7 +3857,27 @@
       "tur": "kanun",
       "soru": "Altı aydan fazla işten uzak kalan çalışana tekrar işe başlamadan önce hangi eğitim verilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.39,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.14,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2565,7 +3887,7 @@
           "sure_sn": 1.38,
           "tam_destekli": true
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2575,7 +3897,7 @@
           "sure_sn": 1.65,
           "tam_destekli": true
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "baglam": true,
           "atif": true,
@@ -2585,7 +3907,7 @@
           "sure_sn": 2.57,
           "tam_destekli": true
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": false,
           "baglam": true,
           "atif": false,
@@ -2602,25 +3924,37 @@
       "tur": "kapsam_disi",
       "soru": "2026 yılında kıdem tazminatı tavanı kaç liradır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 3.14
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.66
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.17
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.14
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.16
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
@@ -2633,25 +3967,37 @@
       "tur": "kapsam_disi",
       "soru": "İş mahkemesinde dava açmadan önce arabuluculuk görüşmeleri en fazla kaç hafta sürer?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.37
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.83
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.19
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.16
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.19
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
@@ -2664,25 +4010,37 @@
       "tur": "kapsam_disi",
       "soru": "GDPR'a göre veri ihlali denetim otoritesine kaç saat içinde bildirilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.12
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.81
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.13
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.13
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.18
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
@@ -2695,25 +4053,37 @@
       "tur": "kapsam_disi",
       "soru": "Anonim şirket en az kaç ortakla kurulabilir?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.27
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.85
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.17
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.14
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.13
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
@@ -2726,25 +4096,37 @@
       "tur": "kapsam_disi",
       "soru": "Konut satışında tapu harcı oranı yüzde kaçtır?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.12
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.86
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.18
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.17
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.15
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
@@ -2757,25 +4139,37 @@
       "tur": "kapsam_disi",
       "soru": "Trafik cezasına itiraz süresi kaç gündür?",
       "sonuclar": {
-        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.15
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.63
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.14
         },
-        "openrouter:qwen/qwen3.7-flash": {
+        "openrouter:qwen/qwen3.7-flash|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.15
         },
-        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.12
         },
-        "ollama:qwen2.5:7b": {
+        "ollama:qwen2.5:7b|tek_adim": {
           "dogru": true,
           "dogru_ret": true,
           "katman": "arama_esigi",

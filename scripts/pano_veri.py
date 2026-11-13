@@ -4,6 +4,7 @@ Girdiler (yalnız okunur):
   - results/eval_history.jsonl
   - results/eval_*.jsonl
   - results/sadakat_*__hakem_*.jsonl (varsa)
+  - results/rerank_compare.md (varsa)
 
 Çalıştırma:
   python scripts/pano_veri.py
@@ -12,6 +13,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -22,6 +24,16 @@ OUT_PATH = ROOT / "web" / "public" / "pano.json"
 
 def llm_tag(llm: str) -> str:
     return re.sub(r"[^a-z0-9.]+", "_", llm.lower())
+
+
+def config_info(rerank: bool, ajan: bool) -> tuple[str, str, str]:
+    if rerank and ajan:
+        return "reranker+ajan", "reranker + ajan", "_ajan_rerank"
+    if rerank:
+        return "reranker", "reranker", "_rerank"
+    if ajan:
+        return "ajan", "ajan", "_ajan"
+    return "tek_adim", "tek adım", ""
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -39,6 +51,27 @@ def read_jsonl(path: Path) -> list[dict]:
     return rows
 
 
+def find_raw_eval(base_tag: str, rerank: bool, ajan: bool) -> Path | None:
+    if rerank and ajan:
+        candidates = [
+            RESULTS_DIR / f"eval_{base_tag}_ajan_rerank.jsonl",
+            RESULTS_DIR / f"eval_{base_tag}_rerank_ajan.jsonl",
+        ]
+    elif rerank:
+        candidates = [RESULTS_DIR / f"eval_{base_tag}_rerank.jsonl"]
+    elif ajan:
+        candidates = [
+            RESULTS_DIR / f"eval_{base_tag}_ajan.jsonl",
+            *sorted(RESULTS_DIR.glob(f"eval_{base_tag}_ajan*.jsonl")),
+        ]
+    else:
+        candidates = [RESULTS_DIR / f"eval_{base_tag}.jsonl"]
+    for p in candidates:
+        if p.is_file():
+            return p
+    return None
+
+
 def calc_median_sure(rows: list[dict]) -> float | None:
     sures = sorted(r["sure_sn"] for r in rows if r.get("sure_sn") is not None and not r.get("hata"))
     if not sures:
@@ -46,8 +79,20 @@ def calc_median_sure(rows: list[dict]) -> float | None:
     return round(float(sures[len(sures) // 2]), 2)
 
 
-def load_sadakat(tag: str) -> tuple[dict | None, dict[str, bool | None]]:
-    candidates = sorted(RESULTS_DIR.glob(f"sadakat_{tag}__hakem_*.jsonl"))
+def calc_yanlis_ret_katmanlari(rows: list[dict]) -> dict[str, int]:
+    say = Counter()
+    for r in rows:
+        if r.get("hata") or r.get("tur") == "kapsam_disi":
+            continue
+        skor = r.get("skor") or {}
+        if skor.get("yanlis_ret"):
+            katman = skor.get("katman") or "belirsiz"
+            say[katman] += 1
+    return dict(say)
+
+
+def load_sadakat(sadakat_tag: str) -> tuple[dict | None, dict[str, bool | None]]:
+    candidates = sorted(RESULTS_DIR.glob(f"sadakat_{sadakat_tag}__hakem_*.jsonl"))
     if not candidates:
         return None, {}
     path = max(candidates, key=lambda p: p.stat().st_mtime)
@@ -96,18 +141,72 @@ def load_sadakat(tag: str) -> tuple[dict | None, dict[str, bool | None]]:
     return ozet, by_id
 
 
+def parse_rerank_compare() -> dict | None:
+    path = RESULTS_DIR / "rerank_compare.md"
+    if not path.is_file():
+        return None
+    lines = path.read_text(encoding="utf-8").splitlines()
+    satirlar: list[dict] = []
+    in_table = False
+    sure_notu: str | None = None
+    for line in lines:
+        s = line.strip()
+        if s.startswith("| Kanal | Yöntem |"):
+            in_table = True
+            continue
+        if in_table:
+            if s.startswith("|---"):
+                continue
+            if not s.startswith("|"):
+                in_table = False
+            else:
+                parts = [p.strip() for p in s.strip("|").split("|")]
+                if len(parts) >= 7:
+                    satirlar.append(
+                        {
+                            "kanal": parts[0],
+                            "yontem": parts[1],
+                            "n": int(parts[2]),
+                            "r1": int(parts[3]),
+                            "r3": int(parts[4]),
+                            "r5": int(parts[5]),
+                            "mrr": float(parts[6]),
+                        }
+                    )
+        if s.startswith("Rerank süresi:"):
+            sure_notu = s
+    if not satirlar:
+        return None
+    return {"dosya": path.name, "satirlar": satirlar, "not": sure_notu}
+
+
 def build_pano() -> dict:
     history_raw = read_jsonl(RESULTS_DIR / "eval_history.jsonl")
 
     gecmis: list[dict] = []
     latest_tam: dict[str, dict] = {}
     for h in history_raw:
+        if not h.get("tam"):
+            continue
+        llm = h.get("llm")
+        if not llm:
+            continue
+        rerank = bool(h.get("rerank"))
+        ajan = bool(h.get("ajan"))
+        yap_kod, yap_ad, _ = config_info(rerank, ajan)
+        anahtar = f"{llm}|{yap_kod}"
+
         n_ic = int(h.get("n_ic") or 0)
         n_dis = int(h.get("n_dis") or 0)
         dogru = int(h.get("dogru") or 0)
         entry = {
+            "anahtar": anahtar,
             "tarih": h.get("tarih"),
-            "llm": h.get("llm"),
+            "llm": llm,
+            "yapilandirma": yap_kod,
+            "yapilandirma_adi": yap_ad,
+            "rerank": rerank,
+            "ajan": ajan,
             "commit": h.get("commit"),
             "n_ic": n_ic,
             "n_dis": n_dis,
@@ -120,26 +219,32 @@ def build_pano() -> dict:
             "dogru_ret": int(h.get("dogru_ret") or 0),
             "gecersiz_atif": int(h.get("gecersiz_atif") or 0),
             "hata": int(h.get("hata") or 0),
-            "tam": bool(h.get("tam")),
+            "tam": True,
         }
         gecmis.append(entry)
-        if entry["tam"] and entry["llm"]:
-            latest_tam[entry["llm"]] = entry
+        latest_tam[anahtar] = entry
 
     modeller: list[dict] = []
-    raw_by_llm: dict[str, dict[str, dict]] = {}
-    sadakat_by_llm: dict[str, dict[str, bool | None]] = {}
+    raw_by_key: dict[str, dict[str, dict]] = {}
+    sadakat_by_key: dict[str, dict[str, bool | None]] = {}
     question_meta: dict[str, dict] = {}
     question_order: list[str] = []
 
-    for llm, h in latest_tam.items():
-        tag = llm_tag(llm)
-        raw_path = RESULTS_DIR / f"eval_{tag}.jsonl"
-        raw_rows = read_jsonl(raw_path)
+    for anahtar, h in latest_tam.items():
+        llm = h["llm"]
+        rerank = h["rerank"]
+        ajan = h["ajan"]
+        _, _, suffix = config_info(rerank, ajan)
+        base_tag = llm_tag(llm)
+        full_tag = base_tag + suffix
+
+        raw_path = find_raw_eval(base_tag, rerank, ajan)
+        raw_rows = read_jsonl(raw_path) if raw_path else []
 
         medyan_sure = calc_median_sure(raw_rows)
-        sadakat_ozet, sadakat_map = load_sadakat(tag)
-        sadakat_by_llm[llm] = sadakat_map
+        yanlis_ret_katmanlari = calc_yanlis_ret_katmanlari(raw_rows)
+        sadakat_ozet, sadakat_map = load_sadakat(full_tag)
+        sadakat_by_key[anahtar] = sadakat_map
 
         row_map: dict[str, dict] = {}
         for r in raw_rows:
@@ -154,14 +259,19 @@ def build_pano() -> dict:
                     "soru": r.get("soru"),
                 }
                 question_order.append(qid)
-        raw_by_llm[llm] = row_map
+        raw_by_key[anahtar] = row_map
 
         n_ic = h["n_ic"]
         n_dis = h["n_dis"]
         modeller.append(
             {
+                "anahtar": anahtar,
                 "llm": llm,
-                "tag": tag,
+                "yapilandirma": h["yapilandirma"],
+                "yapilandirma_adi": h["yapilandirma_adi"],
+                "rerank": rerank,
+                "ajan": ajan,
+                "tag": full_tag,
                 "tarih": h["tarih"],
                 "commit": h["commit"],
                 "n_ic": n_ic,
@@ -173,6 +283,7 @@ def build_pano() -> dict:
                 "dogru_orani": round(h["dogru"] / n_ic, 4) if n_ic else None,
                 "yanlis_ret": h["yanlis_ret"],
                 "yanlis_ret_orani": round(h["yanlis_ret"] / n_ic, 4) if n_ic else None,
+                "yanlis_ret_katmanlari": yanlis_ret_katmanlari,
                 "dogru_ret": h["dogru_ret"],
                 "dogru_ret_orani": round(h["dogru_ret"] / n_dis, 4) if n_dis else None,
                 "gecersiz_atif": h["gecersiz_atif"],
@@ -185,35 +296,49 @@ def build_pano() -> dict:
     modeller.sort(
         key=lambda m: (
             -(m["dogru_orani"] or 0.0),
+            -(m["baglam"] / m["n_ic"] if m["n_ic"] else 0.0),
             m["medyan_sure_sn"] if m["medyan_sure_sn"] is not None else 9999.0,
         )
     )
+
+    by_llm: dict[str, list[dict]] = {}
+    for m in modeller:
+        by_llm.setdefault(m["llm"], []).append(m)
+    config_order = {"tek_adim": 0, "reranker": 1, "ajan": 2, "reranker+ajan": 3}
+    yapilandirma_karsilastirmasi = [
+        {
+            "llm": llm,
+            "yapilandirmalar": sorted(items, key=lambda x: config_order.get(x["yapilandirma"], 9)),
+        }
+        for llm, items in by_llm.items()
+        if len(items) > 1
+    ]
 
     sorular: list[dict] = []
     for qid in question_order:
         meta = question_meta[qid]
         sonuclar: dict[str, dict] = {}
         for m in modeller:
-            llm = m["llm"]
-            r = raw_by_llm.get(llm, {}).get(qid)
+            anahtar = m["anahtar"]
+            r = raw_by_key.get(anahtar, {}).get(qid)
             if not r:
                 continue
             skor = r.get("skor") or {}
             if r.get("hata"):
-                sonuclar[llm] = {
+                sonuclar[anahtar] = {
                     "dogru": False,
                     "hata": True,
                     "sure_sn": r.get("sure_sn"),
                 }
             elif meta["tur"] == "kapsam_disi":
-                sonuclar[llm] = {
+                sonuclar[anahtar] = {
                     "dogru": bool(skor.get("dogru_ret")),
                     "dogru_ret": bool(skor.get("dogru_ret")),
                     "katman": skor.get("katman"),
                     "sure_sn": r.get("sure_sn"),
                 }
             else:
-                sonuclar[llm] = {
+                sonuclar[anahtar] = {
                     "dogru": bool(skor.get("dogru")),
                     "baglam": bool(skor.get("baglam")),
                     "atif": bool(skor.get("atif")),
@@ -221,13 +346,15 @@ def build_pano() -> dict:
                     "yanlis_ret": bool(skor.get("yanlis_ret")),
                     "katman": skor.get("katman"),
                     "sure_sn": r.get("sure_sn"),
-                    "tam_destekli": sadakat_by_llm.get(llm, {}).get(qid),
+                    "tam_destekli": sadakat_by_key.get(anahtar, {}).get(qid),
                 }
         sorular.append({**meta, "sonuclar": sonuclar})
 
     return {
         "uretim_tarihi": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "modeller": modeller,
+        "yapilandirma_karsilastirmasi": yapilandirma_karsilastirmasi,
+        "rerank_karsilastirma": parse_rerank_compare(),
         "gecmis": gecmis,
         "sorular": sorular,
     }
@@ -237,7 +364,10 @@ def main() -> None:
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     pano = build_pano()
     OUT_PATH.write_text(json.dumps(pano, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    print(f"Yazıldı: {OUT_PATH} ({len(pano['modeller'])} model, {len(pano['gecmis'])} çalıştırma, {len(pano['sorular'])} soru)")
+    print(
+        f"Yazıldı: {OUT_PATH} ({len(pano['modeller'])} yapılandırma, "
+        f"{len(pano['gecmis'])} çalıştırma, {len(pano['sorular'])} soru)"
+    )
 
 
 if __name__ == "__main__":

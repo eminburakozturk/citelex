@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { EsikEtkisiKutusu } from "@/components/pano/EsikEtkisiKutusu";
 import { ModelTablosu } from "@/components/pano/ModelTablosu";
 import { SoruIsiTablosu } from "@/components/pano/SoruIsiTablosu";
+import { YapilandirmaKarsilastirmasi } from "@/components/pano/YapilandirmaKarsilastirmasi";
 import { ZamanGrafigi } from "@/components/pano/ZamanGrafigi";
 import { PanoVerisi, tarihSaat } from "@/components/pano/types";
 
@@ -36,8 +38,11 @@ export default function PanoSayfasi() {
           <h1 className="text-lg font-semibold tracking-tight">
             Citelex <span className="font-normal text-muted">· Değerlendirme panosu</span>
           </h1>
-          <div className="flex items-baseline gap-4 text-xs text-muted">
+          <div className="flex flex-wrap items-baseline gap-4 text-xs text-muted">
             {veri?.uretim_tarihi && <span>Veri: {tarihSaat(veri.uretim_tarihi)}</span>}
+            <Link href="/degisiklikler" className="text-accent hover:underline">
+              Son değişiklikler
+            </Link>
             <Link href="/" className="text-accent hover:underline">
               ← Soru-cevaba dön
             </Link>
@@ -63,6 +68,11 @@ export default function PanoSayfasi() {
         {veri && (
           <>
             <ModelTablosu modeller={veri.modeller} />
+            <YapilandirmaKarsilastirmasi
+              gruplar={veri.yapilandirma_karsilastirmasi}
+              rerank={veri.rerank_karsilastirma}
+            />
+            <EsikEtkisiKutusu modeller={veri.modeller} />
             <ZamanGrafigi gecmis={veri.gecmis} />
             <SoruIsiTablosu modeller={veri.modeller} sorular={veri.sorular} />
           </>

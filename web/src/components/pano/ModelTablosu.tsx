@@ -13,14 +13,14 @@ export function ModelTablosu({ modeller }: { modeller: ModelOzeti[] }) {
         <h2 id="model-tablo-baslik" className="text-base font-semibold">
           Model karşılaştırması
         </h2>
-        <p className="text-xs text-muted">Her modelin son tam çalıştırması</p>
+        <p className="text-xs text-muted">Her model ve yapılandırmanın son tam çalıştırması</p>
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-line bg-panel">
         <table className="w-full border-collapse text-left text-sm">
           <thead>
             <tr className="border-b border-line text-xs text-muted">
-              <th className="px-3 py-2.5 font-medium">Model</th>
+              <th className="px-3 py-2.5 font-medium">Model / yapılandırma</th>
               <th className="px-3 py-2.5 text-right font-medium">Doğru oranı</th>
               <th className="px-3 py-2.5 text-right font-medium">Yanlış &ldquo;bilmiyorum&rdquo;</th>
               <th className="px-3 py-2.5 text-right font-medium">Kapsam dışı ret</th>
@@ -31,10 +31,15 @@ export function ModelTablosu({ modeller }: { modeller: ModelOzeti[] }) {
           </thead>
           <tbody className="divide-y divide-line tabular-nums">
             {modeller.map((m) => (
-              <tr key={m.llm} className="hover:bg-bg/60">
+              <tr key={m.anahtar} className="hover:bg-bg/60">
                 <td className="px-3 py-2.5">
-                  <div className="font-medium text-ink" title={m.llm}>
-                    {kisaModelAdi(m.llm)}
+                  <div className="flex flex-wrap items-center gap-1.5 font-medium text-ink" title={m.llm}>
+                    <span>{kisaModelAdi(m.llm)}</span>
+                    {m.yapilandirma !== "tek_adim" && (
+                      <span className="rounded bg-accent-soft px-1.5 py-0.5 text-[11px] font-medium text-accent">
+                        + {m.yapilandirma_adi}
+                      </span>
+                    )}
                   </div>
                   <div className="text-xs text-muted">
                     {saglayiciAdi(m.llm)} · {tarihSaat(m.tarih)} · <code>{m.commit}</code>

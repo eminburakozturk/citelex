@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ModelOzeti, SoruSatiri, SoruSonucu, kisaModelAdi } from "./types";
+import { ModelOzeti, SoruSatiri, SoruSonucu, yapilandirmaEtiketi } from "./types";
 
 type Filtre = "hepsi" | "basarisiz" | "kanun" | "yonetmelik" | "karar" | "kapsam_disi";
 
@@ -23,8 +23,8 @@ const FILTRELER: { id: Filtre; ad: string }[] = [
   { id: "kapsam_disi", ad: "Kapsam dışı" },
 ];
 
-function hucreBasligi(llm: string, tur: string, s: SoruSonucu): string {
-  const parcalar = [kisaModelAdi(llm)];
+function hucreBasligi(etiket: string, tur: string, s: SoruSonucu): string {
+  const parcalar = [etiket];
   if (s.hata) {
     parcalar.push("hata");
   } else if (tur === "kapsam_disi") {
@@ -44,12 +44,12 @@ function hucreBasligi(llm: string, tur: string, s: SoruSonucu): string {
 
 export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; sorular: SoruSatiri[] }) {
   const [filtre, setFiltre] = useState<Filtre>("hepsi");
-  const [secili, setSecili] = useState<{ q: SoruSatiri; llm: string; s: SoruSonucu } | null>(null);
+  const [secili, setSecili] = useState<{ q: SoruSatiri; etiket: string; s: SoruSonucu } | null>(null);
 
   const gosterilen = sorular.filter((q) => {
     if (filtre === "hepsi") return true;
     if (filtre === "basarisiz") {
-      return modeller.some((m) => q.sonuclar[m.llm] && !q.sonuclar[m.llm].dogru);
+      return modeller.some((m) => q.sonuclar[m.anahtar] && !q.sonuclar[m.anahtar].dogru);
     }
     if (filtre === "kanun") return q.tur === "kanun" || q.tur === "kanun+yonetmelik";
     if (filtre === "yonetmelik") return q.tur === "yonetmelik" || q.tur === "teblig" || q.tur === "kanun+yonetmelik";
@@ -90,8 +90,8 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
         <div className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-line bg-panel px-3 py-2 text-xs">
           <div>
             <span className="font-semibold text-ink">{secili.q.id}</span> ·{" "}
-            <span className="text-ink">{kisaModelAdi(secili.llm)}</span>:{" "}
-            <span className="text-muted">{hucreBasligi(secili.llm, secili.q.tur, secili.s)}</span>
+            <span className="text-ink">{secili.etiket}</span>:{" "}
+            <span className="text-muted">{hucreBasligi(secili.etiket, secili.q.tur, secili.s)}</span>
           </div>
           <button
             type="button"
@@ -110,11 +110,14 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
               <th className="px-2.5 py-2 font-medium">#</th>
               <th className="px-2.5 py-2 font-medium">Tür</th>
               <th className="min-w-[16rem] px-2.5 py-2 font-medium">Soru</th>
-              {modeller.map((m) => (
-                <th key={m.llm} className="px-2.5 py-2 text-center font-medium whitespace-nowrap" title={m.llm}>
-                  {kisaModelAdi(m.llm)}
-                </th>
-              ))}
+              {modeller.map((m) => {
+                const etiket = yapilandirmaEtiketi(m.llm, m.yapilandirma, m.yapilandirma_adi);
+                return (
+                  <th key={m.anahtar} className="px-2.5 py-2 text-center font-medium whitespace-nowrap" title={m.anahtar}>
+                    {etiket}
+                  </th>
+                );
+              })}
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
@@ -124,10 +127,11 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
                 <td className="px-2.5 py-1.5 whitespace-nowrap text-muted">{TUR_ETIKET[q.tur] ?? q.tur}</td>
                 <td className="px-2.5 py-1.5 text-ink">{q.soru}</td>
                 {modeller.map((m) => {
-                  const s = q.sonuclar[m.llm];
+                  const s = q.sonuclar[m.anahtar];
+                  const etiket = yapilandirmaEtiketi(m.llm, m.yapilandirma, m.yapilandirma_adi);
                   if (!s) {
                     return (
-                      <td key={m.llm} className="px-2 py-1.5 text-center text-muted">
+                      <td key={m.anahtar} className="px-2 py-1.5 text-center text-muted">
                         —
                       </td>
                     );
@@ -139,11 +143,11 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
                       ? "bg-warn-bg text-warn-ink"
                       : "bg-accent-soft text-accent";
                   return (
-                    <td key={m.llm} className="p-1 text-center">
+                    <td key={m.anahtar} className="p-1 text-center">
                       <button
                         type="button"
-                        onClick={() => setSecili({ q, llm: m.llm, s })}
-                        title={hucreBasligi(m.llm, q.tur, s)}
+                        onClick={() => setSecili({ q, etiket, s })}
+                        title={hucreBasligi(etiket, q.tur, s)}
                         className={`relative inline-flex h-6 w-8 items-center justify-center rounded font-semibold ${hucreSinif}`}
                       >
                         {ok ? "✓" : "✗"}
