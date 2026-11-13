@@ -112,7 +112,7 @@ abonelik istiyor (402) -> barındırma kararı kullanıcıda. Ayrıca Gemini üc
 OpenRouter sağlayıcısı eklendi (model zincirli; deepseek-v4.1-flash 40/50 %80, ücretsiz nemotron 39/50 %78; yerel qwen2.5
 33/50). Zincir OPENROUTER_MODELS ile .env'ten seçilir; kalıcı model/faturalama + barındırma kararı kullanıcıda.
 Sıradaki işler, sırayla ve DURMADAN:
-1. 16 Kas satırı (GitHub Actions + arama regresyonu kapısı, LLM hakemli sadakat, izlenebilirlik).
+1. ~~16 Kas~~ BİTTİ (CI + kapı, LLM hakemli sadakat, OTel+Jaeger izleri). Sıradaki: 17 Kas ("bu madde değişti" + reranker).
 2. Kullanıcının barındırma/model kararına göre yayını bitir.
 3. Takvim v2'nin kalan satırları (17, 18, 19, 20, 21 Kas).
 Kullanıcıdan beklenenler: eval setinin doğrulanması (56 soru, 4'ü yeni İSG sorusu); barındırma (HF PRO / alternatif) ve
