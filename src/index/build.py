@@ -119,7 +119,9 @@ def indexed_state(client: QdrantClient, name: str) -> dict[str, str]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=["madde", "fikra", "hibrit"], default="hibrit")
+    # genis: geniş katman (HF corpus, ~900 kanun) AYRI koleksiyonda; derin katman ve eval etkilenmez.
+    #   önce: python -m src.ingest.chunk --mode hibrit --src data/processed/articles_genis.jsonl --out data/processed/chunks_genis.jsonl
+    ap.add_argument("--mode", choices=["madde", "fikra", "hibrit", "genis"], default="hibrit")
     ap.add_argument("--recreate", action="store_true")
     ap.add_argument("--no-karar", action="store_true", help="KVKK karar parçalarını ekleme")
     args = ap.parse_args()

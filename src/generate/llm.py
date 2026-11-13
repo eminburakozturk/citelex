@@ -176,6 +176,19 @@ class OpenRouterLLM:
         self._http = httpx.Client(timeout=timeout, headers={"Authorization": f"Bearer {self._key}"})
         self.last_model: str | None = None   # cevabı üreten model (izlenebilirlik)
         self.last_usage: dict | None = None  # {prompt_tokens, completion_tokens, cost}
+        # Devre kesici: 429 veren model bir süre atlanır (ücretsiz modelin günlük kotası dolunca her istekte
+        # 429 + bekleme + yeniden deneme ~6 sn kaybettiriyordu; ajan soru başına 2-3 çağrı yapar). Ölçüm: KARARLAR.md.
+        self._atla: dict[str, float] = {}
+
+    def _aktif(self) -> list[str]:
+        now = time.time()
+        ms = [m for m in self.models if self._atla.get(m, 0) <= now]
+        return ms or list(self.models)   # hepsi atlanmışsa yine de dene (kota açılmış olabilir)
+
+    def _kes(self, model: str, err: "LLMError") -> None:
+        if err.status == 429:
+            gunluk = "per-day" in str(err) or "per day" in str(err)
+            self._atla[model] = time.time() + (3600 if gunluk else 60)
 
     def _body(self, model: str, system: str, user: str, max_tokens: int, stream: bool) -> dict:
         body = {"model": model, "temperature": 0, "max_tokens": max_tokens, "stream": stream,
@@ -197,7 +210,7 @@ class OpenRouterLLM:
 
     def generate(self, system: str, user: str, max_tokens: int = 1500) -> str:
         last: Exception | None = None
-        for model in self.models:
+        for model in self._aktif():
             for attempt in range(2):   # aynı modelde bir kez daha (geçici 429/5xx), sonra sıradaki model
                 try:
                     r = self._http.post(self.URL, json=self._body(model, system, user, max_tokens, False))
@@ -217,20 +230,26 @@ class OpenRouterLLM:
                     last = LLMError(f"OpenRouter boş cevap ({model}, finish={j['choices'][0].get('finish_reason')})")
                     break
                 last = self._error(r)
+                if r.status_code == 429 and ("per-day" in str(last) or "per day" in str(last)):
+                    self._kes(model, last)   # günlük kota: aynı modelde beklemek boşuna
+                    break
                 if r.status_code not in (429, 500, 502, 503) or attempt == 1:
+                    if r.status_code == 429:
+                        self._kes(model, last)
                     break
                 time.sleep(3)
         raise last or LLMError("OpenRouter: cevap alınamadı")
 
     def stream(self, system: str, user: str, max_tokens: int = 1500) -> Iterator[str]:
         last: Exception | None = None
-        for model in self.models:
+        for model in self._aktif():
             started = False
             try:
                 with self._http.stream("POST", self.URL, json=self._body(model, system, user, max_tokens, True)) as r:
                     if r.status_code != 200:
                         r.read()
                         last = self._error(r)
+                        self._kes(model, last)
                         continue
                     for line in r.iter_lines():
                         if not line.startswith("data:") or line.strip() == "data: [DONE]":

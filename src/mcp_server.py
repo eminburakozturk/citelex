@@ -40,6 +40,8 @@ def _get():
             from src.index.embed import Embedder
             from src.retrieve.search import Searcher
             _searcher = Searcher("hibrit", Embedder(device=os.environ.get("CITELEX_EMBED_DEVICE") or None))
+            from src.retrieve.search import attach_genis
+            attach_genis(_searcher)
             _esik = load_cfg().get("esik")
     return _searcher, _esik
 

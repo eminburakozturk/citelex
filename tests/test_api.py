@@ -155,3 +155,23 @@ def test_ajan_modu_yeniden_yazip_cevaplar(monkeypatch):
         r = c.post("/sor?akis=false", json={"soru": "Hangi sözleşmeler yazılı yapılır?", "ajan": True}).json()
     assert r["bilmiyorum"] is False and r["kaynaklar"][0]["anahtar"] == "is-kanunu:8"
     assert r["ajan_sorgular"] == ["4857 sayılı İş Kanunu yazılı sözleşme"] and r["ajan_deneme"] == 2 and len(cagri) == 3
+
+
+def test_openrouter_devre_kesici(monkeypatch):
+    """Günlük kotası dolan ücretsiz model 1 saat atlanır; ikinci istek doğrudan yedek modele gider (bekleme yok)."""
+    import httpx
+    from src.generate import llm as llm_mod
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test")
+    cagri = []
+
+    def handler(req):
+        model = json.loads(req.content)["model"]
+        cagri.append(model)
+        if model == "ucretsiz":
+            return httpx.Response(429, json={"error": {"message": "Rate limit exceeded: free-models-per-day"}})
+        return httpx.Response(200, json={"model": model, "choices": [{"message": {"content": "tamam"}}]})
+    o = llm_mod.OpenRouterLLM()
+    o.models = ["ucretsiz", "ucretli"]
+    o._http = httpx.Client(transport=httpx.MockTransport(handler))
+    assert o.generate("s", "u") == "tamam" and cagri == ["ucretsiz", "ucretli"]
+    assert o.generate("s", "u") == "tamam" and cagri == ["ucretsiz", "ucretli", "ucretli"]

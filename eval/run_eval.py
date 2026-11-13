@@ -71,7 +71,7 @@ def main() -> None:
     if args.ajan:
         from src.agent import AgentAnswerer
         ans = AgentAnswerer(ans)
-    tag = re.sub(r"[^a-z0-9.]+", "_", args.llm.lower()) + ("_rerank" if ans.searcher.rerank else "") + ("_ajan" if args.ajan else "") + ("_kismi" if args.sadece else "")
+    tag = re.sub(r"[^a-z0-9.]+", "_", args.llm.lower()) + ("_rerank" if ans.searcher.rerank else "") + ("_ajan" if args.ajan else "") + ("_genis" if getattr(ans.searcher, "genis", None) is not None else "") + ("_kismi" if args.sadece else "")
     raw_path = Path(f"results/eval_{tag}.jsonl")
     rows, errors, ardisik = [], 0, 0
     with raw_path.open("w", encoding="utf-8", newline="\n") as fh:
@@ -150,7 +150,7 @@ def main() -> None:
         fh.write(json.dumps({"tarih": f"{datetime.now():%Y-%m-%dT%H:%M}", "llm": ans.llm.name, "commit": commit,
                              "n_ic": len(ic), "n_dis": len(dis), **tot, "dogru_ret": dis_ok, "gecersiz_atif": gecersiz,
                              "hata": errors, "tam": args.limit is None and not args.sadece and errors == 0, "ajan": args.ajan,
-                             "rerank": ans.searcher.rerank}, ensure_ascii=False) + "\n")
+                             "rerank": ans.searcher.rerank, "genis": getattr(ans.searcher, "genis", None) is not None}, ensure_ascii=False) + "\n")
     print("\n".join(L[:22]))
 
 

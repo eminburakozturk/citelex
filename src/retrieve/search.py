@@ -183,6 +183,19 @@ class Searcher:
         return trim_context(ctx, max_chars) if max_chars else ctx
 
 
+def attach_genis(searcher: "Searcher") -> None:
+    """Geniş katman koleksiyonu varsa ve CITELEX_GENIS != 0 ise derin katman aramacısına bağla (build_context kullanır).
+    Embedding modeli paylaşılır; reranker geniş katmanda kapalı (yayın CPU'su ve ölçülmemiş katman)."""
+    searcher.genis = None
+    if os.environ.get("CITELEX_GENIS", "1") == "0" or searcher.name != collection_name("hibrit"):
+        return
+    try:
+        if searcher.client.collection_exists(collection_name("genis")):
+            searcher.genis = Searcher("genis", searcher.embedder, rerank=False)
+    except Exception:  # noqa: BLE001 — geniş katman yoksa derin katman çalışmaya devam eder
+        searcher.genis = None
+
+
 def trim_context(ctx: dict[str, list[Hit]], max_chars: int = 14000) -> dict[str, list[Hit]]:
     """Bağlam bütçesi (yerel modelin 8k penceresi için): aşılırsa en düşük sıralı kaynaklar atılır.
 

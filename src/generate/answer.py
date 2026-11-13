@@ -22,9 +22,11 @@ from src import trace
 from src.generate import prompt
 from src.generate.llm import make_llm
 from src.index.embed import Embedder
-from src.retrieve.search import MEVZUAT_TURLERI, Searcher, trim_context
+from src.retrieve.search import MEVZUAT_TURLERI, Searcher, attach_genis, trim_context
 
 CFG_PATH = Path("configs/answer.json")
+GENIS_UYARI = ("Bu cevap geniş katmandan (yaklaşık 900 kanun, Temmuz 2025'e kadar) geliyor; bu katmanın doğruluğu ve "
+               "güncelliği ölçülmedi, resmî metinden kontrol edin.")
 DISCLAIMER = "Bu sistem hukuki tavsiye vermez; cevaplar yalnızca gösterilen kaynak metinlere dayanır."
 
 
@@ -62,11 +64,22 @@ def build_context(searcher: Searcher, query: str, esik: float | None,
     if not karar_acik:
         ctx["karar"] = []
     kanallar = [kn for kn in ("mevzuat", "karar") if esik is None or top[kn] >= esik]
+    genis = getattr(searcher, "genis", None)
+    if not kanallar and genis is not None and (turler is None or "kanun" in turler):
+        # Geniş katman (~900 kanun, HF corpus; kalitesi ÖLÇÜLMEDİ): yalnız derin katman eşiği geçemezse aranır,
+        # aynı eşik uygulanır. Derin katman sorularının davranışı değişmez.
+        g = genis.search(query, "dense", top_k=1, belge_tur=["kanun"])
+        top["genis"] = g[0].score if g else 0.0
+        if top["genis"] >= esik:
+            gctx = genis.search_context(query, "hybrid", k_mevzuat=5, k_karar=0, max_chars=None, mevzuat_tur=["kanun"])
+            hits = trim_context({"mevzuat": gctx["mevzuat"], "karar": []})["mevzuat"]
+            return hits, {"dense_top1": round(top["genis"], 4), "kanal_top1": {a: round(b, 4) for a, b in top.items()},
+                          "kanallar": ["genis"]}
     if not kanallar:  # eşik kapalıyken çağrılmaz; çağıran kapsam dışı kararını top1'den verir
-        kanallar = [max(top, key=top.get)]
+        kanallar = [max(("mevzuat", "karar"), key=top.get)]
     ctx = trim_context({kn: ctx[kn] for kn in kanallar})   # bütçe yalnız bağlama giren kanallara uygulanır
     hits = [h for kn in kanallar for h in ctx[kn]]
-    return hits, {"dense_top1": round(max(top.values()), 4), "kanal_top1": {a: round(b, 4) for a, b in top.items()},
+    return hits, {"dense_top1": round(max(top["mevzuat"], top["karar"]), 4), "kanal_top1": {a: round(b, 4) for a, b in top.items()},
                   "kanallar": kanallar}
 
 
@@ -76,6 +89,7 @@ class Answerer:
         if embed_device is None and llm_spec.startswith("ollama"):
             embed_device = "cpu"
         self.searcher = Searcher(mode, Embedder(device=embed_device))
+        attach_genis(self.searcher)
         self.llm = make_llm(llm_spec)
         self.cfg = load_cfg()
         self._lock = threading.Lock()
@@ -97,7 +111,7 @@ class Answerer:
         finally:
             sp.end()
         base = {"soru": query, "llm": self.llm.name, **meta, "esik": esik,
-                "uyari": DISCLAIMER, "derlem_tarihi": self.cfg.get("derlem_tarihi"),
+                "uyari": DISCLAIMER + (" " + GENIS_UYARI if meta["kanallar"] == ["genis"] else ""), "derlem_tarihi": self.cfg.get("derlem_tarihi"),
                 "baglam": [h.payload["atif"] for h in hits], "baglam_anahtar": [source_key(h.payload) for h in hits],
                 "arama_sn": round(time.time() - t0, 2)}
         if esik is not None and meta["dense_top1"] < esik:
