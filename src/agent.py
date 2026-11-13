@@ -44,6 +44,7 @@ class Durum(TypedDict, total=False):
     ham: str
     sorgular: list[str]
     sonuc: dict
+    turler: list[str] | None
 
 
 def _birlestir(eski: list, yeni: list) -> list:
@@ -65,7 +66,7 @@ def build_graph(ans: Answerer):
 
     def ara(d: Durum) -> Durum:
         with ans._lock:
-            hits, meta = build_context(ans.searcher, d["sorgu"], esik)
+            hits, meta = build_context(ans.searcher, d["sorgu"], esik, d.get("turler"))
         eslesti = esik is None or meta["dense_top1"] >= esik
         hits = _birlestir(d.get("hits", []), hits if eslesti else [])
         return {"hits": hits, "meta": meta | {"esik_gecti": eslesti or bool(d.get("hits"))},
@@ -107,7 +108,7 @@ class AgentAnswerer:
 
     def answer(self, query: str, turler=None) -> dict:
         t0 = time.time()
-        d = self.graph.invoke({"soru": query, "sorgu": query, "sorgular": []})
+        d = self.graph.invoke({"soru": query, "sorgu": query, "sorgular": [], "turler": turler})
         base = {"soru": query, "llm": self.llm.name + " (ajan)", **{k: d["meta"][k] for k in ("dense_top1", "kanal_top1", "kanallar")},
                 "esik": self.cfg.get("esik"), "baglam": [h.payload["atif"] for h in d["hits"]],
                 "baglam_anahtar": [source_key(h.payload) for h in d["hits"]], "arama_sn": 0.0,

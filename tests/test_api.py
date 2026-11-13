@@ -138,3 +138,20 @@ def test_tur_filtresi_dogrulanir():
         assert c.post("/sor?akis=false", json={"soru": "Yıllık izin kaç gün?", "turler": ["kanun"]}).status_code == 200
         assert c.post("/sor?akis=false", json={"soru": "Yıllık izin kaç gün?", "turler": ["roman"]}).status_code == 422
         assert c.post("/sor?akis=false", json={"soru": "Yıllık izin kaç gün?", "turler": []}).status_code == 422
+
+
+def test_ajan_modu_yeniden_yazip_cevaplar(monkeypatch):
+    """İlk denemede CEVAP_YOK -> soru yeniden yazılır -> ikinci denemede atıflı cevap (gerçek LangGraph akışı, sahte LLM)."""
+    a = make([])
+    cagri = []
+
+    def gen(system, user, max_tokens=1500):
+        cagri.append(system[:20])
+        if "arama sorgusuna" in system:
+            return "4857 sayılı İş Kanunu yazılı sözleşme"
+        return "CEVAP_YOK\nyetmiyor" if len(cagri) == 1 else "Yazılı yapılır [1]."
+    a.llm.generate = gen
+    with client(a) as c:
+        r = c.post("/sor?akis=false", json={"soru": "Hangi sözleşmeler yazılı yapılır?", "ajan": True}).json()
+    assert r["bilmiyorum"] is False and r["kaynaklar"][0]["anahtar"] == "is-kanunu:8"
+    assert r["ajan_sorgular"] == ["4857 sayılı İş Kanunu yazılı sözleşme"] and r["ajan_deneme"] == 2 and len(cagri) == 3

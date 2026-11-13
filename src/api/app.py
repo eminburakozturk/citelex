@@ -55,6 +55,9 @@ MSG_SINIR = {"dakika": "Çok sık soru gönderdiniz.", "gunluk": "Günlük soru 
 class Soru(BaseModel):
     soru: str = Field(min_length=3, max_length=500)
     turler: list[Literal["kanun", "yonetmelik", "teblig", "karar"]] | None = Field(default=None, min_length=1, max_length=4)
+    # Ajan modu (src/agent.py): "bilmiyorum" durumunda soruyu yeniden yazıp bir kez daha arar. Akışta parça yok,
+    # yalnız "sonuc" olayı gelir (ek LLM çağrısı olabileceği için daha yavaş).
+    ajan: bool = False
 
 
 def _env_int(name: str, default: int) -> int:
@@ -142,6 +145,27 @@ def create_app(answerer=None) -> FastAPI:
                                 headers={"Retry-After": str(bekle)})
         ans = request.app.state.answerer
         soru = body.soru.strip()
+        if body.ajan:
+            if getattr(request.app.state, "ajan", None) is None:
+                from src.agent import AgentAnswerer
+                request.app.state.ajan = AgentAnswerer(ans)
+            ans_ajan = request.app.state.ajan
+            if not akis:
+                try:
+                    return public(ans_ajan.answer(soru, body.turler))
+                except Exception as e:  # noqa: BLE001
+                    log.exception("ajan hatası")
+                    raise HTTPException(503, detail=llm_error_message(e)) from None
+
+            def gen_ajan() -> Iterator[str]:
+                try:
+                    yield sse("sonuc", public(ans_ajan.answer(soru, body.turler)))
+                except Exception as e:  # noqa: BLE001
+                    log.exception("ajan akış hatası")
+                    yield sse("hata", {"mesaj": llm_error_message(e)})
+
+            return StreamingResponse(gen_ajan(), media_type="text/event-stream",
+                                     headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
         if not akis:
             try:
                 return public(ans.answer(soru, body.turler))
