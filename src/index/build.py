@@ -27,7 +27,7 @@ NS = uuid.UUID("6f0c2b52-58c6-4a8e-9a43-1f0e3c7d9b21")  # citelex chunk namespac
 
 PAYLOAD_KEYS = [
     "chunk_id", "belge_id", "belge_tur", "belge_no", "belge_adi", "madde_tur", "madde_no",
-    "fikra_no", "baslik", "bolum", "atif", "mulga", "diger_kanuna_islendi", "dipnotlar", "metin",
+    "fikra_no", "parca_no", "giris", "baslik", "bolum", "atif", "mulga", "diger_kanuna_islendi", "dipnotlar", "metin",
     "kategori", "url", "karar_tarihi",  # yalnız karar parçalarında dolu
 ]
 KARAR_CHUNKS = Path("data/processed/chunks_karar.jsonl")  # mod bağımsız; her koleksiyona eklenir

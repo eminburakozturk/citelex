@@ -21,7 +21,7 @@ from pathlib import Path
 from src.generate import prompt
 from src.generate.llm import make_llm
 from src.index.embed import Embedder
-from src.retrieve.search import MEVZUAT_TURLERI, Searcher
+from src.retrieve.search import MEVZUAT_TURLERI, Searcher, trim_context
 
 CFG_PATH = Path("configs/answer.json")
 DISCLAIMER = "Bu sistem hukuki tavsiye vermez; cevaplar yalnızca gösterilen kaynak metinlere dayanır."
@@ -51,10 +51,11 @@ def build_context(searcher: Searcher, query: str, esik: float | None) -> tuple[l
     m = searcher.search(query, "dense", top_k=1, belge_tur=MEVZUAT_TURLERI)
     k = searcher.search(query, "dense", top_k=1, belge_tur=["karar"])
     top = {"mevzuat": m[0].score if m else 0.0, "karar": k[0].score if k else 0.0}
-    ctx = searcher.search_context(query, "hybrid")
+    ctx = searcher.search_context(query, "hybrid", max_chars=None)
     kanallar = [kn for kn in ("mevzuat", "karar") if esik is None or top[kn] >= esik]
     if not kanallar:  # eşik kapalıyken çağrılmaz; çağıran kapsam dışı kararını top1'den verir
         kanallar = [max(top, key=top.get)]
+    ctx = trim_context({kn: ctx[kn] for kn in kanallar})   # bütçe yalnız bağlama giren kanallara uygulanır
     hits = [h for kn in kanallar for h in ctx[kn]]
     return hits, {"dense_top1": round(max(top.values()), 4), "kanal_top1": {a: round(b, 4) for a, b in top.items()},
                   "kanallar": kanallar}

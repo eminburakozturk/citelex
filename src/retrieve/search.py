@@ -95,7 +95,7 @@ class Searcher:
         out: list[Hit] = []
         for (bid, mtur, mno), grp in list(groups.items())[:k]:
             first = grp[0]
-            if first.payload.get("fikra_no") is None:  # madde zaten tek parça
+            if first.payload.get("fikra_no") is None and first.payload.get("parca_no") is None:  # madde tek parça
                 out.append(first)
                 continue
             pts, _ = self.client.scroll(self.name, scroll_filter=models.Filter(must=[
@@ -104,22 +104,36 @@ class Searcher:
                 models.FieldCondition(key="madde_no", match=models.MatchValue(value=mno)),
                 models.FieldCondition(key="mulga", match=models.MatchValue(value=False)),
             ]), limit=200, with_payload=True)
-            fk = sorted((p.payload for p in pts if p.payload.get("fikra_no") is not None), key=lambda x: x["fikra_no"])
-            eslesen = sorted({h.payload["fikra_no"] for h in grp})
+            fk = sorted((p.payload for p in pts), key=lambda x: (x.get("fikra_no") or 0, x.get("parca_no") or 0))
+            eslesen = sorted({h.payload["fikra_no"] for h in grp if h.payload.get("fikra_no") is not None})
+            eslesen_id = {h.payload["chunk_id"] for h in grp}
             if sum(len(x["metin"]) for x in fk) > MAX_MADDE_CHARS:
+                # Bölünmemiş fıkralar: eşleşen ± 1. Bölünmüş uzun fıkra (tanımlar, bent listesi): yalnız eşleşen parçalar.
                 keep = {n + d for n in eslesen for d in (-1, 0, 1)}
-                fk = [x for x in fk if x["fikra_no"] in keep]
+                fk = [x for x in fk if x["chunk_id"] in eslesen_id
+                      or (x.get("parca_no") is None and x.get("fikra_no") in keep)]
+            satirlar, onceki = [], None
+            for x in fk:
+                metin = x["metin"]
+                if x.get("parca_no") is not None:
+                    ayni = onceki is not None and onceki.get("fikra_no") == x.get("fikra_no") and onceki.get("parca_no") is not None
+                    if ayni and x.get("giris") and x["giris"] == onceki.get("giris"):
+                        metin = metin[len(x["giris"]):].lstrip("\n")   # aynı giriş cümlesini tekrar etme
+                etiket = (f"{x['fikra_no']}. fıkra" if x.get("fikra_no") is not None else "") + \
+                         (" (ilgili bentler)" if x.get("parca_no") is not None else "")
+                satirlar.append(f"{etiket.strip()}: {metin}" if etiket.strip() else metin)
+                onceki = x
             payload = dict(first.payload)
             payload.update(
-                fikra_no=None, eslesen_fikralar=eslesen,
+                fikra_no=None, parca_no=None, eslesen_fikralar=eslesen,
                 atif=re.sub(r"/\d+$", "", first.payload["atif"]),
-                metin="\n".join(f"{x['fikra_no']}. fıkra: {x['metin']}" for x in fk),
+                metin="\n".join(satirlar),
             )
             out.append(Hit(first.score, payload))
         return out
 
     def search_context(self, query: str, method: str = "hybrid", k_mevzuat: int = 5,
-                       k_karar: int = 3, per_karar: int = 2, max_chars: int = 14000) -> dict[str, list[Hit]]:
+                       k_karar: int = 3, per_karar: int = 2, max_chars: int | None = 14000) -> dict[str, list[Hit]]:
         """İki kanallı arama: mevzuat ve karar AYRI aranır (KARARLAR.md 2026-11-12).
 
         Tek havuzda kararlar, alıntıladıkları kanun maddesini ilk 5'in dışına itiyordu ve ilk
@@ -144,15 +158,26 @@ class Searcher:
             ]), limit=4, with_payload=True)
             hukum = sorted((Hit(en_iyi.score, p.payload) for p in pts), key=lambda h: h.payload["chunk_id"])[:2]
             karar += deg + hukum if hukum else [en_iyi]
-        # Bağlam bütçesi (yerel modelin 8k penceresi için): aşılırsa en düşük sıralı kaynaklar atılır.
-        def size() -> int:
-            return sum(len(h.payload["metin"]) for h in mevzuat + karar)
-        while size() > max_chars and (len(mevzuat) > 2 or len(karar) > 2):
-            if len(karar) > 2 and (len(mevzuat) <= 2 or sum(len(h.payload["metin"]) for h in karar) >= sum(len(h.payload["metin"]) for h in mevzuat)):
-                karar.pop()
-            else:
-                mevzuat.pop()
-        return {"mevzuat": mevzuat, "karar": karar}
+        ctx = {"mevzuat": mevzuat, "karar": karar}
+        return trim_context(ctx, max_chars) if max_chars else ctx
+
+
+def trim_context(ctx: dict[str, list[Hit]], max_chars: int = 14000) -> dict[str, list[Hit]]:
+    """Bağlam bütçesi (yerel modelin 8k penceresi için): aşılırsa en düşük sıralı kaynaklar atılır.
+
+    Yalnız bağlama GERÇEKTEN girecek kanallarla çağrılmalı: eşikle elenen karar kanalı bütçeden pay
+    alınca mevzuat 2 kaynağa düşüyor, cevabı taşıyan madde dışarıda kalıyordu (ölçüldü, 13 Kas).
+    """
+    mevzuat, karar = list(ctx.get("mevzuat", [])), list(ctx.get("karar", []))
+
+    def size(hs: list[Hit]) -> int:
+        return sum(len(h.payload["metin"]) for h in hs)
+    while size(mevzuat) + size(karar) > max_chars and (len(mevzuat) > 2 or len(karar) > 2):
+        if len(karar) > 2 and (len(mevzuat) <= 2 or size(karar) >= size(mevzuat)):
+            karar.pop()
+        else:
+            mevzuat.pop()
+    return {"mevzuat": mevzuat, "karar": karar}
 
 
 def main() -> None:

@@ -1,2 +1,4 @@
 {"tarih": "2026-11-12T17:48", "llm": "ollama:qwen2.5:7b", "commit": "9076480", "n_ic": 46, "n_dis": 6, "baglam": 41, "atif": 33, "icerik": 34, "dogru": 31, "yanlis_ret": 9, "dogru_ret": 6, "gecersiz_atif": 0, "hata": 0, "tam": true}
 {"tarih": "2026-11-12T22:44", "llm": "ollama:qwen2.5:7b", "commit": "9755794", "n_ic": 46, "n_dis": 6, "baglam": 41, "atif": 37, "icerik": 37, "dogru": 34, "yanlis_ret": 3, "dogru_ret": 5, "gecersiz_atif": 0, "hata": 0, "tam": true}
+{"tarih": "2026-11-13T13:28", "llm": "ollama:qwen2.5:7b", "commit": "c3dac88", "n_ic": 50, "n_dis": 6, "baglam": 45, "atif": 36, "icerik": 34, "dogru": 32, "yanlis_ret": 10, "dogru_ret": 6, "gecersiz_atif": 0, "hata": 0, "tam": true}
+{"tarih": "2026-11-13T13:40", "llm": "ollama:qwen2.5:7b", "commit": "c3dac88", "n_ic": 50, "n_dis": 6, "baglam": 45, "atif": 35, "icerik": 35, "dogru": 33, "yanlis_ret": 12, "dogru_ret": 6, "gecersiz_atif": 0, "hata": 0, "tam": true}
