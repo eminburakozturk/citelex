@@ -40,7 +40,7 @@ import pdfplumber
 from src.sources import kvkk
 from src.sources.http import FetchError, get
 from src.store import db
-from src.update import diff
+from src.update import diff as fark
 
 PY = sys.executable
 LOG = Path("logs/updates.jsonl")
@@ -139,7 +139,7 @@ def check(con, run_id: str, docs: list[dict], fake: dict[str, str]) -> tuple[lis
                     if act:  # "bu madde değişti": madde/bölüm düzeyinde fark (API /degisiklikler okur)
                         try:
                             yeni_v = db.active_version(con, doc["doc_key"])
-                            fp = diff.write_diff(con, doc["doc_key"], act, yeni_v)
+                            fp = fark.write_diff(con, doc["doc_key"], act, yeni_v)
                             detail += f" | fark: {fp.name if fp else 'yok (yalnız biçim)'}"
                         except Exception as e:  # noqa: BLE001 — fark üretilemezse güncelleme durmaz
                             detail += f" | fark hatası: {type(e).__name__}: {str(e)[:120]}"
@@ -151,6 +151,21 @@ def check(con, run_id: str, docs: list[dict], fake: dict[str, str]) -> tuple[lis
             con.commit()
             print(f"  {doc['doc_key']:42} {result}" + (f"  ({detail})" if detail else ""), flush=True)
     return changed, errors
+
+
+def erken_uyari_adimi(fake: dict) -> list[dict]:
+    """Resmî Gazete'de son 3 günün derin katmanı ilgilendiren yeni kayıtları (src/update/erken_uyari.py).
+    Hata güncellemeyi durdurmaz; sahte (test) çalıştırmada atlanır."""
+    if fake:
+        return []
+    try:
+        from src.update.erken_uyari import kontrol_ve_kaydet
+        yeni = kontrol_ve_kaydet(3)
+        print(f"  erken uyarı: {len(yeni)} yeni ilgili Resmî Gazete kaydı")
+        return yeni
+    except Exception as e:  # noqa: BLE001
+        print(f"  erken uyarı hatası: {type(e).__name__}: {str(e)[:150]}")
+        return []
 
 
 def rebuild_chunks(changed: list[dict]) -> None:
@@ -238,7 +253,13 @@ def main() -> None:
     con.commit()
     t0 = time.time()
     print(f"[{run_id}] {len(docs)} doküman kontrol ediliyor")
+    uyarilar = erken_uyari_adimi(fake)
     changed, errors = check(con, run_id, docs, fake)
+    degisen_belge = {d["belge_id"] for d in changed}
+    for u in uyarilar:
+        if u.get("ilgili_belge_id") not in degisen_belge:
+            print(f"  BEKLEYEN: Resmî Gazete'de {u['ilgili_belge_id']} değişikliği var ({u['gun']}: {u['baslik'][:80]}), "
+                  "mevzuat.gov.tr metni henüz değişmedi")
 
     diff, ev = None, None
     if changed:
@@ -259,7 +280,8 @@ def main() -> None:
     with LOG.open("a", encoding="utf-8", newline="\n") as fh:
         fh.write(json.dumps({"run_id": run_id, "tarih": db.now(), "sure_sn": round(time.time() - t0, 1),
                              "kontrol": len(docs), "degisen": [d["doc_key"] for d in changed], "hata": errors,
-                             "sahte": list(fake) or None, "indeks": diff, "regresyon": ev}, ensure_ascii=False) + "\n")
+                             "sahte": list(fake) or None, "indeks": diff, "regresyon": ev,
+                             "erken_uyari": [{k: u.get(k) for k in ("gun", "ilgili_belge_id", "baslik", "url")} for u in uyarilar]}, ensure_ascii=False) + "\n")
     print(f"[{run_id}] bitti: {len(changed)} değişti, {errors} hata, {time.time() - t0:.0f} sn")
     if errors and errors == len(docs):
         sys.exit(2)  # tüm kaynaklar hatalı: zamanlayıcı başarısız saysın
