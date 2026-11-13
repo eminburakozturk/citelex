@@ -60,6 +60,7 @@ Arama:           iki kanallı hibrit (dense + BM25, RRF) -> reranker (bge-rerank
 Depo:            SQLite sürüm deposu -> "bu madde değişti" (eski/yeni metin farkı)
 Yayın:           Docker Compose (yerel) | Hugging Face Spaces (API + bge-m3 CPU) + Qdrant Cloud (ücretsiz katman)
 CI:              GitHub Actions: testler + arama regresyonu (eval kapısı) + EXE/APK derleme
+İzleme:          her sorunun izi (arama, bağlam, gecikme, token/maliyet): Langfuse veya OpenTelemetry
 ```
 - Telefon/EXE istemcileri ince istemcidir: model cihazda çalışmaz (bge-m3 ~2,3 GB, LLM 7B), bulut API'ye bağlanır.
 - Çekirdek hat (Qdrant, bge-m3, kendi hibrit araması, eval, güncelleme) framework'e TAŞINMAZ; LangGraph yalnız
@@ -102,17 +103,20 @@ citelex/
 Durum (13 Kas sabahı): 11–15 Kas satırlarının çekirdeği bitti (ayrıntı KARARLAR.md). Açık kalanlar aşağıda "Borçlar"da.
 
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)
+Hedef rol: yapay zekâ / ürün geliştirici. Sıra CV değerine göre: önce canlı ve ölçülen sistem, sonra
+LLM mühendisliği sinyalleri; EXE + APK "mobilde de varım" göstergesi olarak en sonda ve sade tutulur.
+
 | Gün | Görev | Bitti kriteri |
 |---|---|---|
 | 13 Kas | FastAPI: akışlı cevap (SSE), kaynak metni, sağlık ucu, istek sınırı; Docker Compose (API + Qdrant) | `docker compose up` ile API açılıyor; akışlı cevap curl ile görülüyor |
 | 14 Kas | Next.js arayüz (Vercel AI SDK): akışlı sohbet, tıklanabilir kaynak paneli, tür filtresi, son kontrol tarihi, "hukuki tavsiye değildir" uyarısı; statik çıktı | Tarayıcıda uçtan uca soru-cevap; atıfa tıklayınca madde metni açılıyor |
 | 15 Kas | Bulutta yayın: Hugging Face Spaces (API + bge-m3 CPU) + Qdrant Cloud + Gemini API; web arayüzü yayında | Herkese açık adresten soru-cevap çalışıyor |
-| 16 Kas | Tauri 2: aynı arayüzden Windows EXE + Android APK (bulut API'ye bağlı) | EXE bilgisayarda, APK telefonda soru cevaplıyor |
+| 16 Kas | GitHub Actions: testler + arama regresyonu kapısı; izlenebilirlik (her sorunun araması, bağlamı, gecikmesi, token/maliyeti kayıtlı; Langfuse veya OpenTelemetry) | Push'ta CI yeşil, isabeti düşüren değişiklik kırmızı; bir sorunun izi panelde görülüyor |
 | 17 Kas | "Bu madde değişti": sürüm deposundan değişiklik listesi + eski/yeni metin farkı (API + arayüz); reranker ölçümü | Sahte değişiklik arayüzde fark olarak görünüyor; reranker'lı/siz eval tablosu |
-| 18 Kas | GitHub Actions: testler + arama regresyonu kapısı + EXE/APK otomatik derleme | Push'ta CI yeşil; isabeti düşüren değişiklik kırmızı |
-| 19 Kas | LangGraph ajan modu (bağlam yetmiyorsa soruyu yeniden yazıp tekrar ara) + tek adımlı hatla eval karşılaştırması | Ajan ve tek adım aynı sette ölçüldü, sonuç tabloda |
-| 20 Kas | Karşılaştırma deneyleri: dense/BM25/hibrit; madde/fıkra/hibrit; BM25 vs bge-m3 sparse; yerel vs API; Borçlar | results/ altında tablolar |
-| 21 Kas | README (mimari şeması, sonuç tabloları, sınırlar, kurulum), repo public | Repo public, canlı bağlantı README'de |
+| 18 Kas | LangGraph ajan modu (bağlam yetmiyorsa soruyu yeniden yazıp tekrar ara) + tek adımlı hatla eval karşılaştırması | Ajan ve tek adım aynı sette ölçüldü, sonuç tabloda |
+| 19 Kas | Karşılaştırma deneyleri: dense/BM25/hibrit; madde/fıkra/hibrit; BM25 vs bge-m3 sparse; yerel vs API; Borçlar | results/ altında tablolar |
+| 20 Kas | Tauri 2: aynı arayüzden Windows EXE + Android APK (ince istemci, bulut API'ye bağlı); CI'da otomatik derleme | EXE bilgisayarda, APK telefonda soru cevaplıyor |
+| 21 Kas | README (mimari şeması, sonuç tabloları, sınırlar, kurulum, canlı bağlantı), repo public | Repo public |
 
 Kapsam kesilmez; iş yetişmezse tarih kayar. Kesinti gerekirse kullanıcıya sorulur.
 Kendini güncelleme ve değerlendirme setinden VAZGEÇİLMEZ.
