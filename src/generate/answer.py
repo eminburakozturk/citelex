@@ -25,6 +25,7 @@ from src.index.embed import Embedder
 from src.retrieve.search import MEVZUAT_TURLERI, Searcher, attach_genis, trim_context
 
 CFG_PATH = Path("configs/answer.json")
+GENIS_FARK = 0.05   # kalibrasyon: derin katman sorularında max(geniş - derin) = +0,021
 GENIS_UYARI = ("Bu cevap geniş katmandan (yaklaşık 900 kanun, Temmuz 2025'e kadar) geliyor; bu katmanın doğruluğu ve "
                "güncelliği ölçülmedi, resmî metinden kontrol edin.")
 DISCLAIMER = "Bu sistem hukuki tavsiye vermez; cevaplar yalnızca gösterilen kaynak metinlere dayanır."
@@ -65,12 +66,15 @@ def build_context(searcher: Searcher, query: str, esik: float | None,
         ctx["karar"] = []
     kanallar = [kn for kn in ("mevzuat", "karar") if esik is None or top[kn] >= esik]
     genis = getattr(searcher, "genis", None)
-    if not kanallar and genis is not None and (turler is None or "kanun" in turler):
-        # Geniş katman (~900 kanun, HF corpus; kalitesi ÖLÇÜLMEDİ): yalnız derin katman eşiği geçemezse aranır,
-        # aynı eşik uygulanır. Derin katman sorularının davranışı değişmez.
+    if genis is not None and esik is not None and (turler is None or "kanun" in turler):
+        # Geniş katman (~900 kanun, HF corpus): aynı eşik uygulanır. İki durumda geniş katmana gidilir:
+        #  (a) derin katman eşiği geçemez; (b) derin geçse bile geniş katman GENIS_FARK'tan fazla önde
+        #      (ör. "devlet memuruna analık izni": İş Kanunu m.74 eşleşiyordu, doğrusu 657 s. DMK m.104).
+        # GENIS_FARK kalibrasyon setinden: derin katman sorularında geniş katmanın en büyük üstünlüğü +0,021 (KARARLAR.md).
         g = genis.search(query, "dense", top_k=1, belge_tur=["kanun"])
         top["genis"] = g[0].score if g else 0.0
-        if top["genis"] >= esik:
+        derin = max(top["mevzuat"], top["karar"])
+        if top["genis"] >= esik and (not kanallar or top["genis"] > derin + GENIS_FARK):
             gctx = genis.search_context(query, "hybrid", k_mevzuat=5, k_karar=0, max_chars=None, mevzuat_tur=["kanun"])
             hits = trim_context({"mevzuat": gctx["mevzuat"], "karar": []})["mevzuat"]
             return hits, {"dense_top1": round(top["genis"], 4), "kanal_top1": {a: round(b, 4) for a, b in top.items()},

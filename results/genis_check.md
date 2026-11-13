@@ -4,8 +4,8 @@ Eşik 0.637. Soru: 15 kapsam içi + 3 kapsam dışı (eval/genis_sorular.jsonl, 
 
 | Ölçüt | Değer |
 |---|---|
-| Geniş katmana yönlendirildi | 13/15 |
-| Beklenen madde üretim bağlamında | 12/15 |
+| Geniş katmana yönlendirildi | 14/15 |
+| Beklenen madde üretim bağlamında | 13/15 |
 | Doğrudan geniş arama R@1 | 10/15 |
 | Doğrudan geniş arama R@5 | 14/15 |
 | Kapsam dışı: hiçbir kanala gitmedi (eşikte ret) | 3/3 |
@@ -24,7 +24,7 @@ Eşik 0.637. Soru: 15 kapsam içi + 3 kapsam dışı (eval/genis_sorular.jsonl, 
 | g10 | İşveren yeni işe alacağı işçinin sigortalı işe giriş bildirgesini SGK' | kanun-5510:8 | genis (0.747) | ✓ | 1 | kanun-5510:8; kanun-5510:11; kanun-4447:48 |
 | g11 | Kamu ihalesi sürecinde hukuka aykırılık iddiasıyla ihaleyi yapan idare | kanun-4734:55 | genis (0.742) | ✓ | 1 | kanun-4734:55; kanun-4734:54; kanun-4734:56 |
 | g12 | Bireysel işlenen suçlarda gözaltı süresi en fazla ne kadar sürebilir? | kanun-5271:91 | genis (0.664) | ✓ | 1 | kanun-5271:91; kanun-3713:Geçici 19; kanun-7074:Geçici 1 |
-| g13 | Kadın devlet memuruna doğumdan önce ve sonra toplam kaç hafta analık i | kanun-657:104 | mevzuat (0.717) | ✗ | 1 | kanun-657:104; kanun-2692:Ek 11; kanun-657:108 |
+| g13 | Kadın devlet memuruna doğumdan önce ve sonra toplam kaç hafta analık i | kanun-657:104 | genis (0.813) | ✓ | 1 | kanun-657:104; kanun-2692:Ek 11; kanun-657:108 |
 | g14 | Bir takvim yılına ait yıllık gelir vergisi beyannamesi ne zamana kadar | kanun-193:92 | genis (0.779) | ✓ | 1 | kanun-193:92; kanun-193:84; kanun-1319:47 |
 | g15 | Özel kanunda ayrı süre öngörülmemişse idare mahkemesi ve vergi mahkeme | kanun-2577:7 | genis (0.751) | ✓ | 1 | kanun-2577:7; kanun-2577:10; kanun-213:Ek 15 |
 | g16 | 2026 yılı için geçerli net asgari ücret tutarı kaç TL olarak belirlenm | kapsam dışı | mevzuat (0.562) | ✗ | — | kanun-193:Geçici 86; kanun-193:Geçici 87; kanun-193:31 |
