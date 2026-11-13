@@ -58,6 +58,8 @@ class Searcher:
                                            query_filter=flt, limit=top_k, with_payload=True)
         else:
             if query not in self._qcache:  # aynı soru iki kanalda/yöntemde tekrar embed edilmesin
+                if len(self._qcache) >= 256:  # uzun yaşayan API sürecinde sınırsız büyümesin
+                    self._qcache.clear()
                 self._qcache[query] = self.embedder.embed_query(query).tolist()
             dense = self._qcache[query]
             if method == "dense":

@@ -1,0 +1,10 @@
+.env
+.git
+data
+logs
+results
+eval
+tests
+web
+**/__pycache__
+*.md
