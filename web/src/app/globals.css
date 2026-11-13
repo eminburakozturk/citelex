@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f7f6f3;
+  --panel: #ffffff;
+  --ink: #1c1b19;
+  --muted: #6b6860;
+  --line: #e2dfd8;
+  --accent: #7a2e2e;
+  --accent-soft: #f3e6e4;
+  --warn-bg: #fdf4dc;
+  --warn-ink: #6b4e00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151412;
+    --panel: #1e1d1a;
+    --ink: #ece9e2;
+    --muted: #a09c92;
+    --line: #34322d;
+    --accent: #e0a39b;
+    --accent-soft: #3a2623;
+    --warn-bg: #33290f;
+    --warn-ink: #ecd9a0;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-ink: var(--warn-ink);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.kanun-metni {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.65;
+}

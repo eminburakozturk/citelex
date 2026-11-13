@@ -103,14 +103,14 @@ citelex/
 Durum (13 Kas sabahı): 11–15 Kas satırlarının çekirdeği bitti (ayrıntı KARARLAR.md). Açık kalanlar aşağıda "Borçlar"da.
 
 ### DEVAM NOKTASI (yeni oturum buradan başlar; bitince bu bölümü güncelle)
-Son durum: 13 Kas öğleden sonra. Biten: 6331 İSG Kanunu derlemde; eval seti 56 soru; **13 Kas satırı tamam**
-(FastAPI /sor SSE + /kaynak + /saglik, istek sınırı, 11 test, Dockerfile + Compose; `docker compose up` ile akışlı cevap
-doğrulandı). Qdrant artık Compose'dan çalışıyor (`docker compose up -d`; ad ve volume aynı).
+Son durum: 13 Kas akşamı. Biten: 6331 derlemde; eval seti 56 soru; **13 Kas satırı tamam** (FastAPI + Compose);
+**14 Kas satırı tamam** (Next.js arayüz `web/`: akış, kaynak paneli, tür filtresi; tarayıcıda uçtan uca doğrulandı).
+Çalıştırma: `docker compose up -d` (API 8000 + Qdrant), `npm --prefix web run dev` (3000). Statik çıktı: `npm --prefix web run build` -> `web/out`.
 Sıradaki işler, sırayla ve DURMADAN:
-1. **14 Kas satırı:** Next.js arayüz (`web/`): akışlı sohbet (SSE olayları: baglam, parca, sonuc, hata), tıklanabilir
-   kaynak paneli (/kaynak), tür filtresi (API'ye `tur` parametresi eklenecek: build_context'te kanal/belge_tur kısıtı),
-   son kontrol tarihi, "hukuki tavsiye değildir" uyarısı; statik çıktı.
-2. 15 Kas satırı (bulutta yayın) — kullanıcıdan Hugging Face ve Qdrant Cloud hesapları gerekir.
+1. **15 Kas satırı:** bulutta yayın (Hugging Face Spaces: API + bge-m3 CPU; Qdrant Cloud; statik arayüz). Kullanıcıdan
+   Hugging Face ve Qdrant Cloud hesapları/anahtarları gerekir -> BURADA DURULUR. Hazırlık: bge-m3'ün yalnız gereken
+   dosyalarını indir, CITELEX_GUNLUK_TOPLAM ve CITELEX_CORS'u ayarla, indeksi Qdrant Cloud'a kur (1 GB sınırını ölç).
+2. Hesaplar gelene kadar: 16 Kas satırı (GitHub Actions + arama regresyonu kapısı, LLM hakemli sadakat, izlenebilirlik).
 3. Takvim v2'nin kalan satırları.
 Kullanıcıdan beklenenler: eval setinin doğrulanması (56 soru, 4'ü yeni İSG sorusu); 15 Kas'ta Hugging Face ve Qdrant Cloud
 hesapları.
