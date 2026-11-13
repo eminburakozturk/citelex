@@ -21,6 +21,7 @@ export interface Sonuc {
   cevap: string;
   neden?: string;
   kaynaklar: Kaynak[];
+  kanallar?: string[];
   uyari: string;
   son_kontrol?: string | null;
   sure_sn?: number;

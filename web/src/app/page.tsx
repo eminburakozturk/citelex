@@ -16,6 +16,7 @@ const ORNEKLER = [
   "İşveren çalışanın kurumsal e-postasını izleyebilir mi?",
   "İş kazası Sosyal Güvenlik Kurumuna kaç gün içinde bildirilir?",
   "Veri ihlali Kurula ne kadar sürede bildirilmelidir?",
+  "Kira sözleşmesinde kiracıdan alınan güvence (depozito) en fazla ne kadar olabilir?",
 ];
 const BOLUM_ADI: Record<string, string> = {
   sikayet: "Şikâyet / ihlal bildirimi",
@@ -141,11 +142,13 @@ export default function Sayfa() {
                   sorabilirsiniz. Kapsam dışındaki sorularda sistem “bilmiyorum” der.
                 </p>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  {ORNEKLER.map((o) => (
+                  {ORNEKLER.map((o, idx) => (
                     <button
                       key={o}
                       onClick={() => gonder(o)}
-                      className="min-h-[44px] rounded-md border border-line bg-panel px-3 py-2.5 text-left text-sm hover:border-accent"
+                      className={`min-h-[44px] rounded-md border border-line bg-panel px-3 py-2.5 text-left text-sm hover:border-accent ${
+                        ORNEKLER.length % 2 === 1 && idx === ORNEKLER.length - 1 ? "sm:col-span-2" : ""
+                      }`}
                     >
                       {o}
                     </button>
@@ -251,6 +254,7 @@ function Cevap({ m, ac }: { m: Mesaj; ac: (anahtar: string) => void }) {
 
   if (m.hata) return <p className="rounded-md border border-line bg-panel px-3 py-2 text-sm text-accent">{m.hata}</p>;
   const s = m.sonuc;
+  const genis = s?.kanallar?.includes("genis") ?? false;
   // [n] -> kaynak: bitince doğrudan sonuc.kaynaklar'dan (ajan modunda baglam gelmez), akış sırasında baglam'dan
   const bul = (n: number) =>
     s ? s.kaynaklar.find((k) => k.no === n) : m.baglam.find((k) => k.no === n) ?? m.baglam[n - 1];
@@ -262,6 +266,17 @@ function Cevap({ m, ac }: { m: Mesaj; ac: (anahtar: string) => void }) {
           {m.ajan && uzunBekleme && (
             <p className="text-xs text-muted">Gerekirse soru yeniden yazılıp tekrar aranıyor…</p>
           )}
+        </div>
+      )}
+      {genis && (
+        <div className="mb-3 space-y-1.5 border-b border-line pb-2.5">
+          <span className="inline-flex items-center rounded-md border border-warn-ink/30 bg-warn-bg px-2.5 py-1 text-xs font-medium text-warn-ink">
+            Geniş katman · doğruluğu ölçülmedi
+          </span>
+          <p className="text-xs leading-relaxed text-muted">
+            {s?.uyari ||
+              "Bu cevap geniş katmandan (yaklaşık 900 kanun, Temmuz 2025'e kadar) geliyor; bu katmanın doğruluğu ve güncelliği ölçülmedi, resmî metinden kontrol edin."}
+          </p>
         </div>
       )}
       {m.metin && (
@@ -289,10 +304,12 @@ function Cevap({ m, ac }: { m: Mesaj; ac: (anahtar: string) => void }) {
       {s?.ajan_deneme === 2 && (
         <details className="mt-3 border-t border-line pt-2 text-xs text-muted">
           <summary className="flex min-h-[40px] cursor-pointer select-none items-center hover:text-ink">
-            Soru yeniden yazılarak tekrar arandı (2. deneme)
+            {s.bilmiyorum
+              ? "Soru yeniden yazılıp tekrar arandı; yine yeterli kaynak bulunamadı."
+              : "Soru yeniden yazılarak tekrar arandı (2. deneme)"}
           </summary>
           <p className="mt-1 break-words rounded bg-bg px-2.5 py-2 text-ink">
-            İlk aramada yeterli kaynak bulunamadı; soru şu sorguyla yeniden arandı:{" "}
+            {s.bilmiyorum ? "Denenen arama sorgusu: " : "İlk aramada yeterli kaynak bulunamadı; soru şu sorguyla yeniden arandı: "}
             <span className="font-medium">{s.ajan_sorgular?.[0] ?? "—"}</span>
           </p>
         </details>

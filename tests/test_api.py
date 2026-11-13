@@ -175,3 +175,10 @@ def test_openrouter_devre_kesici(monkeypatch):
     o._http = httpx.Client(transport=httpx.MockTransport(handler))
     assert o.generate("s", "u") == "tamam" and cagri == ["ucretsiz", "ucretli"]
     assert o.generate("s", "u") == "tamam" and cagri == ["ucretsiz", "ucretli", "ucretli"]
+
+
+def test_ajan_uyari_ve_sureler():
+    a = make(["Yazılı yapılır [1]."])
+    with client(a) as c:
+        r = c.post("/sor?akis=false", json={"soru": "Hangi sözleşmeler yazılı yapılır?", "ajan": True}).json()
+    assert "hukuki tavsiye" in r["uyari"] and r["llm_sn"] is not None and r["arama_sn"] is not None

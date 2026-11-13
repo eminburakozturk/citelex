@@ -26,7 +26,7 @@ from langgraph.graph import END, StateGraph
 
 from src import trace
 from src.generate import prompt
-from src.generate.answer import Answerer, build_context, source_key
+from src.generate.answer import DISCLAIMER, GENIS_UYARI, Answerer, build_context, source_key
 from src.retrieve.search import trim_context
 
 MAX_DENEME = 2
@@ -45,6 +45,8 @@ class Durum(TypedDict, total=False):
     ham: str
     sorgular: list[str]
     sonuc: dict
+    arama_sn: float
+    llm_sn: float
     turler: list[str] | None
 
 
@@ -66,19 +68,23 @@ def build_graph(ans: Answerer):
     esik = ans.cfg.get("esik")
 
     def ara(d: Durum) -> Durum:
+        t = time.time()
         with ans._lock:
             hits, meta = build_context(ans.searcher, d["sorgu"], esik, d.get("turler"))
         eslesti = esik is None or meta["dense_top1"] >= esik
         hits = _birlestir(d.get("hits", []), hits if eslesti else [])
         return {"hits": hits, "meta": meta | {"esik_gecti": eslesti or bool(d.get("hits"))},
-                "deneme": d.get("deneme", 0) + 1}
+                "deneme": d.get("deneme", 0) + 1, "arama_sn": d.get("arama_sn", 0.0) + time.time() - t}
 
     def cevapla(d: Durum) -> Durum:
-        return {"ham": ans.llm.generate(prompt.SYSTEM, prompt.build_user(d["soru"], d["hits"]))}
+        t = time.time()
+        ham = ans.llm.generate(prompt.SYSTEM, prompt.build_user(d["soru"], d["hits"]))
+        return {"ham": ham, "llm_sn": d.get("llm_sn", 0.0) + time.time() - t}
 
     def yeniden_yaz(d: Durum) -> Durum:
+        t = time.time()
         q = ans.llm.generate(REWRITE_SYSTEM, d["soru"], max_tokens=120).strip().splitlines()[0][:300]
-        return {"sorgu": q, "sorgular": [*d.get("sorgular", []), q]}
+        return {"sorgu": q, "sorgular": [*d.get("sorgular", []), q], "llm_sn": d.get("llm_sn", 0.0) + time.time() - t}
 
     def aramadan_sonra(d: Durum) -> str:
         if d["meta"]["esik_gecti"]:
@@ -125,13 +131,15 @@ class AgentAnswerer:
         d = self.graph.invoke({"soru": query, "sorgu": query, "sorgular": [], "turler": turler})
         base = {"soru": query, "llm": self.llm.name + " (ajan)", **{k: d["meta"][k] for k in ("dense_top1", "kanal_top1", "kanallar")},
                 "esik": self.cfg.get("esik"), "baglam": [h.payload["atif"] for h in d["hits"]],
-                "baglam_anahtar": [source_key(h.payload) for h in d["hits"]], "arama_sn": 0.0,
+                "baglam_anahtar": [source_key(h.payload) for h in d["hits"]], "arama_sn": round(d.get("arama_sn", 0.0), 2),
+                "uyari": DISCLAIMER + (" " + GENIS_UYARI if d["meta"]["kanallar"] == ["genis"] else ""),
+                "derlem_tarihi": self.cfg.get("derlem_tarihi"),
                 "ajan_deneme": d["deneme"], "ajan_sorgular": d.get("sorgular", [])}
         if "ham" not in d:   # iki aramada da eşik geçilmedi
             return {**base, "bilmiyorum": True, "bilmiyorum_katmani": "arama_esigi", "cevap": prompt.NO_ANSWER_TEXT,
                     "neden": "Soru, derlemdeki kaynaklara yeterince yakın değil.", "kaynaklar": [], "gecersiz_atif": [],
                     "sure_sn": round(time.time() - t0, 2)}
-        out = self.ans.finalize(d["ham"], d["hits"], base, 0.0)
+        out = self.ans.finalize(d["ham"], d["hits"], base, d.get("llm_sn", 0.0))
         out["sure_sn"] = round(time.time() - t0, 2)
         return out
 

@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 // API adresi derleme anında NEXT_PUBLIC_API_URL ile verilir (anahtar DEĞİL; anahtar yalnız API sunucusunda).
 const nextConfig: NextConfig = {
   output: "export",
+  trailingSlash: true,
   images: { unoptimized: true },
   turbopack: {
     rules: {

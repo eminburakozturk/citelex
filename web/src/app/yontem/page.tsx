@@ -50,8 +50,8 @@ const ADIMLAR = [
 const SINIRLAR = [
   "56 soruluk değerlendirme setindeki beklenen cevaplar taslaktır (hukuki doğrulama bekler); içerik puanı anahtar kelime eşleşmesine dayanır.",
   "0,637 eşiği \"daha az yanlış cevap\" yönünde tutucudur; kısa veya genel kapsam içi soruları kesebilir (ajan modu bu darboğazı büyük ölçüde aşar).",
-  "Geçerli [n] atfı anlamsal doğruluğu tek başına kanıtlamaz; bu yüzden iddia düzeyi sadakat LLM hakemiyle ayrıca ölçülür.",
-  "Derlem 12 mevzuat belgesi ve 40 seçili KVKK Kurul kararıyla sınırlıdır; geniş katmandaki 895 kanun henüz indekslenmez ve değerlendirilmez.",
+  "Atıf geçerliliği anlamsal doğruluğu tek başına kanıtlamaz; bu yüzden iddia düzeyi sadakat LLM hakemiyle ayrıca ölçülür.",
+  "Derin katman 12 mevzuat belgesi ve 40 seçili KVKK Kurul kararıyla sınırlıdır. Geniş katman (895 kanun, 44.854 parça) arama kapsamındadır ancak doğruluğu henüz ölçülmemiştir.",
   "Örneklem küçüktür (eval 56 soru, arama deneyleri 63 soru); 1–2 soruluk farklar gürültü sınırındadır.",
 ];
 
@@ -131,6 +131,19 @@ export default function YontemSayfasi() {
           <p className="text-xs text-muted">
             Tasarım ilkeleri: <code>KARARLAR.md</code> · Sayısal sonuçlar doğrudan <code>web/public/pano.json</code>{" "}
             dosyasından okunur.
+          </p>
+        </section>
+
+        <section aria-labelledby="genis-katman-baslik" className="space-y-1.5 rounded-lg border border-line bg-panel p-4">
+          <h2 id="genis-katman-baslik" className="text-sm font-semibold text-ink">
+            Geniş katman (~900 kanun) ne zaman devreye girer?
+          </h2>
+          <p className="text-sm leading-relaxed text-ink">
+            Yalnızca derin katman (KVKK, İş Kanunu, İSG Kanunu, ilgili yönetmelik/tebliğler ve 40 Kurul kararı) kalibre
+            edilmiş <code>0,637</code> eşiğini geçemezse ve tür filtresi kanunu kapsıyorsa <code>citelex_genis</code>{" "}
+            koleksiyonu (895 kanun, 44.854 parça, Temmuz 2025&apos;e kadar) aranır; derin katman sorularının davranışı
+            değişmez. Geniş katmanın doğruluğu ve güncelliği eval setiyle ölçülmediği için yanıtlar rozet ve resmî
+            metinden kontrol uyarısıyla döner.
           </p>
         </section>
 

@@ -26,6 +26,7 @@ services:
       CITELEX_LLM: ${CITELEX_LLM:-gemini}
       CITELEX_EMBED_DEVICE: cpu
       CITELEX_RERANK: ${CITELEX_RERANK:-0}         # CPU'da ölçüldü: 30 aday ~43 sn/sorgu -> kapalı (GPU'da 0,74 sn)
+      CITELEX_WEB_DIR: /app/web/out
       # İzler: jaeger çalışıyorsa span'ler oraya gider (yoksa sessizce düşer); tek satırlık özet logs/izler.jsonl'de.
       OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://jaeger:4318}
       CITELEX_IZ_DOSYA: /app/logs/izler.jsonl
@@ -35,6 +36,7 @@ services:
       - hf_cache:/models                      # bge-m3 bir kez iner
       - ./data/store:/app/data/store:ro       # güncelleme deposu (son kontrol tarihi); yalnız okunur
       - ./logs:/app/logs                      # izler.jsonl
+      - ./web/out:/app/web/out:ro             # statik Next.js arayüzü (npm --prefix web run build)
 
   # İz paneli (isteğe bağlı): docker compose --profile izleme up -d  ->  http://127.0.0.1:16686
   jaeger:
