@@ -25,11 +25,24 @@ services:
       OLLAMA_HOST: http://host.docker.internal:11434   # CITELEX_LLM=ollama ise ana makinedeki Ollama
       CITELEX_LLM: ${CITELEX_LLM:-gemini}
       CITELEX_EMBED_DEVICE: cpu
+      # İzler: jaeger çalışıyorsa span'ler oraya gider (yoksa sessizce düşer); tek satırlık özet logs/izler.jsonl'de.
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://jaeger:4318}
+      CITELEX_IZ_DOSYA: /app/logs/izler.jsonl
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
       - hf_cache:/models                      # bge-m3 bir kez iner
       - ./data/store:/app/data/store:ro       # güncelleme deposu (son kontrol tarihi); yalnız okunur
+      - ./logs:/app/logs                      # izler.jsonl
+
+  # İz paneli (isteğe bağlı): docker compose --profile izleme up -d  ->  http://127.0.0.1:16686
+  jaeger:
+    image: jaegertracing/jaeger:2.22.0
+    container_name: citelex-jaeger
+    profiles: ["izleme"]
+    ports:
+      - "127.0.0.1:16686:16686"   # panel
+      - "127.0.0.1:4318:4318"     # OTLP/HTTP (yerelde compose dışından çalışan API için)
 
 volumes:
   citelex_qdrant:

@@ -18,6 +18,7 @@ import time
 from collections.abc import Iterator
 from pathlib import Path
 
+from src import trace
 from src.generate import prompt
 from src.generate.llm import make_llm
 from src.index.embed import Embedder
@@ -79,12 +80,22 @@ class Answerer:
         self.cfg = load_cfg()
         self._lock = threading.Lock()
 
-    def prepare(self, query: str, turler: list[str] | None = None) -> tuple[dict | None, list, dict]:
+    def prepare(self, query: str, turler: list[str] | None = None,
+                root: trace.Span | None = None) -> tuple[dict | None, list, dict]:
         """Arama + eşik. Dönen: (erken "bilmiyorum" cevabı veya None, bağlam, ortak alanlar)."""
         t0 = time.time()
         esik = self.cfg.get("esik")
-        with self._lock:  # embedding modeli ve sorgu önbelleği: aynı anda tek istek (API çok iş parçacıklı)
-            hits, meta = build_context(self.searcher, query, esik, turler)
+        sp = trace.Span("arama", root, **{"citelex.esik": esik})
+        try:
+            with self._lock:  # embedding modeli ve sorgu önbelleği: aynı anda tek istek (API çok iş parçacıklı)
+                hits, meta = build_context(self.searcher, query, esik, turler)
+            sp.set(**{"citelex.kanallar": meta["kanallar"], "citelex.dense_top1": meta["dense_top1"],
+                      "citelex.baglam": [source_key(h.payload) for h in hits]})
+        except Exception as e:
+            sp.error(e)
+            raise
+        finally:
+            sp.end()
         base = {"soru": query, "llm": self.llm.name, **meta, "esik": esik,
                 "uyari": DISCLAIMER, "derlem_tarihi": self.cfg.get("derlem_tarihi"),
                 "baglam": [h.payload["atif"] for h in hits], "baglam_anahtar": [source_key(h.payload) for h in hits],
@@ -112,12 +123,50 @@ class Answerer:
                 "ham": raw, "sure_sn": round(base["arama_sn"] + llm_sn, 2), "llm_sn": round(llm_sn, 2)}
 
     def answer(self, query: str, turler: list[str] | None = None) -> dict:
-        early, hits, base = self.prepare(query, turler)
-        if early:
-            return early
-        t1 = time.time()
-        raw = self.llm.generate(prompt.SYSTEM, prompt.build_user(query, hits))
-        return self.finalize(raw, hits, base, time.time() - t1)
+        root = trace.Span("sor", **{"citelex.akis": False})
+        out = None
+        try:
+            early, hits, base = self.prepare(query, turler, root)
+            if early:
+                out = early
+                return early
+            t1 = time.time()
+            if hasattr(self.llm, "last_usage"):
+                self.llm.last_usage = None  # önceki çağrının token/maliyeti bu ize yazılmasın
+            sp = trace.Span("llm", root)
+            try:
+                raw = self.llm.generate(prompt.SYSTEM, prompt.build_user(query, hits))
+            except Exception as e:
+                sp.error(e)
+                raise
+            finally:
+                sp.set(**trace.usage_attrs(self.llm))
+                sp.end()
+            out = self.finalize(raw, hits, base, time.time() - t1)
+            return out
+        except Exception as e:
+            root.error(e)
+            raise
+        finally:
+            self._trace_end(root, query, turler, out, akis=False)
+
+    def _trace_end(self, root: trace.Span, query: str, turler: list[str] | None, out: dict | None, akis: bool) -> None:
+        """Kök span'i kapat ve logs/izler.jsonl'e tek satır özet yaz (hata olsa da)."""
+        o = out or {}
+        kullanim = trace.usage_attrs(self.llm) if o.get("llm_sn") is not None else {}
+        root.set(**{"citelex.bilmiyorum": o.get("bilmiyorum"), "citelex.bilmiyorum_katmani": o.get("bilmiyorum_katmani"),
+                    "citelex.atif": [k["anahtar"] for k in o.get("kaynaklar", [])], **kullanim})
+        toplam = root.end()
+        trace.write_record({
+            "trace_id": root.trace_id, "akis": akis, "soru": query, "turler": turler,
+            "sonuc": "hata" if "hata" in root.attrs else ("bilmiyorum" if o.get("bilmiyorum") else "cevap"),
+            "hata": root.attrs.get("hata"), "bilmiyorum_katmani": o.get("bilmiyorum_katmani"),
+            "kanallar": o.get("kanallar"), "dense_top1": o.get("dense_top1"), "baglam": o.get("baglam_anahtar"),
+            "atif": [k["anahtar"] for k in o.get("kaynaklar", [])], "gecersiz_atif": o.get("gecersiz_atif"),
+            "arama_sn": o.get("arama_sn"), "llm_sn": o.get("llm_sn"), "toplam_sn": toplam,
+            "model": kullanim.get("gen_ai.request.model"), "girdi_token": kullanim.get("gen_ai.usage.input_tokens"),
+            "cikti_token": kullanim.get("gen_ai.usage.output_tokens"), "maliyet_usd": kullanim.get("citelex.maliyet_usd"),
+        })
 
     def answer_stream(self, query: str, turler: list[str] | None = None) -> Iterator[tuple[str, dict]]:
         """Akışlı cevap: ("baglam", {...}) -> ("parca", {"metin": ...})* -> ("sonuc", doğrulanmış cevap).
@@ -125,21 +174,46 @@ class Answerer:
         Doğrulama akıştan SONRA da yapılır ve "sonuc" olayı esas alınır: hiç geçerli atıf yoksa akıtılan
         metin atılır, istemci "bilmiyorum" gösterir. CEVAP_YOK ile başlayan çıktı hiç akıtılmaz.
         """
-        early, hits, base = self.prepare(query, turler)
-        if early:
-            yield "sonuc", early
-            return
-        yield "baglam", {"kaynaklar": [source_entry(i, h.payload) for i, h in enumerate(hits, 1)]}
-        t1 = time.time()
-        buf, sent = "", 0
-        for delta in self.llm.stream(prompt.SYSTEM, prompt.build_user(query, hits)):
-            buf += delta
-            head = buf.lstrip().upper()
-            if head.startswith(prompt.NO_ANSWER) or prompt.NO_ANSWER.startswith(head):
-                continue  # "bilmiyorum" (veya henüz belli değil): modelin gerekçesi kullanıcıya akıtılmaz
-            yield "parca", {"metin": buf[sent:]}
-            sent = len(buf)
-        yield "sonuc", self.finalize(buf, hits, base, time.time() - t1)
+        root = trace.Span("sor", **{"citelex.akis": True})
+        out = None
+        try:
+            early, hits, base = self.prepare(query, turler, root)
+            if early:
+                out = early
+                yield "sonuc", early
+                return
+            yield "baglam", {"kaynaklar": [source_entry(i, h.payload) for i, h in enumerate(hits, 1)]}
+            t1 = time.time()
+            buf, sent = "", 0
+            if hasattr(self.llm, "last_usage"):
+                self.llm.last_usage = None  # önceki çağrının token/maliyeti bu ize yazılmasın
+            sp = trace.Span("llm", root)
+            try:
+                for delta in self.llm.stream(prompt.SYSTEM, prompt.build_user(query, hits)):
+                    if sent == 0 and not buf:
+                        sp.set(**{"citelex.ilk_parca_sn": round(time.time() - t1, 3)})
+                    buf += delta
+                    head = buf.lstrip().upper()
+                    if head.startswith(prompt.NO_ANSWER) or prompt.NO_ANSWER.startswith(head):
+                        continue  # "bilmiyorum" (veya henüz belli değil): modelin gerekçesi kullanıcıya akıtılmaz
+                    yield "parca", {"metin": buf[sent:]}
+                    sent = len(buf)
+            except Exception as e:
+                sp.error(e)
+                raise
+            finally:
+                sp.set(**trace.usage_attrs(self.llm))
+                sp.end()
+            out = self.finalize(buf, hits, base, time.time() - t1)
+            yield "sonuc", out
+        except GeneratorExit:   # istemci bağlantıyı kesti
+            root.set(hata="istemci_ayrildi")
+            raise
+        except Exception as e:
+            root.error(e)
+            raise
+        finally:
+            self._trace_end(root, query, turler, out, akis=True)
 
 
 def render(a: dict) -> str:

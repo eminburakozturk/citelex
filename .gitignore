@@ -19,3 +19,4 @@ Thumbs.db
 
 # Zamanlayıcı çalışma günlüğü (yerel)
 logs/scheduler.log
+logs/izler.jsonl
