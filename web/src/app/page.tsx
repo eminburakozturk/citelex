@@ -107,13 +107,16 @@ export default function Sayfa() {
   return (
     <div className="flex h-dvh overflow-x-hidden">
       <main className="flex min-w-0 flex-1 flex-col">
-        <header className="border-b border-line bg-panel px-4 py-3">
+        <header className="guvenli-ust guvenli-yatay border-b border-line bg-panel pb-3">
           <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-1">
             <h1 className="text-lg font-semibold tracking-tight">
               Citelex <span className="font-normal text-muted">· kaynak gösteren mevzuat asistanı</span>
             </h1>
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
               <p>Kaynakların son kontrolü: {tarih(sonKontrol)}</p>
+              <Link href="/yontem" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+                Yöntem
+              </Link>
               <Link href="/pano" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
                 Değerlendirme panosu
               </Link>
@@ -163,7 +166,7 @@ export default function Sayfa() {
           </div>
         </div>
 
-        <footer className="border-t border-line bg-panel px-4 py-3">
+        <footer className="guvenli-alt guvenli-yatay border-t border-line bg-panel pt-3">
           <form
             className="mx-auto max-w-3xl space-y-2.5"
             onSubmit={(e) => {
@@ -353,7 +356,7 @@ function KaynakPaneli({ panel, kapat }: { panel: { anahtar: string; veri?: Kayna
             Kapat
           </button>
         </div>
-        <div className="flex-1 space-y-4 overflow-y-auto px-4 py-4">
+        <div className="guvenli-panel-alt flex-1 space-y-4 overflow-y-auto px-4 pt-4">
           {!v && !panel.hata && <p className="text-sm text-muted">Yükleniyor…</p>}
           {panel.hata && <p className="text-sm text-accent">{panel.hata}</p>}
           {v && (

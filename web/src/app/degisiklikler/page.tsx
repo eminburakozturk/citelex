@@ -70,13 +70,16 @@ export default function DegisikliklerSayfasi() {
 
   return (
     <div className="min-h-full overflow-x-hidden bg-bg text-ink">
-      <header className="border-b border-line bg-panel px-4 py-3">
+      <header className="guvenli-ust guvenli-yatay border-b border-line bg-panel pb-3">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-1">
           <h1 className="text-lg font-semibold tracking-tight">
             Citelex <span className="font-normal text-muted">· Son değişiklikler</span>
           </h1>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
             <span>Son kontrol: {tarih(sonKontrol)}</span>
+            <Link href="/yontem" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+              Yöntem
+            </Link>
             <Link href="/pano" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Değerlendirme panosu
             </Link>
@@ -87,7 +90,7 @@ export default function DegisikliklerSayfasi() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl min-w-0 space-y-6 px-4 py-6">
+      <main className="guvenli-sayfa-alt guvenli-yatay mx-auto max-w-5xl min-w-0 space-y-6 pt-6">
         <div className="flex flex-wrap items-center justify-between gap-2 rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
           <p>
             Kaynak kontrollerinde tespit edilen sürüm farkları madde veya bölüm düzeyinde listelenir. Eski sürümler
