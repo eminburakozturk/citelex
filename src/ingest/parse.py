@@ -69,14 +69,14 @@ SOURCES_PATH = Path("configs/sources.json")
 
 RE_MADDE = re.compile(
     r"^(?P<tur>MADDE|Madde|EK MADDE|Ek Madde|Ek madde|GEÇİCİ MADDE|Geçici Madde|Geçici madde)"
-    r"\s*(?P<no>\d+)\s*[-–—]?\s*(?P<rest>.*)$"
+    r"\s*(?P<no>\d+(?:/[A-ZÇĞİÖŞÜ](?![A-Za-zçğıöşüÇĞİÖŞÜ]))?)\s*[-–—]?\s*(?P<rest>.*)$"   # "24/A": sonradan eklenen ara madde
 )
 RE_FIKRA_NO = re.compile(r"^\((?P<n>\d+)\)\s*")
 RE_BENT = re.compile(r"^([a-zçğıöşü]{1,2}\)|\([IVX]+\)|[IVX]+\s*[-–.]\s|\([a-zçğıöşü]\)\s|\d+\.\s|[a-zçğıöşü]\.\s)")
 # Değişiklik notu: "(Değişik: 6/5/2016-6715/1 md.)", "(Ek fıkra:11/6/2003-4884/10 md.)", yönetmeliklerde "(Değişik:RG-28/4/2019-30758)"
 RE_ANNOT = re.compile(r"\((?:[^()]*?)(?:Ek|Değişik|Mülga|İptal|Başlığı|Yeniden)[^()]*?\d+/\d+/\d{4}[^()]*?\)")
 RE_MULGA_FULL = re.compile(r"^\(\s*Mülga\s*:[^)]*\)\s*$")
-RE_ISLENDI = re.compile(r"^\(.*ilgili olup.*yerine işlenmiştir\.?\)\s*$", re.S)
+RE_ISLENDI = re.compile(r"^\(?.*ilgili olup.*yerine işlenmiştir\.?\)?\s*$", re.S)   # 6331 m.35-36'da parantezsiz
 # Kalın yazı tipi adı: "TimesNewRomanPS-BoldMT" veya Türkçe "TimesNewRomanKalın" (PDF'te "Kal?n" bozulabilir)
 RE_EK_FORM = re.compile(r"EK\s*[-–]?\s*[IVX0-9]+")   # "EK-I": yönetmelik sonundaki form/cetvel başlığı
 RE_BOLD_FONT = re.compile(r"Bold|Kal.{1,2}n", re.I)
@@ -306,7 +306,8 @@ def _finalize(a: Article) -> None:
         a.diger_kanuna_islendi = True
 
     # Maddenin tamamını değiştiren not tek başına satırdaysa ("(Değişik: ...)") fıkra değildir
-    if paras and not a.mulga and RE_ANNOT.fullmatch(paras[0]):
+    # (6331 Ek m.1'de art arda üç not var: Ek + İptal + Yeniden Düzenleme)
+    if paras and not a.mulga and re.fullmatch(rf"(?:{RE_ANNOT.pattern}\s*)+", paras[0]):
         paras = paras[1:]
 
     fikralar: list[str] = []

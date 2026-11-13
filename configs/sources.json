@@ -36,6 +36,17 @@
     "url": "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.1475.pdf",
     "sayfa_url": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=1475&MevzuatTur=1&MevzuatTertip=5"
   },
+  "1.5.6331.pdf": {
+    "belge_id": "isg-kanunu",
+    "belge_tur": "kanun",
+    "belge_no": "6331",
+    "belge_adi": "İş Sağlığı ve Güvenliği Kanunu",
+    "kisa_ad": "İSG Kanunu",
+    "mevzuat_no": 6331,
+    "mevzuat_tur": 1,
+    "url": "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.6331.pdf",
+    "sayfa_url": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6331&MevzuatTur=1&MevzuatTertip=5"
+  },
   "yon_imha.pdf": {
     "belge_id": "imha-yon",
     "belge_tur": "yonetmelik",
