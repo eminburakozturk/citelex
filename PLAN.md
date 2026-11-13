@@ -108,14 +108,15 @@ Son durum: 13 Kas akşamı. Biten: 6331 derlemde; eval seti 56 soru; **13 Kas sa
 Çalıştırma: `docker compose up -d` (API 8000 + Qdrant), `npm --prefix web run dev` (3000). Statik çıktı: `npm --prefix web run build` -> `web/out`.
 15 Kas (bulutta yayın) YARIM: Qdrant Cloud'da indeks kurulu; yayın betikleri hazır (scripts/yayin_qdrant.py,
 scripts/yayin_space.py); yapılandırma yerelde bulut Qdrant'a karşı doğrulandı. ENGEL: Hugging Face Docker Space artık PRO
-abonelik istiyor (402) -> barındırma kararı kullanıcıda. Ayrıca Gemini ücretsiz kota günde 20 istek (gemini-3.6-flash).
+abonelik istiyor (402) -> barındırma kararı kullanıcıda. Ayrıca Gemini ücretsiz kota günde 20 istek -> çözüm olarak
+OpenRouter sağlayıcısı eklendi (model zincirli; deepseek-v4.1-flash 40/50 %80, ücretsiz nemotron 39/50 %78; yerel qwen2.5
+33/50). Zincir OPENROUTER_MODELS ile .env'ten seçilir; kalıcı model/faturalama + barındırma kararı kullanıcıda.
 Sıradaki işler, sırayla ve DURMADAN:
-1. Kullanıcının barındırma kararına göre yayını bitir (PRO ise: `python -m scripts.yayin_space`, derlemeyi izle, herkese
-   açık adresten soru-cevabı dene). Kararı beklerken 2'ye geç.
-2. 16 Kas satırı (GitHub Actions + arama regresyonu kapısı, LLM hakemli sadakat, izlenebilirlik).
-3. Takvim v2'nin kalan satırları.
-Kullanıcıdan beklenenler: eval setinin doğrulanması (56 soru, 4'ü yeni İSG sorusu); 15 Kas'ta Hugging Face ve Qdrant Cloud
-hesapları.
+1. 16 Kas satırı (GitHub Actions + arama regresyonu kapısı, LLM hakemli sadakat, izlenebilirlik).
+2. Kullanıcının barındırma/model kararına göre yayını bitir.
+3. Takvim v2'nin kalan satırları (17, 18, 19, 20, 21 Kas).
+Kullanıcıdan beklenenler: eval setinin doğrulanması (56 soru, 4'ü yeni İSG sorusu); barındırma (HF PRO / alternatif) ve
+kalıcı LLM (ücretsiz nemotron zinciri / ücretli deepseek / Gemini faturalama) kararları.
 Günlük görev kurulu ("Citelex Gunluk Guncelleme", her gün 03:00, scripts/guncelle.ps1).
 
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)

@@ -30,3 +30,5 @@ if not OLLAMA_HOST.startswith("http"):
     OLLAMA_HOST = "http://" + OLLAMA_HOST
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen2.5:7b")
+# OpenRouter: virgüllü model zinciri, sırayla denenir (önce ücretsiz, kotası dolunca ücretli). Seçim: results/llm_compare_openrouter.md
+OPENROUTER_MODELS = [m.strip() for m in os.environ.get("OPENROUTER_MODELS", "").split(",") if m.strip()]

@@ -1,4 +1,4 @@
-"""LLM istemcileri: Gemini (API) ve Ollama (yerel). İkisi de generate(system, user) -> str.
+"""LLM istemcileri: Gemini (API), OpenRouter (API, model zinciri) ve Ollama (yerel). İkisi de generate(system, user) -> str.
 
 temperature=0: aynı soru + aynı kaynaklar -> aynı cevap (eval tekrarlanabilirliği).
 Ek bağımlılık yok; doğrudan HTTP (httpx). Gemini anahtarı başlıkta gider, URL'ye yazılmaz.
@@ -156,11 +156,112 @@ class OllamaLLM:
                         yield text
 
 
+class OpenRouterLLM:
+    """OpenRouter (OpenAI uyumlu sohbet ucu). Model ZİNCİRİ: ilk model hata verirse (429 kota, 402 kredi, 5xx,
+    zaman aşımı, boş cevap) sıradaki denenir — önce ücretsiz model, kotası dolunca ücretli olan.
+
+    Akışta yedek modele yalnız İLK parça gelmeden önce geçilir (yarım cevabın üstüne ikinci model yazmaz).
+    Anahtar yalnız Authorization başlığında; isteğe proje/kullanıcı bilgisi eklenmez.
+    """
+    URL = "https://openrouter.ai/api/v1/chat/completions"
+
+    def __init__(self, model: str | None = None, timeout: float = 90):
+        self.models = [model] if model else list(config.OPENROUTER_MODELS)
+        if not self.models:
+            raise LLMError("OpenRouter modeli yok (OPENROUTER_MODELS veya 'openrouter:<model>')")
+        self.name = "openrouter:" + self.models[0] + (f" (+{len(self.models) - 1} yedek)" if len(self.models) > 1 else "")
+        self._key = os.environ.get("OPENROUTER_API_KEY", "")
+        if not self._key:
+            raise LLMError("OPENROUTER_API_KEY yok (.env)")
+        self._http = httpx.Client(timeout=timeout, headers={"Authorization": f"Bearer {self._key}"})
+        self.last_model: str | None = None   # cevabı üreten model (izlenebilirlik)
+        self.last_usage: dict | None = None  # {prompt_tokens, completion_tokens, cost}
+
+    def _body(self, model: str, system: str, user: str, max_tokens: int, stream: bool) -> dict:
+        body = {"model": model, "temperature": 0, "max_tokens": max_tokens, "stream": stream,
+                "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+                "usage": {"include": True},
+                # düşünme kapalı: ucuz modellerde düşünme tokenları çıktı limitini tüketip boş cevap döndürüyordu (ölçüldü)
+                "reasoning": {"enabled": False}}
+        if stream:
+            body["stream_options"] = {"include_usage": True}
+        return body
+
+    @staticmethod
+    def _error(r) -> LLMError:
+        try:
+            msg = r.json().get("error", {}).get("message", "")
+        except ValueError:
+            msg = r.text
+        return LLMError(f"OpenRouter {r.status_code}: {str(msg)[:300]}", status=r.status_code)
+
+    def generate(self, system: str, user: str, max_tokens: int = 1500) -> str:
+        last: Exception | None = None
+        for model in self.models:
+            for attempt in range(2):   # aynı modelde bir kez daha (geçici 429/5xx), sonra sıradaki model
+                try:
+                    r = self._http.post(self.URL, json=self._body(model, system, user, max_tokens, False))
+                except httpx.TimeoutException:
+                    last = LLMError(f"OpenRouter zaman aşımı ({model})")
+                    break
+                if r.status_code == 200:
+                    j = r.json()
+                    if "error" in j:   # sağlayıcı hatası 200 içinde dönebiliyor
+                        last = LLMError(f"OpenRouter sağlayıcı hatası ({model}): {str(j['error'].get('message'))[:200]}",
+                                        status=j["error"].get("code") if isinstance(j["error"].get("code"), int) else None)
+                        break
+                    text = (j["choices"][0]["message"].get("content") or "").strip()
+                    if text:
+                        self.last_model, self.last_usage = j.get("model", model), j.get("usage")
+                        return text
+                    last = LLMError(f"OpenRouter boş cevap ({model}, finish={j['choices'][0].get('finish_reason')})")
+                    break
+                last = self._error(r)
+                if r.status_code not in (429, 500, 502, 503) or attempt == 1:
+                    break
+                time.sleep(3)
+        raise last or LLMError("OpenRouter: cevap alınamadı")
+
+    def stream(self, system: str, user: str, max_tokens: int = 1500) -> Iterator[str]:
+        last: Exception | None = None
+        for model in self.models:
+            started = False
+            try:
+                with self._http.stream("POST", self.URL, json=self._body(model, system, user, max_tokens, True)) as r:
+                    if r.status_code != 200:
+                        r.read()
+                        last = self._error(r)
+                        continue
+                    for line in r.iter_lines():
+                        if not line.startswith("data:") or line.strip() == "data: [DONE]":
+                            continue
+                        j = json.loads(line[5:])
+                        if "error" in j:
+                            raise LLMError(f"OpenRouter akış hatası ({model}): {str(j['error'].get('message'))[:200]}")
+                        if j.get("usage"):
+                            self.last_usage = j["usage"]
+                        text = (j.get("choices") or [{}])[0].get("delta", {}).get("content") or ""
+                        if text:
+                            started = True
+                            yield text
+                if started:
+                    self.last_model = model
+                    return
+                last = LLMError(f"OpenRouter boş cevap ({model})")
+            except (httpx.TimeoutException, LLMError) as e:
+                if started:
+                    raise LLMError(f"OpenRouter akışı kesildi ({model})") from None
+                last = e if isinstance(e, LLMError) else LLMError(f"OpenRouter zaman aşımı ({model})")
+        raise last or LLMError("OpenRouter: cevap alınamadı")
+
+
 def make_llm(spec: str):
-    """'gemini', 'gemini:<model>', 'ollama', 'ollama:<model>'"""
+    """'gemini[:model]', 'ollama[:model]', 'openrouter' (OPENROUTER_MODELS zinciri) veya 'openrouter:<model>'"""
     kind, _, model = spec.partition(":")
     if kind == "gemini":
         return GeminiLLM(model or None)
     if kind == "ollama":
         return OllamaLLM(model or None)
+    if kind == "openrouter":
+        return OpenRouterLLM(model or None)
     raise ValueError(spec)
