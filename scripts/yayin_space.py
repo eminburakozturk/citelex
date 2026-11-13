@@ -125,6 +125,7 @@ def main() -> None:
     # olan lite model kullanılır. Bu modelin cevap kalitesi eval setinde ÖLÇÜLMEDİ (KARARLAR.md).
     for k, v in {"CITELEX_LLM": "gemini", "GEMINI_MODEL": os.environ.get("CITELEX_YAYIN_MODEL", "gemini-3.1-flash-lite"),
                  "CITELEX_TRUST_PROXY": "1", "CITELEX_RATE_DK": "5", "CITELEX_RATE_GUN": "60",
+                 "CITELEX_RERANK": "0",  # CPU'da reranker ~43 sn/sorgu (KARARLAR.md)
                  "CITELEX_GUNLUK_TOPLAM": os.environ.get("CITELEX_YAYIN_GUNLUK_TOPLAM", "300"),
                  "CITELEX_SON_KONTROL": son_kontrol()}.items():
         api.add_space_variable(repo, k, v)
