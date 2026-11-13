@@ -44,9 +44,10 @@ for i in $(seq 1 30); do $CURL http://qdrant:6333/readyz >/dev/null 2>&1 && brea
 QID="$($COMPOSE ps -q qdrant)"
 for s in snapshots/*.snapshot; do
   name="$(basename "$s" .snapshot)"
-  $DOCKER cp "$s" "$QID:/qdrant/$name.snapshot"
-  $CURL -X PUT "http://qdrant:6333/collections/$name/snapshots/recover?wait=true" -H 'Content-Type: application/json'     -d "{\"location\":\"file:///qdrant/$name.snapshot\",\"priority\":\"snapshot\"}" >/dev/null
-  $DOCKER exec "$QID" rm -f "/qdrant/$name.snapshot"
+  $DOCKER exec "$QID" mkdir -p /qdrant/snapshots   # Qdrant yalnız bu klasörden geri yükler
+  $DOCKER cp "$s" "$QID:/qdrant/snapshots/$name.snapshot"
+  $CURL -X PUT "http://qdrant:6333/collections/$name/snapshots/recover?wait=true" -H 'Content-Type: application/json'     -d "{\"location\":\"file:///qdrant/snapshots/$name.snapshot\",\"priority\":\"snapshot\"}" >/dev/null
+  $DOCKER exec "$QID" rm -f "/qdrant/snapshots/$name.snapshot"
   echo "  $name: $($CURL http://qdrant:6333/collections/$name | grep -o '"points_count":[0-9]*')"
 done
 
