@@ -24,20 +24,31 @@ SPLIT_CHARS = 3000   # bundan uzun fıkra/madde bent gruplarına bölünür (ara
 PART_CHARS = 1500    # hedef parça boyu (giriş ve kapanış hariç)
 RE_GRUP = re.compile(r"^[IVX]+\s*[-–]\s")
 
+def madde_no_kisa(madde_no: str) -> str:
+    """'Geçici 1' -> '1', 'Ek 2' -> '2', '24/A' -> '24/A'; geniş katmanda tekrar eki: 'Geçici 1 (2)' -> '1 (2)'.
+    Derin katmanda eski split()[-1] ile aynı sonucu verir (chunk_id'ler değişmez)."""
+    return re.sub(r"^(Geçici|Ek)\s+", "", madde_no.strip())   # "Mükerrer 8" korunur ("8" ile çakışmasın)
+
+
 def atif(a: dict, fikra_no: int | None) -> str:
     """Kanun: '6698 s. KVKK m. 5/2'. Yönetmelik/tebliğ: 'Yıllık Ücretli İzin Yön. m. 9'."""
-    tur = {"asil": "m.", "ek": "ek m.", "gecici": "geç. m."}[a["madde_tur"]]
-    no = a["madde_no"].split()[-1]
     ad = a["kisa_ad"]
     if a["belge_tur"] == "kanun" and not ad.startswith(a["belge_no"]):
         ad = f"{a['belge_no']} s. {ad}"
+    if a["madde_tur"] == "ek_liste":   # kanun eki (geniş katman): "5747 s. ... I Sayılı Liste" / parça no
+        return f"{ad} {a['madde_no']}" + (f"/{fikra_no}" if fikra_no is not None else "")
+    tur = {"asil": "m.", "ek": "ek m.", "gecici": "geç. m."}[a["madde_tur"]]
+    no = madde_no_kisa(a["madde_no"])
     return f"{ad} {tur} {no}" + (f"/{fikra_no}" if fikra_no is not None else "")
 
 
 def header(a: dict, fikra_no: int | None) -> str:
     h = f"{a['belge_no']} sayılı {a['belge_adi']}, " if a["belge_tur"] == "kanun" else f"{a['belge_adi']}, "
-    h += {"asil": "Madde", "ek": "Ek Madde", "gecici": "Geçici Madde"}[a["madde_tur"]]
-    h += f" {a['madde_no'].split()[-1]}"
+    if a["madde_tur"] == "ek_liste":
+        h += f"Ek: {a['madde_no']}"
+    else:
+        h += {"asil": "Madde", "ek": "Ek Madde", "gecici": "Geçici Madde"}[a["madde_tur"]]
+        h += f" {madde_no_kisa(a['madde_no'])}"
     if a["baslik"]:
         h += f" ({a['baslik']})"
     if fikra_no is not None:
@@ -85,7 +96,7 @@ def split_long(metin: str) -> list[tuple[str, str]] | None:
 
 def make_chunk(a: dict, fikralar: list[dict], fikra_no: int | None, parca: tuple[int, str, str] | None = None) -> dict:
     metin = parca[2] if parca else "\n".join(f["metin"] for f in fikralar)
-    mid = f"{a['belge_id']}-{a['madde_tur']}-{a['madde_no'].split()[-1]}"
+    mid = f"{a['belge_id']}-{a['madde_tur']}-" + re.sub(r"[\s()]+", "-", madde_no_kisa(a["madde_no"])).strip("-")
     return {
         "chunk_id": mid + (f"-f{fikra_no}" if fikra_no is not None else "") + (f"-p{parca[0]}" if parca else ""),
         "parca_no": parca[0] if parca else None,   # uzun fıkranın kaçıncı parçası (split_long)
