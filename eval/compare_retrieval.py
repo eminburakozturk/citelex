@@ -38,7 +38,7 @@ def deney1(qs: list[dict]) -> list[str]:
          "|---|---|---|---|---|---|---|---|"]
     emb = None
     for mode in MODES:
-        s = Searcher(mode, emb)
+        s = Searcher(mode, emb, rerank=False)
         emb = s.embedder
         for m in METHODS:
             rk = {"mevzuat": [], "karar": []}

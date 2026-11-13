@@ -25,6 +25,7 @@ services:
       OLLAMA_HOST: http://host.docker.internal:11434   # CITELEX_LLM=ollama ise ana makinedeki Ollama
       CITELEX_LLM: ${CITELEX_LLM:-gemini}
       CITELEX_EMBED_DEVICE: cpu
+      CITELEX_RERANK: ${CITELEX_RERANK:-1}         # CPU'da sorgu başı süre ölçülmeli; yavaşsa 0
       # İzler: jaeger çalışıyorsa span'ler oraya gider (yoksa sessizce düşer); tek satırlık özet logs/izler.jsonl'de.
       OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://jaeger:4318}
       CITELEX_IZ_DOSYA: /app/logs/izler.jsonl

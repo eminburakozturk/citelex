@@ -48,8 +48,8 @@ class Hit:
 class Searcher:
     def __init__(self, mode: str = "hibrit", embedder: Embedder | None = None, rerank: bool | None = None):
         self.client = QdrantClient(url=QDRANT_URL, api_key=config.QDRANT_API_KEY, timeout=30)
-        # Reranker (bge-reranker-v2-m3): ölçüm results/rerank_compare.md; varsayılan CITELEX_RERANK ortam değişkeni.
-        self.rerank = (os.environ.get("CITELEX_RERANK") == "1") if rerank is None else rerank
+        # Varsayılan AÇIK (2026-11-13: en iyi ölçülen yapılandırma ajan + reranker, 45/50); CITELEX_RERANK=0 kapatır.
+        self.rerank = (os.environ.get("CITELEX_RERANK", "1") != "0") if rerank is None else rerank
         self._reranker = None
         self.name = collection_name(mode)
         self.embedder = embedder or Embedder()

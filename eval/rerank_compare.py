@@ -33,7 +33,7 @@ def main() -> None:
     args = ap.parse_args()
     from FlagEmbedding import FlagReranker
     rr = FlagReranker(MODEL, use_fp16=True)
-    s = Searcher("hibrit")
+    s = Searcher("hibrit", rerank=False)
     qs = [json.loads(l) for f in SORU_DOSYALARI for l in open(f, encoding="utf-8")]
     qs = [q for q in qs if q["beklenen"]]
     rows, sure = [], []
