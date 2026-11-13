@@ -94,6 +94,9 @@ export default function Sayfa() {
               <Link href="/pano" className="text-accent hover:underline">
                 Değerlendirme panosu
               </Link>
+              <Link href="/degisiklikler" className="text-accent hover:underline">
+                Son değişiklikler
+              </Link>
             </div>
           </div>
         </header>

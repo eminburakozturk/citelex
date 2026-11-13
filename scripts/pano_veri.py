@@ -57,6 +57,13 @@ def load_sadakat(tag: str) -> tuple[dict | None, dict[str, bool | None]]:
 
     cevap = len(rows)
     sadik_say = sum(1 for r in rows if r.get("sadik"))
+    tam_destekli_say = sum(
+        1
+        for r in rows
+        if int(r.get("kismen") or 0) == 0
+        and int(r.get("desteksiz") or 0) == 0
+        and int(r.get("n_iddia") or 0) > 0
+    )
     destekli = sum(int(r.get("destekli") or 0) for r in rows)
     kismen = sum(int(r.get("kismen") or 0) for r in rows)
     desteksiz = sum(int(r.get("desteksiz") or 0) for r in rows)
@@ -69,13 +76,23 @@ def load_sadakat(tag: str) -> tuple[dict | None, dict[str, bool | None]]:
         "cevap": cevap,
         "sadik": sadik_say,
         "sadik_orani": round(sadik_say / cevap, 4) if cevap else None,
+        "tam_destekli": tam_destekli_say,
+        "tam_destekli_orani": round(tam_destekli_say / cevap, 4) if cevap else None,
         "destekli": destekli,
         "kismen": kismen,
         "desteksiz": desteksiz,
         "n_iddia": n_iddia,
         "destekli_orani": round(destekli / n_iddia, 4) if n_iddia else None,
     }
-    by_id: dict[str, bool | None] = {r["id"]: r.get("sadik") for r in rows if "id" in r}
+    by_id: dict[str, bool | None] = {
+        r["id"]: (
+            int(r.get("kismen") or 0) == 0
+            and int(r.get("desteksiz") or 0) == 0
+            and int(r.get("n_iddia") or 0) > 0
+        )
+        for r in rows
+        if "id" in r
+    }
     return ozet, by_id
 
 
@@ -204,7 +221,7 @@ def build_pano() -> dict:
                     "yanlis_ret": bool(skor.get("yanlis_ret")),
                     "katman": skor.get("katman"),
                     "sure_sn": r.get("sure_sn"),
-                    "sadik": sadakat_by_llm.get(llm, {}).get(qid),
+                    "tam_destekli": sadakat_by_llm.get(llm, {}).get(qid),
                 }
         sorular.append({**meta, "sonuclar": sonuclar})
 

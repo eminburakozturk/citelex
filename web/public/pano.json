@@ -1,5 +1,5 @@
 {
-  "uretim_tarihi": "2026-11-13T17:28:54+00:00",
+  "uretim_tarihi": "2026-11-13T17:30:43+00:00",
   "modeller": [
     {
       "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
@@ -26,6 +26,8 @@
         "cevap": 43,
         "sadik": 43,
         "sadik_orani": 1.0,
+        "tam_destekli": 41,
+        "tam_destekli_orani": 0.9535,
         "destekli": 161,
         "kismen": 2,
         "desteksiz": 0,
@@ -58,6 +60,8 @@
         "cevap": 42,
         "sadik": 38,
         "sadik_orani": 0.9048,
+        "tam_destekli": 26,
+        "tam_destekli_orani": 0.619,
         "destekli": 145,
         "kismen": 13,
         "desteksiz": 4,
@@ -90,6 +94,8 @@
         "cevap": 42,
         "sadik": 42,
         "sadik_orani": 1.0,
+        "tam_destekli": 35,
+        "tam_destekli_orani": 0.8333,
         "destekli": 86,
         "kismen": 7,
         "desteksiz": 0,
@@ -254,7 +260,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 25.98,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -264,7 +270,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 39.85,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -274,7 +280,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 33.45,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -284,7 +290,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 33.35,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -301,7 +307,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.16,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -311,7 +317,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.25,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -321,7 +327,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.2,
-          "sadik": null
+          "tam_destekli": null
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -331,7 +337,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.55,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -348,7 +354,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.3,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -358,7 +364,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.71,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -368,7 +374,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.89,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -378,7 +384,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.78,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -395,7 +401,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.71,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -405,7 +411,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.43,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -415,7 +421,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.13,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -425,7 +431,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.32,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -442,7 +448,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.14,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -452,7 +458,7 @@
           "yanlis_ret": true,
           "katman": "llm",
           "sure_sn": 4.59,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -462,7 +468,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.32,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -472,7 +478,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.61,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -489,7 +495,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.02,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -499,7 +505,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.51,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -509,7 +515,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.21,
-          "sadik": true
+          "tam_destekli": false
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -519,7 +525,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.73,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -536,7 +542,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.0,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -546,7 +552,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.08,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -556,7 +562,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.67,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -566,7 +572,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.23,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -583,7 +589,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.93,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -593,7 +599,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.14,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -603,7 +609,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.06,
-          "sadik": true
+          "tam_destekli": false
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -613,7 +619,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.36,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -630,7 +636,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.62,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -640,7 +646,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.76,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -650,7 +656,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.67,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -660,7 +666,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.41,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -677,7 +683,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.66,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -687,7 +693,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.36,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -697,7 +703,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.99,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -707,7 +713,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.04,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -724,7 +730,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.88,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -734,7 +740,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.02,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -744,7 +750,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.89,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -754,7 +760,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.28,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -771,7 +777,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.66,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -781,7 +787,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.62,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -791,7 +797,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.29,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -801,7 +807,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.76,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -818,7 +824,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.98,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -828,7 +834,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.59,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -838,7 +844,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.47,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -848,7 +854,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.67,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -865,7 +871,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.34,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -875,7 +881,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.97,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -885,7 +891,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.07,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -895,7 +901,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.03,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -912,7 +918,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 14.41,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -922,7 +928,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.39,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -932,7 +938,7 @@
           "yanlis_ret": true,
           "katman": "atif_dogrulama",
           "sure_sn": 4.37,
-          "sadik": null
+          "tam_destekli": null
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -942,7 +948,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.25,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -959,7 +965,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.04,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -969,7 +975,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.92,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -979,7 +985,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 13.43,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -989,7 +995,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.24,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1006,7 +1012,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.08,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1016,7 +1022,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.81,
-          "sadik": false
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1026,7 +1032,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.21,
-          "sadik": true
+          "tam_destekli": false
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -1036,7 +1042,7 @@
           "yanlis_ret": true,
           "katman": "llm",
           "sure_sn": 3.41,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1053,7 +1059,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.23,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1063,7 +1069,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.75,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1073,7 +1079,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.54,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1083,7 +1089,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.86,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1100,7 +1106,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.58,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1110,7 +1116,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.87,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1120,7 +1126,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.91,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1130,7 +1136,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.91,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1147,7 +1153,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.07,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1157,7 +1163,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.66,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1167,7 +1173,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.29,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1177,7 +1183,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.73,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1194,7 +1200,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.1,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1204,7 +1210,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.65,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1214,7 +1220,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.01,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -1224,7 +1230,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.12,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1241,7 +1247,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.41,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1251,7 +1257,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.83,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1261,7 +1267,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.17,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1271,7 +1277,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.87,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1288,7 +1294,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.72,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1298,7 +1304,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.92,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1308,7 +1314,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.29,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1318,7 +1324,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.56,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1335,7 +1341,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.12,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -1345,7 +1351,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.18,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -1355,7 +1361,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.18,
-          "sadik": null
+          "tam_destekli": null
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -1365,7 +1371,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.35,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1382,7 +1388,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.54,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -1392,7 +1398,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.36,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -1402,7 +1408,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.4,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -1412,7 +1418,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 6.39,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1429,7 +1435,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.02,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1439,7 +1445,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.9,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1449,7 +1455,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 11.09,
-          "sadik": true
+          "tam_destekli": false
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1459,7 +1465,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.72,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1476,7 +1482,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.9,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -1486,7 +1492,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.31,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -1496,7 +1502,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.53,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -1506,7 +1512,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 11.55,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1523,7 +1529,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.38,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1533,7 +1539,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.56,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1543,7 +1549,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.65,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1553,7 +1559,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.97,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1570,7 +1576,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.67,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1580,7 +1586,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.68,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1590,7 +1596,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.95,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1600,7 +1606,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.47,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1617,7 +1623,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.68,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1627,7 +1633,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.01,
-          "sadik": false
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1637,7 +1643,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.97,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1647,7 +1653,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.38,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1664,7 +1670,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.31,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1674,7 +1680,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.58,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1684,7 +1690,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.25,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1694,7 +1700,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.46,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1711,7 +1717,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.51,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1721,7 +1727,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.65,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1731,7 +1737,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.98,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1741,7 +1747,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.47,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1758,7 +1764,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.03,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1768,7 +1774,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.07,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1778,7 +1784,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 30.11,
-          "sadik": true
+          "tam_destekli": false
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1788,7 +1794,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.7,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1805,7 +1811,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.81,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1815,7 +1821,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.0,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1825,7 +1831,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.43,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1835,7 +1841,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.72,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1852,7 +1858,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.17,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -1862,7 +1868,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.14,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -1872,7 +1878,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.16,
-          "sadik": null
+          "tam_destekli": null
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -1882,7 +1888,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.35,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1899,7 +1905,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.77,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -1909,7 +1915,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.61,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -1919,7 +1925,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.58,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -1929,7 +1935,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.36,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1946,7 +1952,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.13,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -1956,7 +1962,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.12,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -1966,7 +1972,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.1,
-          "sadik": null
+          "tam_destekli": null
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -1976,7 +1982,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.36,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -1993,7 +1999,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.18,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2003,7 +2009,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.88,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2013,7 +2019,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 59.77,
-          "sadik": true
+          "tam_destekli": false
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -2023,7 +2029,7 @@
           "yanlis_ret": true,
           "katman": "llm",
           "sure_sn": 4.19,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2040,7 +2046,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.11,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -2050,7 +2056,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.12,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -2060,7 +2066,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.11,
-          "sadik": null
+          "tam_destekli": null
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -2070,7 +2076,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.43,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2087,7 +2093,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.33,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2097,7 +2103,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.13,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2107,7 +2113,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 6.46,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -2117,7 +2123,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 6.41,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2134,7 +2140,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.55,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2144,7 +2150,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.9,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2154,7 +2160,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 9.1,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -2164,7 +2170,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 9.46,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2181,7 +2187,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.14,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -2191,7 +2197,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.15,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -2201,7 +2207,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.12,
-          "sadik": null
+          "tam_destekli": null
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -2211,7 +2217,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.32,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2228,7 +2234,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.02,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2238,7 +2244,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.22,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2248,7 +2254,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.35,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -2258,7 +2264,7 @@
           "yanlis_ret": true,
           "katman": "llm",
           "sure_sn": 4.08,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2275,7 +2281,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.93,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2285,7 +2291,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.38,
-          "sadik": false
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2295,7 +2301,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.33,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -2305,7 +2311,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 6.11,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2322,7 +2328,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.25,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2332,7 +2338,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.55,
-          "sadik": true
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2342,7 +2348,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 10.68,
-          "sadik": true
+          "tam_destekli": false
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -2352,7 +2358,7 @@
           "yanlis_ret": true,
           "katman": "atif_dogrulama",
           "sure_sn": 8.86,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2369,7 +2375,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.32,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2379,7 +2385,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.13,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2389,7 +2395,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.41,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -2399,7 +2405,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.4,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2416,7 +2422,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.87,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2426,7 +2432,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.66,
-          "sadik": false
+          "tam_destekli": false
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2436,7 +2442,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.27,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -2446,7 +2452,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.35,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2463,7 +2469,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.55,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2473,7 +2479,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.57,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2483,7 +2489,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.06,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": true,
@@ -2493,7 +2499,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.53,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2510,7 +2516,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.19,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": false,
@@ -2520,7 +2526,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.15,
-          "sadik": null
+          "tam_destekli": null
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": false,
@@ -2530,7 +2536,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.15,
-          "sadik": null
+          "tam_destekli": null
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -2540,7 +2546,7 @@
           "yanlis_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 0.37,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },
@@ -2557,7 +2563,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.38,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:qwen/qwen3.7-flash": {
           "dogru": true,
@@ -2567,7 +2573,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.65,
-          "sadik": true
+          "tam_destekli": true
         },
         "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
           "dogru": true,
@@ -2577,7 +2583,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.57,
-          "sadik": true
+          "tam_destekli": true
         },
         "ollama:qwen2.5:7b": {
           "dogru": false,
@@ -2587,7 +2593,7 @@
           "yanlis_ret": true,
           "katman": "atif_dogrulama",
           "sure_sn": 36.4,
-          "sadik": null
+          "tam_destekli": null
         }
       }
     },

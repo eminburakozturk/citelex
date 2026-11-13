@@ -46,9 +46,13 @@ export default function PanoSayfasi() {
       </header>
 
       <main className="mx-auto max-w-5xl space-y-8 px-4 py-6">
-        <p className="rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
-          Beklenen cevaplar taslaktır; içerik ölçütü anahtar kelime eşleşmesidir.
-        </p>
+        <div className="space-y-1 rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
+          <p>Beklenen cevaplar taslaktır; içerik ölçütü anahtar kelime eşleşmesidir.</p>
+          <p className="text-xs opacity-90">
+            Sadakat: LLM hakem (claude-haiku-5.5), cevabın her iddiası atıf yaptığı kaynakla destekleniyor mu; elle
+            kontrol 10 kararda 9 uyum.
+          </p>
+        </div>
 
         {hata && (
           <p className="rounded-md border border-line bg-panel px-3 py-2 text-sm text-accent">{hata}</p>

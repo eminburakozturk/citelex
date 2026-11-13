@@ -4,6 +4,8 @@ export interface SadakatOzeti {
   cevap: number;
   sadik: number;
   sadik_orani: number | null;
+  tam_destekli: number;
+  tam_destekli_orani: number | null;
   destekli: number;
   kismen: number;
   desteksiz: number;
@@ -61,7 +63,7 @@ export interface SoruSonucu {
   dogru_ret?: boolean;
   katman?: string | null;
   sure_sn?: number | null;
-  sadik?: boolean | null;
+  tam_destekli?: boolean | null;
 }
 
 export interface SoruSatiri {

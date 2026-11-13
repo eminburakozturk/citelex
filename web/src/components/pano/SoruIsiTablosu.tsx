@@ -34,7 +34,9 @@ function hucreBasligi(llm: string, tur: string, s: SoruSonucu): string {
     parcalar.push(s.dogru ? "doğru" : "başarısız");
     parcalar.push(`bağlam:${s.baglam ? "✓" : "✗"} atıf:${s.atif ? "✓" : "✗"} içerik:${s.icerik ? "✓" : "✗"}`);
     if (s.yanlis_ret) parcalar.push(`yanlış bilmiyorum (${s.katman ?? "?"})`);
-    if (s.sadik != null) parcalar.push(`hakem:${s.sadik ? "sadık" : "desteksiz"}`);
+    if (s.tam_destekli != null) {
+      parcalar.push(`sadakat:${s.tam_destekli ? "tam destekli" : "kısmen/desteksiz"}`);
+    }
   }
   if (s.sure_sn != null) parcalar.push(`${s.sure_sn} sn`);
   return parcalar.join(" · ");
@@ -142,9 +144,15 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
                         type="button"
                         onClick={() => setSecili({ q, llm: m.llm, s })}
                         title={hucreBasligi(m.llm, q.tur, s)}
-                        className={`inline-flex h-6 w-8 items-center justify-center rounded font-semibold ${hucreSinif}`}
+                        className={`relative inline-flex h-6 w-8 items-center justify-center rounded font-semibold ${hucreSinif}`}
                       >
                         {ok ? "✓" : "✗"}
+                        {s.tam_destekli === false && (
+                          <span
+                            aria-label="Kısmen veya desteksiz iddia"
+                            className="absolute right-1 top-1 h-1.5 w-1.5 rounded-full bg-amber-500"
+                          />
+                        )}
                       </button>
                     </td>
                   );

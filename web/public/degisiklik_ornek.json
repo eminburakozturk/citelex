@@ -1,0 +1,165 @@
+{
+  "son_kontrol": "2026-11-12T23:18:36",
+  "degisiklikler": [
+    {
+      "fark_id": "20261112T231836_karar_2023-2007_52-12",
+      "zaman": "2026-11-12T23:18:36",
+      "doc_key": "karar:2023-2007",
+      "belge_id": "kvkk-karar-2023-2007",
+      "tur": "karar",
+      "eski": {
+        "surum_id": 52,
+        "ilk_gorulme": "2026-11-12T23:16:23",
+        "hash": "35ba28ebb9"
+      },
+      "yeni": {
+        "surum_id": 12,
+        "ilk_gorulme": "2026-11-12T23:12:59",
+        "hash": "4c5a188595"
+      },
+      "ozet": {
+        "degisti": 1,
+        "eklendi": 0,
+        "silindi": 0
+      },
+      "birimler": [
+        {
+          "birim": "hukum",
+          "etiket": "hukum",
+          "durum": "degisti"
+        }
+      ]
+    },
+    {
+      "fark_id": "20261112T231623_karar_2023-2007_12-52",
+      "zaman": "2026-11-12T23:16:23",
+      "doc_key": "karar:2023-2007",
+      "belge_id": "kvkk-karar-2023-2007",
+      "tur": "karar",
+      "eski": {
+        "surum_id": 12,
+        "ilk_gorulme": "2026-11-12T23:12:59",
+        "hash": "4c5a188595"
+      },
+      "yeni": {
+        "surum_id": 52,
+        "ilk_gorulme": "2026-11-12T23:16:23",
+        "hash": "35ba28ebb9"
+      },
+      "ozet": {
+        "degisti": 1,
+        "eklendi": 0,
+        "silindi": 0
+      },
+      "birimler": [
+        {
+          "birim": "hukum",
+          "etiket": "hukum",
+          "durum": "degisti"
+        }
+      ]
+    }
+  ],
+  "ayrintilar": {
+    "20261112T231836_karar_2023-2007_52-12": {
+      "fark_id": "20261112T231836_karar_2023-2007_52-12",
+      "zaman": "2026-11-12T23:18:36",
+      "doc_key": "karar:2023-2007",
+      "belge_id": "kvkk-karar-2023-2007",
+      "tur": "karar",
+      "url": "https://www.kvkk.gov.tr/Icerik/8846/2023-2007",
+      "eski": {
+        "surum_id": 52,
+        "ilk_gorulme": "2026-11-12T23:16:23",
+        "hash": "35ba28ebb9"
+      },
+      "yeni": {
+        "surum_id": 12,
+        "ilk_gorulme": "2026-11-12T23:12:59",
+        "hash": "4c5a188595"
+      },
+      "ozet": {
+        "degisti": 1,
+        "eklendi": 0,
+        "silindi": 0
+      },
+      "birimler": [
+        {
+          "birim": "hukum",
+          "etiket": "hukum",
+          "durum": "degisti",
+          "eski": "değerlendirmelerinden hareketle;\n\n- Güvenlik kameraları vasıtasıyla ses kaydı alınması suretiyle gerçekleştirilen kişisel veri işleme faaliyetinin Kanun’un 5’inci maddesinde yer alan veri işleme şartlarından herhangi birine dayanılmaksızın gerçekleştirildiği, bu bakımdan Veri Sorumlusunun, kişisel verilerin hukuka aykırı olarak işlenmesini önlemek amacıyla uygun güvenlik düzeyini temin etmeye yönelik gerekli her türlü teknik ve idari tedbirleri alma yükümlülüğünü ihlal ederek Kanun’un 12’nci maddesinin birinci fıkrasına aykırı hareket ettiği, bu doğrultuda Veri Sorumlusu hakkında Kanun’un 18’inci maddesinin (1) numaralı fıkrasının (b) bendi uyarınca 175.000 TL idari para cezası uygulanmasına,\n- Veri Sorumlusunun, hukuka aykırı olarak işlenen ses verilerinin imha edilmesi ve sonucundan Kurula bilgi verilmesi hususunda talimatlandırılmasına\n\nkarar verilmiştir.",
+          "yeni": "değerlendirmelerinden hareketle;\n\n- Güvenlik kameraları vasıtasıyla ses kaydı alınması suretiyle gerçekleştirilen kişisel veri işleme faaliyetinin Kanun’un 5’inci maddesinde yer alan veri işleme şartlarından herhangi birine dayanılmaksızın gerçekleştirildiği, bu bakımdan Veri Sorumlusunun, kişisel verilerin hukuka aykırı olarak işlenmesini önlemek amacıyla uygun güvenlik düzeyini temin etmeye yönelik gerekli her türlü teknik ve idari tedbirleri alma yükümlülüğünü ihlal ederek Kanun’un 12’nci maddesinin birinci fıkrasına aykırı hareket ettiği, bu doğrultuda Veri Sorumlusu hakkında Kanun’un 18’inci maddesinin (1) numaralı fıkrasının (b) bendi uyarınca 125.000 TL idari para cezası uygulanmasına,\n- Veri Sorumlusunun, hukuka aykırı olarak işlenen ses verilerinin imha edilmesi ve sonucundan Kurula bilgi verilmesi hususunda talimatlandırılmasına\n\nkarar verilmiştir.",
+          "fark": [
+            [
+              "=",
+              "değerlendirmelerinden hareketle;\n\n- Güvenlik kameraları vasıtasıyla ses kaydı alınması suretiyle gerçekleştirilen kişisel veri işleme faaliyetinin Kanun’un 5’inci maddesinde yer alan veri işleme şartlarından herhangi birine dayanılmaksızın gerçekleştirildiği, bu bakımdan Veri Sorumlusunun, kişisel verilerin hukuka aykırı olarak işlenmesini önlemek amacıyla uygun güvenlik düzeyini temin etmeye yönelik gerekli her türlü teknik ve idari tedbirleri alma yükümlülüğünü ihlal ederek Kanun’un 12’nci maddesinin birinci fıkrasına aykırı hareket ettiği, bu doğrultuda Veri Sorumlusu hakkında Kanun’un 18’inci maddesinin (1) numaralı fıkrasının (b) bendi uyarınca "
+            ],
+            [
+              "-",
+              "175.000"
+            ],
+            [
+              "+",
+              "125.000"
+            ],
+            [
+              "=",
+              " TL idari para cezası uygulanmasına,\n- Veri Sorumlusunun, hukuka aykırı olarak işlenen ses verilerinin imha edilmesi ve sonucundan Kurula bilgi verilmesi hususunda talimatlandırılmasına\n\nkarar verilmiştir."
+            ]
+          ]
+        }
+      ]
+    },
+    "20261112T231623_karar_2023-2007_12-52": {
+      "fark_id": "20261112T231623_karar_2023-2007_12-52",
+      "zaman": "2026-11-12T23:16:23",
+      "doc_key": "karar:2023-2007",
+      "belge_id": "kvkk-karar-2023-2007",
+      "tur": "karar",
+      "url": "https://www.kvkk.gov.tr/Icerik/8846/2023-2007",
+      "eski": {
+        "surum_id": 12,
+        "ilk_gorulme": "2026-11-12T23:12:59",
+        "hash": "4c5a188595"
+      },
+      "yeni": {
+        "surum_id": 52,
+        "ilk_gorulme": "2026-11-12T23:16:23",
+        "hash": "35ba28ebb9"
+      },
+      "ozet": {
+        "degisti": 1,
+        "eklendi": 0,
+        "silindi": 0
+      },
+      "birimler": [
+        {
+          "birim": "hukum",
+          "etiket": "hukum",
+          "durum": "degisti",
+          "eski": "değerlendirmelerinden hareketle;\n\n- Güvenlik kameraları vasıtasıyla ses kaydı alınması suretiyle gerçekleştirilen kişisel veri işleme faaliyetinin Kanun’un 5’inci maddesinde yer alan veri işleme şartlarından herhangi birine dayanılmaksızın gerçekleştirildiği, bu bakımdan Veri Sorumlusunun, kişisel verilerin hukuka aykırı olarak işlenmesini önlemek amacıyla uygun güvenlik düzeyini temin etmeye yönelik gerekli her türlü teknik ve idari tedbirleri alma yükümlülüğünü ihlal ederek Kanun’un 12’nci maddesinin birinci fıkrasına aykırı hareket ettiği, bu doğrultuda Veri Sorumlusu hakkında Kanun’un 18’inci maddesinin (1) numaralı fıkrasının (b) bendi uyarınca 125.000 TL idari para cezası uygulanmasına,\n- Veri Sorumlusunun, hukuka aykırı olarak işlenen ses verilerinin imha edilmesi ve sonucundan Kurula bilgi verilmesi hususunda talimatlandırılmasına\n\nkarar verilmiştir.",
+          "yeni": "değerlendirmelerinden hareketle;\n\n- Güvenlik kameraları vasıtasıyla ses kaydı alınması suretiyle gerçekleştirilen kişisel veri işleme faaliyetinin Kanun’un 5’inci maddesinde yer alan veri işleme şartlarından herhangi birine dayanılmaksızın gerçekleştirildiği, bu bakımdan Veri Sorumlusunun, kişisel verilerin hukuka aykırı olarak işlenmesini önlemek amacıyla uygun güvenlik düzeyini temin etmeye yönelik gerekli her türlü teknik ve idari tedbirleri alma yükümlülüğünü ihlal ederek Kanun’un 12’nci maddesinin birinci fıkrasına aykırı hareket ettiği, bu doğrultuda Veri Sorumlusu hakkında Kanun’un 18’inci maddesinin (1) numaralı fıkrasının (b) bendi uyarınca 175.000 TL idari para cezası uygulanmasına,\n- Veri Sorumlusunun, hukuka aykırı olarak işlenen ses verilerinin imha edilmesi ve sonucundan Kurula bilgi verilmesi hususunda talimatlandırılmasına\n\nkarar verilmiştir.",
+          "fark": [
+            [
+              "=",
+              "değerlendirmelerinden hareketle;\n\n- Güvenlik kameraları vasıtasıyla ses kaydı alınması suretiyle gerçekleştirilen kişisel veri işleme faaliyetinin Kanun’un 5’inci maddesinde yer alan veri işleme şartlarından herhangi birine dayanılmaksızın gerçekleştirildiği, bu bakımdan Veri Sorumlusunun, kişisel verilerin hukuka aykırı olarak işlenmesini önlemek amacıyla uygun güvenlik düzeyini temin etmeye yönelik gerekli her türlü teknik ve idari tedbirleri alma yükümlülüğünü ihlal ederek Kanun’un 12’nci maddesinin birinci fıkrasına aykırı hareket ettiği, bu doğrultuda Veri Sorumlusu hakkında Kanun’un 18’inci maddesinin (1) numaralı fıkrasının (b) bendi uyarınca "
+            ],
+            [
+              "-",
+              "125.000"
+            ],
+            [
+              "+",
+              "175.000"
+            ],
+            [
+              "=",
+              " TL idari para cezası uygulanmasına,\n- Veri Sorumlusunun, hukuka aykırı olarak işlenen ses verilerinin imha edilmesi ve sonucundan Kurula bilgi verilmesi hususunda talimatlandırılmasına\n\nkarar verilmiştir."
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

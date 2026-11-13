@@ -26,7 +26,7 @@ export function ModelTablosu({ modeller }: { modeller: ModelOzeti[] }) {
               <th className="px-3 py-2.5 text-right font-medium">Kapsam dışı ret</th>
               <th className="px-3 py-2.5 text-right font-medium">Geçersiz atıf</th>
               <th className="px-3 py-2.5 text-right font-medium">Medyan süre</th>
-              <th className="px-3 py-2.5 text-right font-medium">Sadakat (hakem)</th>
+              <th className="px-3 py-2.5 text-right font-medium">Sadakat</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-line tabular-nums">
@@ -65,9 +65,9 @@ export function ModelTablosu({ modeller }: { modeller: ModelOzeti[] }) {
                 <td className="px-3 py-2.5 text-right whitespace-nowrap">
                   {m.sadakat ? (
                     <>
-                      <span className="font-medium text-ink">{yuzde(m.sadakat.sadik_orani)}</span>
+                      <span className="font-medium text-ink">{yuzde(m.sadakat.tam_destekli_orani)}</span>
                       <div className="text-xs text-muted">
-                        {m.sadakat.sadik}/{m.sadakat.cevap} cevap · iddia {yuzde(m.sadakat.destekli_orani)}
+                        {m.sadakat.tam_destekli}/{m.sadakat.cevap} tam destekli · iddia {yuzde(m.sadakat.destekli_orani)}
                       </div>
                     </>
                   ) : (
