@@ -64,6 +64,9 @@ def madde_getir(searcher, anahtar: str, son_kontrol: str | None = None) -> dict:
     if mno:
         must.append(models.FieldCondition(key="madde_no", match=models.MatchValue(value=mno)))
     pts, _ = searcher.client.scroll(searcher.name, scroll_filter=models.Filter(must=must), limit=100, with_payload=True)
+    genis = getattr(searcher, "genis", None)
+    if not pts and genis is not None and bid.startswith("kanun-"):   # geniş katman atfı ("kanun-6098:342")
+        pts, _ = genis.client.scroll(genis.name, scroll_filter=models.Filter(must=must), limit=200, with_payload=True)
     ps = [p.payload for p in pts]
     if not ps or (not mno and ps[0]["belge_tur"] != "karar"):
         raise AracHatasi("Kaynak bulunamadı.", 404)
