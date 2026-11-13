@@ -39,3 +39,19 @@ def test_esik_reddi_ve_hata_izi(iz):
     r1, r2 = oku(iz)
     assert r1["sonuc"] == "bilmiyorum" and r1["bilmiyorum_katmani"] == "arama_esigi" and r1["llm_sn"] is None
     assert r2["sonuc"] == "hata" and "429" in r2["hata"]
+
+
+def test_ajan_izi(iz):
+    a = make(["Yazılı yapılır [1]."])
+    with client(a) as c:
+        c.post("/sor?akis=false", json={"soru": "Hangi sözleşmeler yazılı yapılır?", "ajan": True})
+    (r,) = oku(iz)
+    assert r["sonuc"] == "cevap" and r["atif"] == ["is-kanunu:8"]
+
+
+def test_ajan_varsayilani_ortamdan(monkeypatch):
+    from src.api.app import Soru
+    monkeypatch.setenv("CITELEX_AJAN", "1")
+    assert Soru(soru="abc").ajan is True
+    monkeypatch.setenv("CITELEX_AJAN", "0")
+    assert Soru(soru="abc").ajan is False and Soru(soru="abc", ajan=True).ajan is True

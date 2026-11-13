@@ -24,6 +24,7 @@ from typing import TypedDict
 
 from langgraph.graph import END, StateGraph
 
+from src import trace
 from src.generate import prompt
 from src.generate.answer import Answerer, build_context, source_key
 from src.retrieve.search import trim_context
@@ -107,6 +108,19 @@ class AgentAnswerer:
         self.graph = build_graph(ans)
 
     def answer(self, query: str, turler=None) -> dict:
+        root = trace.Span("sor", **{"citelex.akis": False, "citelex.ajan": True})
+        out = None
+        try:
+            out = self._answer(query, turler)
+            root.set(**{"citelex.ajan_deneme": out.get("ajan_deneme"), "citelex.ajan_sorgular": out.get("ajan_sorgular")})
+            return out
+        except Exception as e:
+            root.error(e)
+            raise
+        finally:
+            self.ans._trace_end(root, query, turler, out, akis=False)
+
+    def _answer(self, query: str, turler=None) -> dict:
         t0 = time.time()
         d = self.graph.invoke({"soru": query, "sorgu": query, "sorgular": [], "turler": turler})
         base = {"soru": query, "llm": self.llm.name + " (ajan)", **{k: d["meta"][k] for k in ("dense_top1", "kanal_top1", "kanallar")},

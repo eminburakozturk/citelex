@@ -57,7 +57,9 @@ class Soru(BaseModel):
     turler: list[Literal["kanun", "yonetmelik", "teblig", "karar"]] | None = Field(default=None, min_length=1, max_length=4)
     # Ajan modu (src/agent.py): "bilmiyorum" durumunda soruyu yeniden yazıp bir kez daha arar. Akışta parça yok,
     # yalnız "sonuc" olayı gelir (ek LLM çağrısı olabileceği için daha yavaş).
-    ajan: bool = False
+    # Varsayılan AÇIK (2026-11-13 kullanıcı kararı: en iyi ölçülen yapılandırma; eval 40 -> 44/50).
+    # Sunucu varsayılanı CITELEX_AJAN=0 ile kapatılır; istemci istek başına ajan: false gönderebilir.
+    ajan: bool = Field(default_factory=lambda: os.environ.get("CITELEX_AJAN", "1") != "0")
 
 
 def _env_int(name: str, default: int) -> int:
