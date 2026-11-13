@@ -47,6 +47,7 @@ export default function Sayfa() {
   const [panel, setPanel] = useState<{ anahtar: string; veri?: KaynakMetni; hata?: string } | null>(null);
   const son = useRef<HTMLDivElement>(null);
   const sayac = useRef(0);
+  const tetikleyiciRef = useRef<HTMLElement | null>(null);
   const mesgul = mesajlar.some((m) => m.suruyor);
 
   useEffect(() => {
@@ -96,12 +97,24 @@ export default function Sayfa() {
   }
 
   async function kaynakAc(anahtar: string) {
+    if (typeof document !== "undefined" && document.activeElement instanceof HTMLElement) {
+      tetikleyiciRef.current = document.activeElement;
+    }
     setPanel({ anahtar });
     try {
       const veri = await kaynakGetir(anahtar);
       setPanel((p) => (p?.anahtar === anahtar ? { anahtar, veri } : p));
     } catch (e) {
       setPanel((p) => (p?.anahtar === anahtar ? { anahtar, hata: (e as Error).message } : p));
+    }
+  }
+
+  function kaynakKapat() {
+    setPanel(null);
+    const hedef = tetikleyiciRef.current;
+    tetikleyiciRef.current = null;
+    if (hedef) {
+      window.requestAnimationFrame(() => hedef.focus());
     }
   }
 
@@ -115,13 +128,13 @@ export default function Sayfa() {
             </h1>
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
               <p>Kaynakların son kontrolü: {tarih(sonKontrol)}</p>
-              <Link href="/yontem" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+              <Link href="/yontem" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
                 Yöntem
               </Link>
-              <Link href="/pano" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+              <Link href="/pano" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
                 Değerlendirme panosu
               </Link>
-              <Link href="/degisiklikler" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+              <Link href="/degisiklikler" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
                 Son değişiklikler
               </Link>
             </div>
@@ -130,7 +143,7 @@ export default function Sayfa() {
 
         <div className="flex-1 overflow-y-auto px-4 py-6">
           <div className="mx-auto max-w-3xl space-y-6">
-            <p className="rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
+            <p role="note" className="rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
               Bu sistem hukuki tavsiye vermez. Cevaplar yalnızca gösterilen kaynak metinlere dayanır; karar vermeden önce
               kaynağın kendisini okuyun.
             </p>
@@ -221,7 +234,7 @@ export default function Sayfa() {
                 maxLength={500}
                 placeholder="Sorunuzu yazın…"
                 aria-label="Soru"
-                className="min-h-[44px] min-w-0 flex-1 rounded-md border border-line bg-bg px-3 py-2 text-sm outline-none focus:border-accent"
+                className="min-h-[44px] min-w-0 flex-1 rounded-md border border-line bg-bg px-3 py-2 text-sm focus:border-accent"
               />
               <button
                 type="submit"
@@ -235,7 +248,7 @@ export default function Sayfa() {
         </footer>
       </main>
 
-      {panel && <KaynakPaneli panel={panel} kapat={() => setPanel(null)} />}
+      {panel && <KaynakPaneli panel={panel} kapat={kaynakKapat} />}
     </div>
   );
 }
@@ -259,7 +272,11 @@ function Cevap({ m, ac }: { m: Mesaj; ac: (anahtar: string) => void }) {
   const bul = (n: number) =>
     s ? s.kaynaklar.find((k) => k.no === n) : m.baglam.find((k) => k.no === n) ?? m.baglam[n - 1];
   return (
-    <div className="rounded-lg border border-line bg-panel px-4 py-3 text-[15px] leading-relaxed">
+    <div
+      aria-live="polite"
+      aria-busy={m.suruyor}
+      className="rounded-lg border border-line bg-panel px-4 py-3 text-[15px] leading-relaxed"
+    >
       {!m.metin && m.suruyor && (
         <div className="space-y-1">
           <p className="text-sm text-muted">Kaynaklar aranıyor…</p>
@@ -270,13 +287,17 @@ function Cevap({ m, ac }: { m: Mesaj; ac: (anahtar: string) => void }) {
       )}
       {genis && (
         <div className="mb-3 space-y-1.5 border-b border-line pb-2.5">
-          <span className="inline-flex items-center rounded-md border border-warn-ink/30 bg-warn-bg px-2.5 py-1 text-xs font-medium text-warn-ink">
+          <span
+            role="note"
+            className="inline-flex items-center rounded-md border border-warn-ink/30 bg-warn-bg px-2.5 py-1 text-xs font-medium text-warn-ink"
+          >
             Geniş katman · doğruluğu ölçülmedi
           </span>
-          <p className="text-xs leading-relaxed text-muted">
-            {s?.uyari ||
-              "Bu cevap geniş katmandan (yaklaşık 900 kanun, Temmuz 2025'e kadar) geliyor; bu katmanın doğruluğu ve güncelliği ölçülmedi, resmî metinden kontrol edin."}
-          </p>
+          {s?.uyari && (
+            <p role="note" className="text-xs leading-relaxed text-muted">
+              {s.uyari}
+            </p>
+          )}
         </div>
       )}
       {m.metin && (
@@ -292,6 +313,7 @@ function Cevap({ m, ac }: { m: Mesaj; ac: (anahtar: string) => void }) {
                 type="button"
                 onClick={() => ac(k.anahtar)}
                 title={k.atif}
+                aria-label={`Kaynak ${no}: ${k.atif}`}
                 className="mx-0.5 rounded bg-accent-soft px-1.5 py-0.5 align-baseline text-xs font-medium text-accent hover:underline"
               >
                 {no}
@@ -340,11 +362,19 @@ function Cevap({ m, ac }: { m: Mesaj; ac: (anahtar: string) => void }) {
 
 function KaynakPaneli({ panel, kapat }: { panel: { anahtar: string; veri?: KaynakMetni; hata?: string }; kapat: () => void }) {
   const v = panel.veri;
+  const panelRef = useRef<HTMLElement>(null);
+  const kapatRef = useRef(kapat);
   useEffect(() => {
-    const f = (e: KeyboardEvent) => e.key === "Escape" && kapat();
+    kapatRef.current = kapat;
+  });
+  useEffect(() => {
+    panelRef.current?.focus();
+    const f = (e: KeyboardEvent) => {
+      if (e.key === "Escape") kapatRef.current();
+    };
     window.addEventListener("keydown", f);
     return () => window.removeEventListener("keydown", f);
-  }, [kapat]);
+  }, []);
   return (
     <div
       className="fixed inset-0 z-20 flex flex-col justify-end bg-black/40 md:static md:z-auto md:block md:bg-transparent"
@@ -353,7 +383,11 @@ function KaynakPaneli({ panel, kapat }: { panel: { anahtar: string; veri?: Kayna
       }}
     >
       <aside
-        aria-label="Kaynak metni"
+        ref={panelRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="kaynak-panel-baslik"
         className="flex max-h-[82dvh] w-full flex-col rounded-t-2xl border-t border-line bg-panel shadow-xl md:h-full md:max-h-none md:w-[26rem] md:shrink-0 md:rounded-none md:border-l md:border-t-0 md:shadow-none lg:w-[32rem]"
       >
         <div className="flex justify-center pt-2 pb-1 md:hidden" aria-hidden="true">
@@ -361,7 +395,9 @@ function KaynakPaneli({ panel, kapat }: { panel: { anahtar: string; veri?: Kayna
         </div>
         <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
           <div className="min-w-0">
-            <h2 className="break-words font-semibold">{v?.atif ?? "Kaynak"}</h2>
+            <h2 id="kaynak-panel-baslik" className="break-words font-semibold">
+              {v?.atif ?? "Kaynak"}
+            </h2>
             {v?.baslik && <p className="break-words text-sm text-muted">{v.baslik}</p>}
           </div>
           <button
@@ -382,10 +418,14 @@ function KaynakPaneli({ panel, kapat }: { panel: { anahtar: string; veri?: Kayna
                 {v.belge_adi}
                 {v.karar_tarihi ? ` · ${v.karar_tarihi}` : ""}
               </p>
-              {v.mulga && <p className="rounded bg-warn-bg px-2 py-1 text-sm text-warn-ink">Bu hüküm yürürlükten kaldırılmıştır.</p>}
+              {v.mulga && (
+                <p role="note" className="rounded bg-warn-bg px-2 py-1 text-sm text-warn-ink">
+                  Bu hüküm yürürlükten kaldırılmıştır.
+                </p>
+              )}
               <div className="kanun-metni space-y-3 text-[15px]">
                 {v.parcalar.map((p, i) => (
-                  <div key={i} className={p.mulga ? "opacity-50" : ""}>
+                  <div key={i} className={p.mulga ? "text-muted" : ""}>
                     {p.bolum && (i === 0 || v.parcalar[i - 1].bolum !== p.bolum) && (
                       <h3 className="mb-1 font-sans text-xs font-semibold uppercase tracking-wide text-muted">
                         {BOLUM_ADI[p.bolum] ?? p.bolum}

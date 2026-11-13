@@ -77,13 +77,13 @@ export default function DegisikliklerSayfasi() {
           </h1>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
             <span>Son kontrol: {tarih(sonKontrol)}</span>
-            <Link href="/yontem" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/yontem" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Yöntem
             </Link>
-            <Link href="/pano" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/pano" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Değerlendirme panosu
             </Link>
-            <Link href="/" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               ← Soru-cevaba dön
             </Link>
           </div>
@@ -91,13 +91,13 @@ export default function DegisikliklerSayfasi() {
       </header>
 
       <main className="guvenli-sayfa-alt guvenli-yatay mx-auto max-w-5xl min-w-0 space-y-6 pt-6">
-        <div className="flex flex-wrap items-center justify-between gap-2 rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
+        <div role="note" className="flex flex-wrap items-center justify-between gap-2 rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
           <p>
             Kaynak kontrollerinde tespit edilen sürüm farkları madde veya bölüm düzeyinde listelenir. Eski sürümler
             saklanır.
           </p>
           {ORNEK_MODU && (
-            <span className="rounded border border-warn-ink/30 px-2 py-0.5 text-xs font-medium">
+            <span role="note" className="rounded border border-warn-ink/30 px-2 py-0.5 text-xs font-medium">
               Örnek veri (data/store/farklar)
             </span>
           )}

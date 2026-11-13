@@ -1,6 +1,33 @@
 {
-  "uretim_tarihi": "2026-11-13T17:51:41+00:00",
+  "uretim_tarihi": "2026-11-13T21:31:23+00:00",
   "modeller": [
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "reranker+ajan",
+      "yapilandirma_adi": "reranker + ajan",
+      "rerank": true,
+      "ajan": true,
+      "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_rerank",
+      "tarih": "2026-11-13T20:59",
+      "commit": "9f2760d",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 46,
+      "atif": 46,
+      "icerik": 48,
+      "dogru": 45,
+      "dogru_orani": 0.9,
+      "yanlis_ret": 0,
+      "yanlis_ret_orani": 0.0,
+      "yanlis_ret_katmanlari": {},
+      "dogru_ret": 6,
+      "dogru_ret_orani": 1.0,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 3.98,
+      "sadakat": null
+    },
     {
       "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan",
       "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
@@ -348,6 +375,33 @@
             "n_iddia": 182,
             "destekli_orani": 0.9725
           }
+        },
+        {
+          "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan",
+          "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+          "yapilandirma": "reranker+ajan",
+          "yapilandirma_adi": "reranker + ajan",
+          "rerank": true,
+          "ajan": true,
+          "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_rerank",
+          "tarih": "2026-11-13T20:59",
+          "commit": "9f2760d",
+          "n_ic": 50,
+          "n_dis": 6,
+          "baglam": 46,
+          "atif": 46,
+          "icerik": 48,
+          "dogru": 45,
+          "dogru_orani": 0.9,
+          "yanlis_ret": 0,
+          "yanlis_ret_orani": 0.0,
+          "yanlis_ret_katmanlari": {},
+          "dogru_ret": 6,
+          "dogru_ret_orani": 1.0,
+          "gecersiz_atif": 0,
+          "hata": 0,
+          "medyan_sure_sn": 3.98,
+          "sadakat": null
         }
       ]
     }
@@ -505,6 +559,291 @@
       }
     ]
   },
+  "genis_katman": {
+    "arama": {
+      "dosya": "genis_check.md",
+      "taslak": true,
+      "not": "Eşik 0.637. Soru: 15 kapsam içi + 3 kapsam dışı (eval/genis_sorular.jsonl, TASLAK).",
+      "ozet": [
+        {
+          "olcut": "Geniş katmana yönlendirildi",
+          "deger": "13/15"
+        },
+        {
+          "olcut": "Beklenen madde üretim bağlamında",
+          "deger": "12/15"
+        },
+        {
+          "olcut": "Doğrudan geniş arama R@1",
+          "deger": "10/15"
+        },
+        {
+          "olcut": "Doğrudan geniş arama R@5",
+          "deger": "14/15"
+        },
+        {
+          "olcut": "Kapsam dışı: hiçbir kanala gitmedi (eşikte ret)",
+          "deger": "3/3"
+        }
+      ],
+      "sorular": [
+        {
+          "id": "g01",
+          "soru": "Konut kira artışlarında yenilenen kira döneminde yasal üst sınır nasıl",
+          "beklenen": "kanun-6098:344",
+          "kanal": "genis (0.689)",
+          "baglamda": true,
+          "sira": "2",
+          "ilk3": "kanun-6098:Geçici 2; kanun-6098:344; kanun-6098:Geçici 1"
+        },
+        {
+          "id": "g02",
+          "soru": "Anlaşmalı boşanma davası açabilmek için evliliğin en az ne kadar sürmü",
+          "beklenen": "kanun-4721:166",
+          "kanal": "mevzuat (0.629)",
+          "baglamda": false,
+          "sira": "1",
+          "ilk3": "kanun-4721:166; kanun-4721:164; kanun-4721:161"
+        },
+        {
+          "id": "g03",
+          "soru": "Tacirler arasında temerrüde düşürme veya sözleşmeden dönme ihtarları h",
+          "beklenen": "kanun-6102:18",
+          "kanal": "genis (0.648)",
+          "baglamda": true,
+          "sira": "1",
+          "ilk3": "kanun-6102:18; kanun-6102:1530; kanun-6098:235"
+        },
+        {
+          "id": "g04",
+          "soru": "Mal teslim edildikten veya hizmet yapıldıktan sonra fatura en geç kaç",
+          "beklenen": "kanun-213:231",
+          "kanal": "genis (0.735)",
+          "baglamda": true,
+          "sira": "1",
+          "ilk3": "kanun-213:231; kanun-5510:97; kanun-6102:1530"
+        },
+        {
+          "id": "g05",
+          "soru": "Hukuk mahkemesinin kararına karşı istinaf yoluna başvuru süresi kaç ha",
+          "beklenen": "kanun-6100:345",
+          "kanal": "genis (0.761)",
+          "baglamda": true,
+          "sira": "3",
+          "ilk3": "kanun-2004:363; kanun-6100:348; kanun-6100:345"
+        },
+        {
+          "id": "g06",
+          "soru": "İlamsız icra takibinde ödeme emrini alan borçlu kaç gün içinde ve nere",
+          "beklenen": "kanun-2004:62",
+          "kanal": "genis (0.770)",
+          "baglamda": true,
+          "sira": "2",
+          "ilk3": "kanun-7155:7; kanun-2004:62; kanun-2004:172"
+        },
+        {
+          "id": "g07",
+          "soru": "İnternetten yapılan mesafeli satışlarda tüketici gerekçe göstermeden k",
+          "beklenen": "kanun-6502:48",
+          "kanal": "genis (0.715)",
+          "baglamda": true,
+          "sira": "2",
+          "ilk3": "kanun-6502:49; kanun-6502:48; kanun-6502:47/A"
+        },
+        {
+          "id": "g08",
+          "soru": "Basit hırsızlık suçunun kanunda öngörülen hapis cezası alt ve üst sını",
+          "beklenen": "kanun-5237:141",
+          "kanal": "genis (0.641)",
+          "baglamda": false,
+          "sira": "—",
+          "ilk3": "kanun-5237:144; kanun-5237:142; kanun-5237:282"
+        },
+        {
+          "id": "g09",
+          "soru": "Trafik kontrolünde alkol ölçümü için teknik cihaza üflemeye izin verme",
+          "beklenen": "kanun-2918:48",
+          "kanal": "genis (0.683)",
+          "baglamda": true,
+          "sira": "1",
+          "ilk3": "kanun-2918:48; kanun-2918:51; kanun-2918:72"
+        },
+        {
+          "id": "g10",
+          "soru": "İşveren yeni işe alacağı işçinin sigortalı işe giriş bildirgesini SGK'",
+          "beklenen": "kanun-5510:8",
+          "kanal": "genis (0.747)",
+          "baglamda": true,
+          "sira": "1",
+          "ilk3": "kanun-5510:8; kanun-5510:11; kanun-4447:48"
+        },
+        {
+          "id": "g11",
+          "soru": "Kamu ihalesi sürecinde hukuka aykırılık iddiasıyla ihaleyi yapan idare",
+          "beklenen": "kanun-4734:55",
+          "kanal": "genis (0.742)",
+          "baglamda": true,
+          "sira": "1",
+          "ilk3": "kanun-4734:55; kanun-4734:54; kanun-4734:56"
+        },
+        {
+          "id": "g12",
+          "soru": "Bireysel işlenen suçlarda gözaltı süresi en fazla ne kadar sürebilir?",
+          "beklenen": "kanun-5271:91",
+          "kanal": "genis (0.664)",
+          "baglamda": true,
+          "sira": "1",
+          "ilk3": "kanun-5271:91; kanun-3713:Geçici 19; kanun-7074:Geçici 1"
+        },
+        {
+          "id": "g13",
+          "soru": "Kadın devlet memuruna doğumdan önce ve sonra toplam kaç hafta analık i",
+          "beklenen": "kanun-657:104",
+          "kanal": "mevzuat (0.717)",
+          "baglamda": false,
+          "sira": "1",
+          "ilk3": "kanun-657:104; kanun-2692:Ek 11; kanun-657:108"
+        },
+        {
+          "id": "g14",
+          "soru": "Bir takvim yılına ait yıllık gelir vergisi beyannamesi ne zamana kadar",
+          "beklenen": "kanun-193:92",
+          "kanal": "genis (0.779)",
+          "baglamda": true,
+          "sira": "1",
+          "ilk3": "kanun-193:92; kanun-193:84; kanun-1319:47"
+        },
+        {
+          "id": "g15",
+          "soru": "Özel kanunda ayrı süre öngörülmemişse idare mahkemesi ve vergi mahkeme",
+          "beklenen": "kanun-2577:7",
+          "kanal": "genis (0.751)",
+          "baglamda": true,
+          "sira": "1",
+          "ilk3": "kanun-2577:7; kanun-2577:10; kanun-213:Ek 15"
+        },
+        {
+          "id": "g16",
+          "soru": "2026 yılı için geçerli net asgari ücret tutarı kaç TL olarak belirlenm",
+          "beklenen": "kapsam dışı",
+          "kanal": "mevzuat (0.562)",
+          "baglamda": false,
+          "sira": "—",
+          "ilk3": "kanun-193:Geçici 86; kanun-193:Geçici 87; kanun-193:31"
+        },
+        {
+          "id": "g17",
+          "soru": "Türkiye'de 10 yıl kıdemli bir yazılım mühendisinin ortalama piyasa maa",
+          "beklenen": "kapsam dışı",
+          "kanal": "mevzuat (0.528)",
+          "baglamda": false,
+          "sira": "—",
+          "ilk3": "kanun-926:Ek Geçici 23; kanun-2879:4; kanun-926:36"
+        },
+        {
+          "id": "g18",
+          "soru": "Ankara'daki ehliyet direksiyon sınavı randevu takvimi hangi tarihte aç",
+          "beklenen": "kapsam dışı",
+          "kanal": "karar (0.504)",
+          "baglamda": false,
+          "sira": "—",
+          "ilk3": "kanun-2918:Geçici 5; kanun-6643:53; kanun-3213:Geçici 6"
+        }
+      ]
+    },
+    "acik_eval": [
+      {
+        "dosya": "eval_openrouter_deepseek_deepseek_v4.1_flash_1017_rerank_ajan_genis.md",
+        "model": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+        "bilgi": "Tarih: 2026-11-14 00:02 | commit: 2f828ba | eşik: 0.637 | reranker: açık | soru: 56 (50 kapsam içi, 6 kapsam dışı) | hata: 0",
+        "taslak_not": "Beklenen cevaplar TASLAK (kullanıcı doğrulaması bekliyor). `icerik` anahtar kelime eşleşmesidir; kesin doğruluk için ham cevaplar elle okunmalı.",
+        "olcutler": [
+          {
+            "olcut": "Beklenen kaynak bağlamda",
+            "tumu": "46/50 (%92)",
+            "mevzuat": "37/41 (%90)",
+            "karar": "9/9 (%100)"
+          },
+          {
+            "olcut": "Beklenen kaynağa atıf",
+            "tumu": "46/50 (%92)",
+            "mevzuat": "37/41 (%90)",
+            "karar": "9/9 (%100)"
+          },
+          {
+            "olcut": "Cevap içeriği (anahtar)",
+            "tumu": "49/50 (%98)",
+            "mevzuat": "41/41 (%100)",
+            "karar": "8/9 (%89)"
+          },
+          {
+            "olcut": "Doğru (cevap + atıf + içerik)",
+            "tumu": "45/50 (%90)",
+            "mevzuat": "37/41 (%90)",
+            "karar": "8/9 (%89)"
+          },
+          {
+            "olcut": "Yanlış \"bilmiyorum\"",
+            "tumu": "0/50 (%0)",
+            "mevzuat": "0/41 (%0)",
+            "karar": "0/9 (%0)"
+          }
+        ],
+        "kapsam_disi": "5/6 (%83) — katmanlar: {'llm': 5}",
+        "diger": "Geçersiz atıf (bağlamda olmayan [n]): 0 | süre medyan 5.47 sn, en uzun 44.88 sn",
+        "basarisizlar": [
+          {
+            "id": "e13",
+            "soru": "Günlük çalışma süresi en fazla kaç saat olabilir?",
+            "baglam": "✗",
+            "atif": "✗",
+            "icerik": "✓",
+            "not": "Günlük çalışma süresi her ne şekilde olursa olsun 11 saati aşamaz [1]. Telafi çalışmaları da günlük en çok çal"
+          },
+          {
+            "id": "e25",
+            "soru": "KVKK'ya göre açık rıza nasıl tanımlanır?",
+            "baglam": "✗",
+            "atif": "✗",
+            "icerik": "✓",
+            "not": "Açık rıza, Kanun'un tanımlar maddesinde \"belirli bir konuya ilişkin, bilgilendirilmeye dayanan ve özgür iradey"
+          },
+          {
+            "id": "e35",
+            "soru": "Silme ve yok etme işlemlerine ilişkin kayıtlar en az kaç yıl saklanır?",
+            "baglam": "✗",
+            "atif": "✗",
+            "icerik": "✓",
+            "not": "CEVAP: 2022/172 sayılı Kurul kararında, Kişisel Verilerin Silinmesi, Yok Edilmesi veya Anonim Hale Getirilmesi"
+          },
+          {
+            "id": "e37",
+            "soru": "Açık rızaya dayanan işlemede aydınlatma ile açık rıza birlikte alınabilir mi?",
+            "baglam": "✗",
+            "atif": "✗",
+            "icerik": "✓",
+            "not": "Hayır, birlikte alınamaz; aydınlatma yükümlülüğü ile açık rıza alınması işlemlerinin ayrı ayrı yerine getirilm"
+          },
+          {
+            "id": "e38",
+            "soru": "İşveren, işten çıkardığı çalışanı şirketin sosyal medya hesabından duyurursa Kurul ne karar vermiştir?",
+            "baglam": "✓",
+            "atif": "✓",
+            "icerik": "✗",
+            "not": "Kurul, 2022/386 sayılı kararında, iş akdi sonlandırılan ilgili kişinin açık ad-soyadı ve hakkındaki ithamları"
+          },
+          {
+            "id": "d03",
+            "soru": "İş mahkemesinde dava açmadan önce arabuluculuk görüşmeleri en fazla kaç hafta sürer?",
+            "baglam": "—",
+            "atif": "—",
+            "icerik": "—",
+            "not": "CEVAP VERDİ: İş mahkemesinde dava şartı arabuluculukta arabulucu, yapılan başvuruyu görevlendirildiği tarihten itibaren üç"
+          }
+        ]
+      }
+    ]
+  },
   "gecmis": [
     {
       "anahtar": "ollama:qwen2.5:7b|tek_adim",
@@ -514,6 +853,7 @@
       "yapilandirma_adi": "tek adım",
       "rerank": false,
       "ajan": false,
+      "genis": false,
       "commit": "9076480",
       "n_ic": 46,
       "n_dis": 6,
@@ -536,6 +876,7 @@
       "yapilandirma_adi": "tek adım",
       "rerank": false,
       "ajan": false,
+      "genis": false,
       "commit": "9755794",
       "n_ic": 46,
       "n_dis": 6,
@@ -558,6 +899,7 @@
       "yapilandirma_adi": "tek adım",
       "rerank": false,
       "ajan": false,
+      "genis": false,
       "commit": "c3dac88",
       "n_ic": 50,
       "n_dis": 6,
@@ -580,6 +922,7 @@
       "yapilandirma_adi": "tek adım",
       "rerank": false,
       "ajan": false,
+      "genis": false,
       "commit": "c3dac88",
       "n_ic": 50,
       "n_dis": 6,
@@ -602,6 +945,7 @@
       "yapilandirma_adi": "tek adım",
       "rerank": false,
       "ajan": false,
+      "genis": false,
       "commit": "8e4d3f2",
       "n_ic": 50,
       "n_dis": 6,
@@ -624,6 +968,7 @@
       "yapilandirma_adi": "tek adım",
       "rerank": false,
       "ajan": false,
+      "genis": false,
       "commit": "8e4d3f2",
       "n_ic": 50,
       "n_dis": 6,
@@ -646,6 +991,7 @@
       "yapilandirma_adi": "tek adım",
       "rerank": false,
       "ajan": false,
+      "genis": false,
       "commit": "8e4d3f2",
       "n_ic": 50,
       "n_dis": 6,
@@ -668,6 +1014,7 @@
       "yapilandirma_adi": "reranker",
       "rerank": true,
       "ajan": false,
+      "genis": false,
       "commit": "ca327a3",
       "n_ic": 50,
       "n_dis": 6,
@@ -690,6 +1037,7 @@
       "yapilandirma_adi": "ajan",
       "rerank": false,
       "ajan": true,
+      "genis": false,
       "commit": "a6958d2",
       "n_ic": 50,
       "n_dis": 6,
@@ -703,6 +1051,52 @@
       "gecersiz_atif": 0,
       "hata": 0,
       "tam": true
+    },
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan",
+      "tarih": "2026-11-13T20:59",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "reranker+ajan",
+      "yapilandirma_adi": "reranker + ajan",
+      "rerank": true,
+      "ajan": true,
+      "genis": false,
+      "commit": "9f2760d",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 46,
+      "atif": 46,
+      "icerik": 48,
+      "dogru": 45,
+      "dogru_orani": 0.9,
+      "yanlis_ret": 0,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    },
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis",
+      "tarih": "2026-11-14T00:02",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "reranker+ajan+genis",
+      "yapilandirma_adi": "reranker + ajan + geniş",
+      "rerank": true,
+      "ajan": true,
+      "genis": true,
+      "commit": "2f828ba",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 46,
+      "atif": 46,
+      "icerik": 49,
+      "dogru": 45,
+      "dogru_orani": 0.9,
+      "yanlis_ret": 0,
+      "dogru_ret": 5,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
     }
   ],
   "sorular": [
@@ -711,6 +1105,16 @@
       "tur": "kanun",
       "soru": "Hangi iş sözleşmelerinin yazılı yapılması zorunludur?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 34.33,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -778,6 +1182,16 @@
       "tur": "kanun",
       "soru": "İş güvencesi hükümlerinden yararlanmak için işyerinde en az kaç işçi çalışıyor olmalı?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.19,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -845,6 +1259,16 @@
       "tur": "kanun",
       "soru": "İşe iade başvurusu sonrası işveren işçiyi işe başlatmazsa ne kadar tazminat öder?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.0,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -912,6 +1336,16 @@
       "tur": "kanun",
       "soru": "Ücret en geç ne sıklıkla ödenmek zorundadır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.38,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -979,6 +1413,16 @@
       "tur": "kanun",
       "soru": "Ücreti kaç gün ödenmeyen işçi çalışmaktan kaçınabilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.86,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1046,6 +1490,16 @@
       "tur": "kanun",
       "soru": "İşveren bir ayda işçinin ücretinden ceza olarak en fazla ne kadar kesinti yapabilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.7,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1113,6 +1567,16 @@
       "tur": "kanun+yonetmelik",
       "soru": "Bir yılda en fazla kaç saat fazla çalışma yaptırılabilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.05,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1180,6 +1644,16 @@
       "tur": "kanun",
       "soru": "Fazla çalışma karşılığında ücret yerine serbest zaman kullanılırsa her saat için ne kadar süre verilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.32,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1247,6 +1721,16 @@
       "tur": "kanun",
       "soru": "Hafta tatili en az kaç saat olmalıdır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.84,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1314,6 +1798,16 @@
       "tur": "kanun+yonetmelik",
       "soru": "On beş yıl ve daha fazla kıdemi olan işçinin yıllık ücretli izni en az kaç gündür?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.46,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1381,6 +1875,16 @@
       "tur": "kanun",
       "soru": "Yıllık izin bölünerek kullanılırsa bölümlerden biri en az kaç gün olmalıdır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.74,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1448,6 +1952,16 @@
       "tur": "kanun",
       "soru": "Yıllık iznini başka şehirde geçirecek işçiye kaç güne kadar yol izni verilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.72,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1515,6 +2029,16 @@
       "tur": "kanun",
       "soru": "Günlük çalışma süresi en fazla kaç saat olabilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.88,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": false,
@@ -1582,6 +2106,16 @@
       "tur": "kanun",
       "soru": "Yedi buçuk saatten uzun süren işlerde ara dinlenmesi ne kadardır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.91,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1649,6 +2183,16 @@
       "tur": "kanun",
       "soru": "Kadın işçinin doğum izni toplam kaç haftadır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.25,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1716,6 +2260,16 @@
       "tur": "kanun",
       "soru": "Özel sektör işyerinde kaç işçiden itibaren ve yüzde kaç oranında engelli çalıştırmak zorunludur?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.33,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1783,6 +2337,16 @@
       "tur": "kanun",
       "soru": "Eşit davranma ilkesine aykırılık halinde işçi ne kadar tazminat isteyebilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.16,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1850,6 +2414,16 @@
       "tur": "kanun",
       "soru": "Bildirim süresi içinde yeni iş arama izni günde en az kaç saattir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.71,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1917,6 +2491,16 @@
       "tur": "kanun",
       "soru": "Kıdem tazminatı her tam yıl için kaç günlük ücret üzerinden ödenir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.78,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1984,6 +2568,16 @@
       "tur": "kanun",
       "soru": "İşe iade için arabulucuya başvuru süresi ne kadardır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.76,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2051,6 +2645,16 @@
       "tur": "yonetmelik",
       "soru": "İzin kurulu hangi büyüklükteki işyerlerinde kurulur ve kaç kişiden oluşur?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.17,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2118,6 +2722,16 @@
       "tur": "yonetmelik",
       "soru": "İşçi yıllık izin talebini ne kadar önceden işverene bildirmelidir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.63,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2185,6 +2799,16 @@
       "tur": "yonetmelik",
       "soru": "Fazla çalışma yaptırmak için işçiden ne alınması gerekir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.94,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2252,6 +2876,16 @@
       "tur": "yonetmelik",
       "soru": "Denkleştirme hangi süre içinde tamamlanmalıdır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.15,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": false,
@@ -2319,6 +2953,16 @@
       "tur": "kanun",
       "soru": "KVKK'ya göre açık rıza nasıl tanımlanır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.72,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": false,
@@ -2386,6 +3030,16 @@
       "tur": "kanun",
       "soru": "Kişisel verilerin işlenmesinde amaçla ilgili genel ilke nedir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.66,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2453,6 +3107,16 @@
       "tur": "kanun",
       "soru": "Kişisel veriler hangi durumda silinmek, yok edilmek veya anonim hale getirilmek zorundadır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.85,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": false,
@@ -2520,6 +3184,16 @@
       "tur": "kanun",
       "soru": "Kişisel veriler başkalarınca hukuka aykırı elde edilirse veri sorumlusu kime ve ne zaman bildirir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.46,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2587,6 +3261,16 @@
       "tur": "kanun",
       "soru": "Veri sorumlusunun cevabından sonra Kurula şikâyet süresi ne kadardır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.3,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2654,6 +3338,16 @@
       "tur": "kanun",
       "soru": "Kurul şikâyete süresinde cevap vermezse ne olur?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.49,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2721,6 +3415,16 @@
       "tur": "kanun+yonetmelik",
       "soru": "Veri Sorumluları Siciline ne zaman kaydolunmalıdır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.56,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2788,6 +3492,16 @@
       "tur": "kanun+yonetmelik",
       "soru": "Standart sözleşme imzalandıktan sonra Kuruma kaç gün içinde bildirilmelidir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.98,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2855,6 +3569,16 @@
       "tur": "yonetmelik",
       "soru": "İlgili kişi verilerinin silinmesini talep ederse veri sorumlusu kaç gün içinde sonuçlandırmalıdır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.94,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2922,6 +3646,16 @@
       "tur": "yonetmelik",
       "soru": "Saklama ve imha politikası hazırlama yükümlülüğü olmayan veri sorumlusu verileri ne kadar sürede silmelidir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.53,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2989,6 +3723,16 @@
       "tur": "yonetmelik",
       "soru": "Silme ve yok etme işlemlerine ilişkin kayıtlar en az kaç yıl saklanır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.54,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3056,6 +3800,16 @@
       "tur": "teblig",
       "soru": "Veri sorumlusu başvuruya yazılı cevap verirken kaç sayfaya kadar ücret alamaz?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.96,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3123,6 +3877,16 @@
       "tur": "teblig",
       "soru": "Açık rızaya dayanan işlemede aydınlatma ile açık rıza birlikte alınabilir mi?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.69,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": false,
@@ -3190,6 +3954,16 @@
       "tur": "karar",
       "soru": "İşveren, işten çıkardığı çalışanı şirketin sosyal medya hesabından duyurursa Kurul ne karar vermiştir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": false,
+          "baglam": true,
+          "atif": true,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.2,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": true,
@@ -3257,6 +4031,16 @@
       "tur": "karar",
       "soru": "İnternet sitesinde reklam çerezlerinin açık rıza alınmadan kullanılması hakkında Kurul hangi yaptırımı uygulamıştır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 10.3,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3324,6 +4108,16 @@
       "tur": "karar",
       "soru": "Bir çalışanın izin bilgisinin birimdeki diğer personelle paylaşılması hakkında Kurul ne karar vermiştir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.93,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3391,6 +4185,16 @@
       "tur": "karar",
       "soru": "Üniversitenin ders yoklamasını parmak iziyle alması Kurulca hukuka uygun bulunmuş mudur?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.83,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3458,6 +4262,16 @@
       "tur": "karar",
       "soru": "İşyerindeki kameraların konumu hakkında Kurul işverene ne talimat vermiştir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 7.22,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3525,6 +4339,16 @@
       "tur": "karar",
       "soru": "Banka çalışanı kendi telefon görüşmesi kayıtlarını isterse, Kurul kararına göre banka bunları nasıl vermelidir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.12,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3592,6 +4416,16 @@
       "tur": "karar",
       "soru": "Havayolunun özel yolcu programı için açık rıza istemesi hakkında Kurul işlem yapmış mıdır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.11,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3659,6 +4493,16 @@
       "tur": "karar",
       "soru": "Doktorun hastanın ameliyat fotoğrafını kendi sosyal medyasında paylaşması üzerine Kurul ilgili kişiyi hangi konuda bilgilendirmiştir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.94,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3726,6 +4570,16 @@
       "tur": "karar",
       "soru": "İş kazası Sosyal Güvenlik Kurumuna kaç gün içinde bildirilmelidir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.59,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3793,6 +4647,16 @@
       "tur": "kanun",
       "soru": "İş sağlığı ve güvenliği kurulu en az kaç çalışanı olan işyerlerinde oluşturulur?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.65,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3860,6 +4724,16 @@
       "tur": "kanun",
       "soru": "İşveren, işin durdurulması kararına kaç gün içinde ve nereye itiraz edebilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.97,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3927,6 +4801,16 @@
       "tur": "kanun",
       "soru": "Ciddi ve yakın tehlike nedeniyle çalışmaktan kaçınan çalışanın o dönemdeki ücreti ne olur?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.81,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3994,6 +4878,16 @@
       "tur": "kanun",
       "soru": "Altı aydan fazla işten uzak kalan çalışana tekrar işe başlamadan önce hangi eğitim verilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.77,
+          "tam_destekli": null
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -4061,6 +4955,12 @@
       "tur": "kapsam_disi",
       "soru": "2026 yılında kıdem tazminatı tavanı kaç liradır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 5.07
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,
@@ -4104,6 +5004,12 @@
       "tur": "kapsam_disi",
       "soru": "İş mahkemesinde dava açmadan önce arabuluculuk görüşmeleri en fazla kaç hafta sürer?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 4.06
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,
@@ -4147,6 +5053,12 @@
       "tur": "kapsam_disi",
       "soru": "GDPR'a göre veri ihlali denetim otoritesine kaç saat içinde bildirilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 5.4
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,
@@ -4190,6 +5102,12 @@
       "tur": "kapsam_disi",
       "soru": "Anonim şirket en az kaç ortakla kurulabilir?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 5.81
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,
@@ -4233,6 +5151,12 @@
       "tur": "kapsam_disi",
       "soru": "Konut satışında tapu harcı oranı yüzde kaçtır?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 6.12
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,
@@ -4276,6 +5200,12 @@
       "tur": "kapsam_disi",
       "soru": "Trafik cezasına itiraz süresi kaç gündür?",
       "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 3.84
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,

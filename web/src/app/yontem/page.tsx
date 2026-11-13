@@ -106,13 +106,13 @@ export default function YontemSayfasi() {
           </h1>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
             {veri?.uretim_tarihi && <span>Ölçüm verisi: {tarihSaat(veri.uretim_tarihi)}</span>}
-            <Link href="/pano" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/pano" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Değerlendirme panosu
             </Link>
-            <Link href="/degisiklikler" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/degisiklikler" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Son değişiklikler
             </Link>
-            <Link href="/" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               ← Soru-cevaba dön
             </Link>
           </div>
@@ -204,7 +204,7 @@ export default function YontemSayfasi() {
             <h2 id="onemli-sonuclar-baslik" className="text-base font-semibold">
               3. En önemli sonuçlar
             </h2>
-            <Link href="/pano" className="inline-flex min-h-[40px] items-center text-xs text-accent hover:underline">
+            <Link href="/pano" prefetch={false} className="inline-flex min-h-[40px] items-center text-xs text-accent hover:underline">
               Tüm tablo ve soru ısı haritasını gör →
             </Link>
           </div>

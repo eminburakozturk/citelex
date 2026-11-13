@@ -16,7 +16,7 @@ export function AramaDeneyleri({ veri }: { veri?: AramaDeneyleriVerisi | null })
         </p>
       </div>
 
-      <p className="rounded-md bg-warn-bg px-3 py-2 text-xs text-warn-ink">
+      <p role="note" className="rounded-md bg-warn-bg px-3 py-2 text-xs text-warn-ink">
         Bu sette tek başına dense, hibrit RRF&apos;den biraz iyi (2 soru farkı, gürültü sınırında); soru seti derlem
         metninden üretildiği için dense&apos;i kayırabilir.
       </p>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AramaDeneyleri } from "@/components/pano/AramaDeneyleri";
 import { EsikEtkisiKutusu } from "@/components/pano/EsikEtkisiKutusu";
+import { GenisKatmanBolumu } from "@/components/pano/GenisKatmanBolumu";
 import { ModelTablosu } from "@/components/pano/ModelTablosu";
 import { SoruIsiTablosu } from "@/components/pano/SoruIsiTablosu";
 import { YapilandirmaKarsilastirmasi } from "@/components/pano/YapilandirmaKarsilastirmasi";
@@ -41,13 +42,13 @@ export default function PanoSayfasi() {
           </h1>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
             {veri?.uretim_tarihi && <span>Veri: {tarihSaat(veri.uretim_tarihi)}</span>}
-            <Link href="/yontem" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/yontem" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Yöntem
             </Link>
-            <Link href="/degisiklikler" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/degisiklikler" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Son değişiklikler
             </Link>
-            <Link href="/" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
+            <Link href="/" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               ← Soru-cevaba dön
             </Link>
           </div>
@@ -55,7 +56,7 @@ export default function PanoSayfasi() {
       </header>
 
       <main className="guvenli-sayfa-alt guvenli-yatay mx-auto max-w-5xl min-w-0 space-y-8 pt-6">
-        <div className="space-y-1 rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
+        <div role="note" className="space-y-1 rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
           <p>Beklenen cevaplar taslaktır; içerik ölçütü anahtar kelime eşleşmesidir.</p>
           <p className="text-xs opacity-90">
             Sadakat: LLM hakem (claude-haiku-5.5), cevabın her iddiası atıf yaptığı kaynakla destekleniyor mu; elle
@@ -77,6 +78,7 @@ export default function PanoSayfasi() {
               rerank={veri.rerank_karsilastirma}
             />
             <AramaDeneyleri veri={veri.arama_deneyleri} />
+            <GenisKatmanBolumu veri={veri.genis_katman} />
             <EsikEtkisiKutusu modeller={veri.modeller} />
             <ZamanGrafigi gecmis={veri.gecmis} />
             <SoruIsiTablosu modeller={veri.modeller} sorular={veri.sorular} />

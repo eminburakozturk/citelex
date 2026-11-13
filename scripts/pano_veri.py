@@ -5,6 +5,7 @@ Girdiler (yalnız okunur):
   - results/eval_*.jsonl
   - results/sadakat_*__hakem_*.jsonl (varsa)
   - results/rerank_compare.md (varsa)
+  - results/genis_check.md ve results/eval_*_genis.md (varsa)
 
 Çalıştırma:
   python scripts/pano_veri.py
@@ -26,14 +27,20 @@ def llm_tag(llm: str) -> str:
     return re.sub(r"[^a-z0-9.]+", "_", llm.lower())
 
 
-def config_info(rerank: bool, ajan: bool) -> tuple[str, str, str]:
+def config_info(rerank: bool, ajan: bool, genis: bool = False) -> tuple[str, str, str]:
     if rerank and ajan:
-        return "reranker+ajan", "reranker + ajan", "_ajan_rerank"
-    if rerank:
-        return "reranker", "reranker", "_rerank"
-    if ajan:
-        return "ajan", "ajan", "_ajan"
-    return "tek_adim", "tek adım", ""
+        kod, ad, suffix = "reranker+ajan", "reranker + ajan", "_ajan_rerank"
+    elif rerank:
+        kod, ad, suffix = "reranker", "reranker", "_rerank"
+    elif ajan:
+        kod, ad, suffix = "ajan", "ajan", "_ajan"
+    else:
+        kod, ad, suffix = "tek_adim", "tek adım", ""
+    if genis:
+        kod += "+genis"
+        ad += " + geniş"
+        suffix += "_genis"
+    return kod, ad, suffix
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -51,21 +58,22 @@ def read_jsonl(path: Path) -> list[dict]:
     return rows
 
 
-def find_raw_eval(base_tag: str, rerank: bool, ajan: bool) -> Path | None:
+def find_raw_eval(base_tag: str, rerank: bool, ajan: bool, genis: bool = False) -> Path | None:
+    gsuf = "_genis" if genis else ""
     if rerank and ajan:
         candidates = [
-            RESULTS_DIR / f"eval_{base_tag}_ajan_rerank.jsonl",
-            RESULTS_DIR / f"eval_{base_tag}_rerank_ajan.jsonl",
+            RESULTS_DIR / f"eval_{base_tag}_ajan_rerank{gsuf}.jsonl",
+            RESULTS_DIR / f"eval_{base_tag}_rerank_ajan{gsuf}.jsonl",
         ]
     elif rerank:
-        candidates = [RESULTS_DIR / f"eval_{base_tag}_rerank.jsonl"]
+        candidates = [RESULTS_DIR / f"eval_{base_tag}_rerank{gsuf}.jsonl"]
     elif ajan:
         candidates = [
-            RESULTS_DIR / f"eval_{base_tag}_ajan.jsonl",
-            *sorted(RESULTS_DIR.glob(f"eval_{base_tag}_ajan*.jsonl")),
+            RESULTS_DIR / f"eval_{base_tag}_ajan{gsuf}.jsonl",
+            *sorted(RESULTS_DIR.glob(f"eval_{base_tag}_ajan*{gsuf}.jsonl")),
         ]
     else:
-        candidates = [RESULTS_DIR / f"eval_{base_tag}.jsonl"]
+        candidates = [RESULTS_DIR / f"eval_{base_tag}{gsuf}.jsonl"]
     for p in candidates:
         if p.is_file():
             return p
@@ -252,6 +260,140 @@ def parse_compare_retrieval() -> dict | None:
     }
 
 
+def parse_genis_check() -> dict | None:
+    path = RESULTS_DIR / "genis_check.md"
+    if not path.is_file():
+        return None
+    lines = path.read_text(encoding="utf-8").splitlines()
+    aciklama: str | None = None
+    ozet: list[dict] = []
+    sorular: list[dict] = []
+    tablo = 0
+
+    for line in lines:
+        s = line.strip()
+        if s.startswith("Eşik "):
+            aciklama = s
+            continue
+        if s.startswith("| Ölçüt | Değer |"):
+            tablo = 1
+            continue
+        if s.startswith("| # | Soru |"):
+            tablo = 2
+            continue
+        if s.startswith("|---"):
+            continue
+        if not s.startswith("|"):
+            if tablo in (1, 2):
+                tablo = 0
+            continue
+        parts = [p.strip() for p in s.strip("|").split("|")]
+        if tablo == 1 and len(parts) >= 2:
+            ozet.append({"olcut": parts[0], "deger": parts[1]})
+        elif tablo == 2 and len(parts) >= 7:
+            sorular.append(
+                {
+                    "id": parts[0],
+                    "soru": parts[1],
+                    "beklenen": parts[2],
+                    "kanal": parts[3],
+                    "baglamda": parts[4] == "✓",
+                    "sira": parts[5],
+                    "ilk3": parts[6],
+                }
+            )
+
+    if not ozet and not sorular:
+        return None
+    return {
+        "dosya": path.name,
+        "taslak": True,
+        "not": aciklama,
+        "ozet": ozet,
+        "sorular": sorular,
+    }
+
+
+def parse_genis_evals() -> list[dict]:
+    sonuclar: list[dict] = []
+    for path in sorted(RESULTS_DIR.glob("eval_*_genis.md")):
+        lines = path.read_text(encoding="utf-8").splitlines()
+        model: str | None = None
+        bilgi: str | None = None
+        taslak_not: str | None = None
+        olcutler: list[dict] = []
+        kapsam_disi: str | None = None
+        diger: str | None = None
+        notlar: list[dict] = []
+        tablo = 0
+
+        for line in lines:
+            s = line.strip()
+            if s.startswith("# Değerlendirme — "):
+                model = s.removeprefix("# Değerlendirme — ").strip()
+                continue
+            if s.startswith("Tarih: "):
+                bilgi = s
+                continue
+            if s.startswith("Beklenen cevaplar "):
+                taslak_not = s
+                continue
+            if s.startswith("| Ölçüt | Tümü |"):
+                tablo = 1
+                continue
+            if s.startswith("| # | Soru |"):
+                tablo = 2
+                continue
+            if s.startswith("Doğru \"bilmiyorum\":"):
+                kapsam_disi = s.removeprefix("Doğru \"bilmiyorum\":").strip()
+                continue
+            if s.startswith("Geçersiz atıf "):
+                diger = s
+                continue
+            if s.startswith("|---"):
+                continue
+            if not s.startswith("|"):
+                if tablo in (1, 2):
+                    tablo = 0
+                continue
+            parts = [p.strip() for p in s.strip("|").split("|")]
+            if tablo == 1 and len(parts) >= 4:
+                olcutler.append(
+                    {
+                        "olcut": parts[0].replace("**", ""),
+                        "tumu": parts[1],
+                        "mevzuat": parts[2],
+                        "karar": parts[3],
+                    }
+                )
+            elif tablo == 2 and len(parts) >= 6:
+                notlar.append(
+                    {
+                        "id": parts[0],
+                        "soru": parts[1],
+                        "baglam": parts[2],
+                        "atif": parts[3],
+                        "icerik": parts[4],
+                        "not": parts[5],
+                    }
+                )
+
+        if olcutler:
+            sonuclar.append(
+                {
+                    "dosya": path.name,
+                    "model": model,
+                    "bilgi": bilgi,
+                    "taslak_not": taslak_not,
+                    "olcutler": olcutler,
+                    "kapsam_disi": kapsam_disi,
+                    "diger": diger,
+                    "basarisizlar": notlar,
+                }
+            )
+    return sonuclar
+
+
 def build_pano() -> dict:
     history_raw = read_jsonl(RESULTS_DIR / "eval_history.jsonl")
 
@@ -265,7 +407,8 @@ def build_pano() -> dict:
             continue
         rerank = bool(h.get("rerank"))
         ajan = bool(h.get("ajan"))
-        yap_kod, yap_ad, _ = config_info(rerank, ajan)
+        genis = bool(h.get("genis"))
+        yap_kod, yap_ad, _ = config_info(rerank, ajan, genis)
         anahtar = f"{llm}|{yap_kod}"
 
         n_ic = int(h.get("n_ic") or 0)
@@ -279,6 +422,7 @@ def build_pano() -> dict:
             "yapilandirma_adi": yap_ad,
             "rerank": rerank,
             "ajan": ajan,
+            "genis": genis,
             "commit": h.get("commit"),
             "n_ic": n_ic,
             "n_dis": n_dis,
@@ -294,7 +438,8 @@ def build_pano() -> dict:
             "tam": True,
         }
         gecmis.append(entry)
-        latest_tam[anahtar] = entry
+        if not genis:
+            latest_tam[anahtar] = entry
 
     modeller: list[dict] = []
     raw_by_key: dict[str, dict[str, dict]] = {}
@@ -422,12 +567,21 @@ def build_pano() -> dict:
                 }
         sorular.append({**meta, "sonuclar": sonuclar})
 
+    genis_arama = parse_genis_check()
+    genis_evals = parse_genis_evals()
+    genis_katman = (
+        {"arama": genis_arama, "acik_eval": genis_evals}
+        if (genis_arama or genis_evals)
+        else None
+    )
+
     return {
         "uretim_tarihi": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "modeller": modeller,
         "yapilandirma_karsilastirmasi": yapilandirma_karsilastirmasi,
         "rerank_karsilastirma": parse_rerank_compare(),
         "arama_deneyleri": parse_compare_retrieval(),
+        "genis_katman": genis_katman,
         "gecmis": gecmis,
         "sorular": sorular,
     }

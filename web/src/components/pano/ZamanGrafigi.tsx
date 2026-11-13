@@ -120,9 +120,19 @@ export function ZamanGrafigi({ gecmis }: { gecmis: GecmisKaydi[] }) {
                   fill={n.renk}
                   stroke="var(--panel)"
                   strokeWidth="1.5"
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${etiketMap[n.kayit.anahtar]}, ${tarihSaat(n.kayit.tarih)}: ${yuzde(n.kayit.dogru_orani)} (${n.kayit.dogru}/${n.kayit.n_ic})`}
                   className="cursor-pointer"
                   onMouseEnter={() => setSeciliIdx(n.idx)}
+                  onFocus={() => setSeciliIdx(n.idx)}
                   onClick={() => setSeciliIdx(n.idx)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSeciliIdx(n.idx);
+                    }
+                  }}
                 />
                 <text
                   x={n.x}

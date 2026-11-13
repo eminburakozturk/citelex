@@ -131,12 +131,58 @@ export interface SoruSatiri {
   sonuclar: Record<string, SoruSonucu>;
 }
 
+export interface GenisOlcutSatiri {
+  olcut: string;
+  deger: string;
+}
+
+export interface GenisAramaSorusu {
+  id: string;
+  soru: string;
+  beklenen: string;
+  kanal: string;
+  baglamda: boolean;
+  sira: string;
+  ilk3: string;
+}
+
+export interface GenisAramaVerisi {
+  dosya: string;
+  taslak: boolean;
+  not: string | null;
+  ozet: GenisOlcutSatiri[];
+  sorular: GenisAramaSorusu[];
+}
+
+export interface GenisAcikEvalOlcut {
+  olcut: string;
+  tumu: string;
+  mevzuat: string;
+  karar: string;
+}
+
+export interface GenisAcikEval {
+  dosya: string;
+  model: string | null;
+  bilgi: string | null;
+  taslak_not: string | null;
+  olcutler: GenisAcikEvalOlcut[];
+  kapsam_disi: string | null;
+  diger: string | null;
+}
+
+export interface GenisKatmanVerisi {
+  arama: GenisAramaVerisi | null;
+  acik_eval: GenisAcikEval[];
+}
+
 export interface PanoVerisi {
   uretim_tarihi: string;
   modeller: ModelOzeti[];
   yapilandirma_karsilastirmasi: YapilandirmaGrubu[];
   rerank_karsilastirma: RerankKarsilastirma | null;
   arama_deneyleri?: AramaDeneyleriVerisi | null;
+  genis_katman?: GenisKatmanVerisi | null;
   gecmis: GecmisKaydi[];
   sorular: SoruSatiri[];
 }
