@@ -113,7 +113,7 @@ Sıradaki işler, sırayla ve DURMADAN:
 2. 15 Kas satırı (bulutta yayın) — kullanıcıdan Hugging Face ve Qdrant Cloud hesapları gerekir.
 3. Takvim v2'nin kalan satırları.
 Kullanıcıdan beklenenler: eval setinin doğrulanması (56 soru, 4'ü yeni İSG sorusu); 15 Kas'ta Hugging Face ve Qdrant Cloud
-hesapları; CV'ye yönelik ek özellikler kararı (MCP sunucusu, LLM hakemli eval, eval panosu, OCR — KARARLAR.md'ye işlenecek).
+hesapları.
 Günlük görev kurulu ("Citelex Gunluk Guncelleme", her gün 03:00, scripts/guncelle.ps1).
 
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)
@@ -125,13 +125,15 @@ LLM mühendisliği sinyalleri; EXE + APK "mobilde de varım" göstergesi olarak 
 | 13 Kas | FastAPI: akışlı cevap (SSE), kaynak metni, sağlık ucu, istek sınırı; Docker Compose (API + Qdrant) | `docker compose up` ile API açılıyor; akışlı cevap curl ile görülüyor |
 | 14 Kas | Next.js arayüz (Vercel AI SDK): akışlı sohbet, tıklanabilir kaynak paneli, tür filtresi, son kontrol tarihi, "hukuki tavsiye değildir" uyarısı; statik çıktı | Tarayıcıda uçtan uca soru-cevap; atıfa tıklayınca madde metni açılıyor |
 | 15 Kas | Bulutta yayın: Hugging Face Spaces (API + bge-m3 CPU) + Qdrant Cloud + Gemini API; web arayüzü yayında | Herkese açık adresten soru-cevap çalışıyor |
-| 16 Kas | GitHub Actions: testler + arama regresyonu kapısı; izlenebilirlik (her sorunun araması, bağlamı, gecikmesi, token/maliyeti kayıtlı; Langfuse veya OpenTelemetry) | Push'ta CI yeşil, isabeti düşüren değişiklik kırmızı; bir sorunun izi panelde görülüyor |
+| 16 Kas | GitHub Actions: testler + arama regresyonu kapısı; eval'e LLM hakemli sadakat ölçütü (cevap kaynağa dayanıyor mu; anahtar kelime ölçütünün yanlış pozitiflerine karşı); izlenebilirlik (her sorunun araması, bağlamı, gecikmesi, token/maliyeti kayıtlı; Langfuse veya OpenTelemetry) | Push'ta CI yeşil, isabeti düşüren değişiklik kırmızı; bir sorunun izi panelde görülüyor; eval raporunda sadakat sütunu, hakemin 10 cevapta elle kontrolü |
 | 17 Kas | "Bu madde değişti": sürüm deposundan değişiklik listesi + eski/yeni metin farkı (API + arayüz); reranker ölçümü | Sahte değişiklik arayüzde fark olarak görünüyor; reranker'lı/siz eval tablosu |
-| 18 Kas | LangGraph ajan modu (bağlam yetmiyorsa soruyu yeniden yazıp tekrar ara) + tek adımlı hatla eval karşılaştırması | Ajan ve tek adım aynı sette ölçüldü, sonuç tabloda |
-| 19 Kas | Karşılaştırma deneyleri: dense/BM25/hibrit; madde/fıkra/hibrit; BM25 vs bge-m3 sparse; yerel vs API; Borçlar | results/ altında tablolar |
+| 18 Kas | Ortak araç katmanı (`mevzuat_ara`, `madde_getir`): aynı araçlar hem LangGraph ajan modunda hem MCP sunucusunda (`src/mcp_server.py`); LangGraph ajan modu (bağlam yetmiyorsa soruyu yeniden yazıp tekrar ara) + tek adımlı hatla eval karşılaştırması | Ajan ve tek adım aynı sette ölçüldü, sonuç tabloda; MCP sunucusu bir MCP istemcisinden çağrılıp atıflı sonuç döndürüyor |
+| 19 Kas | Karşılaştırma deneyleri: dense/BM25/hibrit; madde/fıkra/hibrit; BM25 vs bge-m3 sparse; yerel vs API; Borçlar; arayüzde değerlendirme panosu (doğruluk, yanlış "bilmiyorum", eşik etkisi, çalıştırma geçmişi) | results/ altında tablolar; pano gerçek eval çıktılarını gösteriyor |
 | 20 Kas | Tauri 2: aynı arayüzden Windows EXE + Android APK (ince istemci, bulut API'ye bağlı); CI'da otomatik derleme | EXE bilgisayarda, APK telefonda soru cevaplıyor |
 | 21 Kas | README (mimari şeması, sonuç tabloları, sınırlar, kurulum, canlı bağlantı), repo public | Repo public |
 
+CV'ye yönelik üç ek (2026-11-13) yeni gün açmadan ilgili satırlara yerleştirildi: LLM hakemli sadakat ölçütü (16 Kas),
+MCP sunucusu (18 Kas, ajanla ortak araç katmanı), değerlendirme panosu (19 Kas). OCR eklenmedi (KARARLAR.md).
 Kapsam kesilmez; iş yetişmezse tarih kayar. Kesinti gerekirse kullanıcıya sorulur.
 Kendini güncelleme ve değerlendirme setinden VAZGEÇİLMEZ.
 
