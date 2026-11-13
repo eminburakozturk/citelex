@@ -59,11 +59,19 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--llm", default="ollama:qwen2.5:7b")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--ajan", action="store_true", help="LangGraph ajan modu (src/agent.py)")
+    ap.add_argument("--sadece", default=None, help="virgüllü soru id'leri")
     args = ap.parse_args()
 
     qs = [json.loads(l) for l in open("eval/questions.jsonl", encoding="utf-8")][: args.limit]
+    if args.sadece:
+        ids = set(args.sadece.split(","))
+        qs = [q for q in qs if q["id"] in ids]
     ans = Answerer(args.llm)
-    tag = re.sub(r"[^a-z0-9.]+", "_", args.llm.lower()) + ("_rerank" if ans.searcher.rerank else "")
+    if args.ajan:
+        from src.agent import AgentAnswerer
+        ans = AgentAnswerer(ans)
+    tag = re.sub(r"[^a-z0-9.]+", "_", args.llm.lower()) + ("_rerank" if ans.searcher.rerank else "") + ("_ajan" if args.ajan else "") + ("_kismi" if args.sadece else "")
     raw_path = Path(f"results/eval_{tag}.jsonl")
     rows, errors, ardisik = [], 0, 0
     with raw_path.open("w", encoding="utf-8", newline="\n") as fh:
@@ -87,6 +95,7 @@ def main() -> None:
                                  "skor": s, "cevap": a["cevap"], "kaynaklar": [k["atif"] for k in a.get("kaynaklar", [])],
                                  "baglam_anahtar": a.get("baglam_anahtar"), "dense_top1": a.get("dense_top1"),
                                  "gecersiz_atif": a.get("gecersiz_atif"), "sure_sn": a["sure_sn"],
+                                 "ajan_sorgular": a.get("ajan_sorgular"),
                                  "hata": a.get("hata")}, ensure_ascii=False) + "\n")
             print(f"[{i}/{len(qs)}] {q['id']} {s} {a['sure_sn']}sn", flush=True)
 
@@ -140,7 +149,7 @@ def main() -> None:
     with open("results/eval_history.jsonl", "a", encoding="utf-8", newline="\n") as fh:
         fh.write(json.dumps({"tarih": f"{datetime.now():%Y-%m-%dT%H:%M}", "llm": ans.llm.name, "commit": commit,
                              "n_ic": len(ic), "n_dis": len(dis), **tot, "dogru_ret": dis_ok, "gecersiz_atif": gecersiz,
-                             "hata": errors, "tam": args.limit is None and errors == 0,
+                             "hata": errors, "tam": args.limit is None and not args.sadece and errors == 0, "ajan": args.ajan,
                              "rerank": ans.searcher.rerank}, ensure_ascii=False) + "\n")
     print("\n".join(L[:22]))
 
