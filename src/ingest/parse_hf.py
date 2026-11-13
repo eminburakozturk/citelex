@@ -238,7 +238,11 @@ def _split_trailing_heading(chunk: str, cur_bolum: str) -> tuple[str, str, str]:
     s = chunk.rstrip()
     if not s:
         return "", cur_bolum, ""
-    m = re.search(r"^(?P<body>.*[\.\?\!\”\)\;])\s+(?P<head>[^\.\?\!\;]{2,140})$", s, re.S)
+    m = re.search(
+        r"^(?P<body>.*(?:[\.\?\!\”\;]|(?<!\s[A-ZÇĞİÖŞÜ])(?<!\s[IVX]{2})(?<!\s[IVX]{3})\)))\s+(?P<head>[^\.\?\!\;]{2,140})$",
+        s,
+        re.S,
+    )
     if not m:
         return s, cur_bolum, ""
     head = m.group("head").strip()
@@ -489,9 +493,15 @@ def _split_ek_body_chunks(ek_ad: str, body: str, max_len: int = 1480) -> list[di
     if len(s) <= budget:
         return [{"fikra_no": 1, "metin": f"{prefix}{s}", "mulga": False, "numara_kaynagi": "sira"}]
 
-    # Kayıt/satır sınırları: "1) ...", "123 ANKARA ...", "Madde ...", ";" / "." sonrası
+    # Kayıt/satır sınırları: "1) ...", "123 ANKARA ...", "166 99911762 ÖZEL ...", "1- Çatalan ...", "297. ERZİNCAN ..."
     rows = re.split(
-        r"\s+(?=(?:\d{1,4}\s+[A-ZÇĞİÖŞÜ]|\d{1,4}\)\s+|I{1,3}V?[-–.\s]+[A-ZÇĞİÖŞÜ]|[a-zçğıöşü]\)\s+))|(?<=;)\s+|(?<!\d)(?<=\.)\s+",
+        r"\s+(?=(?:"
+        r"\d{1,4}\s+(?:(?:\d{1,3}(?:-\d{2,4}){1,3}|\d{5,})\s+)?[A-ZÇĞİÖŞÜ]"
+        r"|\d{1,4}\s*[-–.]\s+[A-ZÇĞİÖŞÜ]"
+        r"|\d{1,4}\)\s+"
+        r"|I{1,3}V?[-–.\s]+[A-ZÇĞİÖŞÜ]"
+        r"|[a-zçğıöşü]\)\s+"
+        r"))|(?<=;)\s+|(?<!\d\.)(?<=\.)\s+",
         s,
     )
     chunks: list[str] = []
@@ -676,6 +686,14 @@ def parse_law_text(
         bolum = next_bolum
         pending_baslik = next_baslik
 
+    # Aynı (madde_tur, madde_no) birden çok kez geçerse ("Geçici Madde 1" vb.) benzersiz yap.
+    gor: dict[tuple[str, str], int] = {}
+    for a in articles:
+        k = (a.madde_tur, a.madde_no)
+        gor[k] = gor.get(k, 0) + 1
+        if gor[k] > 1:
+            a.madde_no = f"{a.madde_no} ({gor[k]})"
+
     return articles
 
 
@@ -724,14 +742,9 @@ def parse_all(
                 no_articles.append(f"{belge_id} ({f.name})")
                 continue
 
-            # Aynı numara birden çok kez (eski kanunlarda farklı değişiklik kanunlarının eklediği birden çok
-            # "Geçici Madde 1" vb.): chunk_id ve atıf benzersiz olsun diye ikinci ve sonrakilere " (2)", " (3)" eklenir.
-            gor: dict[tuple[str, str], int] = {}
+            # Tekrar numara sayımı (tekilleştirme parse_law_text sonunda yapılır)
             for a in arts:
-                k = (a.madde_tur, a.madde_no)
-                gor[k] = gor.get(k, 0) + 1
-                if gor[k] > 1:
-                    a.madde_no = f"{a.madde_no} ({gor[k]})"
+                if re.search(r" \(\d+\)$", a.madde_no):
                     total_tekrar_no += 1
                 fh.write(json.dumps(asdict(a), ensure_ascii=False) + "\n")
                 if a.madde_tur == "ek_liste":

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import fields
 from pathlib import Path
 
@@ -145,3 +146,44 @@ def test_baslik_dustur_bolum_temizligi_ve_dipnot_sonrasi_fikra():
     assert "BÖLÜM" in arts[1].bolum
     assert "BÖLÜM" not in arts[1].baslik
     assert "\n" in arts[1].fikralar[0]["metin"]
+
+
+def test_parse_tekil_madde_no_benzersizligi():
+    text = """TEKRAR KANUNU
+Kanun Numarası : 9002
+MADDE 1- Genel hüküm uygulanır.
+Geçici Madde 1 – İlk geçici madde hükmü burada yer alır.
+Geçici Madde 1 – İkinci geçici madde aynı numara ile eklenmiştir.
+Geçici Madde 1 – Üçüncü geçici madde de aynı numarayı taşır.
+"""
+    arts = parse_hf.parse_law_text(text, "9002", "kanun-9002")
+    anahtarlar = [(a.belge_id, a.madde_tur, a.madde_no) for a in arts]
+    assert len(anahtarlar) == len(set(anahtarlar))
+    assert [a.madde_no for a in arts if a.madde_tur == "gecici"] == ["Geçici 1", "Geçici 1 (2)", "Geçici 1 (3)"]
+
+
+def test_parse_anahat_baslik_ayirma_ve_ek_liste_satir_siniri():
+    text = """ÖRNEK KANUN
+Kanun Numarası : 9003
+MADDE 4 – Önceki haklara eski kanun hükümleri uygulanır. D) Kazanılmış haklar
+MADDE 5 – Kazanılmış haklar korunur.
+MADDE 6 – Bu Kanun yürürlüğe girer.
+I SAYILI LİSTE
+""" + " ".join(
+        f"{i} {99910000 + i} ÖZEL KURUM {i} ADLI KURULUŞ İLÇE MERKEZİ"
+        if i % 3 == 0
+        else (f"{i}- İlçe Belediyesi Merkezi Adı {i}" if i % 3 == 1 else f"{i}. İL MERKEZİ KÖYÜ {i}")
+        for i in range(1, 60)
+    )
+    arts = parse_hf.parse_law_text(text, "9003", "kanun-9003")
+    m4 = next(a for a in arts if a.madde_tur == "asil" and a.madde_no == "4")
+    m5 = next(a for a in arts if a.madde_tur == "asil" and a.madde_no == "5")
+    assert not m4.fikralar[-1]["metin"].endswith("D)")
+    assert "Kazanılmış haklar" in m5.baslik
+
+    ek = next(a for a in arts if a.madde_tur == "ek_liste")
+    assert len(ek.fikralar) >= 2
+    for f in ek.fikralar[1:]:
+        body = f["metin"].split("] ", 1)[1]
+        assert re.match(r"^(?:\d+[-\.\s])", body), f"Satır ortasından bölündü: {body[:60]}"
+

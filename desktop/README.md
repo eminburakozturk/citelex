@@ -74,6 +74,37 @@ cargo tauri android build --apk --split-per-abi
 
 ---
 
+## Telefona kurulum
+
+1. **Derleme zamanı API adresi:** Gerçek telefon `127.0.0.1` ile sunucuya ulaşamaz. Derlemeden önce bulut (veya HTTPS) API adresini verin:
+
+```powershell
+$env:NEXT_PUBLIC_API_URL = "https://api.example.com"
+cd desktop
+cargo tauri android build --apk --split-per-abi
+```
+
+2. **USB hata ayıklama ve kurulum:** Telefonda **Geliştirici Seçenekleri → USB Hata Ayıklama** ayarını açın, USB ile bağlayın ve `arm64-v8a` APK'yı yükleyin (birden fazla cihaz bağlıysa `adb devices` çıktısındaki seri numarasını `-s` ile belirtin):
+
+```powershell
+& "$env:ANDROID_HOME\platform-tools\adb.exe" devices
+& "$env:ANDROID_HOME\platform-tools\adb.exe" install -r `
+  src-tauri/gen/android/app/build/outputs/apk/arm64/release/app-arm64-release.apk
+```
+
+3. **Emülatörde yerel API (`10.0.2.2:8000`) testi:** Android emülatöründe host makineye düz `http://10.0.2.2:8000` ile bağlanmak için `usesCleartextTraffic=true` içeren `--debug` derleme gerekir (release APK'da yalnızca `https://` izinlidir). Android 17+ (`targetSdk = 37`) yerel ağ IP'leri için `ACCESS_LOCAL_NETWORK` çalışma zamanı izni ister (`AndroidManifest.xml`'de tanımlıdır); emülatörde izinleri otomatik vermek için `adb install -r -g ...` kullanın:
+
+```powershell
+$env:NEXT_PUBLIC_API_URL = "http://10.0.2.2:8000"
+cargo tauri android build --apk --debug --target x86_64
+& "$env:ANDROID_HOME\platform-tools\adb.exe" -s emulator-5554 install -r -g `
+  src-tauri/gen/android/app/build/outputs/apk/universal/debug/app-universal-debug.apk
+```
+
+4. **API'ye ulaşılamadığında ne görünür?** Uygulama arayüzü normal açılır; üst çubuktaki son kontrol bilgisi boş/`-` kalır. Soru gönderildiğinde cevap alanında `"Sunucuya ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin."` hata mesajı gösterilir.
+
+---
+
 ## Sunucu CORS Ayarı (`CITELEX_CORS`)
 
 Tauri webview'u işletim sistemine göre farklı kökenlerden istek gönderir. `src/api/app.py` servisinin çalıştığı sunucuda `CITELEX_CORS` ortam değişkenine Tauri kökenlerini ekleyin:
