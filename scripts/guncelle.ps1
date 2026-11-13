@@ -2,6 +2,7 @@
 # Qdrant kapalıysa Docker Desktop'ı ve konteyneri başlatır, ardından src.update.run'ı çalıştırır.
 # Çıktı logs/scheduler.log'a eklenir; özet ayrıca logs/updates.jsonl ve data/store/citelex.db'de.
 $ErrorActionPreference = "Continue"
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8   # python çıktısı log'a bozuk karakterle düşmesin
 $proje = Split-Path -Parent $PSScriptRoot
 Set-Location $proje
 $py = "C:\Users\Burak\anaconda3\envs\citelex\python.exe"

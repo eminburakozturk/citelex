@@ -102,6 +102,18 @@ citelex/
 
 Durum (13 Kas sabahı): 11–15 Kas satırlarının çekirdeği bitti (ayrıntı KARARLAR.md). Açık kalanlar aşağıda "Borçlar"da.
 
+### DEVAM NOKTASI (yeni oturum buradan başlar; bitince bu bölümü güncelle)
+Son durum: 13 Kas sabahı, commit geçmişi ve KARARLAR.md güncel. Sıradaki işler, sırayla ve DURMADAN:
+1. **6331 İSG Kanunu'nu ekle** (kullanıcı onayladı). Adres doğrulandı: `https://www.mevzuat.gov.tr/MevzuatMetin/1.5.6331.pdf`
+   (28 sayfa, MevzuatMetin biçimi; MevzuatNo=6331, MevzuatTur=1). Adımlar: `src/sources/http.py:get` ile `data/raw/1.5.6331.pdf`
+   olarak indir -> `configs/sources.json`'a kayıt (belge_id "isg-kanunu", kisa_ad "İSG Kanunu", url, sayfa_url) -> parse -> chunk
+   (üç mod) -> report; madde sayısını ve sırayı kontrol et -> `python -m src.update.run --init` (depoya ilk sürüm) ->
+   hibrit koleksiyonu artımlı güncelle (reindex; avgdl sabit) -> eval setine 3-4 soru ekle (`validate_questions`).
+2. **13 Kas satırı:** FastAPI (SSE akışlı cevap, kaynak metni, sağlık ucu, istek sınırı) + Dockerfile + Docker Compose.
+3. Takvim v2'nin kalan satırları.
+Kullanıcıdan beklenenler: eval setinin doğrulanması; yeni ücretsiz Gemini anahtarı (.env); 15 Kas'ta Hugging Face ve
+Qdrant Cloud hesapları. Günlük görev kuruldu ("Citelex Gunluk Guncelleme", her gün 03:00, scripts/guncelle.ps1).
+
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)
 Hedef rol: yapay zekâ / ürün geliştirici. Sıra CV değerine göre: önce canlı ve ölçülen sistem, sonra
 LLM mühendisliği sinyalleri; EXE + APK "mobilde de varım" göstergesi olarak en sonda ve sade tutulur.

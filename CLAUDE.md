@@ -8,7 +8,8 @@ devredilmez). Önce `PLAN.md` ve `KARARLAR.md`'yi oku. Görevleri PLAN.md'deki t
   deneyleri, FastAPI, Gradio arayüzü, Dockerfile/docker-compose, requirements, README, grafikler, hata ayıklama.
 - Rutin işleri (boilerplate, arayüz, Docker, README biçimi) sade ve hızlı yap; zamanı ve krediyi
   kritik işlere (mimari, değerlendirme, sonuçların doğruluğu, güvenlik) ayır.
-- Oturumları kısa tut; bir görev bitince özetle ve dur.
+- PLAN.md'deki günler yalnızca ilerlemeyi göstermek içindir, hız sınırı değildir: bir günün işi bitince
+  commit at, kısaca özetle ve DURMADAN sıradaki işe geç. Yalnız "Kullanıcıya sorulacaklar"daki durumlarda dur.
 - Değerlendirme setindeki beklenen cevapları uydurma; derlem metninden taslak üret, kullanıcının kanun
   metninden doğrulaması gerektiğini belirt.
 - Gün sonunda kullanıcıya o gün yapılanı 3-4 cümleyle, mülakatta anlatabileceği şekilde açıkla.
