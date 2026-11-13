@@ -63,7 +63,7 @@ def main() -> None:
 
     qs = [json.loads(l) for l in open("eval/questions.jsonl", encoding="utf-8")][: args.limit]
     ans = Answerer(args.llm)
-    tag = re.sub(r"[^a-z0-9.]+", "_", args.llm.lower())
+    tag = re.sub(r"[^a-z0-9.]+", "_", args.llm.lower()) + ("_rerank" if ans.searcher.rerank else "")
     raw_path = Path(f"results/eval_{tag}.jsonl")
     rows, errors, ardisik = [], 0, 0
     with raw_path.open("w", encoding="utf-8", newline="\n") as fh:
@@ -113,7 +113,7 @@ def main() -> None:
         commit = "?"
 
     L = [f"# Değerlendirme — {ans.llm.name}", "",
-         f"Tarih: {datetime.now():%Y-%m-%d %H:%M} | commit: {commit} | eşik: {ans.cfg.get('esik')} | soru: {len(rows)} "
+         f"Tarih: {datetime.now():%Y-%m-%d %H:%M} | commit: {commit} | eşik: {ans.cfg.get('esik')} | reranker: {'açık' if ans.searcher.rerank else 'kapalı'} | soru: {len(rows)} "
          f"({len(ic)} kapsam içi, {len(dis)} kapsam dışı) | hata: {errors}", "",
          "Beklenen cevaplar TASLAK (kullanıcı doğrulaması bekliyor). `icerik` anahtar kelime eşleşmesidir; "
          "kesin doğruluk için ham cevaplar elle okunmalı.", "",
@@ -140,7 +140,8 @@ def main() -> None:
     with open("results/eval_history.jsonl", "a", encoding="utf-8", newline="\n") as fh:
         fh.write(json.dumps({"tarih": f"{datetime.now():%Y-%m-%dT%H:%M}", "llm": ans.llm.name, "commit": commit,
                              "n_ic": len(ic), "n_dis": len(dis), **tot, "dogru_ret": dis_ok, "gecersiz_atif": gecersiz,
-                             "hata": errors, "tam": args.limit is None and errors == 0}, ensure_ascii=False) + "\n")
+                             "hata": errors, "tam": args.limit is None and errors == 0,
+                             "rerank": ans.searcher.rerank}, ensure_ascii=False) + "\n")
     print("\n".join(L[:22]))
 
 

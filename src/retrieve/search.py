@@ -8,6 +8,7 @@ Kullanım: python -m src.retrieve.search "yıllık izin kaç gün" --mode hibrit
 from __future__ import annotations
 
 import argparse
+import os
 import re
 from dataclasses import dataclass
 
@@ -21,6 +22,8 @@ from src.index.embed import Embedder
 RRF_K = 60
 PREFETCH = 50
 MEVZUAT_TURLERI = ["kanun", "yonetmelik", "teblig"]
+RERANK_MODEL = "BAAI/bge-reranker-v2-m3"
+RERANK_ADAY = 30
 MAX_MADDE_CHARS = 3000  # bağlama tam madde girer; daha uzunsa eşleşen fıkra + komşuları
 
 
@@ -43,8 +46,11 @@ class Hit:
 
 
 class Searcher:
-    def __init__(self, mode: str = "hibrit", embedder: Embedder | None = None):
+    def __init__(self, mode: str = "hibrit", embedder: Embedder | None = None, rerank: bool | None = None):
         self.client = QdrantClient(url=QDRANT_URL, api_key=config.QDRANT_API_KEY, timeout=30)
+        # Reranker (bge-reranker-v2-m3): ölçüm results/rerank_compare.md; varsayılan CITELEX_RERANK ortam değişkeni.
+        self.rerank = (os.environ.get("CITELEX_RERANK") == "1") if rerank is None else rerank
+        self._reranker = None
         self.name = collection_name(mode)
         self.embedder = embedder or Embedder()
         self._qcache: dict[str, list[float]] = {}
@@ -79,6 +85,18 @@ class Searcher:
             else:
                 raise ValueError(method)
         return [Hit(p.score, p.payload) for p in res.points]
+
+    def rerank_hits(self, query: str, hits: list[Hit]) -> list[Hit]:
+        """Çapraz kodlayıcıyla yeniden sırala (skor = reranker skoru, 0-1). Kapalıysa aynen döner."""
+        if not self.rerank or not hits:
+            return hits
+        if self._reranker is None:
+            from FlagEmbedding import FlagReranker
+            self._reranker = FlagReranker(RERANK_MODEL, use_fp16=self.embedder.device != "cpu"
+                                          if hasattr(self.embedder, "device") else True)
+        pairs = [[query, f"{h.payload['atif']} {h.payload.get('baslik') or ''}\n{h.payload['metin']}"] for h in hits]
+        scores = self._reranker.compute_score(pairs, normalize=True)
+        return [Hit(float(sc), h.payload) for sc, h in sorted(zip(scores, hits), key=lambda x: -x[0])]
 
     def expand_to_articles(self, hits: list[Hit], k: int) -> list[Hit]:
         """Fıkra üzerinden ara, maddenin tamamını ver ("small-to-big").
@@ -142,9 +160,10 @@ class Searcher:
         sonuçların hepsi aynı karardan geliyordu. Burada birincil kaynak (mevzuat) için k_mevzuat
         yer ayrılır; karar kanalında en çok k_karar farklı karar, karar başına per_karar parça alınır.
         """
-        mevzuat = self.expand_to_articles(
-            self.search(query, method, top_k=k_mevzuat * 3, belge_tur=mevzuat_tur or MEVZUAT_TURLERI), k_mevzuat)
-        aday = self.search(query, method, top_k=30, belge_tur=["karar"])
+        n_aday = RERANK_ADAY if self.rerank else k_mevzuat * 3
+        mevzuat = self.expand_to_articles(self.rerank_hits(query, self.search(
+            query, method, top_k=n_aday, belge_tur=mevzuat_tur or MEVZUAT_TURLERI)), k_mevzuat)
+        aday = self.rerank_hits(query, self.search(query, method, top_k=30, belge_tur=["karar"]))
         # 1) Kararı OLGULARDAN bul: herhangi bir bölümü eşleşen ilk k_karar farklı karar.
         sira: list[str] = list(dict.fromkeys(h.payload["belge_id"] for h in aday))[:k_karar]
         # 2) Cevabı HÜKÜMDEN ver: bağlama şikâyet/savunma (taraf beyanı) değil, o kararın hüküm
