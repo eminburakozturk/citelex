@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Kaynak, KaynakMetni, Sonuc, Tur, kaynakGetir, saglik, sor, tarih } from "@/lib/api";
 
@@ -88,7 +89,12 @@ export default function Sayfa() {
             <h1 className="text-lg font-semibold tracking-tight">
               Citelex <span className="font-normal text-muted">· kaynak gösteren mevzuat asistanı</span>
             </h1>
-            <p className="text-xs text-muted">Kaynakların son kontrolü: {tarih(sonKontrol)}</p>
+            <div className="flex items-baseline gap-3 text-xs text-muted">
+              <p>Kaynakların son kontrolü: {tarih(sonKontrol)}</p>
+              <Link href="/pano" className="text-accent hover:underline">
+                Değerlendirme panosu
+              </Link>
+            </div>
           </div>
         </header>
 

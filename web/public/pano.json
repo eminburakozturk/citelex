@@ -1,0 +1,2781 @@
+{
+  "uretim_tarihi": "2026-11-13T17:28:54+00:00",
+  "modeller": [
+    {
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017",
+      "tarih": "2026-11-13T14:43",
+      "commit": "8e4d3f2",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 40,
+      "icerik": 42,
+      "dogru": 40,
+      "dogru_orani": 0.8,
+      "yanlis_ret": 7,
+      "yanlis_ret_orani": 0.14,
+      "dogru_ret": 6,
+      "dogru_ret_orani": 1.0,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 1.9,
+      "sadakat": {
+        "hakem": "anthropic/claude-haiku-5.5",
+        "dosya": "sadakat_openrouter_deepseek_deepseek_v4.1_flash_1017__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl",
+        "cevap": 43,
+        "sadik": 43,
+        "sadik_orani": 1.0,
+        "destekli": 161,
+        "kismen": 2,
+        "desteksiz": 0,
+        "n_iddia": 163,
+        "destekli_orani": 0.9877
+      }
+    },
+    {
+      "llm": "openrouter:qwen/qwen3.7-flash",
+      "tag": "openrouter_qwen_qwen3.7_flash",
+      "tarih": "2026-11-13T14:41",
+      "commit": "8e4d3f2",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 39,
+      "icerik": 41,
+      "dogru": 39,
+      "dogru_orani": 0.78,
+      "yanlis_ret": 8,
+      "yanlis_ret_orani": 0.16,
+      "dogru_ret": 6,
+      "dogru_ret_orani": 1.0,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 2.39,
+      "sadakat": {
+        "hakem": "anthropic/claude-haiku-5.5",
+        "dosya": "sadakat_openrouter_qwen_qwen3.7_flash__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl",
+        "cevap": 42,
+        "sadik": 38,
+        "sadik_orani": 0.9048,
+        "destekli": 145,
+        "kismen": 13,
+        "desteksiz": 4,
+        "n_iddia": 162,
+        "destekli_orani": 0.8951
+      }
+    },
+    {
+      "llm": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+      "tag": "openrouter_nvidia_nemotron_3_ultra_550b_a55b_free",
+      "tarih": "2026-11-13T14:48",
+      "commit": "8e4d3f2",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 39,
+      "icerik": 42,
+      "dogru": 39,
+      "dogru_orani": 0.78,
+      "yanlis_ret": 8,
+      "yanlis_ret_orani": 0.16,
+      "dogru_ret": 6,
+      "dogru_ret_orani": 1.0,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 2.43,
+      "sadakat": {
+        "hakem": "anthropic/claude-haiku-5.5",
+        "dosya": "sadakat_openrouter_nvidia_nemotron_3_ultra_550b_a55b_free__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl",
+        "cevap": 42,
+        "sadik": 42,
+        "sadik_orani": 1.0,
+        "destekli": 86,
+        "kismen": 7,
+        "desteksiz": 0,
+        "n_iddia": 93,
+        "destekli_orani": 0.9247
+      }
+    },
+    {
+      "llm": "ollama:qwen2.5:7b",
+      "tag": "ollama_qwen2.5_7b",
+      "tarih": "2026-11-13T13:40",
+      "commit": "c3dac88",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 35,
+      "icerik": 35,
+      "dogru": 33,
+      "dogru_orani": 0.66,
+      "yanlis_ret": 12,
+      "yanlis_ret_orani": 0.24,
+      "dogru_ret": 6,
+      "dogru_ret_orani": 1.0,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 2.86,
+      "sadakat": null
+    }
+  ],
+  "gecmis": [
+    {
+      "tarih": "2026-11-12T17:48",
+      "llm": "ollama:qwen2.5:7b",
+      "commit": "9076480",
+      "n_ic": 46,
+      "n_dis": 6,
+      "baglam": 41,
+      "atif": 33,
+      "icerik": 34,
+      "dogru": 31,
+      "dogru_orani": 0.6739,
+      "yanlis_ret": 9,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    },
+    {
+      "tarih": "2026-11-12T22:44",
+      "llm": "ollama:qwen2.5:7b",
+      "commit": "9755794",
+      "n_ic": 46,
+      "n_dis": 6,
+      "baglam": 41,
+      "atif": 37,
+      "icerik": 37,
+      "dogru": 34,
+      "dogru_orani": 0.7391,
+      "yanlis_ret": 3,
+      "dogru_ret": 5,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    },
+    {
+      "tarih": "2026-11-13T13:28",
+      "llm": "ollama:qwen2.5:7b",
+      "commit": "c3dac88",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 36,
+      "icerik": 34,
+      "dogru": 32,
+      "dogru_orani": 0.64,
+      "yanlis_ret": 10,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    },
+    {
+      "tarih": "2026-11-13T13:40",
+      "llm": "ollama:qwen2.5:7b",
+      "commit": "c3dac88",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 35,
+      "icerik": 35,
+      "dogru": 33,
+      "dogru_orani": 0.66,
+      "yanlis_ret": 12,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    },
+    {
+      "tarih": "2026-11-13T14:41",
+      "llm": "openrouter:qwen/qwen3.7-flash",
+      "commit": "8e4d3f2",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 39,
+      "icerik": 41,
+      "dogru": 39,
+      "dogru_orani": 0.78,
+      "yanlis_ret": 8,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    },
+    {
+      "tarih": "2026-11-13T14:43",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "commit": "8e4d3f2",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 40,
+      "icerik": 42,
+      "dogru": 40,
+      "dogru_orani": 0.8,
+      "yanlis_ret": 7,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    },
+    {
+      "tarih": "2026-11-13T14:48",
+      "llm": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+      "commit": "8e4d3f2",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 45,
+      "atif": 39,
+      "icerik": 42,
+      "dogru": 39,
+      "dogru_orani": 0.78,
+      "yanlis_ret": 8,
+      "dogru_ret": 6,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "tam": true
+    }
+  ],
+  "sorular": [
+    {
+      "id": "e01",
+      "tur": "kanun",
+      "soru": "Hangi iş sözleşmelerinin yazılı yapılması zorunludur?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 25.98,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 39.85,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 33.45,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 33.35,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e02",
+      "tur": "kanun",
+      "soru": "İş güvencesi hükümlerinden yararlanmak için işyerinde en az kaç işçi çalışıyor olmalı?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.16,
+          "sadik": null
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.25,
+          "sadik": null
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.2,
+          "sadik": null
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.55,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e03",
+      "tur": "kanun",
+      "soru": "İşe iade başvurusu sonrası işveren işçiyi işe başlatmazsa ne kadar tazminat öder?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.3,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.71,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.89,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.78,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e04",
+      "tur": "kanun",
+      "soru": "Ücret en geç ne sıklıkla ödenmek zorundadır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.71,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.43,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.13,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.32,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e05",
+      "tur": "kanun",
+      "soru": "Ücreti kaç gün ödenmeyen işçi çalışmaktan kaçınabilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.14,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "llm",
+          "sure_sn": 4.59,
+          "sadik": null
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.32,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.61,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e06",
+      "tur": "kanun",
+      "soru": "İşveren bir ayda işçinin ücretinden ceza olarak en fazla ne kadar kesinti yapabilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.02,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.51,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.21,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.73,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e07",
+      "tur": "kanun+yonetmelik",
+      "soru": "Bir yılda en fazla kaç saat fazla çalışma yaptırılabilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.0,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.08,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.67,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": true,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.23,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e08",
+      "tur": "kanun",
+      "soru": "Fazla çalışma karşılığında ücret yerine serbest zaman kullanılırsa her saat için ne kadar süre verilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.93,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.14,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.06,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.36,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e09",
+      "tur": "kanun",
+      "soru": "Hafta tatili en az kaç saat olmalıdır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.62,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.76,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.67,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.41,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e10",
+      "tur": "kanun+yonetmelik",
+      "soru": "On beş yıl ve daha fazla kıdemi olan işçinin yıllık ücretli izni en az kaç gündür?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.66,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.36,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.99,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.04,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e11",
+      "tur": "kanun",
+      "soru": "Yıllık izin bölünerek kullanılırsa bölümlerden biri en az kaç gün olmalıdır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.88,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.02,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.89,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.28,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e12",
+      "tur": "kanun",
+      "soru": "Yıllık iznini başka şehirde geçirecek işçiye kaç güne kadar yol izni verilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.66,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.62,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.29,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.76,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e13",
+      "tur": "kanun",
+      "soru": "Günlük çalışma süresi en fazla kaç saat olabilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.98,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.59,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.47,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.67,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e14",
+      "tur": "kanun",
+      "soru": "Yedi buçuk saatten uzun süren işlerde ara dinlenmesi ne kadardır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.34,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.97,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.07,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.03,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e15",
+      "tur": "kanun",
+      "soru": "Kadın işçinin doğum izni toplam kaç haftadır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 14.41,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.39,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "atif_dogrulama",
+          "sure_sn": 4.37,
+          "sadik": null
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.25,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e16",
+      "tur": "kanun",
+      "soru": "Özel sektör işyerinde kaç işçiden itibaren ve yüzde kaç oranında engelli çalıştırmak zorunludur?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.04,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.92,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 13.43,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.24,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e17",
+      "tur": "kanun",
+      "soru": "Eşit davranma ilkesine aykırılık halinde işçi ne kadar tazminat isteyebilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.08,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.81,
+          "sadik": false
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.21,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "llm",
+          "sure_sn": 3.41,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e18",
+      "tur": "kanun",
+      "soru": "Bildirim süresi içinde yeni iş arama izni günde en az kaç saattir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.23,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.75,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.54,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.86,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e19",
+      "tur": "kanun",
+      "soru": "Kıdem tazminatı her tam yıl için kaç günlük ücret üzerinden ödenir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.58,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.87,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.91,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.91,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e20",
+      "tur": "kanun",
+      "soru": "İşe iade için arabulucuya başvuru süresi ne kadardır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.07,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.66,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.29,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.73,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e21",
+      "tur": "yonetmelik",
+      "soru": "İzin kurulu hangi büyüklükteki işyerlerinde kurulur ve kaç kişiden oluşur?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.1,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.65,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.01,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": true,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.12,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e22",
+      "tur": "yonetmelik",
+      "soru": "İşçi yıllık izin talebini ne kadar önceden işverene bildirmelidir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.41,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.83,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.17,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.87,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e23",
+      "tur": "yonetmelik",
+      "soru": "Fazla çalışma yaptırmak için işçiden ne alınması gerekir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.72,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.92,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.29,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.56,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e24",
+      "tur": "yonetmelik",
+      "soru": "Denkleştirme hangi süre içinde tamamlanmalıdır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.12,
+          "sadik": null
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.18,
+          "sadik": null
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.18,
+          "sadik": null
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.35,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e25",
+      "tur": "kanun",
+      "soru": "KVKK'ya göre açık rıza nasıl tanımlanır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.54,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.36,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.4,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.39,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e26",
+      "tur": "kanun",
+      "soru": "Kişisel verilerin işlenmesinde amaçla ilgili genel ilke nedir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.02,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.9,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 11.09,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.72,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e27",
+      "tur": "kanun",
+      "soru": "Kişisel veriler hangi durumda silinmek, yok edilmek veya anonim hale getirilmek zorundadır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.9,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.31,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.53,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 11.55,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e28",
+      "tur": "kanun",
+      "soru": "Kişisel veriler başkalarınca hukuka aykırı elde edilirse veri sorumlusu kime ve ne zaman bildirir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.38,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.56,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.65,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.97,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e29",
+      "tur": "kanun",
+      "soru": "Veri sorumlusunun cevabından sonra Kurula şikâyet süresi ne kadardır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.67,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.68,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.95,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.47,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e30",
+      "tur": "kanun",
+      "soru": "Kurul şikâyete süresinde cevap vermezse ne olur?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.68,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.01,
+          "sadik": false
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.97,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.38,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e31",
+      "tur": "kanun+yonetmelik",
+      "soru": "Veri Sorumluları Siciline ne zaman kaydolunmalıdır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.31,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.58,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.25,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.46,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e32",
+      "tur": "kanun+yonetmelik",
+      "soru": "Standart sözleşme imzalandıktan sonra Kuruma kaç gün içinde bildirilmelidir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.51,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.65,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.98,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.47,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e33",
+      "tur": "yonetmelik",
+      "soru": "İlgili kişi verilerinin silinmesini talep ederse veri sorumlusu kaç gün içinde sonuçlandırmalıdır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.03,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.07,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 30.11,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.7,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e34",
+      "tur": "yonetmelik",
+      "soru": "Saklama ve imha politikası hazırlama yükümlülüğü olmayan veri sorumlusu verileri ne kadar sürede silmelidir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.81,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.0,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.43,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.72,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e35",
+      "tur": "yonetmelik",
+      "soru": "Silme ve yok etme işlemlerine ilişkin kayıtlar en az kaç yıl saklanır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.17,
+          "sadik": null
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.14,
+          "sadik": null
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.16,
+          "sadik": null
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.35,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e36",
+      "tur": "teblig",
+      "soru": "Veri sorumlusu başvuruya yazılı cevap verirken kaç sayfaya kadar ücret alamaz?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.77,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.61,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.58,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.36,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e37",
+      "tur": "teblig",
+      "soru": "Açık rızaya dayanan işlemede aydınlatma ile açık rıza birlikte alınabilir mi?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.13,
+          "sadik": null
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.12,
+          "sadik": null
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.1,
+          "sadik": null
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.36,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e38",
+      "tur": "karar",
+      "soru": "İşveren, işten çıkardığı çalışanı şirketin sosyal medya hesabından duyurursa Kurul ne karar vermiştir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.18,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.88,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 59.77,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "llm",
+          "sure_sn": 4.19,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e39",
+      "tur": "karar",
+      "soru": "İnternet sitesinde reklam çerezlerinin açık rıza alınmadan kullanılması hakkında Kurul hangi yaptırımı uygulamıştır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.11,
+          "sadik": null
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.12,
+          "sadik": null
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.11,
+          "sadik": null
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.43,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e40",
+      "tur": "karar",
+      "soru": "Bir çalışanın izin bilgisinin birimdeki diğer personelle paylaşılması hakkında Kurul ne karar vermiştir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.33,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.13,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.46,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.41,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e41",
+      "tur": "karar",
+      "soru": "Üniversitenin ders yoklamasını parmak iziyle alması Kurulca hukuka uygun bulunmuş mudur?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.55,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.9,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.1,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.46,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e42",
+      "tur": "karar",
+      "soru": "İşyerindeki kameraların konumu hakkında Kurul işverene ne talimat vermiştir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.14,
+          "sadik": null
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.15,
+          "sadik": null
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.12,
+          "sadik": null
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.32,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e43",
+      "tur": "karar",
+      "soru": "Banka çalışanı kendi telefon görüşmesi kayıtlarını isterse, Kurul kararına göre banka bunları nasıl vermelidir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.02,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.22,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.35,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "llm",
+          "sure_sn": 4.08,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e44",
+      "tur": "karar",
+      "soru": "Havayolunun özel yolcu programı için açık rıza istemesi hakkında Kurul işlem yapmış mıdır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.93,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.38,
+          "sadik": false
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.33,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.11,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e45",
+      "tur": "karar",
+      "soru": "Doktorun hastanın ameliyat fotoğrafını kendi sosyal medyasında paylaşması üzerine Kurul ilgili kişiyi hangi konuda bilgilendirmiştir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.25,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.55,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 10.68,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "atif_dogrulama",
+          "sure_sn": 8.86,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e46",
+      "tur": "karar",
+      "soru": "İş kazası Sosyal Güvenlik Kurumuna kaç gün içinde bildirilmelidir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.32,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.13,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.41,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.4,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e47",
+      "tur": "kanun",
+      "soru": "İş sağlığı ve güvenliği kurulu en az kaç çalışanı olan işyerlerinde oluşturulur?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.87,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.66,
+          "sadik": false
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.27,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.35,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e48",
+      "tur": "kanun",
+      "soru": "İşveren, işin durdurulması kararına kaç gün içinde ve nereye itiraz edebilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.55,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.57,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.06,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.53,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e49",
+      "tur": "kanun",
+      "soru": "Ciddi ve yakın tehlike nedeniyle çalışmaktan kaçınan çalışanın o dönemdeki ücreti ne olur?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.19,
+          "sadik": null
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.15,
+          "sadik": null
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.15,
+          "sadik": null
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.37,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "e50",
+      "tur": "kanun",
+      "soru": "Altı aydan fazla işten uzak kalan çalışana tekrar işe başlamadan önce hangi eğitim verilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.38,
+          "sadik": true
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.65,
+          "sadik": true
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.57,
+          "sadik": true
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": true,
+          "katman": "atif_dogrulama",
+          "sure_sn": 36.4,
+          "sadik": null
+        }
+      }
+    },
+    {
+      "id": "d01",
+      "tur": "kapsam_disi",
+      "soru": "2026 yılında kıdem tazminatı tavanı kaç liradır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.17
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.14
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.16
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.33
+        }
+      }
+    },
+    {
+      "id": "d03",
+      "tur": "kapsam_disi",
+      "soru": "İş mahkemesinde dava açmadan önce arabuluculuk görüşmeleri en fazla kaç hafta sürer?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.19
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.16
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.19
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.36
+        }
+      }
+    },
+    {
+      "id": "d04",
+      "tur": "kapsam_disi",
+      "soru": "GDPR'a göre veri ihlali denetim otoritesine kaç saat içinde bildirilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.13
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.13
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.18
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.45
+        }
+      }
+    },
+    {
+      "id": "d05",
+      "tur": "kapsam_disi",
+      "soru": "Anonim şirket en az kaç ortakla kurulabilir?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.17
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.14
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.13
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.42
+        }
+      }
+    },
+    {
+      "id": "d06",
+      "tur": "kapsam_disi",
+      "soru": "Konut satışında tapu harcı oranı yüzde kaçtır?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.18
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.17
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.15
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.35
+        }
+      }
+    },
+    {
+      "id": "d07",
+      "tur": "kapsam_disi",
+      "soru": "Trafik cezasına itiraz süresi kaç gündür?",
+      "sonuclar": {
+        "openrouter:deepseek/deepseek-v4.1-flash-1017": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.14
+        },
+        "openrouter:qwen/qwen3.7-flash": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.15
+        },
+        "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.12
+        },
+        "ollama:qwen2.5:7b": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 0.39
+        }
+      }
+    }
+  ]
+}
