@@ -103,21 +103,17 @@ citelex/
 Durum (13 Kas sabahı): 11–15 Kas satırlarının çekirdeği bitti (ayrıntı KARARLAR.md). Açık kalanlar aşağıda "Borçlar"da.
 
 ### DEVAM NOKTASI (yeni oturum buradan başlar; bitince bu bölümü güncelle)
-Son durum: 13 Kas akşamı. Biten: 6331 derlemde; eval seti 56 soru; **13 Kas satırı tamam** (FastAPI + Compose);
-**14 Kas satırı tamam** (Next.js arayüz `web/`: akış, kaynak paneli, tür filtresi; tarayıcıda uçtan uca doğrulandı).
-Çalıştırma: `docker compose up -d` (API 8000 + Qdrant), `npm --prefix web run dev` (3000). Statik çıktı: `npm --prefix web run build` -> `web/out`.
-15 Kas (bulutta yayın) YARIM: Qdrant Cloud'da indeks kurulu; yayın betikleri hazır (scripts/yayin_qdrant.py,
-scripts/yayin_space.py); yapılandırma yerelde bulut Qdrant'a karşı doğrulandı. ENGEL: Hugging Face Docker Space artık PRO
-abonelik istiyor (402) -> barındırma kararı kullanıcıda. Ayrıca Gemini ücretsiz kota günde 20 istek -> çözüm olarak
-OpenRouter sağlayıcısı eklendi (model zincirli; deepseek-v4.1-flash 40/50 %80, ücretsiz nemotron 39/50 %78; yerel qwen2.5
-33/50). Zincir OPENROUTER_MODELS ile .env'ten seçilir; kalıcı model/faturalama + barındırma kararı kullanıcıda.
-Sıradaki işler, sırayla ve DURMADAN:
-1. ~~16-18 Kas~~ BİTTİ; 19 Kas büyük ölçüde bitti (karşılaştırma deneyleri + pano). Ayrıntı KARARLAR.md son kayıtlar. Antigravity: sohbet 1 = geniş katman ayrıştırıcı + Tauri EXE/APK; sohbet 2 = pano genişletme + README taslağı. Kalan: geniş katmanı indeksleme, ajanın API/arayüze bağlanması, yayın (kullanıcı kararı), README son hali.
-2. Kullanıcının barındırma/model kararına göre yayını bitir.
-3. Takvim v2'nin kalan satırları (17, 18, 19, 20, 21 Kas).
-Kullanıcıdan beklenenler: eval setinin doğrulanması (56 soru, 4'ü yeni İSG sorusu); barındırma (HF PRO / alternatif) ve
-kalıcı LLM (ücretsiz nemotron zinciri / ücretli deepseek / Gemini faturalama) kararları.
-Günlük görev kurulu ("Citelex Gunluk Guncelleme", her gün 03:00, scripts/guncelle.ps1).
+Son durum: 14 Kas gece. Takvim v2'de 13-20 Kas satırları BİTTİ (ayrıntı ve ölçümler KARARLAR.md son kayıtları):
+API (SSE) + Next.js arayüz (/pano, /degisiklikler, /yontem, mobil) + CI kapısı + LLM hakemli sadakat + OTel/Jaeger izleri +
+"bu madde değişti" + reranker + LangGraph ajan + MCP sunucusu + karşılaştırma deneyleri + Tauri EXE/APK + geniş katman
+(citelex_genis, derin katman yetmezse devreye girer). Varsayılan: yerelde ajan + reranker (45/50), yayında reranker kapalı.
+İş bölümü: Claude ana geliştirici/denetçi; Antigravity 2 sohbet destekçi (Claude prompt yazar, inceler, commit'ler).
+Sürenler: sohbet 1 = geniş katman örneklemi + taslak geniş soru seti (eval/genis_sorular.jsonl) + emülatörde canlı API;
+sohbet 2 = geniş katman rozeti + Docker uçtan uca + README taslağı.
+Sıradaki (Claude): geniş katman arama kalitesini taslak setle ölç; README son hali (21 Kas); repo public hazırlığı.
+Kullanıcıdan beklenen: barındırma kararı (HF Docker Space PRO istiyor), eval setinin doğrulanması (56 soru; d03 artık
+geniş katmanda cevaplanabiliyor), geniş katman soru setinin doğrulanması. LLM zinciri: ücretsiz önce (kullanıcı kararı).
+Günlük görev kurulu ("Citelex Gunluk Guncelleme", 03:00, scripts/guncelle.ps1; erken uyarı dahil).
 
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)
 Hedef rol: yapay zekâ / ürün geliştirici. Sıra CV değerine göre: önce canlı ve ölçülen sistem, sonra
