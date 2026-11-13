@@ -42,6 +42,8 @@ from src.api.ratelimit import RateLimiter
 log = logging.getLogger("citelex.api")
 SOURCES_PATH = Path("configs/sources.json")
 DB_PATH = Path("data/store/citelex.db")
+FARK_DIR = Path(os.environ.get("CITELEX_FARK_DIR", "data/store/farklar"))
+RE_FARK = re.compile(r"^[0-9T]{15}_[a-z]+_[A-Za-z0-9._-]+_\d+-\d+$")  # yol enjeksiyonuna karşı sıkı kalıp
 RE_ANAHTAR = re.compile(r"^[a-z0-9-]{2,60}(:[0-9A-Za-zÇĞİÖŞÜçğıöşü /]{1,20})?$")
 GIZLI_ALANLAR = ("ham", "esik", "kanal_top1", "dense_top1")  # istemciye gitmeyen iç alanlar
 
@@ -194,6 +196,22 @@ def create_app(answerer=None) -> FastAPI:
                 "parcalar": [{"fikra_no": p.get("fikra_no"), "bolum": p.get("bolum") if ilk["belge_tur"] == "karar" else None,
                               "metin": p["metin"], "mulga": bool(p.get("mulga"))} for p in ps],
                 "dipnotlar": ilk.get("dipnotlar") or []}
+
+    @app.get("/degisiklikler")
+    def degisiklikler(limit: int = Query(20, ge=1, le=100)):
+        """Son sürüm değişiklikleri (özet; madde/bölüm listesi, metin yok). Güncelleme hattının yazdığı farklar."""
+        from src.update.diff import list_diffs
+        return {"degisiklikler": list_diffs(FARK_DIR, limit), "son_kontrol": last_check()}
+
+    @app.get("/degisiklik/{fark_id}")
+    def degisiklik(fark_id: str):
+        """Tek değişiklik: her değişen madde/bölüm için eski metin, yeni metin ve kelime farkı."""
+        if not RE_FARK.match(fark_id):
+            raise HTTPException(400, detail="Geçersiz değişiklik kimliği.")
+        p = FARK_DIR / f"{fark_id}.json"
+        if not p.is_file():
+            raise HTTPException(404, detail="Değişiklik bulunamadı.")
+        return json.loads(p.read_text(encoding="utf-8"))
 
     # Statik arayüz (web/out) aynı adresten sunulur: yayında tek adres, CORS gerekmez. API yolları önce eşleşir.
     web_dir = Path(os.environ.get("CITELEX_WEB_DIR", "web/out"))

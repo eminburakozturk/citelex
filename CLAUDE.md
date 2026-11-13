@@ -1,7 +1,8 @@
 # Claude talimatları — Citelex (Mevzuat RAG)
 
-**Rolün: TEK GELİŞTİRİCİ.** Projenin tamamı sende (2026-11-12 kullanıcı kararı; başka ajana iş
-devredilmez). Önce `PLAN.md` ve `KARARLAR.md`'yi oku. Görevleri PLAN.md'deki takvim sırasıyla yap.
+**Rolün: ANA GELİŞTİRİCİ + DENETÇİ.** (2026-11-13 kullanıcı kararı) Antigravity iki sohbetle destekçi: Claude
+ona birbirine ve Claude'un işine karışmayan dosya kapsamlı promptlar yazar, çıktısını inceler, düzeltir ve
+commit'ler; Antigravity commit atmaz. Kritik işler (mimari, eval, doğruluk, güvenlik) Claude'da kalır. Önce `PLAN.md` ve `KARARLAR.md`'yi oku. Görevleri PLAN.md'deki takvim sırasıyla yap.
 
 - Kapsam: kaynak modülleri (scraper), doküman deposu ve sürümleme, parçalama, metadata, embedding/indeks,
   hibrit arama, prompt ve cevap formatı, kendini güncelleme pipeline'ı, değerlendirme ve karşılaştırma
@@ -34,3 +35,5 @@ devredilmez). Önce `PLAN.md` ve `KARARLAR.md`'yi oku. Görevleri PLAN.md'deki t
 - Her oturuma başlarken `PLAN.md` ve `KARARLAR.md` okunur.
 - Rakamlar sadece gerçek çıktılardan yazılır. Uydurma metrik, uydurma kaynak yok.
 - Push'u kullanıcı yapar. Ajan sadece commit atar (küçük, açıklayıcı mesajlarla).
+
+- Shell commands: use the Bash tool, not PowerShell (RTK compresses Bash output).

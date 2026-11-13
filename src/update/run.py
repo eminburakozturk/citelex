@@ -40,6 +40,7 @@ import pdfplumber
 from src.sources import kvkk
 from src.sources.http import FetchError, get
 from src.store import db
+from src.update import diff
 
 PY = sys.executable
 LOG = Path("logs/updates.jsonl")
@@ -135,6 +136,13 @@ def check(con, run_id: str, docs: list[dict], fake: dict[str, str]) -> tuple[lis
                     Path(doc["local_path"]).write_bytes(raw)
                     result = db.set_active(con, doc["doc_key"], chash, sha(raw), raw_path)
                     detail = f"{(act['content_hash'][:10] if act else '-')} -> {chash[:10]}"
+                    if act:  # "bu madde değişti": madde/bölüm düzeyinde fark (API /degisiklikler okur)
+                        try:
+                            yeni_v = db.active_version(con, doc["doc_key"])
+                            fp = diff.write_diff(con, doc["doc_key"], act, yeni_v)
+                            detail += f" | fark: {fp.name if fp else 'yok (yalnız biçim)'}"
+                        except Exception as e:  # noqa: BLE001 — fark üretilemezse güncelleme durmaz
+                            detail += f" | fark hatası: {type(e).__name__}: {str(e)[:120]}"
                     changed.append(doc)
             except Exception as e:  # noqa: BLE001 — bir kaynağın hatası diğerlerini durdurmaz (PLAN.md)
                 result, detail = "hata", f"{type(e).__name__}: {str(e)[:200]}"
