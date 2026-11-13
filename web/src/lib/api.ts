@@ -25,6 +25,8 @@ export interface Sonuc {
   son_kontrol?: string | null;
   sure_sn?: number;
   llm?: string;
+  ajan_deneme?: number;
+  ajan_sorgular?: string[];
 }
 
 export interface KaynakMetni {
@@ -51,13 +53,19 @@ export interface Olaylar {
 const BAGLANTI_HATASI = "Sunucuya ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin.";
 
 /** Soruyu gönderir ve SSE olaylarını sırayla işler. Akış bitince döner. */
-export async function sor(soru: string, turler: Tur[] | null, on: Olaylar, signal?: AbortSignal): Promise<void> {
+export async function sor(
+  soru: string,
+  turler: Tur[] | null,
+  on: Olaylar,
+  signal?: AbortSignal,
+  ajan = true
+): Promise<void> {
   let res: Response;
   try {
     res = await fetch(`${API_URL}/sor`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(turler ? { soru, turler } : { soru }),
+      body: JSON.stringify({ soru, ...(turler ? { turler } : {}), ajan }),
       signal,
     });
   } catch {

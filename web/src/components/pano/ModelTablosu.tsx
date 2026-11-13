@@ -8,7 +8,7 @@ export function ModelTablosu({ modeller }: { modeller: ModelOzeti[] }) {
   }
 
   return (
-    <section aria-labelledby="model-tablo-baslik" className="space-y-3">
+    <section aria-labelledby="model-tablo-baslik" className="min-w-0 space-y-3">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 id="model-tablo-baslik" className="text-base font-semibold">
           Model karşılaştırması
@@ -16,7 +16,7 @@ export function ModelTablosu({ modeller }: { modeller: ModelOzeti[] }) {
         <p className="text-xs text-muted">Her model ve yapılandırmanın son tam çalıştırması</p>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-line bg-panel">
+      <div className="w-full overflow-x-auto rounded-lg border border-line bg-panel">
         <table className="w-full border-collapse text-left text-sm">
           <thead>
             <tr className="border-b border-line text-xs text-muted">

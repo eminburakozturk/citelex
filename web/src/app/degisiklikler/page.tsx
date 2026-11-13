@@ -69,25 +69,25 @@ export default function DegisikliklerSayfasi() {
   }, [seciliId]);
 
   return (
-    <div className="min-h-full bg-bg text-ink">
+    <div className="min-h-full overflow-x-hidden bg-bg text-ink">
       <header className="border-b border-line bg-panel px-4 py-3">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-1">
           <h1 className="text-lg font-semibold tracking-tight">
             Citelex <span className="font-normal text-muted">· Son değişiklikler</span>
           </h1>
-          <div className="flex flex-wrap items-baseline gap-4 text-xs text-muted">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
             <span>Son kontrol: {tarih(sonKontrol)}</span>
-            <Link href="/pano" className="text-accent hover:underline">
+            <Link href="/pano" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Değerlendirme panosu
             </Link>
-            <Link href="/" className="text-accent hover:underline">
+            <Link href="/" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               ← Soru-cevaba dön
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl space-y-6 px-4 py-6">
+      <main className="mx-auto max-w-5xl min-w-0 space-y-6 px-4 py-6">
         <div className="flex flex-wrap items-center justify-between gap-2 rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
           <p>
             Kaynak kontrollerinde tespit edilen sürüm farkları madde veya bölüm düzeyinde listelenir. Eski sürümler
@@ -123,7 +123,7 @@ export default function DegisikliklerSayfasi() {
                     type="button"
                     onClick={() => setSeciliId(k.fark_id)}
                     aria-pressed={secili}
-                    className={`rounded-lg border p-3.5 text-left transition-colors ${
+                    className={`min-h-[44px] w-full min-w-0 rounded-lg border p-3.5 text-left transition-colors ${
                       secili ? "border-accent bg-accent-soft/40" : "border-line bg-panel hover:border-accent/60"
                     }`}
                   >

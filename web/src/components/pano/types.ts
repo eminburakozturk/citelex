@@ -62,6 +62,32 @@ export interface RerankKarsilastirma {
   not: string | null;
 }
 
+export interface ParcalamaYontemSatiri {
+  parcalama: string;
+  yontem: string;
+  mevzuat_r1: string;
+  mevzuat_r5: string;
+  mevzuat_mrr: number;
+  karar_r1: string;
+  karar_r3: string;
+  sure_sn: number;
+}
+
+export interface SozcukselSatiri {
+  yontem: string;
+  r1: string;
+  r5: string;
+  mrr5: number;
+}
+
+export interface AramaDeneyleriVerisi {
+  dosya: string;
+  ozet_not: string | null;
+  parcalama_yontem: ParcalamaYontemSatiri[];
+  sozcuksel_not: string | null;
+  sozcuksel: SozcukselSatiri[];
+}
+
 export interface GecmisKaydi {
   anahtar: string;
   tarih: string;
@@ -110,6 +136,7 @@ export interface PanoVerisi {
   modeller: ModelOzeti[];
   yapilandirma_karsilastirmasi: YapilandirmaGrubu[];
   rerank_karsilastirma: RerankKarsilastirma | null;
+  arama_deneyleri?: AramaDeneyleriVerisi | null;
   gecmis: GecmisKaydi[];
   sorular: SoruSatiri[];
 }

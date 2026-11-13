@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AramaDeneyleri } from "@/components/pano/AramaDeneyleri";
 import { EsikEtkisiKutusu } from "@/components/pano/EsikEtkisiKutusu";
 import { ModelTablosu } from "@/components/pano/ModelTablosu";
 import { SoruIsiTablosu } from "@/components/pano/SoruIsiTablosu";
@@ -32,25 +33,25 @@ export default function PanoSayfasi() {
   }, []);
 
   return (
-    <div className="min-h-full bg-bg text-ink">
+    <div className="min-h-full overflow-x-hidden bg-bg text-ink">
       <header className="border-b border-line bg-panel px-4 py-3">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-1">
           <h1 className="text-lg font-semibold tracking-tight">
             Citelex <span className="font-normal text-muted">· Değerlendirme panosu</span>
           </h1>
-          <div className="flex flex-wrap items-baseline gap-4 text-xs text-muted">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
             {veri?.uretim_tarihi && <span>Veri: {tarihSaat(veri.uretim_tarihi)}</span>}
-            <Link href="/degisiklikler" className="text-accent hover:underline">
+            <Link href="/degisiklikler" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               Son değişiklikler
             </Link>
-            <Link href="/" className="text-accent hover:underline">
+            <Link href="/" className="inline-flex min-h-[40px] items-center text-accent hover:underline">
               ← Soru-cevaba dön
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl space-y-8 px-4 py-6">
+      <main className="mx-auto max-w-5xl min-w-0 space-y-8 px-4 py-6">
         <div className="space-y-1 rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
           <p>Beklenen cevaplar taslaktır; içerik ölçütü anahtar kelime eşleşmesidir.</p>
           <p className="text-xs opacity-90">
@@ -72,6 +73,7 @@ export default function PanoSayfasi() {
               gruplar={veri.yapilandirma_karsilastirmasi}
               rerank={veri.rerank_karsilastirma}
             />
+            <AramaDeneyleri veri={veri.arama_deneyleri} />
             <EsikEtkisiKutusu modeller={veri.modeller} />
             <ZamanGrafigi gecmis={veri.gecmis} />
             <SoruIsiTablosu modeller={veri.modeller} sorular={veri.sorular} />

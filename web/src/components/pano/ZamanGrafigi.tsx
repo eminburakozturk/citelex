@@ -74,7 +74,7 @@ export function ZamanGrafigi({ gecmis }: { gecmis: GecmisKaydi[] }) {
           viewBox={`0 0 ${W} ${H}`}
           role="img"
           aria-label="Modellerin zaman içindeki doğruluk oranı çizgi grafiği"
-          className="h-auto w-full overflow-visible"
+          className="h-auto w-full"
         >
           {yTicks.map((v) => {
             const y = yPos(v);

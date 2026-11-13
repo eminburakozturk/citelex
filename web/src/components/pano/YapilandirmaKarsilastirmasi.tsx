@@ -18,7 +18,7 @@ export function YapilandirmaKarsilastirmasi({
   if (gruplar.length === 0 && !rerank) return null;
 
   return (
-    <section aria-labelledby="yapilandirma-baslik" className="space-y-4">
+    <section aria-labelledby="yapilandirma-baslik" className="min-w-0 space-y-4">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 id="yapilandirma-baslik" className="text-base font-semibold">
           Yapılandırma karşılaştırması
@@ -27,7 +27,7 @@ export function YapilandirmaKarsilastirmasi({
       </div>
 
       {gruplar.map((g) => (
-        <div key={g.llm} className="overflow-x-auto rounded-lg border border-line bg-panel">
+        <div key={g.llm} className="w-full overflow-x-auto rounded-lg border border-line bg-panel">
           <div className="border-b border-line px-3 py-2 text-xs font-medium text-muted">
             Model: <span className="text-ink">{kisaModelAdi(g.llm)}</span>
           </div>
@@ -74,7 +74,7 @@ export function YapilandirmaKarsilastirmasi({
       ))}
 
       {rerank && (
-        <div className="overflow-x-auto rounded-lg border border-line bg-panel">
+        <div className="w-full overflow-x-auto rounded-lg border border-line bg-panel">
           <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-line px-3 py-2 text-xs text-muted">
             <span>
               Reranker arama ölçümü (<code className="text-ink">{rerank.dosya}</code> · bge-reranker-v2-m3, ilk 30 aday)

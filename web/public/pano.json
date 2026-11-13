@@ -1,5 +1,5 @@
 {
-  "uretim_tarihi": "2026-11-13T17:39:31+00:00",
+  "uretim_tarihi": "2026-11-13T17:51:41+00:00",
   "modeller": [
     {
       "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan",
@@ -28,7 +28,20 @@
       "gecersiz_atif": 0,
       "hata": 0,
       "medyan_sure_sn": 2.42,
-      "sadakat": null
+      "sadakat": {
+        "hakem": "anthropic/claude-haiku-5.5",
+        "dosya": "sadakat_openrouter_deepseek_deepseek_v4.1_flash_1017_ajan__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl",
+        "cevap": 49,
+        "sadik": 48,
+        "sadik_orani": 0.9796,
+        "tam_destekli": 46,
+        "tam_destekli_orani": 0.9388,
+        "destekli": 177,
+        "kismen": 4,
+        "desteksiz": 1,
+        "n_iddia": 182,
+        "destekli_orani": 0.9725
+      }
     },
     {
       "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker",
@@ -321,7 +334,20 @@
           "gecersiz_atif": 0,
           "hata": 0,
           "medyan_sure_sn": 2.42,
-          "sadakat": null
+          "sadakat": {
+            "hakem": "anthropic/claude-haiku-5.5",
+            "dosya": "sadakat_openrouter_deepseek_deepseek_v4.1_flash_1017_ajan__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl",
+            "cevap": 49,
+            "sadik": 48,
+            "sadik_orani": 0.9796,
+            "tam_destekli": 46,
+            "tam_destekli_orani": 0.9388,
+            "destekli": 177,
+            "kismen": 4,
+            "desteksiz": 1,
+            "n_iddia": 182,
+            "destekli_orani": 0.9725
+          }
         }
       ]
     }
@@ -367,6 +393,117 @@
       }
     ],
     "not": "Rerank süresi: medyan 0.74 sn/sorgu (30 aday, GPU fp16)."
+  },
+  "arama_deneyleri": {
+    "dosya": "compare_retrieval.md",
+    "ozet_not": "Sorular: 63 (beklenen kaynağı olanlar: eval/questions.jsonl + eval/retrieval_smoke.jsonl). Küçük örneklem: 1-2 soruluk farklar gürültüdür. Reranker kapalı (ayrı ölçüm: results/rerank_compare.md).",
+    "parcalama_yontem": [
+      {
+        "parcalama": "madde",
+        "yontem": "dense",
+        "mevzuat_r1": "45/51",
+        "mevzuat_r5": "50/51",
+        "mevzuat_mrr": 0.931,
+        "karar_r1": "12/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.56
+      },
+      {
+        "parcalama": "madde",
+        "yontem": "bm25",
+        "mevzuat_r1": "40/51",
+        "mevzuat_r5": "48/51",
+        "mevzuat_mrr": 0.848,
+        "karar_r1": "11/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.05
+      },
+      {
+        "parcalama": "madde",
+        "yontem": "hybrid",
+        "mevzuat_r1": "44/51",
+        "mevzuat_r5": "48/51",
+        "mevzuat_mrr": 0.902,
+        "karar_r1": "11/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.06
+      },
+      {
+        "parcalama": "fikra",
+        "yontem": "dense",
+        "mevzuat_r1": "47/51",
+        "mevzuat_r5": "50/51",
+        "mevzuat_mrr": 0.951,
+        "karar_r1": "12/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.17
+      },
+      {
+        "parcalama": "fikra",
+        "yontem": "bm25",
+        "mevzuat_r1": "40/51",
+        "mevzuat_r5": "48/51",
+        "mevzuat_mrr": 0.848,
+        "karar_r1": "11/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.1
+      },
+      {
+        "parcalama": "fikra",
+        "yontem": "hybrid",
+        "mevzuat_r1": "44/51",
+        "mevzuat_r5": "48/51",
+        "mevzuat_mrr": 0.902,
+        "karar_r1": "11/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.11
+      },
+      {
+        "parcalama": "hibrit",
+        "yontem": "dense",
+        "mevzuat_r1": "45/51",
+        "mevzuat_r5": "50/51",
+        "mevzuat_mrr": 0.931,
+        "karar_r1": "12/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.13
+      },
+      {
+        "parcalama": "hibrit",
+        "yontem": "bm25",
+        "mevzuat_r1": "41/51",
+        "mevzuat_r5": "48/51",
+        "mevzuat_mrr": 0.858,
+        "karar_r1": "11/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.09
+      },
+      {
+        "parcalama": "hibrit",
+        "yontem": "hybrid",
+        "mevzuat_r1": "43/51",
+        "mevzuat_r5": "48/51",
+        "mevzuat_mrr": 0.892,
+        "karar_r1": "11/12",
+        "karar_r3": "12/12",
+        "sure_sn": 0.09
+      }
+    ],
+    "sozcuksel_not": "607 aktif mevzuat parçası; bge-m3 sparse kodlama 3 sn (GPU fp16).",
+    "sozcuksel": [
+      {
+        "yontem": "BM25 (Türkçe tokenizer)",
+        "r1": "38/51",
+        "r5": "48/51",
+        "mrr5": 0.837
+      },
+      {
+        "yontem": "bge-m3 sparse",
+        "r1": "45/51",
+        "r5": "47/51",
+        "mrr5": 0.902
+      }
+    ]
   },
   "gecmis": [
     {
@@ -582,7 +719,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 118.65,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -649,7 +786,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 7.06,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -716,7 +853,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.49,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -783,7 +920,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.38,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -850,7 +987,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.03,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -917,7 +1054,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.19,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -984,7 +1121,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.19,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1051,7 +1188,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.48,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1118,7 +1255,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.42,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1185,7 +1322,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.52,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1252,7 +1389,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.7,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1319,7 +1456,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.47,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1386,7 +1523,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.85,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -1453,7 +1590,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.57,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1520,7 +1657,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.17,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1587,7 +1724,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.4,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1654,7 +1791,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.7,
-          "tam_destekli": null
+          "tam_destekli": false
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1721,7 +1858,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.86,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1788,7 +1925,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.9,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1855,7 +1992,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.48,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1922,7 +2059,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.06,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -1989,7 +2126,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.96,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2056,7 +2193,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.44,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2190,7 +2327,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.12,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -2257,7 +2394,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.35,
-          "tam_destekli": null
+          "tam_destekli": false
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2324,7 +2461,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.23,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2391,7 +2528,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.8,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2458,7 +2595,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.99,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2525,7 +2662,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.79,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2592,7 +2729,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.83,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2659,7 +2796,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.4,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2726,7 +2863,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.35,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2793,7 +2930,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 8.08,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2860,7 +2997,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.69,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -2927,7 +3064,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.24,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -2994,7 +3131,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 14.49,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -3061,7 +3198,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.66,
-          "tam_destekli": null
+          "tam_destekli": false
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -3128,7 +3265,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.12,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -3195,7 +3332,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.24,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -3262,7 +3399,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.3,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -3329,7 +3466,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.75,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -3396,7 +3533,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.53,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -3463,7 +3600,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.34,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -3530,7 +3667,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.13,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -3597,7 +3734,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.64,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -3664,7 +3801,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 6.01,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -3731,7 +3868,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.38,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,
@@ -3798,7 +3935,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.34,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": false,
@@ -3865,7 +4002,7 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 1.39,
-          "tam_destekli": null
+          "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker": {
           "dogru": true,

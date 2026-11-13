@@ -67,7 +67,7 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-1.5 text-xs">
+      <div className="flex flex-wrap gap-2 text-xs">
         {FILTRELER.map((f) => {
           const acik = filtre === f.id;
           return (
@@ -76,7 +76,7 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
               type="button"
               aria-pressed={acik}
               onClick={() => setFiltre(f.id)}
-              className={`rounded-full border px-2.5 py-1 ${
+              className={`inline-flex min-h-[40px] items-center rounded-full border px-3.5 py-2 ${
                 acik ? "border-accent bg-accent-soft text-ink" : "border-line bg-panel text-muted hover:text-ink"
               }`}
             >
@@ -88,7 +88,7 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
 
       {secili && (
         <div className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-line bg-panel px-3 py-2 text-xs">
-          <div>
+          <div className="min-w-0 break-words">
             <span className="font-semibold text-ink">{secili.q.id}</span> ·{" "}
             <span className="text-ink">{secili.etiket}</span>:{" "}
             <span className="text-muted">{hucreBasligi(secili.etiket, secili.q.tur, secili.s)}</span>
@@ -96,14 +96,14 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
           <button
             type="button"
             onClick={() => setSecili(null)}
-            className="rounded border border-line px-2 py-0.5 text-muted hover:text-ink"
+            className="inline-flex min-h-[40px] min-w-[44px] items-center justify-center rounded border border-line px-3 py-1.5 text-muted hover:text-ink"
           >
             Kapat
           </button>
         </div>
       )}
 
-      <div className="overflow-x-auto rounded-lg border border-line bg-panel">
+      <div className="w-full overflow-x-auto rounded-lg border border-line bg-panel">
         <table className="w-full border-collapse text-left text-xs">
           <thead>
             <tr className="border-b border-line text-muted">
@@ -148,7 +148,7 @@ export function SoruIsiTablosu({ modeller, sorular }: { modeller: ModelOzeti[]; 
                         type="button"
                         onClick={() => setSecili({ q, etiket, s })}
                         title={hucreBasligi(etiket, q.tur, s)}
-                        className={`relative inline-flex h-6 w-8 items-center justify-center rounded font-semibold ${hucreSinif}`}
+                        className={`relative inline-flex h-10 min-w-[40px] items-center justify-center rounded font-semibold ${hucreSinif}`}
                       >
                         {ok ? "✓" : "✗"}
                         {s.tam_destekli === false && (

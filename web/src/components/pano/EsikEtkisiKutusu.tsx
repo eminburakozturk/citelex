@@ -68,7 +68,7 @@ export function EsikEtkisiKutusu({ modeller }: { modeller: ModelOzeti[] }) {
                     />
                   )}
                 </div>
-                <div className="text-right text-xs text-muted tabular-nums whitespace-nowrap">
+                <div className="break-words text-left text-xs text-muted tabular-nums sm:whitespace-nowrap sm:text-right">
                   <strong className="text-ink">{toplam}</strong>/{m.n_ic} (
                   {KATMANLAR.filter((ad) => (k[ad] ?? 0) > 0)
                     .map((ad) => `${KATMAN_ADI[ad]}: ${k[ad]}`)

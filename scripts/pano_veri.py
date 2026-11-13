@@ -180,6 +180,78 @@ def parse_rerank_compare() -> dict | None:
     return {"dosya": path.name, "satirlar": satirlar, "not": sure_notu}
 
 
+def parse_compare_retrieval() -> dict | None:
+    path = RESULTS_DIR / "compare_retrieval.md"
+    if not path.is_file():
+        return None
+    lines = path.read_text(encoding="utf-8").splitlines()
+    ozet_not: str | None = None
+    sozcuksel_not: str | None = None
+    parcalama_yontem: list[dict] = []
+    sozcuksel: list[dict] = []
+    bolum = 0
+    in_table = False
+
+    for line in lines:
+        s = line.strip()
+        if s.startswith("Sorular:"):
+            ozet_not = s
+            continue
+        if s.startswith("## 1."):
+            bolum = 1
+            in_table = False
+            continue
+        if s.startswith("## 2."):
+            bolum = 2
+            in_table = False
+            continue
+        if bolum == 2 and not in_table and s and not s.startswith("|") and not s.startswith("#"):
+            sozcuksel_not = s
+            continue
+        if s.startswith("| Parçalama | Yöntem |") or s.startswith("| Yöntem | R@1 |"):
+            in_table = True
+            continue
+        if in_table:
+            if s.startswith("|---"):
+                continue
+            if not s.startswith("|"):
+                in_table = False
+                continue
+            parts = [p.strip() for p in s.strip("|").split("|")]
+            if bolum == 1 and len(parts) >= 8:
+                parcalama_yontem.append(
+                    {
+                        "parcalama": parts[0],
+                        "yontem": parts[1],
+                        "mevzuat_r1": parts[2],
+                        "mevzuat_r5": parts[3],
+                        "mevzuat_mrr": float(parts[4]),
+                        "karar_r1": parts[5],
+                        "karar_r3": parts[6],
+                        "sure_sn": float(parts[7]),
+                    }
+                )
+            elif bolum == 2 and len(parts) >= 4:
+                sozcuksel.append(
+                    {
+                        "yontem": parts[0],
+                        "r1": parts[1],
+                        "r5": parts[2],
+                        "mrr5": float(parts[3]),
+                    }
+                )
+
+    if not parcalama_yontem and not sozcuksel:
+        return None
+    return {
+        "dosya": path.name,
+        "ozet_not": ozet_not,
+        "parcalama_yontem": parcalama_yontem,
+        "sozcuksel_not": sozcuksel_not,
+        "sozcuksel": sozcuksel,
+    }
+
+
 def build_pano() -> dict:
     history_raw = read_jsonl(RESULTS_DIR / "eval_history.jsonl")
 
@@ -355,6 +427,7 @@ def build_pano() -> dict:
         "modeller": modeller,
         "yapilandirma_karsilastirmasi": yapilandirma_karsilastirmasi,
         "rerank_karsilastirma": parse_rerank_compare(),
+        "arama_deneyleri": parse_compare_retrieval(),
         "gecmis": gecmis,
         "sorular": sorular,
     }
