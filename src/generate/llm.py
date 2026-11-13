@@ -21,6 +21,19 @@ class LLMError(RuntimeError):
         self.status = status   # sağlayıcının HTTP kodu (429 = kota); API bunu anlaşılır mesaja çevirir
 
 
+def _retry_delay(r) -> float:
+    """Gemini 429 gövdesindeki RetryInfo.retryDelay ("37s"); yoksa 0. En çok 70 sn."""
+    if r.status_code != 429:
+        return 0.0
+    try:
+        for d in r.json()["error"].get("details", []):
+            if "retryDelay" in d:
+                return min(float(str(d["retryDelay"]).rstrip("s")) + 1, 70.0)
+    except (ValueError, KeyError, TypeError):
+        pass
+    return 30.0
+
+
 class GeminiLLM:
     def __init__(self, model: str | None = None, timeout: float = 60):
         self.model = model or config.GEMINI_MODEL
@@ -42,7 +55,9 @@ class GeminiLLM:
                 continue
             if r.status_code not in (429, 500, 503) or attempt == 3:
                 break
-            time.sleep(2 * 3 ** attempt)
+            # 429'da sağlayıcının bildirdiği süre kadar beklenir (dakikalık kota: 2-18 sn'lik denemeler
+            # yetmiyordu, eval 28. soruda durdu). Akışlı yol (API) beklemez; kullanıcıya mesaj döner.
+            time.sleep(max(2 * 3 ** attempt, _retry_delay(r)))
         return self._parse(r)
 
     def _body(self, system: str, user: str, max_tokens: int) -> dict:
