@@ -178,7 +178,10 @@ def create_app(answerer=None) -> FastAPI:
             ps.sort(key=lambda p: (sira.get(p.get("bolum"), 9), int(p["chunk_id"].rsplit("-", 1)[-1])))
             atif, url = f"KVKK Kurulu K. {ilk['belge_no']}", ilk.get("url")
         else:
-            ps.sort(key=lambda p: p.get("fikra_no") or 0)
+            ps.sort(key=lambda p: (p.get("fikra_no") or 0, p.get("parca_no") or 0))
+            for p in ps:   # bölünmüş uzun fıkra: giriş cümlesi yalnız ilk parçada gösterilir
+                if (p.get("parca_no") or 1) > 1 and p.get("giris") and p["metin"].startswith(p["giris"]):
+                    p["metin"] = p["metin"][len(p["giris"]):].lstrip("\n")
             atif = re.sub(r"/\d+$", "", ilk["atif"]) if ilk.get("fikra_no") is not None else ilk["atif"]
             url = sources.get(bid, {}).get("sayfa_url")
         return {"anahtar": anahtar, "atif": atif, "belge_tur": ilk["belge_tur"], "belge_adi": ilk["belge_adi"],

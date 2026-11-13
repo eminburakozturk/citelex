@@ -103,16 +103,18 @@ citelex/
 Durum (13 Kas sabahı): 11–15 Kas satırlarının çekirdeği bitti (ayrıntı KARARLAR.md). Açık kalanlar aşağıda "Borçlar"da.
 
 ### DEVAM NOKTASI (yeni oturum buradan başlar; bitince bu bölümü güncelle)
-Son durum: 13 Kas sabahı, commit geçmişi ve KARARLAR.md güncel. Sıradaki işler, sırayla ve DURMADAN:
-1. **6331 İSG Kanunu'nu ekle** (kullanıcı onayladı). Adres doğrulandı: `https://www.mevzuat.gov.tr/MevzuatMetin/1.5.6331.pdf`
-   (28 sayfa, MevzuatMetin biçimi; MevzuatNo=6331, MevzuatTur=1). Adımlar: `src/sources/http.py:get` ile `data/raw/1.5.6331.pdf`
-   olarak indir -> `configs/sources.json`'a kayıt (belge_id "isg-kanunu", kisa_ad "İSG Kanunu", url, sayfa_url) -> parse -> chunk
-   (üç mod) -> report; madde sayısını ve sırayı kontrol et -> `python -m src.update.run --init` (depoya ilk sürüm) ->
-   hibrit koleksiyonu artımlı güncelle (reindex; avgdl sabit) -> eval setine 3-4 soru ekle (`validate_questions`).
-2. **13 Kas satırı:** FastAPI (SSE akışlı cevap, kaynak metni, sağlık ucu, istek sınırı) + Dockerfile + Docker Compose.
+Son durum: 13 Kas öğleden sonra. Biten: 6331 İSG Kanunu derlemde; eval seti 56 soru; **13 Kas satırı tamam**
+(FastAPI /sor SSE + /kaynak + /saglik, istek sınırı, 11 test, Dockerfile + Compose; `docker compose up` ile akışlı cevap
+doğrulandı). Qdrant artık Compose'dan çalışıyor (`docker compose up -d`; ad ve volume aynı).
+Sıradaki işler, sırayla ve DURMADAN:
+1. **14 Kas satırı:** Next.js arayüz (`web/`): akışlı sohbet (SSE olayları: baglam, parca, sonuc, hata), tıklanabilir
+   kaynak paneli (/kaynak), tür filtresi (API'ye `tur` parametresi eklenecek: build_context'te kanal/belge_tur kısıtı),
+   son kontrol tarihi, "hukuki tavsiye değildir" uyarısı; statik çıktı.
+2. 15 Kas satırı (bulutta yayın) — kullanıcıdan Hugging Face ve Qdrant Cloud hesapları gerekir.
 3. Takvim v2'nin kalan satırları.
-Kullanıcıdan beklenenler: eval setinin doğrulanması; yeni ücretsiz Gemini anahtarı (.env); 15 Kas'ta Hugging Face ve
-Qdrant Cloud hesapları. Günlük görev kuruldu ("Citelex Gunluk Guncelleme", her gün 03:00, scripts/guncelle.ps1).
+Kullanıcıdan beklenenler: eval setinin doğrulanması (56 soru, 4'ü yeni İSG sorusu); 15 Kas'ta Hugging Face ve Qdrant Cloud
+hesapları; CV'ye yönelik ek özellikler kararı (MCP sunucusu, LLM hakemli eval, eval panosu, OCR — KARARLAR.md'ye işlenecek).
+Günlük görev kurulu ("Citelex Gunluk Guncelleme", her gün 03:00, scripts/guncelle.ps1).
 
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)
 Hedef rol: yapay zekâ / ürün geliştirici. Sıra CV değerine göre: önce canlı ve ölçülen sistem, sonra
@@ -134,12 +136,13 @@ Kapsam kesilmez; iş yetişmezse tarih kayar. Kesinti gerekirse kullanıcıya so
 Kendini güncelleme ve değerlendirme setinden VAZGEÇİLMEZ.
 
 ### Borçlar (önceki günlerden)
-- 6331 İSG Kanunu derlemde yok (kapsamda kalıp kalmayacağı kullanıcı kararı).
 - Geniş katman (~900 kanun, HF corpus) kurulmadı; Qdrant Cloud ücretsiz katmanına (1 GB) sığıp sığmadığı ölçülmeli.
 - `sources/resmigazete.py` (erken uyarı) ve `sources/hf_corpus.py` yazılmadı.
-- Günlük görev Görev Zamanlayıcı'da oluşturulmadı (kullanıcı onayı bekliyor).
 - Mevzuat PDF'i değişiklik yolu canlı test edilmedi.
-- Eval seti kullanıcı doğrulaması bekliyor; Gemini ile eval çalıştırılmadı.
+- Eval seti kullanıcı doğrulaması bekliyor.
+- madde/fikra koleksiyonları 6331 ve bent parçalamasıyla güncellenmedi (19 Kas'ta yeniden kurulacak).
+- Günlük toplam istek tavanı (CITELEX_GUNLUK_TOPLAM) yayından önce Gemini günlük kotasına göre ayarlanmalı.
+- HF Spaces'te bge-m3'ün yalnız gereken dosyaları indirilmeli (tam depo 4,3 GB, ~20 dk).
 
 ## Ortam
 - Windows laptop, RTX 4060 Laptop (8 GB VRAM), 32 GB RAM. Conda ortamı: `citelex` (Python 3.11).
