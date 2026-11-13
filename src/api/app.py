@@ -1,6 +1,6 @@
 """Citelex HTTP API (FastAPI).
 
-  POST /sor        {"soru": "..."}  -> SSE akışı (varsayılan) veya ?akis=false ile tek JSON
+  POST /sor        {"soru": "...", "turler": ["kanun", "karar"] (isteğe bağlı tür filtresi)}  -> SSE akışı (varsayılan) veya ?akis=false ile tek JSON
        olaylar: baglam (numaralı kaynak listesi) -> parca* (cevap metni parçaları) -> sonuc (doğrulanmış cevap)
                 hata (kullanıcıya gösterilebilir mesaj)
   GET  /kaynak?anahtar=is-kanunu:8 | kvkk-karar-2023-86   -> madde / karar metni (atıfa tıklanınca)
@@ -28,6 +28,7 @@ import sqlite3
 from collections.abc import Iterator
 from contextlib import asynccontextmanager
 from pathlib import Path
+from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -50,6 +51,7 @@ MSG_SINIR = {"dakika": "Çok sık soru gönderdiniz.", "gunluk": "Günlük soru 
 
 class Soru(BaseModel):
     soru: str = Field(min_length=3, max_length=500)
+    turler: list[Literal["kanun", "yonetmelik", "teblig", "karar"]] | None = Field(default=None, min_length=1, max_length=4)
 
 
 def _env_int(name: str, default: int) -> int:
@@ -141,14 +143,14 @@ def create_app(answerer=None) -> FastAPI:
         soru = body.soru.strip()
         if not akis:
             try:
-                return public(ans.answer(soru))
+                return public(ans.answer(soru, body.turler))
             except Exception as e:  # noqa: BLE001
                 log.exception("cevap hatası")
                 raise HTTPException(503, detail=llm_error_message(e)) from None
 
         def gen() -> Iterator[str]:
             try:
-                for olay, veri in ans.answer_stream(soru):
+                for olay, veri in ans.answer_stream(soru, body.turler):
                     yield sse(olay, public(veri) if olay == "sonuc" else veri)
             except Exception as e:  # noqa: BLE001 — akış başladıktan sonra HTTP kodu değiştirilemez: hata olayı
                 log.exception("akış hatası")

@@ -41,17 +41,25 @@ def source_entry(no: int, p: dict) -> dict:
             "baslik": p.get("baslik"), "url": p.get("url"), "alinti": p["metin"][:300]}
 
 
-def build_context(searcher: Searcher, query: str, esik: float | None) -> tuple[list, dict]:
+def build_context(searcher: Searcher, query: str, esik: float | None,
+                  turler: list[str] | None = None) -> tuple[list, dict]:
     """Bağlamı kur: iki kanal ayrı aranır; dense top-1'i eşiğin altında kalan kanal bağlama girmez.
 
     Aynı kalibre eşik iki işte kullanılır: (a) iki kanal da eşiğin altındaysa soru kapsam dışı sayılır,
     (b) yalnız biri altındaysa o kanal atılır — aksi halde karar sorusuna ilgisiz kanun maddesi,
     mevzuat sorusuna ilgisiz karar karışıyor ve küçük modeller bunlardan gerekçe uyduruyordu.
     """
-    m = searcher.search(query, "dense", top_k=1, belge_tur=MEVZUAT_TURLERI)
-    k = searcher.search(query, "dense", top_k=1, belge_tur=["karar"])
+    # turler: kullanıcının tür filtresi (kanun/yonetmelik/teblig/karar); None = hepsi. Filtre dışı kanal hiç aranmaz.
+    mtur = [t for t in MEVZUAT_TURLERI if turler is None or t in turler]
+    karar_acik = turler is None or "karar" in turler
+    m = searcher.search(query, "dense", top_k=1, belge_tur=mtur) if mtur else []
+    k = searcher.search(query, "dense", top_k=1, belge_tur=["karar"]) if karar_acik else []
     top = {"mevzuat": m[0].score if m else 0.0, "karar": k[0].score if k else 0.0}
-    ctx = searcher.search_context(query, "hybrid", max_chars=None)
+    ctx = searcher.search_context(query, "hybrid", max_chars=None, mevzuat_tur=mtur or None)
+    if not mtur:
+        ctx["mevzuat"] = []
+    if not karar_acik:
+        ctx["karar"] = []
     kanallar = [kn for kn in ("mevzuat", "karar") if esik is None or top[kn] >= esik]
     if not kanallar:  # eşik kapalıyken çağrılmaz; çağıran kapsam dışı kararını top1'den verir
         kanallar = [max(top, key=top.get)]
@@ -71,12 +79,12 @@ class Answerer:
         self.cfg = load_cfg()
         self._lock = threading.Lock()
 
-    def prepare(self, query: str) -> tuple[dict | None, list, dict]:
+    def prepare(self, query: str, turler: list[str] | None = None) -> tuple[dict | None, list, dict]:
         """Arama + eşik. Dönen: (erken "bilmiyorum" cevabı veya None, bağlam, ortak alanlar)."""
         t0 = time.time()
         esik = self.cfg.get("esik")
         with self._lock:  # embedding modeli ve sorgu önbelleği: aynı anda tek istek (API çok iş parçacıklı)
-            hits, meta = build_context(self.searcher, query, esik)
+            hits, meta = build_context(self.searcher, query, esik, turler)
         base = {"soru": query, "llm": self.llm.name, **meta, "esik": esik,
                 "uyari": DISCLAIMER, "derlem_tarihi": self.cfg.get("derlem_tarihi"),
                 "baglam": [h.payload["atif"] for h in hits], "baglam_anahtar": [source_key(h.payload) for h in hits],
@@ -103,21 +111,21 @@ class Answerer:
                 "neden": parsed["neden"], "kaynaklar": kaynaklar, "gecersiz_atif": parsed["gecersiz_atif"],
                 "ham": raw, "sure_sn": round(base["arama_sn"] + llm_sn, 2), "llm_sn": round(llm_sn, 2)}
 
-    def answer(self, query: str) -> dict:
-        early, hits, base = self.prepare(query)
+    def answer(self, query: str, turler: list[str] | None = None) -> dict:
+        early, hits, base = self.prepare(query, turler)
         if early:
             return early
         t1 = time.time()
         raw = self.llm.generate(prompt.SYSTEM, prompt.build_user(query, hits))
         return self.finalize(raw, hits, base, time.time() - t1)
 
-    def answer_stream(self, query: str) -> Iterator[tuple[str, dict]]:
+    def answer_stream(self, query: str, turler: list[str] | None = None) -> Iterator[tuple[str, dict]]:
         """Akışlı cevap: ("baglam", {...}) -> ("parca", {"metin": ...})* -> ("sonuc", doğrulanmış cevap).
 
         Doğrulama akıştan SONRA da yapılır ve "sonuc" olayı esas alınır: hiç geçerli atıf yoksa akıtılan
         metin atılır, istemci "bilmiyorum" gösterir. CEVAP_YOK ile başlayan çıktı hiç akıtılmaz.
         """
-        early, hits, base = self.prepare(query)
+        early, hits, base = self.prepare(query, turler)
         if early:
             yield "sonuc", early
             return

@@ -133,7 +133,8 @@ class Searcher:
         return out
 
     def search_context(self, query: str, method: str = "hybrid", k_mevzuat: int = 5,
-                       k_karar: int = 3, per_karar: int = 2, max_chars: int | None = 14000) -> dict[str, list[Hit]]:
+                       k_karar: int = 3, per_karar: int = 2, max_chars: int | None = 14000,
+                       mevzuat_tur: list[str] | None = None) -> dict[str, list[Hit]]:
         """İki kanallı arama: mevzuat ve karar AYRI aranır (KARARLAR.md 2026-11-12).
 
         Tek havuzda kararlar, alıntıladıkları kanun maddesini ilk 5'in dışına itiyordu ve ilk
@@ -141,7 +142,7 @@ class Searcher:
         yer ayrılır; karar kanalında en çok k_karar farklı karar, karar başına per_karar parça alınır.
         """
         mevzuat = self.expand_to_articles(
-            self.search(query, method, top_k=k_mevzuat * 3, belge_tur=MEVZUAT_TURLERI), k_mevzuat)
+            self.search(query, method, top_k=k_mevzuat * 3, belge_tur=mevzuat_tur or MEVZUAT_TURLERI), k_mevzuat)
         aday = self.search(query, method, top_k=30, belge_tur=["karar"])
         # 1) Kararı OLGULARDAN bul: herhangi bir bölümü eşleşen ilk k_karar farklı karar.
         sira: list[str] = list(dict.fromkeys(h.payload["belge_id"] for h in aday))[:k_karar]

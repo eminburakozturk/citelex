@@ -44,7 +44,7 @@ def make(parts, error=None, top1=0.8) -> Answerer:
     a = Answerer.__new__(Answerer)
     a.llm, a.cfg, a._lock, a.searcher = FakeLLM(parts, error), {"esik": 0.637, "derlem_tarihi": "2026-11-11"}, threading.Lock(), None
     import src.generate.answer as mod
-    mod.build_context = lambda searcher, query, esik: (HITS, {"dense_top1": top1, "kanal_top1": {}, "kanallar": ["mevzuat"]})
+    mod.build_context = lambda searcher, query, esik, turler=None: (HITS, {"dense_top1": top1, "kanal_top1": {}, "kanallar": ["mevzuat"]})
     return a
 
 
@@ -131,3 +131,10 @@ def test_limiter_pencereleri():
 def test_kaynak_anahtari_dogrulanir():
     with client(make(["a [1]"])) as c:
         assert c.get("/kaynak", params={"anahtar": "is-kanunu:8'; DROP"}).status_code == 400
+
+
+def test_tur_filtresi_dogrulanir():
+    with client(make(["Cevap [1]."])) as c:
+        assert c.post("/sor?akis=false", json={"soru": "Yıllık izin kaç gün?", "turler": ["kanun"]}).status_code == 200
+        assert c.post("/sor?akis=false", json={"soru": "Yıllık izin kaç gün?", "turler": ["roman"]}).status_code == 422
+        assert c.post("/sor?akis=false", json={"soru": "Yıllık izin kaç gün?", "turler": []}).status_code == 422
