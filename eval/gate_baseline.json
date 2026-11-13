@@ -1,0 +1,22 @@
+{
+  "bm25": {
+    "mevzuat": {
+      "isabet": 48,
+      "n": 51
+    },
+    "karar": {
+      "isabet": 12,
+      "n": 12
+    }
+  },
+  "qdrant": {
+    "mevzuat": {
+      "isabet": 48,
+      "n": 51
+    },
+    "karar": {
+      "isabet": 12,
+      "n": 12
+    }
+  }
+}
