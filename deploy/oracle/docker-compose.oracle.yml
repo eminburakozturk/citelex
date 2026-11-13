@@ -1,0 +1,55 @@
+# Oracle Cloud Always Free (Ubuntu, ARM/Ampere) yayını: Qdrant + API + Caddy (otomatik HTTPS).
+# Kurulum: deploy/oracle/README.md. Bu dosya paket kökünde (citelex/) çalıştırılır:
+#   docker compose -f deploy/oracle/docker-compose.oracle.yml up -d --build
+# Gizli değerler yalnız .env'de (OPENROUTER_API_KEY vb.); imaja ve pakete GİRMEZ.
+name: citelex
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.20.0
+    restart: unless-stopped
+    volumes:
+      - qdrant_data:/qdrant/storage
+    # dışarı port açılmaz; yalnız API ve kurulum betiği (docker compose exec) erişir
+
+  api:
+    build: ../..
+    image: citelex-api
+    restart: unless-stopped
+    depends_on: [qdrant]
+    env_file: ../../.env
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      CITELEX_EMBED_DEVICE: cpu
+      CITELEX_RERANK: "0"            # CPU'da reranker ~43 sn/sorgu (KARARLAR.md)
+      CITELEX_AJAN: "1"              # en iyi ölçülen yayın yapılandırması (44/50)
+      CITELEX_TRUST_PROXY: "1"       # Caddy arkasında: istemci IP'si X-Forwarded-For'un son değeri
+      CITELEX_RATE_DK: "5"
+      CITELEX_RATE_GUN: "60"
+      CITELEX_GUNLUK_TOPLAM: ${CITELEX_GUNLUK_TOPLAM:-300}
+      CITELEX_CORS: https://${ALAN_ADI},http://tauri.localhost,https://tauri.localhost,tauri://localhost
+      CITELEX_WEB_DIR: /app/web/out
+      CITELEX_IZ_DOSYA: /app/logs/izler.jsonl
+    volumes:
+      - hf_cache:/models                    # bge-m3 ilk açılışta bir kez iner (~2,3 GB)
+      - ../../store:/app/data/store:ro      # sürüm deposu + farklar (/degisiklikler, son kontrol)
+      - ../../web_out:/app/web/out:ro       # statik arayüz (paketle gelir)
+      - ../../logs:/app/logs
+
+  caddy:
+    image: caddy:2.10
+    restart: unless-stopped
+    depends_on: [api]
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      ALAN_ADI: ${ALAN_ADI}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+
+volumes:
+  qdrant_data:
+  hf_cache:
+  caddy_data:

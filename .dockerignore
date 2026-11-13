@@ -8,3 +8,8 @@ tests
 web
 **/__pycache__
 *.md
+snapshots
+web_out
+store
+deploy
+desktop

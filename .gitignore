@@ -20,3 +20,5 @@ Thumbs.db
 # Zamanlayıcı çalışma günlüğü (yerel)
 logs/scheduler.log
 logs/izler.jsonl
+deploy/citelex_paket.tar.gz
+deploy/_paket/

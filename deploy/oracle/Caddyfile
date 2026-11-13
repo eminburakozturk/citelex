@@ -1,0 +1,14 @@
+# ALAN_ADI: alan adın yoksa <genel-ip-tireli>.sslip.io (ör. 129-146-10-20.sslip.io); Caddy Let's Encrypt sertifikasını kendisi alır.
+{$ALAN_ADI} {
+	encode zstd gzip
+	reverse_proxy api:8000 {
+		# SSE akışı tamponlanmasın
+		flush_interval -1
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+}
