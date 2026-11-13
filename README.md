@@ -10,6 +10,24 @@
 
 ![](docs/mimari.svg)
 
+## Ekranlar
+
+**Kaynaklı yanıt ve madde paneli** — `[n]` atıflarına tıklandığında ilgili kanun/yönetmelik/karar metni yan panelde açılır:
+
+![Kaynaklı yanıt ve açık kaynak paneli](docs/ekran/01_cevap.png)
+
+**Geniş katman uyarısı ve kapsam dışı reddi** — Derin katman eşiği geçemediğinde ~900 kanunluk geniş katman devreye girer ve doğrulanmamış katman uyarısı gösterilir; derlemle ilgisiz sorular reddedilir:
+
+![Geniş katman rozeti ve uyarısı](docs/ekran/02_genis.png)
+
+**Değerlendirme panosu ve değişiklik takibi** — Model/yapılandırma karşılaştırması (`/pano`) ile eski–yeni sürüm kelime farkı (`/degisiklikler`):
+
+![Değerlendirme panosu](docs/ekran/04_pano.png)
+
+![Madde değişikliği kelime farkı](docs/ekran/05_degisiklik.png)
+
+Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil görünüm](docs/ekran/06_mobil.png) · [Jaeger / OpenTelemetry izi](docs/ekran/07_jaeger.png)
+
 ## Sonuçlar
 
 ### Model ve yapılandırma karşılaştırması (`56` soru: `50` kapsam içi, `6` kapsam dışı)

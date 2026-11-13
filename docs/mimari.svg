@@ -1,14 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 612" role="img" aria-labelledby="title desc">
   <title id="title">Citelex Mimari Şeması</title>
-  <desc id="desc">Kaynaklardan güncelleme hattına, parçalamaya, Qdrant indeksine, hibrit arama ve reranker aşamasına, eşik kontrolüne, LLM ve atıf doğrulamasına, FastAPI SSE API ucundan istemcilere uzanan akış ile değerlendirme ve izlenebilirlik yan bileşenleri.</desc>
+  <desc id="desc">Kaynaklardan güncelleme hattına, parçalamaya, Qdrant derin ve geniş katman indekslerine, hibrit arama ve yalnızca GPU reranker aşamasına, eşik ve LangGraph ajan döngüsüne, OpenRouter devre kesicili LLM ve atıf doğrulamasına, FastAPI API ve istemciler ile Oracle tek makine yayınına uzanan akış.</desc>
   <style>
     :root {
       --bg: #f7f6f3;
       --box: #ffffff;
       --box-soft: #f3e6e4;
       --box-side: #f2f1ed;
+      --box-warn: #fdf4dc;
       --ink: #1c1b19;
       --muted: #5c5952;
+      --warn-ink: #6b4e00;
       --line: #b8b3a8;
       --accent: #7a2e2e;
     }
@@ -18,8 +20,10 @@
         --box: #1e1d1a;
         --box-soft: #3a2623;
         --box-side: #242320;
+        --box-warn: #33290f;
         --ink: #ece9e2;
-        --muted: #a8a399;
+        --muted: #a09c92;
+        --warn-ink: #ecd9a0;
         --line: #524f47;
         --accent: #e0a39b;
       }
@@ -29,11 +33,14 @@
     .card { fill: var(--box); stroke: var(--line); stroke-width: 1.4; rx: 8; ry: 8; }
     .card-accent { fill: var(--box-soft); stroke: var(--accent); stroke-width: 1.5; rx: 8; ry: 8; }
     .card-side { fill: var(--box-side); stroke: var(--line); stroke-width: 1.4; stroke-dasharray: 5 3; rx: 8; ry: 8; }
+    .card-warn { fill: var(--box-warn); stroke: var(--warn-ink); stroke-width: 1.2; stroke-dasharray: 4 2; rx: 8; ry: 8; }
     .h { fill: var(--ink); font-size: 13px; font-weight: 600; }
     .s { fill: var(--muted); font-size: 11px; }
+    .w { fill: var(--warn-ink); font-size: 11px; font-weight: 600; }
     .tag { fill: var(--accent); font-size: 11px; font-weight: 600; }
     .arr { stroke: var(--line); stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
     .arr-accent { stroke: var(--accent); stroke-width: 1.6; fill: none; marker-end: url(#arrow-accent); }
+    .arr-loop { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 5 3; fill: none; marker-end: url(#arrow-accent); }
     .arr-dash { stroke: var(--line); stroke-width: 1.3; stroke-dasharray: 4 3; fill: none; marker-end: url(#arrow); }
   </style>
   <defs>
@@ -45,119 +52,143 @@
     </marker>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="960" height="540" rx="10" />
+  <rect class="bg" x="0" y="0" width="980" height="612" rx="10" />
 
   <!-- Bölüm etiketleri -->
-  <text class="tag" x="28" y="28">VERİ &amp; İNDEKS HATTI</text>
-  <text class="tag" x="28" y="218">SORGU &amp; DOĞRULAMA HATTI</text>
-  <text class="tag" x="720" y="28">KALİTE &amp; İZLEME</text>
+  <text class="tag" x="28" y="26">VERİ &amp; İNDEKS HATTI</text>
+  <text class="tag" x="28" y="198">SORGU, AJAN &amp; DOĞRULAMA HATTI</text>
+  <text class="tag" x="28" y="394">SUNUM, İSTEMCİLER &amp; YAYIN</text>
+  <text class="tag" x="744" y="26">KALİTE &amp; İZLEME</text>
 
   <!-- Satır 1: Kaynaklar -> Güncelleme -> Parçalama -> İndeks -->
-  <rect class="card" x="28" y="44" width="164" height="104" />
-  <text class="h" x="42" y="66">Kaynaklar</text>
-  <text class="s" x="42" y="86">• mevzuat.gov.tr (PDF)</text>
-  <text class="s" x="42" y="102">• kvkk.gov.tr (40 karar)</text>
-  <text class="s" x="42" y="118">• Resmî Gazete (fihrist)</text>
-  <text class="s" x="42" y="134">• HF corpus (899 kanun)</text>
+  <rect class="card" x="28" y="40" width="166" height="106" />
+  <text class="h" x="40" y="62">Kaynaklar</text>
+  <text class="s" x="40" y="82">• mevzuat.gov.tr (12 belge)</text>
+  <text class="s" x="40" y="98">• kvkk.gov.tr (40 karar)</text>
+  <text class="s" x="40" y="114">• Resmî Gazete (fihrist)</text>
+  <text class="s" x="40" y="130">• HF corpus (895 kanun)</text>
 
-  <line class="arr" x1="192" y1="96" x2="220" y2="96" />
+  <line class="arr" x1="194" y1="93" x2="216" y2="93" />
 
-  <rect class="card" x="224" y="44" width="154" height="104" />
-  <text class="h" x="238" y="66">Güncelleme Hattı</text>
-  <text class="s" x="238" y="86">• SQLite sürüm deposu</text>
-  <text class="s" x="238" y="102">• Madde/bölüm farkı</text>
-  <text class="s" x="238" y="118">• Erken uyarı günlüğü</text>
-  <text class="s" x="238" y="134">• Artımlı upsert</text>
+  <rect class="card" x="220" y="40" width="158" height="106" />
+  <text class="h" x="232" y="62">Güncelleme Hattı</text>
+  <text class="s" x="232" y="82">• SQLite sürüm deposu</text>
+  <text class="s" x="232" y="98">• Madde/bölüm farkı</text>
+  <text class="s" x="232" y="114">• Erken uyarı günlüğü</text>
+  <text class="s" x="232" y="130">• Artımlı upsert</text>
 
-  <line class="arr" x1="378" y1="96" x2="406" y2="96" />
+  <line class="arr" x1="378" y1="93" x2="400" y2="93" />
 
-  <rect class="card" x="410" y="44" width="128" height="104" />
-  <text class="h" x="424" y="66">Parçalama</text>
-  <text class="s" x="424" y="86">• Madde / fıkra</text>
-  <text class="s" x="424" y="102">• Hibrit (1500 kr.)</text>
-  <text class="s" x="424" y="118">• Mülga bayrağı</text>
-  <text class="s" x="424" y="134">• Karar bölümleri</text>
+  <rect class="card" x="404" y="40" width="138" height="106" />
+  <text class="h" x="416" y="62">Parçalama</text>
+  <text class="s" x="416" y="82">• Madde / fıkra / ek</text>
+  <text class="s" x="416" y="98">• Hibrit (1500 kr.)</text>
+  <text class="s" x="416" y="114">• Mülga bayrağı</text>
+  <text class="s" x="416" y="130">• Karar bölümleri</text>
 
-  <line class="arr" x1="538" y1="96" x2="566" y2="96" />
+  <line class="arr" x1="542" y1="93" x2="564" y2="93" />
 
-  <rect class="card-accent" x="570" y="44" width="128" height="104" />
-  <text class="h" x="584" y="66">İndeks (Qdrant)</text>
-  <text class="s" x="584" y="86">• bge-m3 dense</text>
-  <text class="s" x="584" y="102">• BM25 sparse (TR)</text>
-  <text class="s" x="584" y="118">• Payload filtreleri</text>
-  <text class="s" x="584" y="134">• Emb. önbelleği</text>
+  <rect class="card-accent" x="568" y="40" width="154" height="106" />
+  <text class="h" x="580" y="62">İndeks (Qdrant)</text>
+  <text class="s" x="580" y="82">• Derin (17 MB) + Geniş</text>
+  <text class="s" x="580" y="98">  (44.854 parça, 323 MB)</text>
+  <text class="s" x="580" y="114">• bge-m3 + BM25 (TR)</text>
+  <text class="s" x="580" y="130">• Emb. önbelleği (SQLite)</text>
 
   <!-- İndeks -> Hibrit arama bağlantısı -->
-  <path class="arr-accent" d="M 634 148 L 634 184 L 106 184 L 106 232" />
+  <path class="arr-accent" d="M 645 146 L 645 174 L 116 174 L 116 208" />
 
   <!-- Satır 2: Hibrit Arama -> Eşik -> LLM -> Atıf Doğrulama -->
-  <rect class="card" x="28" y="236" width="156" height="92" />
-  <text class="h" x="42" y="258">Hibrit Arama</text>
-  <text class="s" x="42" y="278">• İki kanallı (mevzuat</text>
-  <text class="s" x="42" y="294">  + karar), RRF k=60</text>
-  <text class="s" x="42" y="312">• + bge-reranker-v2-m3</text>
+  <rect class="card" x="28" y="212" width="176" height="114" />
+  <text class="h" x="40" y="233">Hibrit Arama</text>
+  <text class="s" x="40" y="252">• Derin: mevzuat + karar</text>
+  <text class="s" x="40" y="268">  (RRF k=60, filtreli)</text>
+  <text class="s" x="40" y="286">• Reranker (yalnız GPU):</text>
+  <text class="s" x="40" y="302">  bge-reranker-v2-m3</text>
+  <text class="s" x="40" y="318">• Geniş: derin yetmezse</text>
 
-  <line class="arr" x1="184" y1="282" x2="210" y2="282" />
+  <line class="arr" x1="204" y1="269" x2="222" y2="269" />
 
-  <rect class="card-accent" x="214" y="236" width="136" height="92" />
-  <text class="h" x="228" y="258">Eşik Kontrolü</text>
-  <text class="s" x="228" y="278">• dense top-1 ≥ 0.637</text>
-  <text class="s" x="228" y="294">• Kalibrasyon ayrı</text>
-  <text class="s" x="228" y="312">• Altı → "bilmiyorum"</text>
+  <rect class="card-accent" x="226" y="212" width="144" height="114" />
+  <text class="h" x="238" y="233">Eşik Kontrolü</text>
+  <text class="s" x="238" y="252">• dense top-1 ≥ 0.637</text>
+  <text class="s" x="238" y="268">• 30 soruda kalibre</text>
+  <text class="s" x="238" y="286">• Altı → geniş katman</text>
+  <text class="s" x="238" y="302">  veya ajan / "bilmiyorum"</text>
 
-  <line class="arr" x1="350" y1="282" x2="376" y2="282" />
+  <line class="arr" x1="370" y1="269" x2="388" y2="269" />
 
-  <rect class="card" x="380" y="236" width="156" height="92" />
-  <text class="h" x="394" y="258">LLM Üretimi</text>
-  <text class="s" x="394" y="278">• OpenRouter zinciri</text>
-  <text class="s" x="394" y="294">• Gemini / Ollama</text>
-  <text class="s" x="394" y="312">• Tek adım | LangGraph</text>
+  <rect class="card" x="392" y="212" width="176" height="114" />
+  <text class="h" x="404" y="233">LLM Üretimi</text>
+  <text class="s" x="404" y="252">• OpenRouter zinciri</text>
+  <text class="s" x="404" y="268">• Devre kesici (429:</text>
+  <text class="s" x="404" y="284">  kota 1 sa / geçici 60 sn)</text>
+  <text class="s" x="404" y="302">• Gemini / yerel Ollama</text>
+  <text class="s" x="404" y="318">• Tek adım | LangGraph</text>
 
-  <line class="arr" x1="536" y1="282" x2="562" y2="282" />
+  <line class="arr" x1="568" y1="269" x2="586" y2="269" />
 
-  <rect class="card-accent" x="566" y="236" width="132" height="92" />
-  <text class="h" x="580" y="258">Atıf Doğrulama</text>
-  <text class="s" x="580" y="278">• Geçerli [n] kontrolü</text>
-  <text class="s" x="580" y="294">• CEVAP_YOK yakalar</text>
-  <text class="s" x="580" y="312">• Kaynak metni bağlar</text>
+  <rect class="card-accent" x="590" y="212" width="132" height="114" />
+  <text class="h" x="602" y="233">Atıf Doğrulama</text>
+  <text class="s" x="602" y="252">• Geçerli [n] kontrolü</text>
+  <text class="s" x="602" y="268">• CEVAP_YOK yakalar</text>
+  <text class="s" x="602" y="286">• Kaynak metni bağlar</text>
+  <text class="s" x="602" y="304">• Geniş katman rozeti</text>
 
-  <!-- Satır 3: API (SSE) -> İstemciler -->
-  <line class="arr-accent" x1="632" y1="328" x2="632" y2="380" />
+  <!-- LangGraph Ajan Döngüsü -->
+  <path class="arr-loop" d="M 298 326 L 298 358 L 116 358 L 116 330" />
+  <path class="arr-loop" d="M 624 326 L 624 358 L 298 358" />
+  <rect class="card-warn" x="152" y="344" width="444" height="26" />
+  <text class="w" x="374" y="361" text-anchor="middle">LangGraph Ajan Döngüsü (≤ 1 kez): Eşik altı / CEVAP_YOK → yeniden yaz → ara</text>
 
-  <rect class="card" x="456" y="384" width="242" height="108" />
-  <text class="h" x="472" y="408">FastAPI (SSE + REST)</text>
-  <text class="s" x="472" y="428">• POST /sor (akışlı cevap + ?mod=ajan)</text>
-  <text class="s" x="472" y="444">• GET /kaynak · /saglik</text>
-  <text class="s" x="472" y="460">• GET /degisiklikler · /degisiklik/{id}</text>
-  <text class="s" x="472" y="476">• IP / günlük istek sınırı</text>
+  <!-- Atıf Doğrulama -> FastAPI bağlantısı -->
+  <path class="arr-accent" d="M 672 326 L 672 406" />
 
-  <line class="arr" x1="456" y1="438" x2="416" y2="438" />
+  <!-- Satır 3: İstemciler <-> FastAPI ve Oracle Yayını -->
+  <rect class="card" x="424" y="410" width="298" height="106" />
+  <text class="h" x="436" y="432">FastAPI (SSE + REST)</text>
+  <text class="s" x="436" y="452">• POST /sor (ajan varsayılan açık; ?akis=false)</text>
+  <text class="s" x="436" y="468">• GET /kaynak · /saglik · /degisiklikler</text>
+  <text class="s" x="436" y="484">• IP / günlük hız sınırı · OpenRouter anahtarı gizli</text>
+  <text class="s" x="436" y="500">• Statik web/out sunumu (CITELEX_WEB_DIR)</text>
 
-  <rect class="card" x="28" y="384" width="384" height="108" />
-  <text class="h" x="44" y="408">İstemciler &amp; Araçlar (src/tools.py)</text>
-  <text class="s" x="44" y="430">• Web (Next.js statik çıktı): sohbet, /pano, /degisiklikler</text>
-  <text class="s" x="44" y="448">• MCP Sunucusu (src/mcp_server.py): mevzuat_ara, madde_getir</text>
-  <text class="s" x="44" y="466">• Tauri 2 (planlanan): Windows EXE + Android APK</text>
+  <line class="arr" x1="424" y1="463" x2="394" y2="463" />
 
-  <!-- Yan Kutu: Değerlendirme ve İzlenebilirlik -->
-  <rect class="card-side" x="720" y="44" width="212" height="236" />
-  <text class="h" x="736" y="70">Değerlendirme</text>
-  <text class="s" x="736" y="92">• Eval seti: 56 soru (50 içi, 6 dışı)</text>
-  <text class="s" x="736" y="110">• Kalibrasyon seti: 30 soru (ayrı)</text>
-  <text class="s" x="736" y="128">• LLM hakem (claude-haiku-5.5)</text>
-  <text class="s" x="736" y="146">  tam destekli sadakat ölçütü</text>
-  <text class="s" x="736" y="164">• CI arama regresyonu kapısı</text>
-  <text class="s" x="736" y="182">  (BM25 bellek içi, GitHub Actions)</text>
-  <text class="s" x="736" y="200">• Sonuçlar → results/ + /pano</text>
+  <rect class="card" x="28" y="410" width="362" height="106" />
+  <text class="h" x="40" y="432">İstemciler &amp; Araçlar (src/tools.py)</text>
+  <text class="s" x="40" y="452">• Web (Next.js statik): sohbet, /yontem, /pano, /degisiklikler</text>
+  <text class="s" x="40" y="468">• MCP Sunucusu (src/mcp_server.py): mevzuat_ara, madde_getir</text>
+  <text class="s" x="40" y="484">• Tauri 2 ince istemci: Windows EXE (8,7 MB) + Android APK (10,7 MB)</text>
+  <text class="s" x="40" y="500">• Aynı web/out arayüzünü masaüstü ve mobilde kullanır</text>
 
-  <rect class="card-side" x="720" y="302" width="212" height="190" />
-  <text class="h" x="736" y="328">İzlenebilirlik</text>
-  <text class="s" x="736" y="350">• OpenTelemetry (src/trace.py)</text>
-  <text class="s" x="736" y="368">  sor → arama, llm span ağacı</text>
-  <text class="s" x="736" y="386">• Jaeger UI (Compose profili)</text>
-  <text class="s" x="736" y="404">• logs/izler.jsonl tek satır özet</text>
-  <text class="s" x="736" y="422">• Gecikme, token ve maliyet</text>
+  <!-- Oracle Cloud Yayını kutusu -->
+  <rect class="card-side" x="28" y="532" width="694" height="58" />
+  <text class="h" x="42" y="553">Oracle Cloud Yayını (tek makinede · ARM A1 4 OCPU / 24 GB)</text>
+  <text class="s" x="42" y="573">Caddy (otomatik HTTPS) → FastAPI + web/out (ajan açık, reranker CPU nedeniyle kapalı, geniş katman açık) → Qdrant + SQLite depo</text>
 
-  <line class="arr-dash" x1="698" y1="282" x2="716" y2="160" />
-  <line class="arr-dash" x1="698" y1="438" x2="716" y2="392" />
+  <!-- Yan Kutu 1: Değerlendirme -->
+  <rect class="card-side" x="744" y="40" width="210" height="286" />
+  <text class="h" x="758" y="64">Değerlendirme</text>
+  <text class="s" x="758" y="86">• Eval seti: 56 soru (50 içi, 6 dışı)</text>
+  <text class="s" x="758" y="104">• Geniş arama: 18 soru (taslak)</text>
+  <text class="s" x="758" y="122">• Kalibrasyon: 30 soru (ayrı set)</text>
+  <text class="s" x="758" y="140">• LLM hakem (claude-haiku-5.5)</text>
+  <text class="s" x="758" y="156">  tam destekli sadakat ölçütü</text>
+  <text class="s" x="758" y="176">• CI arama regresyonu kapısı</text>
+  <text class="s" x="758" y="192">  (BM25 bellek içi, GitHub Actions)</text>
+  <text class="s" x="758" y="212">• Ajan: %88 · Ajan+rerank: %90</text>
+  <text class="s" x="758" y="230">• Sonuçlar → results/ + /pano</text>
+
+  <!-- Yan Kutu 2: İzlenebilirlik -->
+  <rect class="card-side" x="744" y="346" width="210" height="244" />
+  <text class="h" x="758" y="370">İzlenebilirlik</text>
+  <text class="s" x="758" y="392">• OpenTelemetry (src/trace.py)</text>
+  <text class="s" x="758" y="408">  sor → arama, llm span ağacı</text>
+  <text class="s" x="758" y="428">• Jaeger UI (Compose profili)</text>
+  <text class="s" x="758" y="446">• logs/izler.jsonl tek satır özet</text>
+  <text class="s" x="758" y="464">• Gecikme, token ve maliyet</text>
+  <text class="s" x="758" y="484">• Eşik / geniş katman telemetrisi</text>
+
+  <line class="arr-dash" x1="722" y1="269" x2="740" y2="170" />
+  <line class="arr-dash" x1="722" y1="463" x2="740" y2="432" />
 </svg>
