@@ -364,6 +364,7 @@ OLMADIĞINI kontrol et. Bitince: `python -m scripts.dogrulama_listesi --oku`
 
 ### d03 — İş mahkemesinde dava açmadan önce arabuluculuk görüşmeleri en fazla kaç hafta sürer?
 - Beklenen: **kapsam dışı** (sistem "bilmiyorum" demeli)
+- **Claude notu (14 Kas):** Geniş katman eklenince bu soru derlemde cevaplanabilir hale geldi; sistem 7036 s. İş Mahkemeleri Kanunu m. 3'ten doğru ve atıflı cevap veriyor. Öneri: etiketi 'kapsam içi (geniş katman)' yap, beklenen kaynak `kanun-7036:3`. Karar senin.
 - [ ] Doğrulandı
 - Not: 
 
@@ -374,6 +375,7 @@ OLMADIĞINI kontrol et. Bitince: `python -m scripts.dogrulama_listesi --oku`
 
 ### d05 — Anonim şirket en az kaç ortakla kurulabilir?
 - Beklenen: **kapsam dışı** (sistem "bilmiyorum" demeli)
+- **Claude notu (14 Kas):** Geniş katman eklenince bu soru derlemde cevaplanabilir hale geldi; sistem 6102 s. TTK m. 338'ten doğru ve atıflı cevap veriyor. Öneri: etiketi 'kapsam içi (geniş katman)' yap, beklenen kaynak `kanun-6102:338`. Karar senin.
 - [ ] Doğrulandı
 - Not: 
 

@@ -92,6 +92,17 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 
 Tek sanal makinede (Oracle Cloud Always Free, ARM): Qdrant + API + Caddy (otomatik HTTPS) ve gece çalışan güncelleme servisi. Paketleme, kurulum ve duman testi: [deploy/oracle/README.md](deploy/oracle/README.md). Yayında reranker kapalıdır (CPU'da ~43 sn/sorgu); ajan ve geniş katman açıktır.
 
+## Veri kaynakları
+
+| Kaynak | Kullanım | Not |
+|---|---|---|
+| [mevzuat.gov.tr](https://www.mevzuat.gov.tr) | Derin katman kanun, yönetmelik ve tebliğ metinleri (güncel metin) | Resmî mevzuat metinleri; günlük kontrol edilir |
+| [kvkk.gov.tr](https://www.kvkk.gov.tr) | 40 seçili KVKK Kurul karar özeti | Günlük kontrol edilir |
+| [resmigazete.gov.tr](https://www.resmigazete.gov.tr) | Erken uyarı (günlük fihrist) | Yalnız başlık ve ilgili metin taranır |
+| [hasankursun/turkish-legislation-corpus](https://huggingface.co/datasets/hasankursun/turkish-legislation-corpus) | Geniş katman (~900 kanun, Temmuz 2025'e kadar) | **CC-BY-4.0**; atıf zorunludur |
+
+Kaynak sitelere istekler `robots.txt` kurallarına uyularak, tanımlayıcı bir User-Agent ile ve host başına en az 2 sn arayla gönderilir.
+
 ## Kurulum
 
 ### 1. Ortam ve bağımlılıklar
