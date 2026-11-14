@@ -1,3 +1,5 @@
+dist/
+src-tauri/tauri.csp.json
 src-tauri/target/
 src-tauri/gen/android/app/src/main/jniLibs/
 src-tauri/gen/android/**/build/

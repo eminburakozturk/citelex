@@ -36,7 +36,9 @@ jobs:
         working-directory: desktop
         env:
           NEXT_PUBLIC_API_URL: ${{ inputs.api_url || 'http://127.0.0.1:8000' }}
-        run: cargo tauri build
+        run: |
+          node csp-config.mjs
+          cargo tauri build --config src-tauri/tauri.csp.json
 
       - name: Windows artefaktlarını yükle
         uses: actions/upload-artifact@v4
@@ -99,7 +101,8 @@ jobs:
             cargo tauri android init --ci --skip-targets-install
           fi
           chmod +x src-tauri/gen/android/gradlew
-          cargo tauri android build --apk --target aarch64 --split-per-abi
+          node csp-config.mjs
+          cargo tauri android build --apk --target aarch64 --split-per-abi --config src-tauri/tauri.csp.json
 
       - name: Android APK artefaktını yükle
         uses: actions/upload-artifact@v4

@@ -1,6 +1,6 @@
 # Citelex Masaüstü ve Mobil İstemci (Tauri 2)
 
-`desktop/` klasörü, `web/out` statik Next.js çıktısını paketleyen **ince istemci** Tauri 2 projesidir. Model, gömme veya Qdrant indeksi cihazda bulunmaz; uygulama yalnızca derleme sırasında belirlenen bulut/yerel API adresine istek atar.
+`desktop/` klasörü, `web/out` statik Next.js çıktısını `desktop/dist` içine kopyalayıp paketleyen **ince istemci** Tauri 2 projesidir (derleme sonunda `web/out` otomatik olarak `NEXT_PUBLIC_API_URL=same-origin` ile geri derlenir). Model, gömme veya Qdrant indeksi cihazda bulunmaz; uygulama yalnızca derleme sırasında belirlenen bulut/yerel API adresine istek atar.
 
 - **Uygulama adı:** `Citelex` (`com.citelex.client`)
 - **Pencere boyutu (masaüstü):** Varsayılan `1200x800`, minimum `400x600`
@@ -17,12 +17,14 @@
 
 ## API Adresi (`NEXT_PUBLIC_API_URL`)
 
-`cargo tauri build` ve `cargo tauri android build`, `beforeBuildCommand` olarak [build-web.mjs](build-web.mjs) üzerinden `web/` projesini derler. API adresi **derleme zamanında** `NEXT_PUBLIC_API_URL` ortam değişkeninden alınır (varsayılan: `http://127.0.0.1:8000`).
+`cargo tauri build` ve `cargo tauri android build`, `beforeBuildCommand` olarak [build-web.mjs](build-web.mjs) üzerinden `web/` projesini derler, çıktıyı `desktop/dist/` altına alır ve ardından `web/out/` dizinini Docker sunumu için `NEXT_PUBLIC_API_URL=same-origin` ile geri yükler. API adresi **derleme zamanında** `NEXT_PUBLIC_API_URL` ortam değişkeninden alınır (varsayılan: `http://127.0.0.1:8000`). Özel bir API adresi kullanıldığında [csp-config.mjs](csp-config.mjs) ile CSP politikasındaki `connect-src` kökeni üretilip `--config src-tauri/tauri.csp.json` ile verilmelidir:
 
 Örnek (PowerShell):
 
 ```powershell
 $env:NEXT_PUBLIC_API_URL = "https://api.example.com"
+node csp-config.mjs
+cargo tauri build --config src-tauri/tauri.csp.json
 ```
 
 ---
@@ -81,7 +83,8 @@ cargo tauri android build --apk --split-per-abi
 ```powershell
 $env:NEXT_PUBLIC_API_URL = "https://api.example.com"
 cd desktop
-cargo tauri android build --apk --split-per-abi
+node csp-config.mjs
+cargo tauri android build --apk --split-per-abi --config src-tauri/tauri.csp.json
 ```
 
 2. **USB hata ayıklama ve kurulum:** Telefonda **Geliştirici Seçenekleri → USB Hata Ayıklama** ayarını açın, USB ile bağlayın ve `arm64-v8a` APK'yı yükleyin (birden fazla cihaz bağlıysa `adb devices` çıktısındaki seri numarasını `-s` ile belirtin):
@@ -96,7 +99,8 @@ cargo tauri android build --apk --split-per-abi
 
 ```powershell
 $env:NEXT_PUBLIC_API_URL = "http://10.0.2.2:8000"
-cargo tauri android build --apk --debug --target x86_64
+node csp-config.mjs
+cargo tauri android build --apk --debug --target x86_64 --config src-tauri/tauri.csp.json
 & "$env:ANDROID_HOME\platform-tools\adb.exe" -s emulator-5554 install -r -g `
   src-tauri/gen/android/app/build/outputs/apk/universal/debug/app-universal-debug.apk
 ```

@@ -5,7 +5,7 @@
   "identifier": "com.citelex.client",
   "build": {
     "beforeBuildCommand": "node build-web.mjs",
-    "frontendDist": "../../web/out"
+    "frontendDist": "../dist"
   },
   "app": {
     "windows": [
@@ -19,7 +19,7 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; connect-src 'self' http://127.0.0.1:8000; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'"
     }
   },
   "bundle": {
