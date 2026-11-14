@@ -58,22 +58,30 @@ def read_jsonl(path: Path) -> list[dict]:
     return rows
 
 
-def find_raw_eval(base_tag: str, rerank: bool, ajan: bool, genis: bool = False) -> Path | None:
-    gsuf = "_genis" if genis else ""
+def tag_candidates(base_tag: str, rerank: bool, ajan: bool, genis: bool = False) -> list[str]:
     if rerank and ajan:
-        candidates = [
-            RESULTS_DIR / f"eval_{base_tag}_ajan_rerank{gsuf}.jsonl",
-            RESULTS_DIR / f"eval_{base_tag}_rerank_ajan{gsuf}.jsonl",
-        ]
+        combos = ["_ajan_rerank", "_rerank_ajan"]
     elif rerank:
-        candidates = [RESULTS_DIR / f"eval_{base_tag}_rerank{gsuf}.jsonl"]
+        combos = ["_rerank"]
     elif ajan:
-        candidates = [
-            RESULTS_DIR / f"eval_{base_tag}_ajan{gsuf}.jsonl",
-            *sorted(RESULTS_DIR.glob(f"eval_{base_tag}_ajan*{gsuf}.jsonl")),
-        ]
+        combos = ["_ajan"]
     else:
-        candidates = [RESULTS_DIR / f"eval_{base_tag}{gsuf}.jsonl"]
+        combos = [""]
+    if not genis:
+        return [f"{base_tag}{c}" for c in combos]
+    out: list[str] = []
+    for c in combos:
+        out.append(f"{base_tag}{c}_genis")
+        if c:
+            out.append(f"{base_tag}_genis{c}")
+    return out
+
+
+def find_raw_eval(base_tag: str, rerank: bool, ajan: bool, genis: bool = False) -> Path | None:
+    candidates = [RESULTS_DIR / f"eval_{t}.jsonl" for t in tag_candidates(base_tag, rerank, ajan, genis)]
+    if ajan and not rerank:
+        gsuf = "_genis" if genis else ""
+        candidates.extend(sorted(RESULTS_DIR.glob(f"eval_{base_tag}_ajan*{gsuf}.jsonl")))
     for p in candidates:
         if p.is_file():
             return p
@@ -99,8 +107,12 @@ def calc_yanlis_ret_katmanlari(rows: list[dict]) -> dict[str, int]:
     return dict(say)
 
 
-def load_sadakat(sadakat_tag: str) -> tuple[dict | None, dict[str, bool | None]]:
-    candidates = sorted(RESULTS_DIR.glob(f"sadakat_{sadakat_tag}__hakem_*.jsonl"))
+def load_sadakat(sadakat_tags: str | list[str]) -> tuple[dict | None, dict[str, bool | None]]:
+    tags = [sadakat_tags] if isinstance(sadakat_tags, str) else list(sadakat_tags)
+    candidates: list[Path] = []
+    for tag in tags:
+        candidates.extend(RESULTS_DIR.glob(f"sadakat_{tag}__hakem_*.jsonl"))
+    candidates = sorted(set(candidates))
     if not candidates:
         return None, {}
     path = max(candidates, key=lambda p: p.stat().st_mtime)
@@ -314,6 +326,25 @@ def parse_genis_check() -> dict | None:
     }
 
 
+def _genis_tag_candidates(stem_tag: str) -> list[str]:
+    if not stem_tag.endswith("_genis"):
+        return [stem_tag]
+    core = stem_tag.removesuffix("_genis")
+    if core.endswith("_rerank_ajan"):
+        base = core.removesuffix("_rerank_ajan")
+        return tag_candidates(base, True, True, True)
+    if core.endswith("_ajan_rerank"):
+        base = core.removesuffix("_ajan_rerank")
+        return tag_candidates(base, True, True, True)
+    if core.endswith("_rerank"):
+        base = core.removesuffix("_rerank")
+        return tag_candidates(base, True, False, True)
+    if core.endswith("_ajan"):
+        base = core.removesuffix("_ajan")
+        return tag_candidates(base, False, True, True)
+    return [stem_tag]
+
+
 def parse_genis_evals() -> list[dict]:
     sonuclar: list[dict] = []
     for path in sorted(RESULTS_DIR.glob("eval_*_genis.md")):
@@ -379,6 +410,7 @@ def parse_genis_evals() -> list[dict]:
                 )
 
         if olcutler:
+            sadakat_ozet, _ = load_sadakat(_genis_tag_candidates(path.stem.removeprefix("eval_")))
             sonuclar.append(
                 {
                     "dosya": path.name,
@@ -388,6 +420,7 @@ def parse_genis_evals() -> list[dict]:
                     "olcutler": olcutler,
                     "kapsam_disi": kapsam_disi,
                     "diger": diger,
+                    "sadakat": sadakat_ozet,
                     "basarisizlar": notlar,
                 }
             )
@@ -451,16 +484,17 @@ def build_pano() -> dict:
         llm = h["llm"]
         rerank = h["rerank"]
         ajan = h["ajan"]
-        _, _, suffix = config_info(rerank, ajan)
+        genis = h["genis"]
+        _, _, suffix = config_info(rerank, ajan, genis)
         base_tag = llm_tag(llm)
         full_tag = base_tag + suffix
 
-        raw_path = find_raw_eval(base_tag, rerank, ajan)
+        raw_path = find_raw_eval(base_tag, rerank, ajan, genis)
         raw_rows = read_jsonl(raw_path) if raw_path else []
 
         medyan_sure = calc_median_sure(raw_rows)
         yanlis_ret_katmanlari = calc_yanlis_ret_katmanlari(raw_rows)
-        sadakat_ozet, sadakat_map = load_sadakat(full_tag)
+        sadakat_ozet, sadakat_map = load_sadakat(tag_candidates(base_tag, rerank, ajan, genis))
         sadakat_by_key[anahtar] = sadakat_map
 
         row_map: dict[str, dict] = {}
