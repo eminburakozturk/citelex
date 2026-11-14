@@ -1,0 +1,189 @@
+{
+  "yillik_izin": {
+    "bilmiyorum": false,
+    "cevap": "İşyerinde işe başladığı günden itibaren deneme süresi dahil en az bir yıl çalışmış olan işçilere yıllık ücretli izin verilir; izin süresi hizmet süresine göre 14, 20 veya 26 günden az olamaz [1].",
+    "kaynaklar": [
+      {
+        "no": 1,
+        "atif": "4857 s. İş Kanunu m. 53",
+        "anahtar": "is-kanunu:53",
+        "belge_tur": "kanun",
+        "baslik": "Yıllık ücretli izin hakkı ve izin süreleri",
+        "alinti": "İşyerinde işe başladığı günden itibaren, deneme süresi de içinde olmak üzere, en az bir yıl çalışmış olan işçilere yıllık ücretli izin verilir."
+      }
+    ],
+    "kanallar": ["mevzuat"],
+    "uyari": "Bu sistem hukuki tavsiye vermez; cevaplar yalnızca gösterilen kaynak metinlere dayanır.",
+    "son_kontrol": "2026-11-14T03:04:12",
+    "sure_sn": 2.42,
+    "arama_sn": 0.45,
+    "llm_sn": 1.97,
+    "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "gecersiz_atif": 0,
+    "ajan_deneme": 1,
+    "ajan_sorgular": ["Yıllık izin kaç gündür?"],
+    "adimlar": [
+      {
+        "ad": "arama",
+        "durum": "tamam",
+        "detay": "5 kaynak bulundu (mevzuat)",
+        "sure_sn": 0.45
+      },
+      {
+        "ad": "esik",
+        "durum": "tamam",
+        "detay": "Kaynaklar soruya yeterince yakın",
+        "sure_sn": 0.0
+      },
+      {
+        "ad": "llm",
+        "durum": "tamam",
+        "detay": "Cevap yazıldı",
+        "sure_sn": 1.97
+      },
+      {
+        "ad": "atif_dogrulama",
+        "durum": "tamam",
+        "detay": "1 atıf doğrulandı",
+        "sure_sn": 0.0
+      }
+    ]
+  },
+  "bilmiyorum": {
+    "bilmiyorum": true,
+    "cevap": "Bu soruya elimdeki kaynaklarla cevap veremiyorum.",
+    "neden": "Soru, derlemdeki kaynaklara yeterince yakın değil.",
+    "kaynaklar": [],
+    "kanallar": ["mevzuat"],
+    "uyari": "Bu sistem hukuki tavsiye vermez; cevaplar yalnızca gösterilen kaynak metinlere dayanır.",
+    "son_kontrol": "2026-11-14T03:04:12",
+    "sure_sn": 0.38,
+    "arama_sn": 0.38,
+    "llm_sn": 0.0,
+    "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "gecersiz_atif": 0,
+    "ajan_deneme": 1,
+    "ajan_sorgular": ["İstanbul'da bugün hava durumu nasıl?"],
+    "adimlar": [
+      {
+        "ad": "arama",
+        "durum": "tamam",
+        "detay": "5 kaynak bulundu (mevzuat)",
+        "sure_sn": 0.38
+      },
+      {
+        "ad": "esik",
+        "durum": "basarisiz",
+        "detay": "Kaynaklar soruya yeterince yakın değil",
+        "sure_sn": 0.0
+      }
+    ]
+  },
+  "genis_katman": {
+    "bilmiyorum": false,
+    "cevap": "Konut ve çatılı işyeri kiralarında sözleşmeyle kiracıya güvence verme borcu getirilmişse, bu güvence üç aylık kira bedelini aşamaz [1].",
+    "kaynaklar": [
+      {
+        "no": 1,
+        "atif": "6098 s. Türk Borçlar Kanunu m. 342",
+        "anahtar": "kanun-6098:342",
+        "belge_tur": "kanun",
+        "baslik": "Kiracının güvence vermesi",
+        "alinti": "Konut ve çatılı işyeri kiralarında sözleşmeyle kiracıya güvence verme borcu getirilmişse, bu güvence üç aylık kira bedelini aşamaz."
+      }
+    ],
+    "kanallar": ["genis"],
+    "uyari": "Bu sistem hukuki tavsiye vermez; cevaplar yalnızca gösterilen kaynak metinlere dayanır. Bu cevap geniş katmandan (yaklaşık 900 kanun, Temmuz 2025'e kadar) geliyor; bu katmanın doğruluğu ve güncelliği ölçülmedi, resmî metinden kontrol edin.",
+    "son_kontrol": "2026-11-14T03:04:12",
+    "sure_sn": 3.12,
+    "arama_sn": 0.82,
+    "llm_sn": 2.3,
+    "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "gecersiz_atif": 0,
+    "ajan_deneme": 1,
+    "ajan_sorgular": ["Kira depozitosu en fazla kaç aylık kira olabilir?"],
+    "adimlar": [
+      {
+        "ad": "arama",
+        "durum": "tamam",
+        "detay": "5 kaynak bulundu (geniş katman)",
+        "sure_sn": 0.82
+      },
+      {
+        "ad": "esik",
+        "durum": "tamam",
+        "detay": "Kaynaklar soruya yeterince yakın",
+        "sure_sn": 0.0
+      },
+      {
+        "ad": "llm",
+        "durum": "tamam",
+        "detay": "Cevap yazıldı",
+        "sure_sn": 2.3
+      },
+      {
+        "ad": "atif_dogrulama",
+        "durum": "tamam",
+        "detay": "1 atıf doğrulandı",
+        "sure_sn": 0.0
+      }
+    ]
+  },
+  "ajan_deneme_2": {
+    "bilmiyorum": false,
+    "cevap": "İşveren, biyometrik veri niteliğindeki parmak izini açık rıza veya kanuni istisna olmaksızın mesai kontrolü amacıyla işleyemez [1].",
+    "kaynaklar": [
+      {
+        "no": 1,
+        "atif": "KVKK Kurul Kararı 2020/404",
+        "anahtar": "kvkk-karar-2020-404",
+        "belge_tur": "karar",
+        "baslik": "Mesai kontrolü amacıyla biyometrik veri işlenmesi",
+        "alinti": "Ölçülülük ilkesine aykırı biçimde parmak izi tarama sistemi kullanılması hukuka aykırıdır."
+      }
+    ],
+    "kanallar": ["karar"],
+    "uyari": "Bu sistem hukuki tavsiye vermez; cevaplar yalnızca gösterilen kaynak metinlere dayanır.",
+    "son_kontrol": "2026-11-14T03:04:12",
+    "sure_sn": 4.15,
+    "arama_sn": 0.95,
+    "llm_sn": 3.2,
+    "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "gecersiz_atif": 0,
+    "ajan_deneme": 2,
+    "ajan_sorgular": [
+      "İşveren çalışanın parmak izini alabilir mi?",
+      "KVKK biyometrik veri parmak izi mesai takibi ölçülülük"
+    ],
+    "adimlar": [
+      {
+        "ad": "arama",
+        "durum": "tamam",
+        "detay": "5 kaynak bulundu (karar)",
+        "sure_sn": 0.95
+      },
+      {
+        "ad": "yeniden_yazma",
+        "durum": "tamam",
+        "detay": "KVKK biyometrik veri parmak izi mesai takibi ölçülülük",
+        "sure_sn": 0.85
+      },
+      {
+        "ad": "llm",
+        "durum": "tamam",
+        "detay": "Cevap yazıldı",
+        "sure_sn": 2.35
+      },
+      {
+        "ad": "atif_dogrulama",
+        "durum": "tamam",
+        "detay": "1 atıf doğrulandı",
+        "sure_sn": 0.0
+      }
+    ]
+  }
+}

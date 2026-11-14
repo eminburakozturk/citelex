@@ -1,0 +1,111 @@
+{
+  "is-kanunu:53": {
+    "anahtar": "is-kanunu:53",
+    "atif": "4857 s. İş Kanunu m. 53",
+    "belge_tur": "kanun",
+    "belge_adi": "İş Kanunu",
+    "baslik": "Yıllık ücretli izin hakkı ve izin süreleri",
+    "parcalar": [
+      {
+        "fikra_no": 1,
+        "metin": "İşyerinde işe başladığı günden itibaren, deneme süresi de içinde olmak üzere, en az bir yıl çalışmış olan işçilere yıllık ücretli izin verilir.",
+        "mulga": false
+      },
+      {
+        "fikra_no": 2,
+        "metin": "Yıllık ücretli izin hakkından vazgeçilemez.",
+        "mulga": false
+      },
+      {
+        "fikra_no": 4,
+        "metin": "İşçilere verilecek yıllık ücretli izin süresi, hizmet süresi; bir yıldan beş yıla kadar (beş yıl dahil) olanlara ondört günden, beş yıldan fazla onbeş yıldan az olanlara yirmi günden, onbeş yıl (dahil) ve daha fazla olanlara yirmialtı günden az olamaz.",
+        "mulga": false
+      }
+    ],
+    "mulga": false,
+    "diger_kanuna_islendi": false,
+    "dipnotlar": [
+      {
+        "no": "1",
+        "metin": "10/9/2014 tarihli ve 6552 sayılı Kanunun 5 inci maddesiyle bu fıkraya cümle eklenmiştir."
+      }
+    ],
+    "url": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=4857&MevzuatTur=1&MevzuatTertip=5",
+    "son_kontrol": "2026-11-14T03:04:12",
+    "gecmis": [
+      {
+        "tarih": "2014-09-10",
+        "kanun": "6552 s. Kanun md. 5",
+        "aciklama": "Ek cümle"
+      }
+    ],
+    "iliskili": [
+      {
+        "anahtar": "is-kanunu:10",
+        "atif": "4857 s. İş Kanunu m. 10",
+        "baslik": "Sürekli ve süreksiz işlerdeki iş sözleşmeleri",
+        "iliski": "atif_alir"
+      },
+      {
+        "anahtar": "is-kanunu:56",
+        "atif": "4857 s. İş Kanunu m. 56",
+        "baslik": "Yıllık ücretli iznin uygulanması",
+        "iliski": "atif_alir"
+      }
+    ]
+  },
+  "is-kanunu:10": {
+    "anahtar": "is-kanunu:10",
+    "atif": "4857 s. İş Kanunu m. 10",
+    "belge_tur": "kanun",
+    "belge_adi": "İş Kanunu",
+    "baslik": "Sürekli ve süreksiz işlerdeki iş sözleşmeleri",
+    "parcalar": [
+      {
+        "fikra_no": 1,
+        "metin": "Nitelikleri bakımından en çok otuz iş günü süren işlere süreksiz iş, bundan fazla devam edenlere sürekli iş denir.",
+        "mulga": false
+      },
+      {
+        "fikra_no": 2,
+        "metin": "Bu Kanunun 3, 8, 12, 13, 14, 15, 17, 23, 24, 25, 26, 27, 28, 29, 30, 31, 34, 53, 54, 55, 56, 57, 58, 59, 75, 80 ve geçici 6 ncı maddeleri süreksiz işlerde yapılan iş sözleşmelerinde uygulanmaz.",
+        "mulga": false
+      }
+    ],
+    "mulga": false,
+    "diger_kanuna_islendi": false,
+    "dipnotlar": [],
+    "url": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=4857&MevzuatTur=1&MevzuatTertip=5",
+    "son_kontrol": "2026-11-14T03:04:12",
+    "gecmis": [],
+    "iliskili": [
+      {
+        "anahtar": "is-kanunu:53",
+        "atif": "4857 s. İş Kanunu m. 53",
+        "baslik": "Yıllık ücretli izin hakkı ve izin süreleri",
+        "iliski": "atif_yapar"
+      }
+    ]
+  },
+  "kanun-6098:342": {
+    "anahtar": "kanun-6098:342",
+    "atif": "6098 s. Türk Borçlar Kanunu m. 342",
+    "belge_tur": "kanun",
+    "belge_adi": "Türk Borçlar Kanunu",
+    "baslik": "Kiracının güvence vermesi",
+    "parcalar": [
+      {
+        "fikra_no": 1,
+        "metin": "Konut ve çatılı işyeri kiralarında sözleşmeyle kiracıya güvence verme borcu getirilmişse, bu güvence üç aylık kira bedelini aşamaz.",
+        "mulga": false
+      }
+    ],
+    "mulga": false,
+    "diger_kanuna_islendi": false,
+    "dipnotlar": [],
+    "url": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6098&MevzuatTur=1&MevzuatTertip=5",
+    "son_kontrol": "2026-11-14T03:04:12",
+    "gecmis": [],
+    "iliskili": []
+  }
+}
