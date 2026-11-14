@@ -33,6 +33,10 @@ Betik Docker'ı kurar, 80/443'ü iptables'ta açar, OpenRouter anahtarını sora
 geri yükler, API'yi derler (ARM'de ilk derleme ~10-15 dk; bge-m3 ilk açılışta ~2,3 GB iner) ve sağlık kontrolü yapar.
 
 ## 4. Kontrol
+- Duman testi (kendi bilgisayarından):
+  ```bash
+  C:\Users\Burak\anaconda3\envs\citelex\python.exe scripts/duman_testi.py https://<adres>
+  ```
 - `https://<adres>/saglik` -> `"durum": "ok"`
 - `https://<adres>/` -> arayüz; bir soru sor.
 - Günlükler: `sudo docker compose -f citelex/deploy/oracle/docker-compose.oracle.yml logs -f api`

@@ -25,6 +25,7 @@ services:
       OLLAMA_HOST: http://host.docker.internal:11434   # CITELEX_LLM=ollama ise ana makinedeki Ollama
       CITELEX_LLM: ${CITELEX_LLM:-gemini}
       CITELEX_EMBED_DEVICE: cpu
+      CITELEX_CORS: ${CITELEX_CORS:-http://localhost:3000,http://tauri.localhost,https://tauri.localhost,tauri://localhost}
       CITELEX_RERANK: ${CITELEX_RERANK:-0}         # CPU'da ölçüldü: 30 aday ~43 sn/sorgu -> kapalı (GPU'da 0,74 sn)
       CITELEX_WEB_DIR: /app/web/out
       # İzler: jaeger çalışıyorsa span'ler oraya gider (yoksa sessizce düşer); tek satırlık özet logs/izler.jsonl'de.
