@@ -80,7 +80,7 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 - **Geniş katman (`895` kanun, `44.843` parça; HF korpusu, Temmuz 2025'e kadar):** doğruluğu tam setle ölçülmedi, cevaplar `"Geniş katman · doğruluğu ölçülmedi"` rozetiyle döner (`CITELEX_GENIS=0` kapatır).
   - *Yönlendirme:* derin katman `0,637` eşiğini geçemezse **veya** geniş katman derin katmandan `0,05`'ten fazla öndeyse. `0,05`, eval setlerinden bağımsız `eval/calibration.jsonl` üzerinde derin katman sorularında görülen en büyük geniş üstünlüğün (`+0,021`) yaklaşık iki katıdır.
   - *Derin katmana etkisi (56 soru):* kapsam içi `45/50` değişmedi. Kapsam dışı ret `6/6 -> 5/6`: "kapsam dışı" etiketli `d03` artık geniş katmandaki `7036` s. Kanun m.3'ten **doğru ve atıflı** cevaplanıyor (etiket geçersizleşti, uydurma değil). Medyan süre `3,98 -> 5,47 sn`.
-  - *Taslak geniş set (`eval/genis_sorular.jsonl`, 15 + 3 soru, `results/genis_check.md`):* R@1 `9/15`, R@5 `14/15`, yönlendirme `14/15`, beklenen madde bağlamda `13/15`, kapsam dışı ret `3/3`. Kalan sınırlar: `g02` eşiğin hemen altında (`0,629`), `g08` ilk 5'te yok. `g13` fark kuralını bulduran örnek olduğu için set bu kural açısından bağımsız değildir.
+  - *Taslak geniş set (`eval/genis_sorular.jsonl`, 15 + 3 soru, `results/genis_check.md`):* R@1 `8/15`, R@5 `14/15`, yönlendirme `14/15`, beklenen madde bağlamda `13/15`, kapsam dışı ret `3/3`. Kalan sınırlar: `g02` eşiğin hemen altında (`0,629`), `g08` ilk 5'te yok. `g13` fark kuralını bulduran örnek olduğu için set bu kural açısından bağımsız değildir.
 
 ## Kendini güncelleme
 
