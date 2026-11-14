@@ -250,15 +250,21 @@ class TestIliskiExtraction:
         data, stats = build_iliskiler(articles_path=articles_path, sources_path=sources_path, out_path=out_path)
         assert out_path.is_file()
         assert stats["yonlu_iliski"] == 3
-        assert data["yurtdisi-aktarim-yon:10"]["iliskili"] == [
+        assert yalin(data["yurtdisi-aktarim-yon:10"]["iliskili"]) == [
             {"anahtar": "kvkk:5", "iliski": "atif_yapar"},
             {"anahtar": "kvkk:6", "iliski": "atif_yapar"},
         ]
-        assert data["kvkk:5"]["iliskili"] == [
+        assert yalin(data["kvkk:5"]["iliskili"]) == [
             {"anahtar": "kvkk:6", "iliski": "atif_alir"},
             {"anahtar": "yurtdisi-aktarim-yon:10", "iliski": "atif_alir"},
         ]
-        assert data["kvkk:6"]["iliskili"] == [
+        assert yalin(data["kvkk:6"]["iliskili"]) == [
             {"anahtar": "kvkk:5", "iliski": "atif_yapar"},
             {"anahtar": "yurtdisi-aktarim-yon:10", "iliski": "atif_alir"},
         ]
+
+
+def yalin(iliskili: list[dict]) -> list[dict]:
+    """Karşılaştırma için anahtar + ilişki; atıf alanı her öğede bulunmalı."""
+    assert all("atif" in x and "baslik" in x for x in iliskili)
+    return [{"anahtar": x["anahtar"], "iliski": x["iliski"]} for x in iliskili]
