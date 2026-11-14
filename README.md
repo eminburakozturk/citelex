@@ -36,6 +36,7 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 
 | Model (yapılandırma) | Doğru | Tam destekli sadakat | İddia desteği | Yanlış "bilmiyorum" | Kapsam dışı ret | Medyan süre |
 |---|---:|---:|---:|---:|---:|---:|
+| **`openrouter:deepseek/deepseek-v4.1-flash-1017` (yayın: ajan + geniş katman, reranker kapalı)** | **44/50 (%88)** | **47/50 (%94)** | — | 0/50 (%0) | 4/6 (%67)¹ | 2,23 sn |
 | `openrouter:deepseek/deepseek-v4.1-flash-1017` (ajan + reranker) | 45/50 (%90) | 46/50 (%92) | 181/185 (%98) | 0/50 (%0) | 6/6 (%100) | 3,98 sn |
 | `openrouter:deepseek/deepseek-v4.1-flash-1017` (ajan) | 44/50 (%88) | 46/49 (%94) | 177/182 (%97) | 1/50 (%2) | 6/6 (%100) | 2,42 sn |
 | `openrouter:deepseek/deepseek-v4.1-flash-1017` (reranker) | 40/50 (%80) | — | — | 7/50 (%14) | 6/6 (%100) | 3,66 sn |
@@ -43,6 +44,8 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 | `openrouter:qwen/qwen3.7-flash` (tek adım) | 39/50 (%78) | 26/42 (%62) | 145/162 (%90) | 8/50 (%16) | 6/6 (%100) | 2,39 sn |
 | `openrouter:nvidia/nemotron-3-ultra-550b-a55b:free` (tek adım) | 39/50 (%78) | 35/42 (%83) | 86/93 (%92) | 8/50 (%16) | 6/6 (%100) | 2,43 sn |
 | `ollama:qwen2.5:7b` (tek adım) | 33/50 (%66) | — | — | 12/50 (%24) | 6/6 (%100) | 2,86 sn |
+
+¹ *Geniş katman açıkken "kapsam dışı" etiketli `d03` ve `d05` artık geniş katmandaki 7036 s. Kanun m.3 ve 6102 s. TTK m.338'den doğru ve atıflı cevaplanıyor; etiketleri geçersizleşti (uydurma cevap değil). Ret edilmesi gereken diğer 4 soru reddedildi.*
 
 *Kaynak: `results/eval_history.jsonl`, `results/eval_*.md`, `results/sadakat_*__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl` ve `KARARLAR.md`. Tüm çalıştırmalarda geçersiz atıf `0`'dır.*
 

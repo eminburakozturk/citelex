@@ -46,7 +46,7 @@ def source_entry(no: int, p: dict) -> dict:
 
 
 def build_context(searcher: Searcher, query: str, esik: float | None,
-                  turler: list[str] | None = None) -> tuple[list, dict]:
+                  turler: list[str] | None = None, genis_yedek: bool = True) -> tuple[list, dict]:
     """Bağlamı kur: iki kanal ayrı aranır; dense top-1'i eşiğin altında kalan kanal bağlama girmez.
 
     Aynı kalibre eşik iki işte kullanılır: (a) iki kanal da eşiğin altındaysa soru kapsam dışı sayılır,
@@ -74,7 +74,9 @@ def build_context(searcher: Searcher, query: str, esik: float | None,
         g = genis.search(query, "dense", top_k=1, belge_tur=["kanun"])
         top["genis"] = g[0].score if g else 0.0
         derin = max(top["mevzuat"], top["karar"])
-        if top["genis"] >= esik and (not kanallar or top["genis"] > derin + GENIS_FARK):
+        # genis_yedek=False: derin katman eşiği geçemese de geniş katmana DÜŞÜLMEZ (ajan önce derin katmanda yeniden
+        # yazıp arar; geniş katman en son denenir). Fark kuralı her zaman geçerlidir.
+        if top["genis"] >= esik and ((not kanallar and genis_yedek) or top["genis"] > derin + GENIS_FARK):
             gctx = genis.search_context(query, "hybrid", k_mevzuat=5, k_karar=0, max_chars=None, mevzuat_tur=["kanun"])
             hits = trim_context({"mevzuat": gctx["mevzuat"], "karar": []})["mevzuat"]
             return hits, {"dense_top1": round(top["genis"], 4), "kanal_top1": {a: round(b, 4) for a, b in top.items()},

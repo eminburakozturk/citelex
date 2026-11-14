@@ -45,6 +45,7 @@ class Durum(TypedDict, total=False):
     ham: str
     sorgular: list[str]
     sonuc: dict
+    genis_denendi: bool
     arama_sn: float
     llm_sn: float
     turler: list[str] | None
@@ -70,11 +71,23 @@ def build_graph(ans: Answerer):
     def ara(d: Durum) -> Durum:
         t = time.time()
         with ans._lock:
-            hits, meta = build_context(ans.searcher, d["sorgu"], esik, d.get("turler"))
+            hits, meta = build_context(ans.searcher, d["sorgu"], esik, d.get("turler"), genis_yedek=False)
         eslesti = esik is None or meta["dense_top1"] >= esik
         hits = _birlestir(d.get("hits", []), hits if eslesti else [])
         return {"hits": hits, "meta": meta | {"esik_gecti": eslesti or bool(d.get("hits"))},
                 "deneme": d.get("deneme", 0) + 1, "arama_sn": d.get("arama_sn", 0.0) + time.time() - t}
+
+    def genis_ara(d: Durum) -> Durum:
+        """Son çare: derin katman (yeniden yazılmış sorguyla da) eşiği geçemedi -> özgün soruyla geniş katman."""
+        t = time.time()
+        with ans._lock:
+            hits, meta = build_context(ans.searcher, d["soru"], esik, d.get("turler"), genis_yedek=True)
+        gecti = meta["kanallar"] == ["genis"]
+        return {"hits": hits if gecti else d.get("hits", []), "meta": (meta if gecti else d["meta"]) | {"esik_gecti": gecti},
+                "arama_sn": d.get("arama_sn", 0.0) + time.time() - t, "genis_denendi": True}
+
+    def genisten_sonra(d: Durum) -> str:
+        return "cevapla" if d["meta"]["esik_gecti"] else END
 
     def cevapla(d: Durum) -> Durum:
         t = time.time()
@@ -89,7 +102,9 @@ def build_graph(ans: Answerer):
     def aramadan_sonra(d: Durum) -> str:
         if d["meta"]["esik_gecti"]:
             return "cevapla"
-        return "yeniden_yaz" if d["deneme"] < MAX_DENEME else END
+        if d["deneme"] < MAX_DENEME:
+            return "yeniden_yaz"
+        return "genis_ara" if getattr(ans.searcher, "genis", None) is not None and not d.get("genis_denendi") else END
 
     def cevaptan_sonra(d: Durum) -> str:
         bilmiyor = d["ham"].lstrip().upper().startswith(prompt.NO_ANSWER)
@@ -99,8 +114,11 @@ def build_graph(ans: Answerer):
     g.add_node("ara", ara)
     g.add_node("cevapla", cevapla)
     g.add_node("yeniden_yaz", yeniden_yaz)
+    g.add_node("genis_ara", genis_ara)
     g.set_entry_point("ara")
-    g.add_conditional_edges("ara", aramadan_sonra, {"cevapla": "cevapla", "yeniden_yaz": "yeniden_yaz", END: END})
+    g.add_conditional_edges("ara", aramadan_sonra, {"cevapla": "cevapla", "yeniden_yaz": "yeniden_yaz",
+                                                    "genis_ara": "genis_ara", END: END})
+    g.add_conditional_edges("genis_ara", genisten_sonra, {"cevapla": "cevapla", END: END})
     g.add_conditional_edges("cevapla", cevaptan_sonra, {"yeniden_yaz": "yeniden_yaz", END: END})
     g.add_edge("yeniden_yaz", "ara")
     return g.compile()

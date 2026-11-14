@@ -70,3 +70,17 @@ def test_tur_filtresi_kanunu_dislarsa_genis_aranmaz():
 
 def test_genis_yoksa_eski_davranis():
     assert kanal(FakeSearcher(0.70, 0.40)) == ["mevzuat"]
+
+
+def test_genis_yedek_kapaliyken_esik_alti_derin_genise_dusmez():
+    # ajan önce derin katmanda yeniden yazıp arar; geniş katman en son denenir
+    # e35 benzeri: derin 0,632 (eşik altı), geniş 0,663 (fark 0,031 < 0,05) -> geniş katmana düşülmez
+    hits, meta = build_context(FakeSearcher(0.632, 0.40, FakeGenis(0.663)), "soru", ESIK, None, genis_yedek=False)
+    assert meta["kanallar"] != ["genis"]
+    hits, meta = build_context(FakeSearcher(0.632, 0.40, FakeGenis(0.663)), "soru", ESIK, None, genis_yedek=True)
+    assert meta["kanallar"] == ["genis"]
+
+
+def test_genis_yedek_kapaliyken_fark_kurali_gecerli():
+    hits, meta = build_context(FakeSearcher(0.717, 0.40, FakeGenis(0.813)), "soru", ESIK, None, genis_yedek=False)
+    assert meta["kanallar"] == ["genis"]

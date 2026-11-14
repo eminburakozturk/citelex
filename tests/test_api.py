@@ -44,7 +44,7 @@ def make(parts, error=None, top1=0.8) -> Answerer:
     a = Answerer.__new__(Answerer)
     a.llm, a.cfg, a._lock, a.searcher = FakeLLM(parts, error), {"esik": 0.637, "derlem_tarihi": "2026-11-11"}, threading.Lock(), None
     import src.generate.answer as mod
-    mod.build_context = lambda searcher, query, esik, turler=None: (HITS, {"dense_top1": top1, "kanal_top1": {}, "kanallar": ["mevzuat"]})
+    mod.build_context = lambda searcher, query, esik, turler=None, **kw: (HITS, {"dense_top1": top1, "kanal_top1": {}, "kanallar": ["mevzuat"]})
     return a
 
 
