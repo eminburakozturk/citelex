@@ -50,3 +50,16 @@ def test_api_degisiklikler(farklar):
 
 def test_windows_yolu_linuxta_acilir():
     assert diff.yol(r"data\raw\versions\karar_2023-2007\x.txt").as_posix() == "data/raw/versions/karar_2023-2007/x.txt"
+
+
+def test_deneme_farki_son_degisiklik_sayilmaz(tmp_path, monkeypatch):
+    import src.api.app as app_mod
+    for i, test in ((1, True), (2, False), (3, True)):
+        fid = f"2026111{i}T000000_karar_x_{i}-{i + 1}"
+        (tmp_path / f"{fid}.json").write_text(json.dumps({
+            "fark_id": fid, "zaman": f"2026-11-1{i}T00:00:00", "doc_key": "karar:x", "belge_id": "x", "tur": "karar",
+            "eski": {}, "yeni": {}, "ozet": {}, "birimler": [], "test": test}), encoding="utf-8")
+    monkeypatch.setattr(app_mod, "FARK_DIR", tmp_path)
+    with client(make(["x [1]."])) as c:
+        assert [d["test"] for d in c.get("/degisiklikler").json()["degisiklikler"]] == [True, False, True]
+        assert c.get("/guncellik").json()["son_degisiklik"]["fark_id"] == "20261112T000000_karar_x_2-3"

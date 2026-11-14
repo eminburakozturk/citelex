@@ -284,7 +284,7 @@ def create_app(answerer=None) -> FastAPI:
                     bekleyen.append({k: r.get(k) for k in ("gun", "baslik", "url")} | {"belge_id": r.get("ilgili_belge_id")})
                 except ValueError:
                     continue
-        son = list_diffs(FARK_DIR, 1)
+        son = [d for d in list_diffs(FARK_DIR, 50) if not d.get("test")][:1]   # deneme farkları "son değişiklik" sayılmaz
         return {"son_kontrol": last_check(), "belge_sayisi": n, "rg_bekleyen": bekleyen[-5:],
                 "son_degisiklik": {k: son[0][k] for k in ("fark_id", "zaman", "belge_id")} if son else None}
 

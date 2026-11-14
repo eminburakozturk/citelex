@@ -135,7 +135,7 @@ export function YapilandirmaKarsilastirmasi({
             <span>
               Reranker arama ölçümü (<code className="text-ink">{rerank.dosya}</code> · bge-reranker-v2-m3, ilk 30 aday)
             </span>
-            {rerank.not && <span>{rerank.not}</span>}
+            {rerank.not && <span>{rerank.not.replace(/(\d)\.(\d)/g, "$1,$2")}</span>}
           </div>
           <table className="w-full border-collapse text-left text-xs">
             <thead>

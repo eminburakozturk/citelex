@@ -124,9 +124,12 @@ export default function DegisikliklerSayfasi() {
           <div className="rounded-xl border border-line bg-panel p-4 shadow-xs">
             <div className="text-[11px] font-semibold tracking-wider text-subtle uppercase">Değişiklik</div>
             <div className="mt-1 font-serif text-2xl font-semibold tabular-nums text-accent">
-              {liste ? liste.length : "—"}
+              {liste ? liste.filter((k) => !k.test).length : "—"}
             </div>
-            <div className="text-xs text-muted">kayıtlı fark</div>
+            <div className="text-xs text-muted">
+              gerçek değişiklik
+              {liste && liste.some((k) => k.test) ? ` · ${liste.filter((k) => k.test).length} test kaydı` : ""}
+            </div>
           </div>
         </section>
 
@@ -227,6 +230,11 @@ export default function DegisikliklerSayfasi() {
                         </div>
                         <div className="mt-1 text-xs text-muted">{zamanMetni(k.zaman)}</div>
                         <div className="mt-2 flex flex-wrap gap-1.5 text-[11px] tabular-nums">
+                          {k.test && (
+                            <span className="rounded-full border border-line px-2 py-0.5 font-medium text-muted">
+                              Test kaydı
+                            </span>
+                          )}
                           {k.ozet.degisti > 0 && (
                             <span className="rounded-full bg-warn-bg px-2 py-0.5 font-medium text-warn-ink">
                               {k.ozet.degisti} değişti

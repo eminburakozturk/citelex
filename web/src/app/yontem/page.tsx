@@ -67,7 +67,7 @@ export default function YontemSayfasi() {
               <div className="font-semibold text-ink">Derin katman (ölçülür)</div>
               <p className="text-muted">
                 KVKK, İş Kanunu (4857 ve 1475 m. 14), İSG Kanunu (6331), ilgili yönetmelik/tebliğler ile 40 KVKK Kurul
-                kararı. Mevzuat (5 yer) ve Kurul kararları (en çok 3 karar) ayrı kanallarda aranır; her cümle [n]
+                kararı. Mevzuat (en çok 5 madde) ve Kurul kararları (en çok 3 karar) ayrı kanallarda aranır; her cümle [n]
                 atıfıyla doğrulanır.
               </p>
             </div>
@@ -201,7 +201,7 @@ export default function YontemSayfasi() {
             <li>
               <strong className="text-ink">Geniş katman kapsama alanı:</strong>{" "}
               {genisAcik?.kapsam_disi
-                ? `Geniş katman açıkken kapsam dışı ret ${genisAcik.kapsam_disi} olmuştur (d03 7036 s. Kanun m. 3). `
+                ? `Geniş katman açıkken kapsam dışı ret ${genisAcik.kapsam_disi.split(" — ")[0]} olmuştur: "kapsam dışı" etiketli d03 (iş davasında arabuluculuk süresi) artık geniş katmandaki 7036 s. Kanun m. 3'ten doğru ve atıflı cevaplanıyor; yani soru etiketi geçersizleşti, uydurma cevap değil. `
                 : ""}
               Trafik cezası veya şirket kuruluşu gibi bazı genel hukuk soruları geniş katmana girse bile tüm sorular
               kapsamlı doğrulanmamıştır.

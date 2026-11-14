@@ -33,6 +33,12 @@ export function DegisiklikAyrinti({ veri }: { veri: DegisiklikAyrintisi }) {
               {turAdi(veri.tur)}
             </span>
           </div>
+          {veri.test && (
+            <p role="note" className="rounded-lg bg-warn-bg px-3 py-2 text-xs text-warn-ink">
+              Test kaydı: güncelleme hattını denemek için metin bilerek değiştirildi. Bu, gerçek bir mevzuat veya Kurul
+              kararı değişikliği değildir.
+            </p>
+          )}
           <p className="break-words text-xs text-muted">
             Değişiklik zamanı: {zamanMetni(veri.zaman)} · Sürüm #{veri.eski.surum_id} (<code>{veri.eski.hash}</code>) →
             Sürüm #{veri.yeni.surum_id} (<code>{veri.yeni.hash}</code>)

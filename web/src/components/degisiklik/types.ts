@@ -37,6 +37,8 @@ export interface DegisiklikKaydi {
   yeni: SurumBilgisi;
   ozet: DegisiklikOzetiSayilari;
   birimler: BirimOzeti[];
+  /** Güncelleme hattını denemek için yapılan sahte değişiklik; gerçek bir mevzuat değişikliği değildir. */
+  test?: boolean;
 }
 
 export interface DegisiklikAyrintisi extends Omit<DegisiklikKaydi, "birimler"> {

@@ -1,5 +1,5 @@
 {
-  "uretim_tarihi": "2026-11-13T22:23:39+00:00",
+  "uretim_tarihi": "2026-11-14T09:28:28+00:00",
   "modeller": [
     {
       "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan",
@@ -601,7 +601,7 @@
         },
         {
           "olcut": "Doğrudan geniş arama R@1",
-          "deger": "10/15"
+          "deger": "9/15"
         },
         {
           "olcut": "Doğrudan geniş arama R@5",
@@ -637,8 +637,8 @@
           "beklenen": "kanun-6102:18",
           "kanal": "genis (0.648)",
           "baglamda": true,
-          "sira": "1",
-          "ilk3": "kanun-6102:18; kanun-6102:1530; kanun-6098:235"
+          "sira": "2",
+          "ilk3": "kanun-6102:1530; kanun-6102:18; kanun-6098:235"
         },
         {
           "id": "g04",
@@ -770,10 +770,10 @@
           "id": "g18",
           "soru": "Ankara'daki ehliyet direksiyon sınavı randevu takvimi hangi tarihte aç",
           "beklenen": "kapsam dışı",
-          "kanal": "karar (0.504)",
+          "kanal": "karar (0.502)",
           "baglamda": false,
           "sira": "—",
-          "ilk3": "kanun-2918:Geçici 5; kanun-6643:53; kanun-3213:Geçici 6"
+          "ilk3": "kanun-2918:Geçici 5; kanun-3224:23; kanun-3213:Geçici 6"
         }
       ]
     },

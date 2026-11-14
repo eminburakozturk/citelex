@@ -90,7 +90,7 @@ def yol(raw_path: str) -> Path:
     return Path(raw_path.replace("\\", "/"))
 
 
-def write_diff(con, doc_key: str, eski_v, yeni_v, zaman: str | None = None) -> Path | None:
+def write_diff(con, doc_key: str, eski_v, yeni_v, zaman: str | None = None, test: bool = False) -> Path | None:
     """eski_v/yeni_v: versions satırları. Fark yoksa (yalnız biçim farkı) dosya yazılmaz."""
     doc = con.execute("SELECT * FROM documents WHERE doc_key=?", (doc_key,)).fetchone()
     birimler = compare(doc["kind"], doc["belge_id"], yol(eski_v["raw_path"]), yol(yeni_v["raw_path"]))
@@ -100,6 +100,7 @@ def write_diff(con, doc_key: str, eski_v, yeni_v, zaman: str | None = None) -> P
     fark_id = f"{zaman.replace(':', '').replace('-', '')}_{doc_key.replace(':', '_')}_{eski_v['id']}-{yeni_v['id']}"
     body = {"fark_id": fark_id, "zaman": zaman, "doc_key": doc_key, "belge_id": doc["belge_id"], "tur": doc["kind"],
             "url": doc["url"],
+            "test": test,   # --sahte ile üretilen deneme farkı; gerçek bir mevzuat değişikliği DEĞİL
             "eski": {"surum_id": eski_v["id"], "ilk_gorulme": eski_v["first_seen"], "hash": eski_v["content_hash"][:10]},
             "yeni": {"surum_id": yeni_v["id"], "ilk_gorulme": yeni_v["first_seen"], "hash": yeni_v["content_hash"][:10]},
             "ozet": {d: sum(b["durum"] == d for b in birimler) for d in ("degisti", "eklendi", "silindi")},
@@ -130,6 +131,7 @@ def list_diffs(fark_dir: Path = FARK_DIR, limit: int = 50) -> list[dict]:
     for p in sorted(fark_dir.glob("*.json"), reverse=True)[:limit]:
         d = json.loads(p.read_text(encoding="utf-8"))
         out.append({k: d[k] for k in ("fark_id", "zaman", "doc_key", "belge_id", "tur", "eski", "yeni", "ozet")}
+                   | {"test": bool(d.get("test"))}
                    | {"birimler": [{"birim": b["birim"], "etiket": b["etiket"], "durum": b["durum"]} for b in d["birimler"]]})
     return out
 

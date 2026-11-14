@@ -139,7 +139,7 @@ def check(con, run_id: str, docs: list[dict], fake: dict[str, str]) -> tuple[lis
                     if act:  # "bu madde değişti": madde/bölüm düzeyinde fark (API /degisiklikler okur)
                         try:
                             yeni_v = db.active_version(con, doc["doc_key"])
-                            fp = fark.write_diff(con, doc["doc_key"], act, yeni_v)
+                            fp = fark.write_diff(con, doc["doc_key"], act, yeni_v, test=doc["doc_key"] in fake)
                             detail += f" | fark: {fp.name if fp else 'yok (yalnız biçim)'}"
                         except Exception as e:  # noqa: BLE001 — fark üretilemezse güncelleme durmaz
                             detail += f" | fark hatası: {type(e).__name__}: {str(e)[:120]}"
