@@ -261,7 +261,60 @@ export async function ilgiliGetir(soru: string, anahtarlar: string[]): Promise<s
 
 export function tarih(iso?: string | null): string {
   if (!iso) return "";
-  const d = new Date(iso);
+  const ymd = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
+  const d = ymd
+    ? new Date(Number(ymd[1]), Number(ymd[2]) - 1, Number(ymd[3]))
+    : new Date(iso);
   if (isNaN(d.getTime())) return iso;
   return d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+}
+
+const ANAHTAR_KANUN_NO: Record<string, string> = {
+  "is-kanunu": "4857",
+  "is-kanunu-1475": "1475",
+  kvkk: "6698",
+  isg: "6331",
+  "yillik-izin-yon": "Yıllık İzin Yön.",
+  "fazla-calisma-yon": "Fazla Çalışma Yön.",
+  "isg-kurul-yon": "İSG Kurul Yön.",
+  "veri-sorumlulari-sicili-yon": "VERBİS Yön.",
+  "aydinlatma-teblig": "Aydınlatma Tebliği",
+};
+
+/**
+ * Uzun atıf dizgesini düğüm ve rozetlerde okunaklı kısa biçime çevirir
+ * (ör. "4857 s. İş Kanunu m. 10" -> "4857 m. 10"). Ham anahtar ("is-kanunu:10") göstermez.
+ */
+export function kisaAtif(atif?: string | null, anahtar?: string | null): string {
+  const ham = (atif ?? "").trim();
+  if (ham) {
+    const kanunEslesme = /^(\d+)\s+s\.\s+.+?\s+((?:geç\.\s*|ek\s+)?m\.\s*\S+.*)$/i.exec(ham);
+    if (kanunEslesme) {
+      return `${kanunEslesme[1]} ${kanunEslesme[2].replace(/\s+/g, " ").trim()}`;
+    }
+    if (ham.length <= 22) return ham;
+    const mEslesme = /^(.+?)\s+((?:geç\.\s*|ek\s+)?m\.\s*\S+.*)$/i.exec(ham);
+    if (mEslesme) {
+      const ad = mEslesme[1]
+        .replace(/Yıllık Ücretli İzin/i, "Yıllık İzin")
+        .replace(/Yönetmeliği/i, "Yön.")
+        .trim();
+      const birlesik = `${ad} ${mEslesme[2]}`;
+      if (birlesik.length <= 24) return birlesik;
+      return `${ad.slice(0, 14).trim()}… ${mEslesme[2]}`;
+    }
+    return `${ham.slice(0, 20)}…`;
+  }
+  const a = (anahtar ?? "").trim();
+  if (!a) return "";
+  const ikiNokta = a.indexOf(":");
+  if (ikiNokta > 0) {
+    const onEk = a.slice(0, ikiNokta);
+    const madde = a.slice(ikiNokta + 1).replace(/^gecici-/, "geç. ");
+    const kanunGenis = /^kanun-(\d+)$/.exec(onEk);
+    if (kanunGenis) return `${kanunGenis[1]} m. ${madde}`;
+    const kisaOnEk = ANAHTAR_KANUN_NO[onEk] ?? onEk;
+    return `${kisaOnEk} m. ${madde}`;
+  }
+  return a;
 }

@@ -189,7 +189,7 @@ export interface PanoVerisi {
 
 export function kisaModelAdi(llm: string): string {
   const [, ad = llm] = llm.includes(":") ? [llm.split(":")[0], llm.slice(llm.indexOf(":") + 1)] : ["", llm];
-  return ad.replace(/^[^/]+\//, "").replace(/:free$/, " (free)");
+  return ad.replace(/^[^/]+\//, "").replace(/:free$/, " (ücretsiz)");
 }
 
 export function yapilandirmaEtiketi(llm: string, yapilandirma: string, yapilandirmaAdi?: string): string {
@@ -206,6 +206,11 @@ export function saglayiciAdi(llm: string): string {
 export function yuzde(oran: number | null | undefined): string {
   if (oran == null) return "—";
   return `%${Math.round(oran * 100)}`;
+}
+
+export function sayiTr(deger: number | null | undefined, basamak = 2): string {
+  if (deger == null || Number.isNaN(deger)) return "—";
+  return deger.toFixed(basamak).replace(".", ",");
 }
 
 export function tarihSaat(iso: string | null | undefined): string {

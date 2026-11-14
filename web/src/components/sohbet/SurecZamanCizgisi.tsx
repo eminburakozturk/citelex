@@ -33,7 +33,9 @@ function AdimSatiri({ adim, index }: { adim: Adim; index: number }) {
         {adim.detay && <span className="truncate text-muted">· {adim.detay}</span>}
       </div>
       {Number.isFinite(adim.sure_sn) && (
-        <span className="shrink-0 tabular-nums text-subtle">{adim.sure_sn.toFixed(2)} sn</span>
+        <span className="shrink-0 tabular-nums text-subtle">
+          {adim.sure_sn.toFixed(2).replace(".", ",")} sn
+        </span>
       )}
     </motion.li>
   );
@@ -70,7 +72,7 @@ export function SurecZamanCizgisi({
     return () => clearTimeout(t);
   }, [sonuc]);
 
-  if (yukleniyor && !akisBasladi) {
+  if (yukleniyor) {
     return (
       <div
         role="status"
@@ -81,9 +83,11 @@ export function SurecZamanCizgisi({
           <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
         </span>
         <span>
-          {ajan && uzunBekleme
-            ? "Arama ve doğrulama sürüyor (derin arama etkin)…"
-            : "Kaynaklar aranıyor…"}
+          {akisBasladi
+            ? "Kaynaklı cevap üretiliyor ve atıflar doğrulanıyor…"
+            : ajan && uzunBekleme
+              ? "Arama ve doğrulama sürüyor (derin arama etkin)…"
+              : "Kaynaklar aranıyor…"}
         </span>
       </div>
     );
@@ -124,7 +128,9 @@ export function SurecZamanCizgisi({
             {adimlar.length} adım
           </span>
           {sonuc.sure_sn != null && (
-            <span className="tabular-nums text-muted">Toplam {sonuc.sure_sn.toFixed(2)} sn</span>
+            <span className="tabular-nums text-muted">
+              Toplam {sonuc.sure_sn.toFixed(2).replace(".", ",")} sn
+            </span>
           )}
           <span className="text-subtle">· {acik ? "Gizle" : "Süreci göster"}</span>
         </button>

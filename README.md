@@ -12,9 +12,11 @@
 
 ## Ekranlar
 
-**Kaynaklı yanıt ve madde paneli** — `[n]` atıflarına tıklandığında ilgili kanun/yönetmelik/karar metni yan panelde açılır:
+**Kaynaklı yanıt ve madde paneli** — `[n]` atıflarına tıklandığında ilgili kanun/yönetmelik/karar metni, değişiklik geçmişi ve ilişkili maddeler ağı yan panelde açılır:
 
 ![Kaynaklı yanıt ve açık kaynak paneli](docs/ekran/01_cevap.png)
+
+![İlişkili maddeler bağlantı ağı ve listesi](docs/ekran/01_iliskili.png)
 
 **Geniş katman uyarısı ve kapsam dışı reddi** — Derin katman eşiği geçemediğinde ~900 kanunluk geniş katman devreye girer ve doğrulanmamış katman uyarısı gösterilir; derlemle ilgisiz sorular reddedilir:
 

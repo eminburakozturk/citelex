@@ -65,7 +65,7 @@ const BOLUM_ADI: Record<string, string> = {
 };
 
 const TUR_ADI: Record<string, string> = {
-  karar: "KVKK Kurul kararı",
+  karar: "Kurul kararı",
   mevzuat: "Mevzuat",
   kanun: "Kanun",
   yonetmelik: "Yönetmelik",
@@ -82,7 +82,7 @@ export function birimEtiketi(etiket: string): string {
 
 export function belgeBasligi(docKey: string, belgeId: string): string {
   if (docKey.startsWith("karar:")) {
-    return `KVKK Kararı ${docKey.slice("karar:".length).replace("-", "/")}`;
+    return `KVKK Kurul Kararı ${docKey.slice("karar:".length).replace("-", "/")}`;
   }
   return belgeId || docKey;
 }

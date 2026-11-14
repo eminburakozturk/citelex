@@ -119,7 +119,7 @@ export function YapilandirmaKarsilastirmasi({
                       {m.dogru_ret}/{m.n_dis} ({yuzde(m.dogru_ret_orani)})
                     </td>
                     <td className="px-3 py-2 text-right whitespace-nowrap">
-                      {m.medyan_sure_sn != null ? `${m.medyan_sure_sn.toFixed(2)} sn` : "—"}
+                      {m.medyan_sure_sn != null ? `${m.medyan_sure_sn.toFixed(2).replace(".", ",")} sn` : "—"}
                     </td>
                   </tr>
                 ))}
@@ -158,7 +158,9 @@ export function YapilandirmaKarsilastirmasi({
                   <td className="px-3.5 py-2 text-right text-ink">{s.r1}</td>
                   <td className="px-3.5 py-2 text-right text-ink">{s.r3}</td>
                   <td className="px-3.5 py-2 text-right text-ink">{s.r5}</td>
-                  <td className="px-3.5 py-2 text-right font-semibold text-ink">{s.mrr.toFixed(3)}</td>
+                  <td className="px-3.5 py-2 text-right font-semibold text-ink">
+                    {s.mrr.toFixed(3).replace(".", ",")}
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -50,11 +50,13 @@ export function AramaDeneyleri({ veri }: { veri?: AramaDeneyleriVerisi | null })
                   <td className="px-3.5 py-2 text-right whitespace-nowrap text-ink">{s.mevzuat_r1}</td>
                   <td className="px-3.5 py-2 text-right whitespace-nowrap text-ink">{s.mevzuat_r5}</td>
                   <td className="px-3.5 py-2 text-right font-semibold whitespace-nowrap text-ink">
-                    {s.mevzuat_mrr.toFixed(3)}
+                    {s.mevzuat_mrr.toFixed(3).replace(".", ",")}
                   </td>
                   <td className="px-3.5 py-2 text-right whitespace-nowrap text-ink">{s.karar_r1}</td>
                   <td className="px-3.5 py-2 text-right whitespace-nowrap text-ink">{s.karar_r3}</td>
-                  <td className="px-3.5 py-2 text-right whitespace-nowrap text-muted">{s.sure_sn.toFixed(2)}</td>
+                  <td className="px-3.5 py-2 text-right whitespace-nowrap text-muted">
+                    {s.sure_sn.toFixed(2).replace(".", ",")}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -65,7 +67,7 @@ export function AramaDeneyleri({ veri }: { veri?: AramaDeneyleriVerisi | null })
       {veri.sozcuksel.length > 0 && (
         <div className="w-full overflow-x-auto rounded-xl border border-line bg-panel shadow-xs">
           <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-line px-3.5 py-2.5 text-xs text-muted">
-            <span className="font-medium">2. Sözcüksel kanal: BM25 vs bge-m3 sparse (hibrit parçalar, mevzuat)</span>
+            <span className="font-medium">2. Sözcüksel kanal: BM25 ve bge-m3 sparse (hibrit parçalar, mevzuat)</span>
             {veri.sozcuksel_not && <span>{veri.sozcuksel_not}</span>}
           </div>
           <table className="w-full border-collapse text-left text-xs sm:text-sm">
@@ -83,7 +85,9 @@ export function AramaDeneyleri({ veri }: { veri?: AramaDeneyleriVerisi | null })
                   <td className="px-3.5 py-2 font-medium text-ink">{s.yontem}</td>
                   <td className="px-3.5 py-2 text-right whitespace-nowrap text-ink">{s.r1}</td>
                   <td className="px-3.5 py-2 text-right whitespace-nowrap text-ink">{s.r5}</td>
-                  <td className="px-3.5 py-2 text-right font-semibold whitespace-nowrap text-ink">{s.mrr5.toFixed(3)}</td>
+                  <td className="px-3.5 py-2 text-right font-semibold whitespace-nowrap text-ink">
+                    {s.mrr5.toFixed(3).replace(".", ",")}
+                  </td>
                 </tr>
               ))}
             </tbody>

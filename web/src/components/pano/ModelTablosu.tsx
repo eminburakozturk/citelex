@@ -112,7 +112,7 @@ export function ModelTablosu({ modeller }: { modeller: ModelOzeti[] }) {
                 </td>
                 <td className="px-3.5 py-2.5 text-right whitespace-nowrap">{m.gecersiz_atif}</td>
                 <td className="px-3.5 py-2.5 text-right whitespace-nowrap">
-                  {m.medyan_sure_sn != null ? `${m.medyan_sure_sn.toFixed(2)} sn` : "—"}
+                  {m.medyan_sure_sn != null ? `${m.medyan_sure_sn.toFixed(2).replace(".", ",")} sn` : "—"}
                 </td>
                 <td className="px-3.5 py-2.5 text-right whitespace-nowrap">
                   {m.sadakat ? (

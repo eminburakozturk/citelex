@@ -122,7 +122,7 @@ export default function YontemSayfasi() {
                       </td>
                       <td className="px-3.5 py-2 text-right text-ink">{m.gecersiz_atif}</td>
                       <td className="px-3.5 py-2 text-right text-muted">
-                        {m.medyan_sure_sn != null ? `${m.medyan_sure_sn.toFixed(2)} sn` : "—"}
+                        {m.medyan_sure_sn != null ? `${m.medyan_sure_sn.toFixed(2).replace(".", ",")} sn` : "—"}
                       </td>
                     </tr>
                   ))}
@@ -132,9 +132,9 @@ export default function YontemSayfasi() {
           )}
 
           <p className="text-xs leading-relaxed text-muted">
-            API&apos;de varsayılan olarak <strong>ajan modu açıktır</strong>; yalnız ilk aramada eşik altında kalan veya
-            yetersiz dönen sorularda sorgu bir kez yeniden yazılıp aranır. <code>bge-reranker-v2-m3</code> CPU yayınında
-            gecikme nedeniyle varsayılan kapalı tutulur.
+            API&apos;de varsayılan olarak <strong>derin arama (ajan) modu açıktır</strong>; yalnız ilk aramada eşik
+            altında kalan veya yetersiz dönen sorularda sorgu bir kez yeniden yazılıp aranır.{" "}
+            <code>bge-reranker-v2-m3</code> CPU yayınında gecikme nedeniyle varsayılan kapalı tutulur.
           </p>
         </section>
 
@@ -181,7 +181,8 @@ export default function YontemSayfasi() {
             <p className="text-xs leading-relaxed text-muted">
               Reranker (<code>{rerank.dosya}</code>): <code>bge-reranker-v2-m3</code> yalnız sıralama ölçümünde mevzuat
               R@1 değerini {rerank.satirlar[0]?.r1} → {rerank.satirlar[1]?.r1} / {rerank.satirlar[0]?.n} ve MRR değerini{" "}
-              {rerank.satirlar[0]?.mrr.toFixed(3)} → {rerank.satirlar[1]?.mrr.toFixed(3)} düzeyine çıkardı.
+              {rerank.satirlar[0]?.mrr.toFixed(3).replace(".", ",")} →{" "}
+              {rerank.satirlar[1]?.mrr.toFixed(3).replace(".", ",")} düzeyine çıkardı.
             </p>
           )}
         </section>

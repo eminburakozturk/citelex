@@ -106,7 +106,8 @@ export function CevapKarti({
   }
 
   const katman = katmanEtiketi(sonuc?.kanallar);
-  const modelAdi = sonuc?.model ?? sonuc?.llm;
+  const hamModel = sonuc?.model ?? sonuc?.llm;
+  const modelAdi = hamModel ? hamModel.replace(/:free$/, " (ücretsiz)") : undefined;
 
   return (
     <section aria-label="Soru ve cevap" className="space-y-4">
@@ -291,19 +292,25 @@ export function CevapKarti({
               {sonuc.sure_sn != null && (
                 <div className="rounded-lg bg-bg/70 px-3 py-2">
                   <dt className="text-subtle">Toplam süre</dt>
-                  <dd className="mt-0.5 font-semibold tabular-nums text-ink">{sonuc.sure_sn.toFixed(2)} sn</dd>
+                  <dd className="mt-0.5 font-semibold tabular-nums text-ink">
+                    {sonuc.sure_sn.toFixed(2).replace(".", ",")} sn
+                  </dd>
                 </div>
               )}
               {sonuc.arama_sn != null && (
                 <div className="rounded-lg bg-bg/70 px-3 py-2">
                   <dt className="text-subtle">Arama süresi</dt>
-                  <dd className="mt-0.5 font-semibold tabular-nums text-ink">{sonuc.arama_sn.toFixed(2)} sn</dd>
+                  <dd className="mt-0.5 font-semibold tabular-nums text-ink">
+                    {sonuc.arama_sn.toFixed(2).replace(".", ",")} sn
+                  </dd>
                 </div>
               )}
               {sonuc.llm_sn != null && (
                 <div className="rounded-lg bg-bg/70 px-3 py-2">
                   <dt className="text-subtle">LLM süresi</dt>
-                  <dd className="mt-0.5 font-semibold tabular-nums text-ink">{sonuc.llm_sn.toFixed(2)} sn</dd>
+                  <dd className="mt-0.5 font-semibold tabular-nums text-ink">
+                    {sonuc.llm_sn.toFixed(2).replace(".", ",")} sn
+                  </dd>
                 </div>
               )}
               {sonuc.gecersiz_atif != null && (
@@ -314,7 +321,7 @@ export function CevapKarti({
               )}
               {sonuc.ajan_deneme != null && (
                 <div className="rounded-lg bg-bg/70 px-3 py-2">
-                  <dt className="text-subtle">Ajan denemesi</dt>
+                  <dt className="text-subtle">Derin arama denemesi</dt>
                   <dd className="mt-0.5 font-semibold tabular-nums text-ink">{sonuc.ajan_deneme}. deneme</dd>
                 </div>
               )}

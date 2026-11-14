@@ -28,9 +28,9 @@ export function GenisKatmanBolumu({ veri }: { veri?: GenisKatmanVerisi | null })
       </div>
 
       <p role="note" className="rounded-xl border border-warn-border bg-warn-bg px-4 py-3 text-xs leading-relaxed text-warn-ink">
-        Geniş katman soru seti (<code>eval/genis_sorular.jsonl</code>: 15 kapsam içi + 3 kapsam dışı) ve açık eval
-        beklenen cevapları <strong>TASLAK</strong> olup hukuki doğrulama bekler; eşik ve yönlendirme bu sete göre
-        ayarlanmamıştır. Bilinen tasarım sınırı: derin katman benzer bir soruyu yakalarsa geniş katmana hiç gidilmez
+        Geniş katman soru seti (<code>eval/genis_sorular.jsonl</code>: 15 kapsam içi + 3 kapsam dışı) ve açık
+        değerlendirme beklenen cevapları <strong>TASLAK</strong> olup hukuki doğrulama bekler; eşik ve yönlendirme bu sete
+        göre ayarlanmamıştır. Bilinen tasarım sınırı: derin katman benzer bir soruyu yakalarsa geniş katmana hiç gidilmez
         (ör. <code>g13</code> devlet memuru analık izni → İş Kanunu m. 74 ile 0,717 eşleşmesi; 0,05 fark kuralı sonrası
         yönlendirildi).
       </p>
@@ -137,7 +137,7 @@ export function GenisKatmanBolumu({ veri }: { veri?: GenisKatmanVerisi | null })
             {ev.kapsam_disi && (
               <span>
                 Kapsam dışı ret: <strong className="text-ink">{ev.kapsam_disi}</strong> (<code>d03</code> 7036 s.
-                Kanun m.3 cevabı nedeniyle)
+                Kanun m. 3 cevabı nedeniyle)
               </span>
             )}
             {ev.diger && <span>{ev.diger}</span>}

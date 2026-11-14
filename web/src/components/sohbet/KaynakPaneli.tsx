@@ -7,6 +7,7 @@ import {
   KaynakParcasi,
   SadeAciklama,
   aciklamaGetir,
+  kisaAtif,
   tarih,
 } from "@/lib/api";
 
@@ -38,21 +39,27 @@ function AlintiVurguluMetin({ metin, alinti }: { metin?: string | null; alinti?:
 }
 
 function IliskiliAgiSvg({
-  merkezEtiket,
+  merkezAtif,
+  merkezAnahtar,
+  merkezBaslik,
   baglantilar,
   onSec,
 }: {
-  merkezEtiket: string;
+  merkezAtif: string;
+  merkezAnahtar?: string;
+  merkezBaslik?: string | null;
   baglantilar: IliskiliMadde[];
-  onSec: (anahtar: string) => void;
+  onSec: (anahtar: string, atif?: string) => void;
 }) {
   const gosterilen = baglantilar.slice(0, 6);
-  const W = 440;
-  const H = 220;
+  const W = 460;
+  const H = 240;
   const cx = W / 2;
   const cy = H / 2;
-  const rx = 148;
-  const ry = 74;
+  const rx = 152;
+  const ry = 80;
+  const merkezKisa = kisaAtif(merkezAtif, merkezAnahtar);
+  const merkezTam = `${merkezAtif}${merkezBaslik ? ` — ${merkezBaslik}` : ""}`;
 
   return (
     <div className="rounded-xl border border-line bg-bg/70 p-3">
@@ -70,7 +77,7 @@ function IliskiliAgiSvg({
       <svg
         viewBox={`0 0 ${W} ${H}`}
         role="img"
-        aria-label={`${merkezEtiket} ile ilişkili ${gosterilen.length} madde bağlantı şeması`}
+        aria-label={`${merkezAtif} ile ilişkili ${gosterilen.length} madde bağlantı şeması`}
         className="block h-auto w-full max-w-full select-none"
       >
         {gosterilen.map((item, i) => {
@@ -78,8 +85,10 @@ function IliskiliAgiSvg({
           const x = cx + Math.cos(aci) * rx;
           const y = cy + Math.sin(aci) * ry;
           const renk = item.iliski === "atif_yapar" ? "var(--accent)" : "var(--info)";
-          const hamEtiket = item.atif || item.anahtar || "";
-          const etiket = hamEtiket.length > 22 ? `${hamEtiket.slice(0, 20)}…` : hamEtiket;
+          const etiket = kisaAtif(item.atif, item.anahtar);
+          const tamBaslik = (item.baslik ?? "").trim();
+          const kisaBaslik = tamBaslik.length > 20 ? `${tamBaslik.slice(0, 19)}…` : tamBaslik;
+          const tamAciklama = `${item.atif || etiket}${tamBaslik ? ` — ${tamBaslik}` : ""}`;
 
           return (
             <g key={item.anahtar}>
@@ -96,20 +105,22 @@ function IliskiliAgiSvg({
               <g
                 role="button"
                 tabIndex={0}
-                onClick={() => onSec(item.anahtar)}
+                aria-label={`${tamAciklama} maddesini incele`}
+                onClick={() => onSec(item.anahtar, item.atif || etiket)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    onSec(item.anahtar);
+                    onSec(item.anahtar, item.atif || etiket);
                   }
                 }}
                 className="cursor-pointer"
               >
+                <title>{tamAciklama}</title>
                 <rect
-                  x={x - 62}
-                  y={y - 16}
-                  width={124}
-                  height={32}
+                  x={x - 68}
+                  y={y - 20}
+                  width={136}
+                  height={40}
                   rx={8}
                   fill="var(--panel)"
                   stroke={renk}
@@ -117,7 +128,7 @@ function IliskiliAgiSvg({
                 />
                 <text
                   x={x}
-                  y={y + 4}
+                  y={kisaBaslik ? y - 3 : y + 4}
                   textAnchor="middle"
                   fontSize="10.5"
                   fontWeight="600"
@@ -125,29 +136,55 @@ function IliskiliAgiSvg({
                 >
                   {etiket}
                 </text>
+                {kisaBaslik && (
+                  <text
+                    x={x}
+                    y={y + 11}
+                    textAnchor="middle"
+                    fontSize="8.8"
+                    fill="var(--muted)"
+                  >
+                    {kisaBaslik}
+                  </text>
+                )}
               </g>
             </g>
           );
         })}
 
-        <rect
-          x={cx - 70}
-          y={cy - 18}
-          width={140}
-          height={36}
-          rx={10}
-          fill="var(--accent-btn)"
-        />
-        <text
-          x={cx}
-          y={cy + 4}
-          textAnchor="middle"
-          fontSize="11"
-          fontWeight="600"
-          fill="var(--accent-ink)"
-        >
-          {merkezEtiket.length > 22 ? `${merkezEtiket.slice(0, 20)}…` : merkezEtiket}
-        </text>
+        <g>
+          <title>{merkezTam}</title>
+          <rect
+            x={cx - 68}
+            y={cy - 19}
+            width={136}
+            height={38}
+            rx={10}
+            fill="var(--accent-btn)"
+          />
+          <text
+            x={cx}
+            y={merkezBaslik ? cy - 2 : cy + 4}
+            textAnchor="middle"
+            fontSize="11"
+            fontWeight="600"
+            fill="var(--accent-ink)"
+          >
+            {merkezKisa}
+          </text>
+          {merkezBaslik && (
+            <text
+              x={cx}
+              y={cy + 11}
+              textAnchor="middle"
+              fontSize="8.8"
+              fill="var(--accent-ink)"
+              fillOpacity="0.88"
+            >
+              {merkezBaslik.length > 20 ? `${merkezBaslik.slice(0, 19)}…` : merkezBaslik}
+            </text>
+          )}
+        </g>
       </svg>
     </div>
   );
@@ -158,6 +195,8 @@ export function KaynakPaneli({
   veri,
   yukleniyor,
   hata,
+  oncekiKaynak,
+  onGeriDon,
   onKapat,
   onAnahtarSec,
 }: {
@@ -165,8 +204,10 @@ export function KaynakPaneli({
   veri: KaynakMetni | null;
   yukleniyor: boolean;
   hata: string | null;
+  oncekiKaynak?: { anahtar: string; atif: string } | null;
+  onGeriDon?: () => void;
   onKapat: () => void;
-  onAnahtarSec: (anahtar: string) => void;
+  onAnahtarSec: (anahtar: string, atif?: string) => void;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const [sekme, setSekme] = useState<Sekme>("metin");
@@ -239,6 +280,20 @@ export function KaynakPaneli({
       >
         <div className="flex items-start justify-between gap-3 border-b border-line px-5 py-4">
           <div className="min-w-0 space-y-1">
+            {oncekiKaynak && onGeriDon && (
+              <div className="pb-1">
+                <button
+                  type="button"
+                  onClick={onGeriDon}
+                  className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 py-1 text-xs font-medium text-accent transition-colors hover:border-accent hover:bg-accent-soft"
+                >
+                  <span aria-hidden="true">←</span>
+                  <span>
+                    Önceki maddeye dön ({kisaAtif(oncekiKaynak.atif, oncekiKaynak.anahtar)})
+                  </span>
+                </button>
+              </div>
+            )}
             <div className="flex flex-wrap items-center gap-2">
               {turEtiketi && (
                 <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-[11px] font-semibold text-accent">
@@ -363,7 +418,7 @@ export function KaynakPaneli({
               {!aciklama && !aciklamaYukleniyor && (
                 <div className="space-y-3 rounded-xl border border-line bg-bg/60 p-4">
                   <p className="text-xs leading-relaxed text-muted">
-                    Bu maddenin yalnızca kendi resmî metnine dayanarak maddeler hâlinde sadeleştirilmiş özeti
+                    Bu maddenin yalnızca kendi resmî metnine dayanarak maddeler hâlinde sade açıklaması
                     oluşturulur.
                   </p>
                   <button
@@ -371,14 +426,14 @@ export function KaynakPaneli({
                     onClick={sadeAciklamaYukle}
                     className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-accent-btn px-4 py-2 text-xs font-medium text-accent-ink transition-colors hover:bg-accent-btn-hover"
                   >
-                    Bu maddeyi sadeleştir
+                    Sade açıklama oluştur
                   </button>
                 </div>
               )}
 
               {aciklamaYukleniyor && (
                 <div role="status" className="rounded-xl border border-line bg-bg/60 p-4 text-xs text-muted">
-                  Madde metni sadeleştiriliyor…
+                  Sade açıklama hazırlanıyor…
                 </div>
               )}
 
@@ -436,7 +491,7 @@ export function KaynakPaneli({
                     className="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-panel bg-accent"
                   />
                   <div className="flex flex-wrap items-center gap-2 text-xs">
-                    <span className="font-semibold tabular-nums text-accent">{g.tarih}</span>
+                    <span className="font-semibold tabular-nums text-accent">{tarih(g.tarih)}</span>
                     {g.kanun && (
                       <span className="rounded bg-panel-soft px-2 py-0.5 font-medium text-ink">{g.kanun}</span>
                     )}
@@ -450,40 +505,66 @@ export function KaynakPaneli({
           {!yukleniyor && !hata && veri && sekme === "iliskili" && iliskiliVar && (
             <div className="space-y-4">
               <IliskiliAgiSvg
-                merkezEtiket={veri.atif}
+                merkezAtif={veri.atif}
+                merkezAnahtar={veri.anahtar}
+                merkezBaslik={veri.baslik}
                 baglantilar={veri.iliskili!}
                 onSec={onAnahtarSec}
               />
 
               <ul className="space-y-2">
-                {veri.iliskili!.map((il) => (
-                  <li key={il.anahtar}>
-                    <button
-                      type="button"
-                      onClick={() => onAnahtarSec(il.anahtar)}
-                      className="flex w-full items-center justify-between gap-3 rounded-xl border border-line bg-bg/60 px-3.5 py-2.5 text-left transition-colors hover:border-accent hover:bg-panel-soft/60"
-                    >
-                      <div className="min-w-0 space-y-0.5">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                              il.iliski === "atif_yapar"
-                                ? "bg-accent-soft text-accent"
-                                : "bg-info-bg text-info"
-                            }`}
-                          >
-                            {il.iliski === "atif_yapar" ? "Atıf yapar" : "Atıf alır"}
-                          </span>
-                          <span className="truncate text-xs font-semibold text-ink">
-                            {il.atif || il.anahtar}
-                          </span>
+                {veri.iliskili!.map((il) => {
+                  const kisa = kisaAtif(il.atif, il.anahtar);
+                  const tamAtif = il.atif || kisa;
+                  const tamAciklama = `${tamAtif}${il.baslik ? ` — ${il.baslik}` : ""}`;
+                  return (
+                    <li key={il.anahtar}>
+                      <button
+                        type="button"
+                        title={tamAciklama}
+                        onClick={() => onAnahtarSec(il.anahtar, tamAtif)}
+                        className="flex w-full items-center justify-between gap-3 rounded-xl border border-line bg-bg/60 px-3.5 py-2.5 text-left transition-colors hover:border-accent hover:bg-panel-soft/60"
+                      >
+                        <div className="min-w-0 space-y-0.5">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span
+                              className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                                il.iliski === "atif_yapar"
+                                  ? "bg-accent-soft text-accent"
+                                  : "bg-info-bg text-info"
+                              }`}
+                            >
+                              {il.iliski === "atif_yapar" ? "Atıf yapar" : "Atıf alır"}
+                            </span>
+                            <span
+                              title={tamAtif}
+                              className="shrink-0 font-mono text-xs font-semibold text-ink"
+                            >
+                              {kisa}
+                            </span>
+                            {il.atif && il.atif !== kisa && (
+                              <span
+                                title={il.atif}
+                                className="truncate text-[11px] text-muted"
+                              >
+                                ({il.atif})
+                              </span>
+                            )}
+                          </div>
+                          {il.baslik && (
+                            <p
+                              title={il.baslik}
+                              className="truncate font-serif text-xs text-muted"
+                            >
+                              {il.baslik}
+                            </p>
+                          )}
                         </div>
-                        {il.baslik && <p className="truncate text-xs text-muted">{il.baslik}</p>}
-                      </div>
-                      <span className="shrink-0 text-xs font-medium text-accent">İncele →</span>
-                    </button>
-                  </li>
-                ))}
+                        <span className="shrink-0 text-xs font-medium text-accent">İncele →</span>
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           )}

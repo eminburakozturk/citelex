@@ -65,6 +65,9 @@ export default function AnaSayfa() {
     atif: string;
     alinti?: string;
   } | null>(null);
+  const [kaynakGecmisi, setKaynakGecmisi] = useState<
+    Array<{ anahtar: string; atif: string; alinti?: string }>
+  >([]);
   const [kaynakVerisi, setKaynakVerisi] = useState<KaynakMetni | null>(null);
   const [kaynakYukleniyor, setKaynakYukleniyor] = useState(false);
   const [kaynakHata, setKaynakHata] = useState<string | null>(null);
@@ -206,13 +209,38 @@ export default function AnaSayfa() {
 
   const kaynakAc = useCallback(
     (k: Kaynak, tetikleyici: HTMLElement) => {
+      setKaynakGecmisi([]);
       anahtarlaKaynakAc(k.anahtar, k.atif, k.alinti, tetikleyici);
     },
     [anahtarlaKaynakAc],
   );
 
+  const paneldeIlerle = useCallback(
+    (yeniAnahtar: string, yeniAtif?: string) => {
+      if (seciliKaynak && seciliKaynak.anahtar !== yeniAnahtar) {
+        const mevcutAtif = kaynakVerisi?.atif ?? seciliKaynak.atif;
+        setKaynakGecmisi((prev) => [
+          ...prev,
+          { anahtar: seciliKaynak.anahtar, atif: mevcutAtif, alinti: seciliKaynak.alinti },
+        ]);
+      }
+      anahtarlaKaynakAc(yeniAnahtar, yeniAtif ?? yeniAnahtar);
+    },
+    [seciliKaynak, kaynakVerisi, anahtarlaKaynakAc],
+  );
+
+  const paneldeGeriDon = useCallback(() => {
+    setKaynakGecmisi((prev) => {
+      if (prev.length === 0) return prev;
+      const onceki = prev[prev.length - 1];
+      anahtarlaKaynakAc(onceki.anahtar, onceki.atif, onceki.alinti);
+      return prev.slice(0, -1);
+    });
+  }, [anahtarlaKaynakAc]);
+
   const panelKapat = useCallback(() => {
     setSeciliKaynak(null);
+    setKaynakGecmisi([]);
     requestAnimationFrame(() => kaynakTetikleyiciRef.current?.focus());
   }, []);
 
@@ -496,8 +524,12 @@ export default function AnaSayfa() {
           veri={kaynakVerisi}
           yukleniyor={kaynakYukleniyor}
           hata={kaynakHata}
+          oncekiKaynak={
+            kaynakGecmisi.length > 0 ? kaynakGecmisi[kaynakGecmisi.length - 1] : null
+          }
+          onGeriDon={paneldeGeriDon}
           onKapat={panelKapat}
-          onAnahtarSec={(yeniAnahtar) => anahtarlaKaynakAc(yeniAnahtar, yeniAnahtar)}
+          onAnahtarSec={paneldeIlerle}
         />
       )}
     </SiteKabugu>
