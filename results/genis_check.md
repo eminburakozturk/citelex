@@ -6,14 +6,14 @@ Eşik 0.637. Soru: 15 kapsam içi + 3 kapsam dışı (eval/genis_sorular.jsonl, 
 |---|---|
 | Geniş katmana yönlendirildi | 14/15 |
 | Beklenen madde üretim bağlamında | 13/15 |
-| Doğrudan geniş arama R@1 | 9/15 |
+| Doğrudan geniş arama R@1 | 8/15 |
 | Doğrudan geniş arama R@5 | 14/15 |
 | Kapsam dışı: hiçbir kanala gitmedi (eşikte ret) | 3/3 |
 
 | # | Soru | Beklenen | Kanal | Bağlamda | Sıra | İlk 3 |
 |---|---|---|---|---|---|---|
 | g01 | Konut kira artışlarında yenilenen kira döneminde yasal üst sınır nasıl | kanun-6098:344 | genis (0.689) | ✓ | 2 | kanun-6098:Geçici 2; kanun-6098:344; kanun-6098:Geçici 1 |
-| g02 | Anlaşmalı boşanma davası açabilmek için evliliğin en az ne kadar sürmü | kanun-4721:166 | mevzuat (0.629) | ✗ | 1 | kanun-4721:166; kanun-4721:164; kanun-4721:161 |
+| g02 | Anlaşmalı boşanma davası açabilmek için evliliğin en az ne kadar sürmü | kanun-4721:166 | mevzuat (0.629) | ✗ | 2 | kanun-4721:164; kanun-4721:166; kanun-4721:161 |
 | g03 | Tacirler arasında temerrüde düşürme veya sözleşmeden dönme ihtarları h | kanun-6102:18 | genis (0.648) | ✓ | 2 | kanun-6102:1530; kanun-6102:18; kanun-6098:235 |
 | g04 | Mal teslim edildikten veya hizmet yapıldıktan sonra fatura en geç kaç  | kanun-213:231 | genis (0.735) | ✓ | 1 | kanun-213:231; kanun-5510:97; kanun-6102:1530 |
 | g05 | Hukuk mahkemesinin kararına karşı istinaf yoluna başvuru süresi kaç ha | kanun-6100:345 | genis (0.761) | ✓ | 3 | kanun-2004:363; kanun-6100:348; kanun-6100:345 |

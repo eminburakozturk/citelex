@@ -27,6 +27,22 @@ RERANK_ADAY = 30
 MAX_MADDE_CHARS = 3000  # bağlama tam madde girer; daha uzunsa eşleşen fıkra + komşuları
 
 
+def rrf_birlestir(dense_pts: list, sparse_pts: list, top_k: int, k: int = 60) -> list["Hit"]:
+    """Reciprocal Rank Fusion, deterministik: puan = Σ 1/(k + sıra); eşitlikte daha iyi dense sırası, sonra chunk_id."""
+    puan: dict = {}
+    d_sira: dict = {}
+    payload: dict = {}
+    for kanal, pts in (("d", dense_pts), ("s", sparse_pts)):
+        for r, p in enumerate(pts, 1):
+            pid = str(p.id)
+            puan[pid] = puan.get(pid, 0.0) + 1.0 / (k + r)
+            payload[pid] = p.payload
+            if kanal == "d":
+                d_sira[pid] = r
+    sirali = sorted(puan, key=lambda i: (-puan[i], d_sira.get(i, 10**6), payload[i].get("chunk_id", i)))
+    return [Hit(puan[i], payload[i]) for i in sirali[:top_k]]
+
+
 def build_filter(belge_tur: list[str] | None = None, include_inactive: bool = False) -> models.Filter | None:
     must: list[models.Condition] = []
     if not include_inactive:
@@ -73,15 +89,14 @@ class Searcher:
                 res = self.client.query_points(self.name, query=dense, using="dense",
                                                query_filter=flt, limit=top_k, with_payload=True)
             elif method == "hybrid":
-                res = self.client.query_points(
-                    self.name,
-                    prefetch=[
-                        models.Prefetch(query=dense, using="dense", filter=flt, limit=PREFETCH),
-                        models.Prefetch(query=sparse, using="bm25", filter=flt, limit=PREFETCH),
-                    ],
-                    query=models.RrfQuery(rrf=models.Rrf(k=RRF_K)),
-                    limit=top_k, with_payload=True,
-                )
+                # RRF istemcide: Qdrant'ın RrfQuery'si eşit RRF puanlarını (ör. sıra 1+3 ile 3+1) her çağrıda farklı
+                # sırada döndürüyordu -> aynı soru farklı bağlam (ölçüldü: derin katmanda 50 sorunun 12'sinde ilk 15
+                # değişiyordu). Formül aynı (1/(k+sıra) toplamı); eşitlik dense sırası, sonra chunk_id ile kırılır.
+                d_res = self.client.query_points(self.name, query=dense, using="dense", query_filter=flt,
+                                                 limit=PREFETCH, with_payload=True).points
+                s_res = self.client.query_points(self.name, query=sparse, using="bm25", query_filter=flt,
+                                                 limit=PREFETCH, with_payload=True).points
+                return rrf_birlestir(d_res, s_res, top_k, RRF_K)
             else:
                 raise ValueError(method)
         return [Hit(p.score, p.payload) for p in res.points]
