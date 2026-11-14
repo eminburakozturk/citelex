@@ -42,7 +42,11 @@ from src.api.ratelimit import RateLimiter
 log = logging.getLogger("citelex.api")
 SOURCES_PATH = Path("configs/sources.json")
 DB_PATH = Path("data/store/citelex.db")
+ILISKI_PATH = Path(os.environ.get("CITELEX_ILISKI", "data/processed/iliskiler.json"))
+ERKEN_UYARI_LOG = Path(os.environ.get("CITELEX_ERKEN_UYARI", "logs/erken_uyari.jsonl"))
+_ILISKILER: dict | None = None
 FARK_DIR = Path(os.environ.get("CITELEX_FARK_DIR", "data/store/farklar"))
+RE_ANAHTAR_BASIT = re.compile(r"^[a-z0-9-]{2,60}(:[0-9A-Za-zÇĞİÖŞÜçğıöşü /()]{1,30})?$")
 RE_FARK = re.compile(r"^[0-9T]{15}_[a-z]+_[A-Za-z0-9._-]+_\d+-\d+$")  # yol enjeksiyonuna karşı sıkı kalıp
 GIZLI_ALANLAR = ("ham", "esik", "kanal_top1", "dense_top1")  # istemciye gitmeyen iç alanlar
 
@@ -50,6 +54,26 @@ MSG_KOTA = "Dil modeli sağlayıcısının kotası doldu. Lütfen birkaç dakika
 MSG_HATA = "Cevap üretilirken bir hata oluştu. Lütfen tekrar deneyin."
 MSG_SINIR = {"dakika": "Çok sık soru gönderdiniz.", "gunluk": "Günlük soru sınırınıza ulaştınız.",
              "gunluk_toplam": "Sistemin günlük soru sınırı doldu."}
+
+
+class AciklamaIstek(BaseModel):
+    anahtar: str = Field(min_length=2, max_length=80)
+
+
+class IlgiliIstek(BaseModel):
+    soru: str = Field(min_length=3, max_length=500)
+    anahtarlar: list[str] = Field(default_factory=list, max_length=10)
+
+
+def iliskiler() -> dict:
+    """data/processed/iliskiler.json (madde değişiklik geçmişi + madde ilişkileri); yoksa boş. Bir kez okunur."""
+    global _ILISKILER
+    if _ILISKILER is None:
+        try:
+            _ILISKILER = json.loads(ILISKI_PATH.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            _ILISKILER = {}
+    return _ILISKILER
 
 
 class Soru(BaseModel):
@@ -92,7 +116,9 @@ def last_check() -> str | None:
 
 
 def public(a: dict) -> dict:
+    from src.generate.answer import adimlar
     out = {k: v for k, v in a.items() if k not in GIZLI_ALANLAR}
+    out["adimlar"] = adimlar(a)
     out["son_kontrol"] = last_check() or a.get("derlem_tarihi")
     return out
 
@@ -191,9 +217,76 @@ def create_app(answerer=None) -> FastAPI:
         """Atıf anahtarından kaynak metni: 'belge_id:madde_no' (mevzuat) veya 'kvkk-karar-YYYY-N'."""
         from src.tools import AracHatasi, madde_getir
         try:
-            return madde_getir(request.app.state.answerer.searcher, anahtar, last_check())
+            out = madde_getir(request.app.state.answerer.searcher, anahtar, last_check())
         except AracHatasi as e:
             raise HTTPException(e.status, detail=str(e)) from None
+        bilgi = iliskiler().get(anahtar, {})
+        out["gecmis"] = bilgi.get("gecmis", [])
+        out["iliskili"] = bilgi.get("iliskili", [])
+        return out
+
+    def sinir(request: Request) -> None:
+        ok, bekle, neden = request.app.state.limiter.check(client_ip(request))
+        if not ok:
+            raise HTTPException(429, detail=f"{MSG_SINIR[neden]} {bekle} saniye sonra tekrar deneyin.",
+                                headers={"Retry-After": str(bekle)})
+
+    @app.post("/aciklama")
+    def aciklama_uc(body: AciklamaIstek, request: Request):
+        """Maddenin sade Türkçe açıklaması (LLM; yalnız madde metnine dayanır; önbellekli; istek sınırına tabi)."""
+        from src.generate.yardimci import aciklama
+        from src.tools import AracHatasi, madde_getir
+        sinir(request)
+        ans = request.app.state.answerer
+        try:
+            madde = madde_getir(ans.searcher, body.anahtar)
+        except AracHatasi as e:
+            raise HTTPException(e.status, detail=str(e)) from None
+        try:
+            return aciklama(ans.llm, madde)
+        except Exception as e:  # noqa: BLE001
+            log.warning("açıklama hatası: %s", e)
+            raise HTTPException(503, detail=llm_error_message(e)) from None
+
+    @app.post("/ilgili")
+    def ilgili_uc(body: IlgiliIstek, request: Request):
+        """Cevaptan sonra en çok 3 takip sorusu; yalnız derlemde cevabı olabilecekler (eşik kontrolü)."""
+        from src.generate.yardimci import ilgili_sorular
+        sinir(request)
+        ans = request.app.state.answerer
+        basliklar = [a for a in body.anahtarlar if RE_ANAHTAR_BASIT.match(a)]
+        try:
+            with ans._lock:
+                return {"sorular": ilgili_sorular(ans.llm, ans.searcher, body.soru.strip(), basliklar, ans.cfg.get("esik"))}
+        except Exception as e:  # noqa: BLE001 — öneri yoksa arayüz bölümü gizler
+            log.warning("ilgili soru hatası: %s", e)
+            return {"sorular": []}
+
+    @app.get("/guncellik")
+    def guncellik():
+        """Ana sayfadaki güncellik kartı: son kontrol, izlenen belge sayısı, RG erken uyarıda bekleyenler, son fark."""
+        from src.update.diff import list_diffs
+        n = None
+        if DB_PATH.exists():
+            try:
+                con = sqlite3.connect(f"file:{DB_PATH.as_posix()}?mode=ro", uri=True)
+                try:
+                    n = con.execute("SELECT COUNT(*) FROM documents").fetchone()[0]
+                finally:
+                    con.close()
+            except sqlite3.Error:
+                n = None
+        bekleyen = []
+        if ERKEN_UYARI_LOG.exists():
+            for l in ERKEN_UYARI_LOG.read_text(encoding="utf-8").splitlines()[-20:]:
+                try:
+                    r = json.loads(l)
+                    bekleyen.append({k: r.get(k) for k in ("gun", "baslik", "url")} | {"belge_id": r.get("ilgili_belge_id")})
+                except ValueError:
+                    continue
+        son = list_diffs(FARK_DIR, 1)
+        return {"son_kontrol": last_check(), "belge_sayisi": n, "rg_bekleyen": bekleyen[-5:],
+                "son_degisiklik": {k: son[0][k] for k in ("fark_id", "zaman", "belge_id")} if son else None}
 
     @app.get("/degisiklikler")
     def degisiklikler(limit: int = Query(20, ge=1, le=100)):

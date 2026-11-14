@@ -87,6 +87,32 @@ def build_context(searcher: Searcher, query: str, esik: float | None,
                   "kanallar": kanallar}
 
 
+def adimlar(a: dict) -> list[dict]:
+    """Cevabın oluşum adımları (arayüzdeki işlem zaman çizelgesi): yalnız gerçekleşen olaylardan türetilir."""
+    katman = a.get("bilmiyorum_katmani")
+    kanallar = a.get("kanallar") or []
+    n = len(a.get("baglam_anahtar") or [])
+    ad = {"mevzuat": "mevzuat", "karar": "Kurul kararı", "genis": "geniş katman"}
+    out = [{"ad": "arama", "durum": "tamam", "sure_sn": a.get("arama_sn"),
+            "detay": f"{n} kaynak bulundu ({', '.join(ad.get(k, k) for k in kanallar) or '-'})"}]
+    esik_ok = katman != "arama_esigi"
+    out.append({"ad": "esik", "durum": "tamam" if esik_ok else "basarisiz", "sure_sn": None,
+                "detay": "Kaynaklar soruya yeterince yakın" if esik_ok else "Kaynaklar soruya yeterince yakın değil"})
+    if (a.get("ajan_deneme") or 1) > 1:
+        q = (a.get("ajan_sorgular") or [""])[0]
+        out.append({"ad": "yeniden_yazma", "durum": "tamam", "sure_sn": None, "detay": f"Soru yeniden yazılıp tekrar arandı: {q}"})
+    if a.get("llm_sn") is not None:
+        out.append({"ad": "llm", "durum": "basarisiz" if katman == "llm" else "tamam", "sure_sn": a.get("llm_sn"),
+                    "detay": "Model kaynakları yetersiz buldu" if katman == "llm" else "Cevap yazıldı"})
+        if katman != "llm":
+            gecerli, gecersiz = len(a.get("kaynaklar") or []), len(a.get("gecersiz_atif") or [])
+            ok = katman != "atif_dogrulama"
+            out.append({"ad": "atif_dogrulama", "durum": "tamam" if ok else "basarisiz", "sure_sn": None,
+                        "detay": (f"{gecerli} atıf doğrulandı" + (f", {gecersiz} geçersiz atıf atıldı" if gecersiz else ""))
+                        if ok else "Cevapta geçerli atıf yok; cevap atıldı"})
+    return out
+
+
 class Answerer:
     def __init__(self, llm_spec: str = "gemini", mode: str = "hibrit", embed_device: str | None = None):
         # Ollama ile çalışırken sorgu embedding'i CPU'da: 8 GB VRAM LLM'e kalsın (KARARLAR.md).
@@ -136,7 +162,7 @@ class Answerer:
             parsed.update(bilmiyorum=True, cevap=prompt.NO_ANSWER_TEXT, neden="Model kaynak göstermeden cevap verdi; cevap atıldı.")
             katman = "atif_dogrulama"
         kaynaklar = [source_entry(n, hits[n - 1].payload) for n in parsed["atif_no"]]
-        return {**base, "bilmiyorum": parsed["bilmiyorum"], "bilmiyorum_katmani": katman, "cevap": parsed["cevap"],
+        return {**base, "model": getattr(self.llm, "last_model", None) or self.llm.name, "bilmiyorum": parsed["bilmiyorum"], "bilmiyorum_katmani": katman, "cevap": parsed["cevap"],
                 "neden": parsed["neden"], "kaynaklar": kaynaklar, "gecersiz_atif": parsed["gecersiz_atif"],
                 "ham": raw, "sure_sn": round(base["arama_sn"] + llm_sn, 2), "llm_sn": round(llm_sn, 2)}
 
