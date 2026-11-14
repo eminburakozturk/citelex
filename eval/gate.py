@@ -108,7 +108,7 @@ def run(motor: str) -> tuple[dict, list[dict]]:
         finder = lambda s: keys_bm25(eng, s)  # noqa: E731
     else:
         from src.retrieve.search import Searcher
-        searcher = Searcher("hibrit")
+        searcher = Searcher("hibrit", rerank=False)   # temel değer reranker'sız
         finder = lambda s: keys_qdrant(searcher, s)  # noqa: E731
     sonuc = {"mevzuat": [0, 0], "karar": [0, 0]}
     satirlar = []

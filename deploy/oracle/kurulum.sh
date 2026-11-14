@@ -32,7 +32,7 @@ if [ ! -f .env ]; then
 else
   grep -q '^ALAN_ADI=' .env || echo "ALAN_ADI=$ALAN_ADI" >> .env
 fi
-mkdir -p logs store
+mkdir -p logs store veri/results
 export ALAN_ADI
 
 COMPOSE="$DOCKER compose --env-file .env -f deploy/oracle/docker-compose.oracle.yml"
@@ -53,6 +53,13 @@ done
 
 echo "== 5/6 API + Caddy (ilk derleme ARM'de ~10-15 dk; bge-m3 ilk açılışta iner)"
 $COMPOSE up -d --build api caddy
+
+echo "== Günlük güncelleme (cron, her gün 03:00; günlük: logs/guncelle.log)"
+mkdir -p veri/results
+CRON="0 3 * * * cd $KOK && $COMPOSE --profile guncelle run --rm guncelle >> $KOK/logs/guncelle.log 2>&1"
+( crontab -l 2>/dev/null | grep -v 'run --rm guncelle' ; echo "$CRON" ) | crontab -
+# Sudo gerektiren docker komutu cron'da çalışsın diye kullanıcı docker grubundaysa sudo'suz sürüm kullanılır.
+if id -nG "$USER" | grep -qw docker; then crontab -l | sed 's/sudo docker/docker/' | crontab -; fi
 
 echo "== 6/6 Sağlık kontrolü (en çok 20 dk)"
 for i in $(seq 1 120); do

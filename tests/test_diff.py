@@ -46,3 +46,7 @@ def test_api_degisiklikler(farklar):
         assert d["birimler"][0]["fark"] == [["-", "a"], ["+", "b"]]
         assert c.get("/degisiklik/..%2F..%2Fetc").status_code in (400, 404)
         assert c.get("/degisiklik/20261112T231623_karar_yok_1-2").status_code == 404
+
+
+def test_windows_yolu_linuxta_acilir():
+    assert diff.yol(r"data\raw\versions\karar_2023-2007\x.txt").as_posix() == "data/raw/versions/karar_2023-2007/x.txt"

@@ -85,10 +85,15 @@ def compare(kind: str, belge_id: str, eski: Path, yeni: Path) -> list[dict]:
     return out
 
 
+def yol(raw_path: str) -> Path:
+    """Depodaki yol Windows'ta '\' ile yazılmış olabilir (eski kayıtlar); Linux'ta da açılsın."""
+    return Path(raw_path.replace("\\", "/"))
+
+
 def write_diff(con, doc_key: str, eski_v, yeni_v, zaman: str | None = None) -> Path | None:
     """eski_v/yeni_v: versions satırları. Fark yoksa (yalnız biçim farkı) dosya yazılmaz."""
     doc = con.execute("SELECT * FROM documents WHERE doc_key=?", (doc_key,)).fetchone()
-    birimler = compare(doc["kind"], doc["belge_id"], Path(eski_v["raw_path"]), Path(yeni_v["raw_path"]))
+    birimler = compare(doc["kind"], doc["belge_id"], yol(eski_v["raw_path"]), yol(yeni_v["raw_path"]))
     if not birimler:
         return None
     zaman = zaman or datetime.now().isoformat(timespec="seconds")

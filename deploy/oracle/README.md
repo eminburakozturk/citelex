@@ -43,8 +43,12 @@ geri yükler, API'yi derler (ARM'de ilk derleme ~10-15 dk; bge-m3 ilk açılış
 
 ## Güncelleme
 Yeni sürüm: paketi yeniden üret, kopyala, `tar xzf` (üzerine yazar; `.env` korunur), `kurulum.sh` yeniden çalıştır.
-Sunucuda günlük otomatik güncelleme (kaynak kontrolü + artımlı indeks) henüz kurulu DEĞİL; yerel makinedeki günlük görev
-derlemi günceller, yayına yeni paketle taşınır.
+**Günlük otomatik güncelleme sunucuda kuruludur** (kurulum.sh cron'a ekler; her gün 03:00):
+kaynakları (mevzuat.gov.tr, kvkk.gov.tr) kontrol eder, değişen belgeyi yeniden ayrıştırır, Qdrant'ı artımlı günceller
+(yalnız değişen parçalar embed edilir), madde farkını üretir (/degisiklikler), Resmî Gazete erken uyarısını yazar ve
+arama regresyonunu çalıştırır. Günlük: `citelex/logs/guncelle.log`; özet: `citelex/logs/updates.jsonl`.
+Elle çalıştırma: `sudo docker compose --env-file .env -f deploy/oracle/docker-compose.oracle.yml --profile guncelle run --rm guncelle`
+Geniş katman (~900 kanun) otomatik güncellenmez.
 
 ## Bilinen sınırlar
 - Tek makine, yedeklilik yok. İstek sınırı: IP başına 5/dk, 60/gün; günlük toplam tavan 300 (`CITELEX_GUNLUK_TOPLAM`).

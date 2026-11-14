@@ -79,6 +79,16 @@ def main() -> int:
         store = Path("data/store")
         if (store / "citelex.db").exists():
             out.add(store / "citelex.db", arcname="citelex/store/citelex.db")
+        # Sunucuda günlük güncelleme için çalışma verisi (veri/): ham kaynaklar (geniş katman HF verisi hariç),
+        # derin katman işlenmiş dosyaları, BM25 parametreleri. Embedding önbelleği (330 MB) GİRMEZ.
+        raw = Path("data/raw")
+        for f in raw.rglob("*"):
+            if f.is_file() and not f.relative_to(raw).parts[0] in ("hf_corpus", "_kopya"):
+                out.add(f, arcname=f"citelex/veri/raw/{f.relative_to(raw).as_posix()}")
+        for f in ["articles.jsonl", "chunks_madde.jsonl", "chunks_fikra.jsonl", "chunks_hibrit.jsonl", "chunks_karar.jsonl"]:
+            out.add(f"data/processed/{f}", arcname=f"citelex/veri/processed/{f}")
+        for f in Path("data/index").glob("bm25_*.json"):
+            out.add(f, arcname=f"citelex/veri/index/{f.name}")
         if Path("data/processed/iliskiler.json").exists():
             out.add("data/processed/iliskiler.json", arcname="citelex/store/iliskiler.json")
         if (store / "farklar").is_dir():

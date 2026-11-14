@@ -39,7 +39,7 @@ def main() -> None:
     out = args.out or ("results/retrieval_check_tek_havuz.md" if args.tek_havuz else "results/retrieval_check.md")
 
     qs = [json.loads(l) for l in open("eval/retrieval_smoke.jsonl", encoding="utf-8")]
-    s = Searcher(args.mode)
+    s = Searcher(args.mode, rerank=False)   # temel değerler reranker'sız ölçüldü; CPU'da reranker çok yavaş
     kanallar = ["mevzuat", "karar"]
     hits = {kn: {m: 0 for m in METHODS} for kn in kanallar}
     n = {kn: sum(1 for q in qs if q["beklenen"] and q.get("kanal", "mevzuat") == kn) for kn in kanallar}

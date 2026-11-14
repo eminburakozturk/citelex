@@ -100,7 +100,7 @@ def archive(doc: dict, raw: bytes, chash: str) -> str:
     d.mkdir(parents=True, exist_ok=True)
     p = d / f"{datetime.now():%Y%m%d}_{chash[:10]}{ext}"
     p.write_bytes(raw)
-    return str(p)
+    return p.as_posix()   # Windows ve Linux (sunucu) arasında taşınabilir yol
 
 
 # ---------- adımlar ----------
