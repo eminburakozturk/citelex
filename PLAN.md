@@ -103,17 +103,15 @@ citelex/
 Durum (13 Kas sabahı): 11–15 Kas satırlarının çekirdeği bitti (ayrıntı KARARLAR.md). Açık kalanlar aşağıda "Borçlar"da.
 
 ### DEVAM NOKTASI (yeni oturum buradan başlar; bitince bu bölümü güncelle)
-Son durum: 14 Kas gece. Takvim v2'de 13-20 Kas satırları BİTTİ (ayrıntı ve ölçümler KARARLAR.md son kayıtları):
-API (SSE) + Next.js arayüz (/pano, /degisiklikler, /yontem, mobil) + CI kapısı + LLM hakemli sadakat + OTel/Jaeger izleri +
-"bu madde değişti" + reranker + LangGraph ajan + MCP sunucusu + karşılaştırma deneyleri + Tauri EXE/APK + geniş katman
-(citelex_genis, derin katman yetmezse devreye girer). Varsayılan: yerelde ajan + reranker (45/50), yayında reranker kapalı.
-İş bölümü: Claude ana geliştirici/denetçi; Antigravity 2 sohbet destekçi (Claude prompt yazar, inceler, commit'ler).
-Sürenler: sohbet 1 = geniş katman örneklemi + taslak geniş soru seti (eval/genis_sorular.jsonl) + emülatörde canlı API;
-sohbet 2 = geniş katman rozeti + Docker uçtan uca + README taslağı.
-Sıradaki (Claude): geniş katman arama kalitesini taslak setle ölç; README son hali (21 Kas); repo public hazırlığı.
-Kullanıcıdan beklenen: barındırma kararı (HF Docker Space PRO istiyor), eval setinin doğrulanması (56 soru; d03 artık
-geniş katmanda cevaplanabiliyor), geniş katman soru setinin doğrulanması. LLM zinciri: ücretsiz önce (kullanıcı kararı).
-Günlük görev kurulu ("Citelex Gunluk Guncelleme", 03:00, scripts/guncelle.ps1; erken uyarı dahil).
+Son durum: 14 Kas öğleden sonra. Takvim v2'nin 13-21 Kas işleri yayın dışında BİTTİ (ayrıntı KARARLAR.md son kayıtları):
+Stitch editoryal arayüz (/, /pano, /degisiklikler, /yontem, /gelistirici; Lighthouse A11y/BP 100), arayüz API'leri
+(adimlar, /guncellik, /aciklama, /ilgili, /kaynak geçmiş+ilişki), geniş katman (44.843 parça, 0,05 fark kuralı),
+Tauri EXE/APK, CI (cssselect düzeltildi), README son hali, sunucuda günlük güncelleme (kapsayıcıda doğrulandı).
+Sürenler (Antigravity): sohbet 1 = masaüstü CSP + web/out üzerine yazmama; sohbet 2 = Playwright uçtan uca testleri
+(ci.yml'deki Playwright adımları onun testleri commit'lenince commit'lenecek).
+KALAN: (1) Oracle yayını — kullanıcı hesap/VM açıp IP verecek; sonra paket yeniden üretilir (scripts/yayin_oracle.py),
+kurulum.sh + duman testi. (2) Kullanıcıdan: geliştirici sayfası bilgileri (web/src/content/gelistirici.ts), eval
+doğrulaması (eval/DOGRULAMA.md, 74 soru), repo public kararı (yazar e-postası, CLAUDE.md/AGENTS.md, .claude/launch.json).
 
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)
 Hedef rol: yapay zekâ / ürün geliştirici. Sıra CV değerine göre: önce canlı ve ölçülen sistem, sonra
