@@ -2,7 +2,7 @@
 
 # Citelex — Türk Mevzuatı için Kaynak Gösteren RAG
 
-**Citelex**, Türk iş hukuku ve kişisel verilerin korunması alanındaki derin katman mevzuatını (`12` mevzuat belgesi ve `40` seçili KVKK Kurul kararı; toplam `52` belge) ve gerektiğinde `895` kanunluk (`44.854` parça) geniş katmanı madde/fıkra düzeyinde dizinleyip her iddiayı resmi kaynağa dayandırarak yanıtlayan, kaynak değiştikçe kendini güncelleyebilen ve kanıt yetersiz kaldığında `"bilmiyorum"` diyebilen bir RAG sistemidir.
+**Citelex**, Türk iş hukuku ve kişisel verilerin korunması alanındaki derin katman mevzuatını (`12` mevzuat belgesi ve `40` seçili KVKK Kurul kararı; toplam `52` belge) ve gerektiğinde `895` kanunluk (`44.843` parça) geniş katmanı madde/fıkra düzeyinde dizinleyip her iddiayı resmi kaynağa dayandırarak yanıtlayan, kaynak değiştikçe kendini güncelleyebilen ve kanıt yetersiz kaldığında `"bilmiyorum"` diyebilen bir RAG sistemidir.
 
 > **Uyarı:** Bu sistem hukuki tavsiye vermez; yalnızca dizinlenen mevzuat ve kurul kararları üzerinden kaynak göstererek bilgi sunar.
 
@@ -74,7 +74,7 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 - **Taslak soru seti ve içerik ölçütü:** `56` soruluk sette beklenen cevaplar taslaktır (hukuki doğrulama bekler); `icerik` ölçütü anahtar kelime eşleşmesine dayanır (`KARARLAR.md`).
 - **Hakem kararlılığı:** LLM hakem (`anthropic/claude-haiku-5.5`) üzerindeki `10` kararlık elle kontrolde `9` uyum görülmüştür; asıl sadakat ölçütü tüm iddiaların desteklendiği `tam_destekli` oranıdır (`KARARLAR.md`).
 - **Eşik tercihi:** Kalibrasyon `30` soruluk ayrı sette yapılmış; `0,574` yerine `0,637` eşiği seçilmiştir (`KARARLAR.md`, `results/calibration.md`). Tutucu eşik kısa/genel kapsam içi soruları reddedebilir; ajan modu bu oranı `7/50`'den `1/50`'ye düşürür.
-- **Geniş katman (`895` kanun, `44.854` parça):** Yalnızca derin katman `0,637` eşiğini geçemezse **veya** geniş katman dense top-1 puanı derin katmanı `0,05`'ten fazla (`GENIS_FARK=0,05`) geçerse `citelex_genis` (`32.925` birim, `44.854` parça; Qdrant diskte `323 MB`, derin katman `17 MB` — `KARARLAR.md`) seçilir (`CITELEX_GENIS=0` kapatır) ve yanıtlar `"Geniş katman · doğruluğu ölçülmedi"` rozetiyle döner. `δ=0,05`, eval setlerinden bağımsız `eval/calibration.jsonl` (`18` kapsam içi soru) üzerindeki en büyük geniş üstünlüğü (`+0,021`, `c11`) baz alınarak yaklaşık `2` kat güvenlik payıyla seçilmiştir (`KARARLAR.md`). Açık eval'de (`56` soru) kapsam içi değişmemiş (`45/50`) ve derin eval yönlendirmesi değişmemiştir; kapsam dışı ret `d03` (`7036` s. Kanun m.3) nedeniyle `6/6 -> 5/6`, medyan süre `3,98 -> 5,47 sn` olmuştur (`KARARLAR.md`). Taslak geniş katman setinde (`eval/genis_sorular.jsonl`: `15` kapsam içi + `3` kapsam dışı, `results/genis_check.md`) doğrudan geniş arama `R@1 10/15`, `R@5 14/15`, üretim yolu yönlendirme `14/15`, beklenen madde bağlamda `13/15`, kapsam dışı eşikte ret `3/3` ölçülmüştür. **Kalan sınır ve not:** `g02` (anlaşmalı boşanma) `0,629` skoruyla eşiğin hemen altında kalıp reddedilir; `g08` (`TCK m.141`) ilk `5`'te bulunamamıştır (`results/genis_check.md`). `g13` (devlet memuru analık izni) bu fark kuralını bulduran örnek olduğu için geniş taslak seti bu değişiklik açısından bağımsız değildir (`KARARLAR.md`).
+- **Geniş katman (`895` kanun, `44.843` parça):** Yalnızca derin katman `0,637` eşiğini geçemezse **veya** geniş katman dense top-1 puanı derin katmanı `0,05`'ten fazla (`GENIS_FARK=0,05`) geçerse `citelex_genis` (`32.925` birim, `44.843` parça; Qdrant diskte `323 MB`, derin katman `17 MB` — `KARARLAR.md`) seçilir (`CITELEX_GENIS=0` kapatır) ve yanıtlar `"Geniş katman · doğruluğu ölçülmedi"` rozetiyle döner. `δ=0,05`, eval setlerinden bağımsız `eval/calibration.jsonl` (`18` kapsam içi soru) üzerindeki en büyük geniş üstünlüğü (`+0,021`, `c11`) baz alınarak yaklaşık `2` kat güvenlik payıyla seçilmiştir (`KARARLAR.md`). Açık eval'de (`56` soru) kapsam içi değişmemiş (`45/50`) ve derin eval yönlendirmesi değişmemiştir; kapsam dışı ret `d03` (`7036` s. Kanun m.3) nedeniyle `6/6 -> 5/6`, medyan süre `3,98 -> 5,47 sn` olmuştur (`KARARLAR.md`). Taslak geniş katman setinde (`eval/genis_sorular.jsonl`: `15` kapsam içi + `3` kapsam dışı, `results/genis_check.md`) doğrudan geniş arama `R@1 9/15`, `R@5 14/15`, üretim yolu yönlendirme `14/15`, beklenen madde bağlamda `13/15`, kapsam dışı eşikte ret `3/3` ölçülmüştür. **Kalan sınır ve not:** `g02` (anlaşmalı boşanma) `0,629` skoruyla eşiğin hemen altında kalıp reddedilir; `g08` (`TCK m.141`) ilk `5`'te bulunamamıştır (`results/genis_check.md`). `g13` (devlet memuru analık izni) bu fark kuralını bulduran örnek olduğu için geniş taslak seti bu değişiklik açısından bağımsız değildir (`KARARLAR.md`).
 
 ## Kurulum
 
@@ -82,19 +82,33 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 
 ```bash
 conda activate citelex
-# veya: pip install -r requirements.txt
+# veya temiz Python 3.11 ortamında (önce donanıma uygun torch, ardından requirements.txt):
+# pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cu126   # CPU için: .../whl/cpu
+# pip install -r requirements.txt
 ```
 
-`.env` dosyasını `.env.example` şablonundan oluşturun (değerleri örnekten kendi anahtarlarınızla doldurun):
+`.env` dosyasını `.env.example` şablonundan oluşturun (`cp .env.example .env`) ve değerleri kendi anahtarlarınızla doldurun:
 
 - **Model / arama:** `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `OPENROUTER_MODELS`, `OLLAMA_HOST`, `CITELEX_LLM`, `QDRANT_URL`
 - **Hız sınırı / CORS:** `CITELEX_RATE_DK`, `CITELEX_RATE_GUN`, `CITELEX_GUNLUK_TOPLAM`, `CITELEX_TRUST_PROXY`, `CITELEX_CORS`
 
 ### 2. Altyapı, veri hazırlama ve indeksleme
 
+`data/` dizini `.gitignore` kapsamındadır; temiz bir `git clone` sonrasında önce harici Qdrant volume'ü oluşturulur ve `52` ham kaynak belgesi (`12` mevzuat PDF + `40` KVKK Kurul kararı) indirilir:
+
 ```bash
+docker volume create citelex_qdrant
 docker compose up -d qdrant
+
+# Ham belgeleri indir (mevzuat.gov.tr + kvkk.gov.tr; host başına ~2 sn bekleme ile ~2,5 dk):
+python -c "from pathlib import Path; import httpx; from src.update.run import tracked, fetch_raw
+with httpx.Client() as c:
+    for d in tracked():
+        p = Path(d['local_path']); p.parent.mkdir(parents=True, exist_ok=True)
+        if not p.exists(): p.write_bytes(fetch_raw(d, c)); print(d['doc_key'], flush=True)"
+
 python -m src.ingest.parse
+python -m src.ingest.iliskiler
 python -m src.ingest.chunk --mode hibrit --max-chars 1500
 python -m src.ingest.parse_karar
 python -m src.index.build --mode hibrit --recreate
@@ -106,8 +120,10 @@ python -m src.update.run --init
 `web/src` statik çıktı üretir ve arayüzde sohbet dışında **`/pano`** (değerlendirme panosu), **`/degisiklikler`** (madde/bölüm kelime farkı) ve **`/yontem`** (2 dakikalık mimari/ölçüm özeti) sayfalarını sunar:
 
 ```bash
+npm --prefix web ci               # temiz klonda web bağımlılıklarını kurar
 npm --prefix web run build        # web/out/ üretir; Compose api'si /app/web/out üzerinden sunar
 docker compose up -d api          # http://127.0.0.1:8000/
+# duman testi: python scripts/duman_testi.py http://127.0.0.1:8000
 # geliştirme modu: npm --prefix web run dev
 # Jaeger izleri (http://127.0.0.1:16686): docker compose --profile izleme up -d
 ```

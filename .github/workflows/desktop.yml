@@ -68,11 +68,12 @@ jobs:
 
       - uses: android-actions/setup-android@v3
 
-      - name: Android NDK kur/ayarla
+      - name: Android NDK ve SDK 37 kur/ayarla
         shell: bash
         run: |
+          yes | sdkmanager "platforms;android-37" "build-tools;35.0.0" >/dev/null
           if [ -z "${ANDROID_NDK_LATEST_HOME:-}" ]; then
-            yes | sdkmanager "ndk;28.2.13676358" "platforms;android-36" "build-tools;35.0.0" >/dev/null
+            yes | sdkmanager "ndk;28.2.13676358" >/dev/null
             echo "NDK_HOME=$ANDROID_HOME/ndk/28.2.13676358" >> "$GITHUB_ENV"
           else
             echo "NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> "$GITHUB_ENV"
@@ -94,7 +95,10 @@ jobs:
         env:
           NEXT_PUBLIC_API_URL: ${{ inputs.api_url || 'http://127.0.0.1:8000' }}
         run: |
-          cargo tauri android init --ci --skip-targets-install
+          if [ ! -d src-tauri/gen/android ]; then
+            cargo tauri android init --ci --skip-targets-install
+          fi
+          chmod +x src-tauri/gen/android/gradlew
           cargo tauri android build --apk --target aarch64 --split-per-abi
 
       - name: Android APK artefaktını yükle

@@ -14,7 +14,7 @@ jobs:
           python-version: "3.11"
           cache: pip
       # Model/torch kurulmaz: testler sahte LLM ile, kapı bellek içi BM25 ile çalışır.
-      - run: pip install fastapi==0.162.5 httpx==0.28.1 qdrant-client==1.20.0 numpy==2.4.6 pdfplumber==0.11.10 lxml==6.1.3 langgraph==1.2.21 pytest
+      - run: pip install fastapi==0.162.5 httpx==0.28.1 qdrant-client==1.20.0 numpy==2.4.6 pdfplumber==0.11.10 lxml==6.1.3 cssselect==1.6.0 langgraph==1.2.21 pytest
       - name: Birim testleri
         run: python -m pytest tests -q
       - name: Arama regresyonu kapısı (BM25, eval/gate_baseline.json)
