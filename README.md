@@ -74,7 +74,20 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 - **Taslak soru seti ve içerik ölçütü:** `56` soruluk sette beklenen cevaplar taslaktır (hukuki doğrulama bekler); `icerik` ölçütü anahtar kelime eşleşmesine dayanır (`KARARLAR.md`).
 - **Hakem kararlılığı:** LLM hakem (`anthropic/claude-haiku-5.5`) üzerindeki `10` kararlık elle kontrolde `9` uyum görülmüştür; asıl sadakat ölçütü tüm iddiaların desteklendiği `tam_destekli` oranıdır (`KARARLAR.md`).
 - **Eşik tercihi:** Kalibrasyon `30` soruluk ayrı sette yapılmış; `0,574` yerine `0,637` eşiği seçilmiştir (`KARARLAR.md`, `results/calibration.md`). Tutucu eşik kısa/genel kapsam içi soruları reddedebilir; ajan modu bu oranı `7/50`'den `1/50`'ye düşürür.
-- **Geniş katman (`895` kanun, `44.843` parça):** Yalnızca derin katman `0,637` eşiğini geçemezse **veya** geniş katman dense top-1 puanı derin katmanı `0,05`'ten fazla (`GENIS_FARK=0,05`) geçerse `citelex_genis` (`32.925` birim, `44.843` parça; Qdrant diskte `323 MB`, derin katman `17 MB` — `KARARLAR.md`) seçilir (`CITELEX_GENIS=0` kapatır) ve yanıtlar `"Geniş katman · doğruluğu ölçülmedi"` rozetiyle döner. `δ=0,05`, eval setlerinden bağımsız `eval/calibration.jsonl` (`18` kapsam içi soru) üzerindeki en büyük geniş üstünlüğü (`+0,021`, `c11`) baz alınarak yaklaşık `2` kat güvenlik payıyla seçilmiştir (`KARARLAR.md`). Açık eval'de (`56` soru) kapsam içi değişmemiş (`45/50`) ve derin eval yönlendirmesi değişmemiştir; kapsam dışı ret `d03` (`7036` s. Kanun m.3) nedeniyle `6/6 -> 5/6`, medyan süre `3,98 -> 5,47 sn` olmuştur (`KARARLAR.md`). Taslak geniş katman setinde (`eval/genis_sorular.jsonl`: `15` kapsam içi + `3` kapsam dışı, `results/genis_check.md`) doğrudan geniş arama `R@1 9/15`, `R@5 14/15`, üretim yolu yönlendirme `14/15`, beklenen madde bağlamda `13/15`, kapsam dışı eşikte ret `3/3` ölçülmüştür. **Kalan sınır ve not:** `g02` (anlaşmalı boşanma) `0,629` skoruyla eşiğin hemen altında kalıp reddedilir; `g08` (`TCK m.141`) ilk `5`'te bulunamamıştır (`results/genis_check.md`). `g13` (devlet memuru analık izni) bu fark kuralını bulduran örnek olduğu için geniş taslak seti bu değişiklik açısından bağımsız değildir (`KARARLAR.md`).
+- **Geniş katman (`895` kanun, `44.843` parça; HF korpusu, Temmuz 2025'e kadar):** doğruluğu tam setle ölçülmedi, cevaplar `"Geniş katman · doğruluğu ölçülmedi"` rozetiyle döner (`CITELEX_GENIS=0` kapatır).
+  - *Yönlendirme:* derin katman `0,637` eşiğini geçemezse **veya** geniş katman derin katmandan `0,05`'ten fazla öndeyse. `0,05`, eval setlerinden bağımsız `eval/calibration.jsonl` üzerinde derin katman sorularında görülen en büyük geniş üstünlüğün (`+0,021`) yaklaşık iki katıdır.
+  - *Derin katmana etkisi (56 soru):* kapsam içi `45/50` değişmedi. Kapsam dışı ret `6/6 -> 5/6`: "kapsam dışı" etiketli `d03` artık geniş katmandaki `7036` s. Kanun m.3'ten **doğru ve atıflı** cevaplanıyor (etiket geçersizleşti, uydurma değil). Medyan süre `3,98 -> 5,47 sn`.
+  - *Taslak geniş set (`eval/genis_sorular.jsonl`, 15 + 3 soru, `results/genis_check.md`):* R@1 `9/15`, R@5 `14/15`, yönlendirme `14/15`, beklenen madde bağlamda `13/15`, kapsam dışı ret `3/3`. Kalan sınırlar: `g02` eşiğin hemen altında (`0,629`), `g08` ilk 5'te yok. `g13` fark kuralını bulduran örnek olduğu için set bu kural açısından bağımsız değildir.
+
+## Kendini güncelleme
+
+- **Günlük hat (`src/update/run.py`, her gün 03:00):** 52 kaynağı indirir; ayrıştırılmış metnin hash'i değişmediyse durur (PDF baytları her indirmede değişir). Değişen belge yeniden ayrıştırılır, Qdrant **artımlı** güncellenir (yalnız değişen parçalar embed edilir), eski sürüm silinmez, madde/bölüm düzeyinde kelime farkı üretilir (`/degisiklikler`) ve arama regresyonu çalışır.
+- **Resmî Gazete erken uyarı (`src/update/erken_uyari.py`):** son 3 günün fihristi taranır; derin katman kanunlarını değiştiren torba kanunlar metinden yakalanır (ör. 7499 s. Kanun → KVKK m.6). Resmî Gazete'de olup mevzuat.gov.tr'ye henüz işlenmemiş değişiklik "bekleyen" olarak raporlanır.
+- **Doğrulama:** sahte bir değişiklikle (`--sahte`) uçtan uca denendi; bu deneme farkları arayüzde **"Test kaydı"** olarak işaretlenir, gerçek değişiklik sayılmaz.
+
+## Yayın
+
+Tek sanal makinede (Oracle Cloud Always Free, ARM): Qdrant + API + Caddy (otomatik HTTPS) ve gece çalışan güncelleme servisi. Paketleme, kurulum ve duman testi: [deploy/oracle/README.md](deploy/oracle/README.md). Yayında reranker kapalıdır (CPU'da ~43 sn/sorgu); ajan ve geniş katman açıktır.
 
 ## Kurulum
 
@@ -142,15 +155,20 @@ citelex/
 │   ├── ingest/         # PDF/HTML/HF ayrıştırma ve hibrit madde/fıkra/ek parçalama
 │   ├── index/          # bge-m3 dense + Türkçe BM25 sparse Qdrant indeksi (derin + geniş)
 │   ├── retrieve/       # İki kanallı arama, eşik kapısı, bge-reranker-v2-m3, geniş katman
-│   ├── generate/       # OpenRouter zinciri + devre kesici, atıf doğrulama, LangGraph ajan
-│   ├── update/         # Sürüm deposu (SQLite), kelime/madde farkı, erken uyarı
+│   ├── generate/       # OpenRouter zinciri + devre kesici, prompt, atıf doğrulama, madde açıklama
+│   ├── sources/        # mevzuat.gov.tr, kvkk.gov.tr, Resmî Gazete, HF korpusu
+│   ├── update/         # Günlük hat, sürüm deposu (SQLite), kelime/madde farkı, erken uyarı
+│   ├── agent.py        # LangGraph ajan modu (yeniden yazıp tekrar arama)
+│   ├── tools.py        # Ortak araçlar (API, ajan ve MCP aynı kodu kullanır)
+│   ├── trace.py        # OpenTelemetry izleri
 │   └── mcp_server.py   # MCP sunucusu (mevzuat_ara, madde_getir)
-├── eval/               # Kalibrasyon, değerlendirme koşucusu, hakem, CI BM25 kapısı
-├── scripts/            # Yardımcı analiz ve pano_veri.py betikleri
+├── eval/               # Kalibrasyon, değerlendirme, LLM hakem, CI arama kapısı, doğrulama listesi
+├── scripts/            # Pano verisi, yayın paketi, duman testi
 ├── results/            # Eval, sadakat, rerank ve arama deneyi çıktıları (.jsonl / .md)
-├── web/                # Next.js statik arayüz (sohbet, /yontem, /pano, /degisiklikler)
+├── web/                # Next.js statik arayüz (sohbet, /pano, /degisiklikler, /yontem, /gelistirici)
 ├── desktop/            # Tauri 2 masaüstü (EXE) ve mobil (Android APK) kabuğu
-└── docs/               # Mimari diyagram (mimari.svg)
+├── deploy/oracle/      # Yayın: compose (Qdrant + API + Caddy + günlük güncelleme), kurulum betiği
+└── docs/               # Mimari şema, ekran görüntüleri, demo senaryosu
 ```
 
 ## Neden Böyle?
