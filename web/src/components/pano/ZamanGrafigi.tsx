@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { GecmisKaydi, tarihSaat, yapilandirmaEtiketi, yuzde } from "./types";
 
-const RENKLER = ["var(--accent)", "#4b83b8", "#3d9468", "#c27d28", "#8f6cb8", "#b35c7e"];
+const RENKLER = ["var(--accent)", "var(--info)", "var(--ok)", "#c27d28", "#8f6cb8", "#b35c7e"];
 
 export function ZamanGrafigi({ gecmis }: { gecmis: GecmisKaydi[] }) {
   const [seciliIdx, setSeciliIdx] = useState<number | null>(null);
@@ -15,7 +15,7 @@ export function ZamanGrafigi({ gecmis }: { gecmis: GecmisKaydi[] }) {
 
   const seriler = Array.from(new Set(gecerli.map((g) => g.anahtar)));
   const etiketMap = Object.fromEntries(
-    gecerli.map((g) => [g.anahtar, yapilandirmaEtiketi(g.llm, g.yapilandirma, g.yapilandirma_adi)])
+    gecerli.map((g) => [g.anahtar, yapilandirmaEtiketi(g.llm, g.yapilandirma, g.yapilandirma_adi)]),
   );
   const renkMap = Object.fromEntries(seriler.map((a, i) => [a, RENKLER[i % RENKLER.length]]));
 
@@ -52,15 +52,18 @@ export function ZamanGrafigi({ gecmis }: { gecmis: GecmisKaydi[] }) {
   const aktif = seciliIdx != null ? noktalar[seciliIdx] : noktalar[noktalar.length - 1];
 
   return (
-    <section aria-labelledby="zaman-grafik-baslik" className="space-y-3">
+    <section aria-labelledby="zaman-grafik-baslik" className="min-w-0 space-y-3">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 id="zaman-grafik-baslik" className="text-base font-semibold">
-          Doğruluğun zaman içindeki değişimi
-        </h2>
+        <div>
+          <span className="text-[11px] font-semibold tracking-wider text-subtle uppercase">Bölüm 6</span>
+          <h2 id="zaman-grafik-baslik" className="font-serif text-xl font-medium text-ink">
+            Doğruluğun zaman içindeki değişimi
+          </h2>
+        </div>
         <p className="text-xs text-muted">{gecerli.length} tam çalıştırma (eval_history.jsonl)</p>
       </div>
 
-      <div className="rounded-lg border border-line bg-panel p-4">
+      <div className="rounded-xl border border-line bg-panel p-4 shadow-xs">
         <div className="mb-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs">
           {seriler.map((a) => (
             <span key={a} className="inline-flex items-center gap-1.5 text-ink">

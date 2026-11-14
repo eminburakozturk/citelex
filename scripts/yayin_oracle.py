@@ -79,6 +79,8 @@ def main() -> int:
         store = Path("data/store")
         if (store / "citelex.db").exists():
             out.add(store / "citelex.db", arcname="citelex/store/citelex.db")
+        if Path("data/processed/iliskiler.json").exists():
+            out.add("data/processed/iliskiler.json", arcname="citelex/store/iliskiler.json")
         if (store / "farklar").is_dir():
             out.add(store / "farklar", arcname="citelex/store/farklar")
     shutil.rmtree(tmp, ignore_errors=True)

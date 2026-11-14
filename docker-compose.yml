@@ -35,6 +35,7 @@ services:
     volumes:
       - hf_cache:/models                      # bge-m3 bir kez iner
       - ./data/store:/app/data/store:ro       # güncelleme deposu (son kontrol tarihi); yalnız okunur
+      - ./data/processed/iliskiler.json:/app/data/processed/iliskiler.json:ro   # madde geçmişi + ilişkiler (/kaynak)
       - ./logs:/app/logs                      # izler.jsonl
       - ./web/out:/app/web/out:ro             # statik Next.js arayüzü (npm --prefix web run build)
 

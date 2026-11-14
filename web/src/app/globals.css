@@ -3,74 +3,149 @@
 :root {
   --bg: #f7f6f3;
   --panel: #ffffff;
+  --panel-soft: #efece6;
   --ink: #1c1b19;
   --muted: #5c5952;
-  --line: #e2dfd8;
+  --subtle: #66625a;
+  --line: #e8e6e1;
   --accent: #7a2e2e;
+  --accent-hover: #632424;
   --accent-soft: #f3e6e4;
+  --accent-btn: #7a2e2e;
+  --accent-btn-hover: #632424;
+  --accent-ink: #ffffff;
   --warn-bg: #fdf4dc;
   --warn-ink: #6b4e00;
+  --warn-border: rgba(107, 78, 0, 0.28);
+  --ok: #1b6e44;
+  --ok-bg: #eaf5ed;
+  --info: #224259;
+  --info-bg: #ebf2f7;
+  --danger: #93000a;
+  --danger-bg: #ffdad6;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #151412;
-    --panel: #1e1d1a;
-    --ink: #ece9e2;
-    --muted: #a09c92;
-    --line: #34322d;
+  :root:not([data-tema="light"]) {
+    --bg: #141312;
+    --panel: #1e1c1a;
+    --panel-soft: #282522;
+    --ink: #f2efeb;
+    --muted: #b5b0a8;
+    --subtle: #9e9990;
+    --line: #33302b;
     --accent: #e0a39b;
-    --accent-soft: #3a2623;
-    --warn-bg: #33290f;
-    --warn-ink: #ecd9a0;
+    --accent-hover: #ebb9b2;
+    --accent-soft: #2f1919;
+    --accent-btn: #8f3838;
+    --accent-btn-hover: #7a2e2e;
+    --accent-ink: #ffffff;
+    --warn-bg: #2a2109;
+    --warn-ink: #f0c659;
+    --warn-border: rgba(240, 198, 89, 0.3);
+    --ok: #5cd092;
+    --ok-bg: #0f2618;
+    --info: #93c2e6;
+    --info-bg: #172530;
+    --danger: #ffb4ab;
+    --danger-bg: #3b1214;
   }
 }
 
+:root[data-tema="dark"] {
+  --bg: #141312;
+  --panel: #1e1c1a;
+  --panel-soft: #282522;
+  --ink: #f2efeb;
+  --muted: #b5b0a8;
+  --subtle: #9e9990;
+  --line: #33302b;
+  --accent: #e0a39b;
+  --accent-hover: #ebb9b2;
+  --accent-soft: #2f1919;
+  --accent-btn: #8f3838;
+  --accent-btn-hover: #7a2e2e;
+  --accent-ink: #ffffff;
+  --warn-bg: #2a2109;
+  --warn-ink: #f0c659;
+  --warn-border: rgba(240, 198, 89, 0.3);
+  --ok: #5cd092;
+  --ok-bg: #0f2618;
+  --info: #93c2e6;
+  --info-bg: #172530;
+  --danger: #ffb4ab;
+  --danger-bg: #3b1214;
+}
+
 @theme inline {
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
   --color-bg: var(--bg);
   --color-panel: var(--panel);
+  --color-panel-soft: var(--panel-soft);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-btn: var(--accent-btn);
+  --color-accent-btn-hover: var(--accent-btn-hover);
+  --color-accent-ink: var(--accent-ink);
   --color-warn-bg: var(--warn-bg);
   --color-warn-ink: var(--warn-ink);
+  --color-warn-border: var(--warn-border);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
 }
 
+html,
 body {
-  background: var(--bg);
+  background-color: var(--bg);
   color: var(--ink);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-:focus-visible {
+a:focus-visible,
+button:focus-visible,
+textarea:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-.kanun-metni {
-  font-family: Georgia, "Times New Roman", serif;
-  line-height: 1.65;
-}
-
 .guvenli-ust {
-  padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 .guvenli-alt {
-  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-.guvenli-sayfa-alt {
-  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+.kanun-metni {
+  font-family: var(--font-serif);
+  font-size: 1.04rem;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
 }
 
-.guvenli-panel-alt {
-  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
-}
-
-.guvenli-yatay {
-  padding-left: calc(1rem + env(safe-area-inset-left, 0px));
-  padding-right: calc(1rem + env(safe-area-inset-right, 0px));
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

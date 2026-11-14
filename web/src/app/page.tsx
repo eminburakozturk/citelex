@@ -1,474 +1,505 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { Kaynak, KaynakMetni, Sonuc, Tur, kaynakGetir, saglik, sor, tarih } from "@/lib/api";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { SiteKabugu } from "@/components/SiteKabugu";
+import { CevapKarti } from "@/components/sohbet/CevapKarti";
+import { IlkZiyaretRehberi } from "@/components/sohbet/IlkZiyaretRehberi";
+import { KaynakPaneli } from "@/components/sohbet/KaynakPaneli";
+import {
+  GuncellikBilgisi,
+  Kaynak,
+  KaynakMetni,
+  Sonuc,
+  Tur,
+  guncellikGetir,
+  ilgiliGetir,
+  kaynakGetir,
+  saglik,
+  sor,
+  tarih,
+} from "@/lib/api";
 
 const TURLER: { id: Tur; ad: string }[] = [
   { id: "kanun", ad: "Kanun" },
   { id: "yonetmelik", ad: "Yönetmelik" },
   { id: "teblig", ad: "Tebliğ" },
-  { id: "karar", ad: "KVKK Kurul kararı" },
+  { id: "karar", ad: "Kurul kararı" },
 ];
-const TUR_ADI: Record<Tur, string> = { kanun: "Kanun", yonetmelik: "Yönetmelik", teblig: "Tebliğ", karar: "Kurul kararı" };
-const ORNEKLER = [
-  "Yıllık ücretli izin süresi kaç gündür?",
-  "İşveren çalışanın kurumsal e-postasını izleyebilir mi?",
-  "İş kazası Sosyal Güvenlik Kurumuna kaç gün içinde bildirilir?",
-  "Veri ihlali Kurula ne kadar sürede bildirilmelidir?",
-  "Kira sözleşmesinde kiracıdan alınan güvence (depozito) en fazla ne kadar olabilir?",
+
+const ORNEKLER: { konu: string; soru: string; kapsamDisi?: boolean }[] = [
+  { konu: "İş hukuku", soru: "Yıllık izin kaç gündür?" },
+  { konu: "KVKK", soru: "İşveren çalışanın parmak izini alabilir mi?" },
+  { konu: "İSG", soru: "İSG kurulu kaç çalışanda kurulur?" },
+  { konu: "Kurul kararı", soru: "Açık rıza hizmet şartına bağlanabilir mi?" },
+  { konu: "Geniş katman", soru: "Kira depozitosu en fazla kaç aylık kira olabilir?" },
+  {
+    konu: "\"Bilmiyorum\" demeyi görün",
+    soru: "İstanbul'da bugün hava durumu nasıl?",
+    kapsamDisi: true,
+  },
 ];
-const BOLUM_ADI: Record<string, string> = {
-  sikayet: "Şikâyet / ihlal bildirimi",
-  savunma: "Veri sorumlusunun savunması",
-  degerlendirme: "Kurulun değerlendirmesi",
-  hukum: "Kurulun kararı",
-};
 
-interface Mesaj {
-  id: number;
-  soru: string;
-  metin: string; // akış sırasında biriken, bitince doğrulanmış cevap
-  baglam: Kaynak[]; // [n] -> kaynak (akış sırasında)
-  ajan?: boolean;
-  sonuc?: Sonuc;
-  hata?: string;
-  suruyor: boolean;
-}
+const AJAN_DEPO = "citelex:ajan";
 
-const AJAN_ANAHTAR = "citelex:ajan";
-
-export default function Sayfa() {
-  const [mesajlar, setMesajlar] = useState<Mesaj[]>([]);
+export default function AnaSayfa() {
   const [girdi, setGirdi] = useState("");
-  const [secili, setSecili] = useState<Tur[]>(TURLER.map((t) => t.id));
+  const [turler, setTurler] = useState<Tur[]>([]);
   const [ajan, setAjan] = useState(true);
-  const [sonKontrol, setSonKontrol] = useState<string | null>(null);
-  const [panel, setPanel] = useState<{ anahtar: string; veri?: KaynakMetni; hata?: string } | null>(null);
-  const son = useRef<HTMLDivElement>(null);
-  const sayac = useRef(0);
-  const tetikleyiciRef = useRef<HTMLElement | null>(null);
-  const mesgul = mesajlar.some((m) => m.suruyor);
+  const [ajanBilgiAcik, setAjanBilgiAcik] = useState(false);
+
+  const [sorulan, setSorulan] = useState("");
+  const [sorulanTurler, setSorulanTurler] = useState<Tur[] | null>(null);
+  const [yukleniyor, setYukleniyor] = useState(false);
+  const [uzunBekleme, setUzunBekleme] = useState(false);
+  const [akiyor, setAkiyor] = useState("");
+  const [sonuc, setSonuc] = useState<Sonuc | null>(null);
+  const [hata, setHata] = useState<string | null>(null);
+  const [ilgiliSorular, setIlgiliSorular] = useState<string[]>([]);
+
+  const [guncellik, setGuncellik] = useState<GuncellikBilgisi | null>(null);
+  const [saglikKontrol, setSaglikKontrol] = useState<string | null>(null);
+
+  const [seciliKaynak, setSeciliKaynak] = useState<{
+    anahtar: string;
+    atif: string;
+    alinti?: string;
+  } | null>(null);
+  const [kaynakVerisi, setKaynakVerisi] = useState<KaynakMetni | null>(null);
+  const [kaynakYukleniyor, setKaynakYukleniyor] = useState(false);
+  const [kaynakHata, setKaynakHata] = useState<string | null>(null);
+
+  const abortRef = useRef<AbortController | null>(null);
+  const kaynakTetikleyiciRef = useRef<HTMLElement | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const istekSayaciRef = useRef(0);
 
   useEffect(() => {
     try {
-      const kayit = window.localStorage.getItem(AJAN_ANAHTAR);
-      if (kayit === "0" || kayit === "false") setAjan(false);
-      else if (kayit === "1" || kayit === "true") setAjan(true);
-    } catch {}
-    saglik().then((s) => setSonKontrol(s?.son_kontrol ?? null));
+      const kayit = localStorage.getItem(AJAN_DEPO);
+      if (kayit === "0") setAjan(false);
+      else if (kayit === "1") setAjan(true);
+    } catch {
+      /* boş */
+    }
+
+    let aktif = true;
+    Promise.all([guncellikGetir(), saglik()]).then(([g, s]) => {
+      if (!aktif) return;
+      if (g) setGuncellik(g);
+      if (s?.son_kontrol) setSaglikKontrol(s.son_kontrol);
+    });
+    return () => {
+      aktif = false;
+    };
   }, []);
+
   useEffect(() => {
-    son.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [mesajlar]);
+    if (!yukleniyor || !ajan) {
+      setUzunBekleme(false);
+      return;
+    }
+    const timer = setTimeout(() => setUzunBekleme(true), 3000);
+    return () => clearTimeout(timer);
+  }, [yukleniyor, ajan]);
 
-  function ajanDegistir(yeni: boolean) {
-    setAjan(yeni);
-    try {
-      window.localStorage.setItem(AJAN_ANAHTAR, yeni ? "1" : "0");
-    } catch {}
+  function ajanDegistir() {
+    setAjan((prev) => {
+      const yeni = !prev;
+      try {
+        localStorage.setItem(AJAN_DEPO, yeni ? "1" : "0");
+      } catch {
+        /* boş */
+      }
+      return yeni;
+    });
   }
 
-  function guncelle(id: number, f: (m: Mesaj) => Mesaj) {
-    setMesajlar((ms) => ms.map((m) => (m.id === id ? f(m) : m)));
+  function turDegistir(t: Tur) {
+    setTurler((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
   }
 
-  async function gonder(soru: string) {
-    soru = soru.trim();
-    if (soru.length < 3 || mesgul || secili.length === 0) return;
-    const id = ++sayac.current;
-    const ajanAcik = ajan;
-    setGirdi("");
-    setMesajlar((ms) => [...ms, { id, soru, metin: "", baglam: [], ajan: ajanAcik, suruyor: true }]);
-    await sor(
-      soru,
-      secili.length === TURLER.length ? null : secili,
+  function baslat(soruMetni: string) {
+    const temiz = soruMetni.trim();
+    if (temiz.length < 3) {
+      setHata("Soru en az 3 karakter olmalı.");
+      return;
+    }
+    abortRef.current?.abort();
+    const ac = new AbortController();
+    abortRef.current = ac;
+    const istekId = ++istekSayaciRef.current;
+
+    const aktifTurler = turler.length > 0 && turler.length < 4 ? [...turler] : null;
+    setSorulan(temiz);
+    setSorulanTurler(aktifTurler);
+    setYukleniyor(true);
+    setAkiyor("");
+    setSonuc(null);
+    setHata(null);
+    setIlgiliSorular([]);
+    setSeciliKaynak(null);
+
+    sor(
+      temiz,
+      aktifTurler,
+      ajan,
       {
-        baglam: (k) => guncelle(id, (m) => ({ ...m, baglam: k })),
-        parca: (t) => guncelle(id, (m) => ({ ...m, metin: m.metin + t })),
-        // Doğrulanmış cevap esas alınır: atıf doğrulamasından geçemeyen metin burada "bilmiyorum" ile değişir.
-        sonuc: (s) => guncelle(id, (m) => ({ ...m, sonuc: s, baglam: s.kaynaklar, metin: s.cevap, suruyor: false })),
-        hata: (h) => guncelle(id, (m) => ({ ...m, hata: h, suruyor: false })),
+        onParca: (m) => setAkiyor((prev) => prev + m),
+        onSonuc: (s) => {
+          setSonuc(s);
+          setYukleniyor(false);
+          if (!s.bilmiyorum && s.kaynaklar.length > 0) {
+            const anahtarlar = s.kaynaklar.map((k) => k.anahtar).filter(Boolean);
+            ilgiliGetir(temiz, anahtarlar).then((liste) => {
+              if (istekSayaciRef.current === istekId && liste.length > 0) {
+                setIlgiliSorular(liste);
+              }
+            });
+          }
+        },
+        onHata: (m) => {
+          setHata(m);
+          setYukleniyor(false);
+        },
       },
-      undefined,
-      ajanAcik
+      ac.signal,
     );
-    guncelle(id, (m) => ({ ...m, suruyor: false }));
   }
 
-  async function kaynakAc(anahtar: string) {
-    if (typeof document !== "undefined" && document.activeElement instanceof HTMLElement) {
-      tetikleyiciRef.current = document.activeElement;
-    }
-    setPanel({ anahtar });
-    try {
-      const veri = await kaynakGetir(anahtar);
-      setPanel((p) => (p?.anahtar === anahtar ? { anahtar, veri } : p));
-    } catch (e) {
-      setPanel((p) => (p?.anahtar === anahtar ? { anahtar, hata: (e as Error).message } : p));
-    }
+  function formGonder(e: FormEvent) {
+    e.preventDefault();
+    baslat(girdi);
   }
 
-  function kaynakKapat() {
-    setPanel(null);
-    const hedef = tetikleyiciRef.current;
-    tetikleyiciRef.current = null;
-    if (hedef) {
-      window.requestAnimationFrame(() => hedef.focus());
-    }
+  function yeniSoru() {
+    abortRef.current?.abort();
+    setYukleniyor(false);
+    setSorulan("");
+    setSorulanTurler(null);
+    setAkiyor("");
+    setSonuc(null);
+    setHata(null);
+    setIlgiliSorular([]);
+    setSeciliKaynak(null);
+    inputRef.current?.focus();
   }
+
+  const anahtarlaKaynakAc = useCallback(
+    async (anahtar: string, atif = anahtar, alinti?: string, tetikleyici?: HTMLElement) => {
+      if (tetikleyici) kaynakTetikleyiciRef.current = tetikleyici;
+      setSeciliKaynak({ anahtar, atif, alinti });
+      setKaynakVerisi(null);
+      setKaynakHata(null);
+      setKaynakYukleniyor(true);
+      try {
+        const veri = await kaynakGetir(anahtar);
+        setKaynakVerisi(veri);
+      } catch (e) {
+        setKaynakHata((e as Error).message || "Kaynak alınamadı.");
+      } finally {
+        setKaynakYukleniyor(false);
+      }
+    },
+    [],
+  );
+
+  const kaynakAc = useCallback(
+    (k: Kaynak, tetikleyici: HTMLElement) => {
+      anahtarlaKaynakAc(k.anahtar, k.atif, k.alinti, tetikleyici);
+    },
+    [anahtarlaKaynakAc],
+  );
+
+  const panelKapat = useCallback(() => {
+    setSeciliKaynak(null);
+    requestAnimationFrame(() => kaynakTetikleyiciRef.current?.focus());
+  }, []);
+
+  function soruyuDuzenle(metin: string) {
+    setGirdi(metin);
+    inputRef.current?.focus();
+  }
+
+  const sonKontrolTarih = tarih(guncellik?.son_kontrol ?? saglikKontrol);
+  const bosDurum = !sorulan;
 
   return (
-    <div className="flex h-dvh overflow-x-hidden">
-      <main className="flex min-w-0 flex-1 flex-col">
-        <header className="guvenli-ust guvenli-yatay border-b border-line bg-panel pb-3">
-          <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-1">
-            <h1 className="text-lg font-semibold tracking-tight">
-              Citelex <span className="font-normal text-muted">· kaynak gösteren mevzuat asistanı</span>
-            </h1>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
-              <p>Kaynakların son kontrolü: {tarih(sonKontrol)}</p>
-              <Link href="/yontem" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
-                Yöntem
-              </Link>
-              <Link href="/pano" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
-                Değerlendirme panosu
-              </Link>
-              <Link href="/degisiklikler" prefetch={false} className="inline-flex min-h-[40px] items-center text-accent hover:underline">
-                Son değişiklikler
-              </Link>
-            </div>
-          </div>
-        </header>
-
-        <div className="flex-1 overflow-y-auto px-4 py-6">
-          <div className="mx-auto max-w-3xl space-y-6">
-            <p role="note" className="rounded-md bg-warn-bg px-3 py-2 text-sm text-warn-ink">
-              Bu sistem hukuki tavsiye vermez. Cevaplar yalnızca gösterilen kaynak metinlere dayanır; karar vermeden önce
-              kaynağın kendisini okuyun.
-            </p>
-
-            {mesajlar.length === 0 && (
-              <section>
-                <p className="mb-3 text-sm text-muted">
-                  KVKK, İş Kanunu, İSG Kanunu, ilgili yönetmelik ve tebliğler ile seçilmiş 40 KVKK Kurul kararı üzerine soru
-                  sorabilirsiniz. Kapsam dışındaki sorularda sistem “bilmiyorum” der.
-                </p>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {ORNEKLER.map((o, idx) => (
-                    <button
-                      key={o}
-                      onClick={() => gonder(o)}
-                      className={`min-h-[44px] rounded-md border border-line bg-panel px-3 py-2.5 text-left text-sm hover:border-accent ${
-                        ORNEKLER.length % 2 === 1 && idx === ORNEKLER.length - 1 ? "sm:col-span-2" : ""
-                      }`}
-                    >
-                      {o}
-                    </button>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {mesajlar.map((m) => (
-              <article key={m.id} className="space-y-3">
-                <p className="ml-auto w-fit max-w-[85%] break-words rounded-lg bg-accent-soft px-3 py-2 text-sm">
-                  {m.soru}
-                </p>
-                <Cevap m={m} ac={kaynakAc} />
-              </article>
-            ))}
-            <div ref={son} />
-          </div>
-        </div>
-
-        <footer className="guvenli-alt guvenli-yatay border-t border-line bg-panel pt-3">
-          <form
-            className="mx-auto max-w-3xl space-y-2.5"
-            onSubmit={(e) => {
-              e.preventDefault();
-              gonder(girdi);
-            }}
+    <SiteKabugu
+      aktif="sor"
+      baslikAlt="KVKK · İş · İSG · Genel Mevzuat"
+      ustEk={
+        sorulan ? (
+          <button
+            type="button"
+            onClick={yeniSoru}
+            className="inline-flex min-h-[40px] items-center rounded-full border border-line bg-panel px-3 py-1 text-xs font-medium text-muted transition-colors hover:border-accent hover:text-ink"
           >
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-              <div className="flex flex-wrap items-center gap-1.5">
-                <span className="mr-1 text-muted">Kaynak türü:</span>
+            Yeni soru
+          </button>
+        ) : undefined
+      }
+    >
+      <div className="space-y-6">
+        {bosDurum && <IlkZiyaretRehberi />}
+
+        {bosDurum && (
+          <section className="space-y-2 pt-1">
+            <div className="text-[11px] font-semibold tracking-wider text-accent uppercase">
+              Mevzuat Araştırma Asistanı
+            </div>
+            <h1 className="font-serif text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+              Mevzuata sor, kaynağıyla öğren.
+            </h1>
+            <p className="max-w-2xl text-sm leading-relaxed text-muted">
+              KVKK, İş ve İSG mevzuatı ile KVKK Kurul kararlarında kaynak doğrulamalı arama; eşik altında
+              kalınırsa ~900 kanunluk genel derlem taranır.
+            </p>
+          </section>
+        )}
+
+        <form onSubmit={formGonder} className="space-y-3">
+          <div className="rounded-xl border border-line bg-panel p-3.5 shadow-xs transition-colors focus-within:border-accent">
+            <label htmlFor="soru" className="sr-only">
+              Mevzuat sorunuz
+            </label>
+            <textarea
+              ref={inputRef}
+              id="soru"
+              rows={bosDurum ? 3 : 2}
+              value={girdi}
+              onChange={(e) => setGirdi(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  baslat(girdi);
+                }
+              }}
+              placeholder="Örn. Yıllık izin süreleri kıdeme göre kaç gündür?"
+              className="w-full resize-none bg-transparent text-[15px] leading-relaxed text-ink outline-none placeholder:text-subtle"
+              maxLength={500}
+            />
+
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-line pt-3">
+              <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Kaynak türü filtresi">
                 {TURLER.map((t) => {
-                  const acik = secili.includes(t.id);
+                  const secili = turler.includes(t.id);
                   return (
                     <button
                       key={t.id}
                       type="button"
-                      aria-pressed={acik}
-                      onClick={() => setSecili((s) => (acik ? s.filter((x) => x !== t.id) : [...s, t.id]))}
-                      className={`inline-flex min-h-[40px] items-center rounded-full border px-3 py-1.5 ${acik ? "border-accent bg-accent-soft text-ink" : "border-line text-muted"}`}
+                      onClick={() => turDegistir(t.id)}
+                      aria-pressed={secili}
+                      className={`min-h-[38px] rounded-full border px-3 py-1 text-xs transition-colors ${
+                        secili
+                          ? "border-accent bg-accent-soft font-medium text-accent"
+                          : "border-line bg-bg text-muted hover:text-ink"
+                      }`}
                     >
                       {t.ad}
                     </button>
                   );
                 })}
-                {secili.length === 0 && <span className="text-accent">En az bir tür seçin.</span>}
               </div>
 
-              <button
-                type="button"
-                role="switch"
-                aria-checked={ajan}
-                onClick={() => ajanDegistir(!ajan)}
-                className={`inline-flex min-h-[40px] items-center gap-2 rounded-full border px-3 py-1.5 transition-colors ${
-                  ajan ? "border-accent bg-accent-soft text-ink" : "border-line bg-bg text-muted"
-                }`}
-              >
-                <span
-                  aria-hidden="true"
-                  className={`inline-block h-2.5 w-2.5 rounded-full ${ajan ? "bg-accent" : "bg-muted/50"}`}
-                />
-                <span>Derin arama (ajan)</span>
-                <span className="text-[11px] font-medium">{ajan ? "Açık" : "Kapalı"}</span>
-              </button>
-            </div>
-            <div className="flex gap-2">
-              <input
-                value={girdi}
-                onChange={(e) => setGirdi(e.target.value)}
-                maxLength={500}
-                placeholder="Sorunuzu yazın…"
-                aria-label="Soru"
-                className="min-h-[44px] min-w-0 flex-1 rounded-md border border-line bg-bg px-3 py-2 text-sm focus:border-accent"
-              />
-              <button
-                type="submit"
-                disabled={mesgul || girdi.trim().length < 3 || secili.length === 0}
-                className="min-h-[44px] shrink-0 rounded-md bg-accent px-4 py-2 text-sm font-medium text-bg disabled:opacity-40"
-              >
-                {mesgul ? "Yanıtlanıyor…" : "Sor"}
-              </button>
-            </div>
-          </form>
-        </footer>
-      </main>
-
-      {panel && <KaynakPaneli panel={panel} kapat={kaynakKapat} />}
-    </div>
-  );
-}
-
-function Cevap({ m, ac }: { m: Mesaj; ac: (anahtar: string) => void }) {
-  const [uzunBekleme, setUzunBekleme] = useState(false);
-
-  useEffect(() => {
-    if (!m.suruyor || m.metin || !m.ajan) {
-      setUzunBekleme(false);
-      return;
-    }
-    const timer = window.setTimeout(() => setUzunBekleme(true), 3000);
-    return () => window.clearTimeout(timer);
-  }, [m.suruyor, m.metin, m.ajan]);
-
-  if (m.hata) return <p className="rounded-md border border-line bg-panel px-3 py-2 text-sm text-accent">{m.hata}</p>;
-  const s = m.sonuc;
-  const genis = s?.kanallar?.includes("genis") ?? false;
-  // [n] -> kaynak: bitince doğrudan sonuc.kaynaklar'dan (ajan modunda baglam gelmez), akış sırasında baglam'dan
-  const bul = (n: number) =>
-    s ? s.kaynaklar.find((k) => k.no === n) : m.baglam.find((k) => k.no === n) ?? m.baglam[n - 1];
-  return (
-    <div
-      aria-live="polite"
-      aria-busy={m.suruyor}
-      className="rounded-lg border border-line bg-panel px-4 py-3 text-[15px] leading-relaxed"
-    >
-      {!m.metin && m.suruyor && (
-        <div className="space-y-1">
-          <p className="text-sm text-muted">Kaynaklar aranıyor…</p>
-          {m.ajan && uzunBekleme && (
-            <p className="text-xs text-muted">Gerekirse soru yeniden yazılıp tekrar aranıyor…</p>
-          )}
-        </div>
-      )}
-      {genis && (
-        <div className="mb-3 space-y-1.5 border-b border-line pb-2.5">
-          <span
-            role="note"
-            className="inline-flex items-center rounded-md border border-warn-ink/30 bg-warn-bg px-2.5 py-1 text-xs font-medium text-warn-ink"
-          >
-            Geniş katman · doğruluğu ölçülmedi
-          </span>
-          {s?.uyari && (
-            <p role="note" className="text-xs leading-relaxed text-muted">
-              {s.uyari}
-            </p>
-          )}
-        </div>
-      )}
-      {m.metin && (
-        <p className="whitespace-pre-wrap break-words">
-          {m.metin.split(/(\[\d{1,2}\])/).map((parca, i) => {
-            const no = /^\[(\d{1,2})\]$/.exec(parca)?.[1];
-            const k = no ? bul(Number(no)) : undefined;
-            if (!no) return <span key={i}>{parca}</span>;
-            if (!k) return null; // doğrulanamayan atıf gösterilmez
-            return (
-              <button
-                key={i}
-                type="button"
-                onClick={() => ac(k.anahtar)}
-                title={k.atif}
-                aria-label={`Kaynak ${no}: ${k.atif}`}
-                className="mx-0.5 rounded bg-accent-soft px-1.5 py-0.5 align-baseline text-xs font-medium text-accent hover:underline"
-              >
-                {no}
-              </button>
-            );
-          })}
-        </p>
-      )}
-      {s?.bilmiyorum && s.neden && <p className="mt-1 text-sm text-muted">{s.neden}</p>}
-      {s?.ajan_deneme === 2 && (
-        <details className="mt-3 border-t border-line pt-2 text-xs text-muted">
-          <summary className="flex min-h-[40px] cursor-pointer select-none items-center hover:text-ink">
-            {s.bilmiyorum
-              ? "Soru yeniden yazılıp tekrar arandı; yine yeterli kaynak bulunamadı."
-              : "Soru yeniden yazılarak tekrar arandı (2. deneme)"}
-          </summary>
-          <p className="mt-1 break-words rounded bg-bg px-2.5 py-2 text-ink">
-            {s.bilmiyorum ? "Denenen arama sorgusu: " : "İlk aramada yeterli kaynak bulunamadı; soru şu sorguyla yeniden arandı: "}
-            <span className="font-medium">{s.ajan_sorgular?.[0] ?? "—"}</span>
-          </p>
-        </details>
-      )}
-      {s && s.kaynaklar.length > 0 && (
-        <ul className="mt-3 space-y-1 border-t border-line pt-2 text-sm">
-          {s.kaynaklar.map((k) => (
-            <li key={k.no}>
-              <button
-                type="button"
-                onClick={() => ac(k.anahtar)}
-                className="flex min-h-[40px] w-full items-start gap-2 rounded py-1.5 text-left hover:bg-bg/70"
-              >
-                <span className="mt-0.5 w-5 shrink-0 text-right text-xs font-medium text-accent">{k.no}</span>
-                <span className="min-w-0 flex-1 break-words">
-                  <span className="hover:underline">{k.atif}</span>
-                  {k.baslik ? <span className="text-muted"> — {k.baslik}</span> : null}
-                  <span className="ml-2 text-xs text-muted">{TUR_ADI[k.belge_tur]}</span>
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-function KaynakPaneli({ panel, kapat }: { panel: { anahtar: string; veri?: KaynakMetni; hata?: string }; kapat: () => void }) {
-  const v = panel.veri;
-  const panelRef = useRef<HTMLElement>(null);
-  const kapatRef = useRef(kapat);
-  useEffect(() => {
-    kapatRef.current = kapat;
-  });
-  useEffect(() => {
-    panelRef.current?.focus();
-    const f = (e: KeyboardEvent) => {
-      if (e.key === "Escape") kapatRef.current();
-    };
-    window.addEventListener("keydown", f);
-    return () => window.removeEventListener("keydown", f);
-  }, []);
-  return (
-    <div
-      className="fixed inset-0 z-20 flex flex-col justify-end bg-black/40 md:static md:z-auto md:block md:bg-transparent"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) kapat();
-      }}
-    >
-      <aside
-        ref={panelRef}
-        tabIndex={-1}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="kaynak-panel-baslik"
-        className="flex max-h-[82dvh] w-full flex-col rounded-t-2xl border-t border-line bg-panel shadow-xl md:h-full md:max-h-none md:w-[26rem] md:shrink-0 md:rounded-none md:border-l md:border-t-0 md:shadow-none lg:w-[32rem]"
-      >
-        <div className="flex justify-center pt-2 pb-1 md:hidden" aria-hidden="true">
-          <span className="h-1 w-10 rounded-full bg-line" />
-        </div>
-        <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
-          <div className="min-w-0">
-            <h2 id="kaynak-panel-baslik" className="break-words font-semibold">
-              {v?.atif ?? "Kaynak"}
-            </h2>
-            {v?.baslik && <p className="break-words text-sm text-muted">{v.baslik}</p>}
-          </div>
-          <button
-            type="button"
-            onClick={kapat}
-            aria-label="Kaynak panelini kapat"
-            className="inline-flex min-h-[40px] min-w-[44px] shrink-0 items-center justify-center rounded border border-line px-3 py-1.5 text-sm"
-          >
-            Kapat
-          </button>
-        </div>
-        <div className="guvenli-panel-alt flex-1 space-y-4 overflow-y-auto px-4 pt-4">
-          {!v && !panel.hata && <p className="text-sm text-muted">Yükleniyor…</p>}
-          {panel.hata && <p className="text-sm text-accent">{panel.hata}</p>}
-          {v && (
-            <>
-              <p className="text-xs text-muted">
-                {v.belge_adi}
-                {v.karar_tarihi ? ` · ${v.karar_tarihi}` : ""}
-              </p>
-              {v.mulga && (
-                <p role="note" className="rounded bg-warn-bg px-2 py-1 text-sm text-warn-ink">
-                  Bu hüküm yürürlükten kaldırılmıştır.
-                </p>
-              )}
-              <div className="kanun-metni space-y-3 text-[15px]">
-                {v.parcalar.map((p, i) => (
-                  <div key={i} className={p.mulga ? "text-muted" : ""}>
-                    {p.bolum && (i === 0 || v.parcalar[i - 1].bolum !== p.bolum) && (
-                      <h3 className="mb-1 font-sans text-xs font-semibold uppercase tracking-wide text-muted">
-                        {BOLUM_ADI[p.bolum] ?? p.bolum}
-                      </h3>
-                    )}
-                    <p className="whitespace-pre-wrap break-words">{p.metin}</p>
-                  </div>
-                ))}
-              </div>
-              {v.dipnotlar.length > 0 && (
-                <details className="text-sm text-muted">
-                  <summary className="flex min-h-[40px] cursor-pointer items-center">
-                    Değişiklik notları ({v.dipnotlar.length})
-                  </summary>
-                  <ul className="mt-2 space-y-1">
-                    {v.dipnotlar.map((d) => (
-                      <li key={d.no}>
-                        {d.no}. {d.metin}
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              )}
-              <p className="border-t border-line pt-3 text-xs text-muted">
-                Son kontrol: {tarih(v.son_kontrol)}
-                {v.url && (
-                  <>
-                    {" · "}
-                    <a
-                      href={v.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-[40px] items-center text-accent underline"
-                    >
-                      Resmî kaynakta aç
-                    </a>
-                  </>
+              <div className="ml-auto flex items-center gap-2">
+                {yukleniyor ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      abortRef.current?.abort();
+                      setYukleniyor(false);
+                    }}
+                    className="inline-flex min-h-[44px] items-center rounded-lg border border-line bg-bg px-4 py-2 text-xs font-medium text-ink hover:border-accent"
+                  >
+                    Durdur
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-accent-btn px-5 py-2 text-xs font-semibold text-accent-ink transition-colors hover:bg-accent-btn-hover"
+                  >
+                    <span>Sor</span>
+                    <span aria-hidden="true">↑</span>
+                  </button>
                 )}
+              </div>
+            </div>
+
+            <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 border-t border-line/70 pt-2.5 text-xs">
+              <div className="flex items-center gap-2.5">
+                <span className="text-muted">Derin arama (ajan)</span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={ajan}
+                  aria-label="Derin arama (ajan) modu"
+                  onClick={ajanDegistir}
+                  className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full border p-0.5 transition-colors ${
+                    ajan ? "border-accent-btn bg-accent-btn" : "border-line bg-panel-soft"
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 rounded-full bg-white shadow-xs transition-transform ${
+                      ajan ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAjanBilgiAcik((v) => !v)}
+                  aria-expanded={ajanBilgiAcik}
+                  aria-label={`${ajan ? "Açık" : "Kapalı"} · Derin arama hakkında bilgi`}
+                  className="inline-flex min-h-[32px] items-center rounded-full border border-line px-2 py-0.5 text-[11px] text-muted hover:text-ink"
+                >
+                  {ajan ? "Açık" : "Kapalı"} · ?
+                </button>
+              </div>
+              <span className="text-[11px] text-subtle">
+                {ajan
+                  ? "İlk arama eşik altında kalırsa sorguyu yeniden yazar"
+                  : "Tek adımda akışlı cevap"}
+              </span>
+            </div>
+
+            {ajanBilgiAcik && (
+              <p className="mt-2 rounded-lg bg-panel-soft/70 px-3 py-2 text-xs leading-relaxed text-muted">
+                Ajan modu açıkken yanıt tek parça hâlinde gelir (akış yapılmaz). Ölçülen değerlendirmede
+                doğruluğu %80&apos;den %88&apos;e çıkarır; gerektiğinde bir kez sorguyu hukuki terimlerle
+                yeniden arar.
               </p>
-            </>
-          )}
-        </div>
-      </aside>
-    </div>
+            )}
+          </div>
+        </form>
+
+        {bosDurum && (guncellik || sonKontrolTarih) && (
+          <section
+            aria-label="Derlem güncelliği"
+            className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line bg-panel px-4 py-3 text-xs shadow-xs"
+          >
+            <div className="flex min-w-0 items-center gap-2.5">
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ok opacity-60" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-ok" />
+              </span>
+              <div className="min-w-0">
+                <div className="font-medium text-ink">
+                  {guncellik
+                    ? `Derlem güncel · ${guncellik.belge_sayisi} takip edilen belge`
+                    : "Derlem çevrimiçi"}
+                </div>
+                <div className="text-muted">
+                  {sonKontrolTarih ? `Son kontrol: ${sonKontrolTarih}` : "Günlük takip etkin"}
+                  {guncellik?.rg_bekleyen && guncellik.rg_bekleyen.length > 0 && (
+                    <> · Resmî Gazete erken uyarı: {guncellik.rg_bekleyen.length} kayıt</>
+                  )}
+                </div>
+              </div>
+            </div>
+            <Link
+              href="/degisiklikler/"
+              prefetch={false}
+              className="inline-flex min-h-[36px] shrink-0 items-center rounded-lg border border-line bg-bg px-3 py-1 font-medium text-accent transition-colors hover:border-accent"
+            >
+              Değişiklikleri gör →
+            </Link>
+          </section>
+        )}
+
+        {bosDurum && (
+          <section aria-label="Örnek araştırmalar" className="space-y-2.5">
+            <h2 className="px-1 text-xs font-semibold tracking-wider text-subtle uppercase">
+              Örnek araştırmalar
+            </h2>
+            <div className="grid gap-2.5 sm:grid-cols-2">
+              {ORNEKLER.map((o) => (
+                <button
+                  key={o.soru}
+                  type="button"
+                  onClick={() => {
+                    setGirdi(o.soru);
+                    baslat(o.soru);
+                  }}
+                  className="group flex min-h-[68px] flex-col justify-between gap-2 rounded-xl border border-line bg-panel p-3.5 text-left shadow-xs transition-all hover:border-accent"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium ${
+                        o.kapsamDisi
+                          ? "bg-warn-bg text-warn-ink"
+                          : "bg-accent-soft text-accent"
+                      }`}
+                    >
+                      {o.konu}
+                    </span>
+                    <span aria-hidden="true" className="text-xs text-subtle group-hover:text-accent">
+                      →
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium leading-snug text-ink">{o.soru}</p>
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {bosDurum && (
+          <section aria-label="Neden Citelex" className="rounded-xl border border-line bg-panel p-4 shadow-xs">
+            <h2 className="mb-3 text-xs font-semibold tracking-wider text-subtle uppercase">Neden Citelex?</h2>
+            <div className="grid gap-3 text-xs leading-relaxed sm:grid-cols-3">
+              <div className="space-y-1 rounded-lg bg-bg/70 p-3">
+                <div className="font-semibold text-ink">1. Atıfsız cümle yok</div>
+                <p className="text-muted">
+                  Her ifade numaralı kaynak kartına bağlanır; doğrulamadan geçemeyen uydurma atıf elenir.
+                </p>
+              </div>
+              <div className="space-y-1 rounded-lg bg-bg/70 p-3">
+                <div className="font-semibold text-ink">2. Bilmediğini söyler</div>
+                <p className="text-muted">
+                  Arama skoru eşiği altındaki veya kaynaksız sorularda tahmin yürütmek yerine reddeder.
+                </p>
+              </div>
+              <div className="space-y-1 rounded-lg bg-bg/70 p-3">
+                <div className="font-semibold text-ink">3. Güncellik takibi</div>
+                <p className="text-muted">
+                  Günlük sürüm karşılaştırması ve kelime düzeyinde fark günlüğü ile değişiklikleri izler.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {sorulan && (
+          <CevapKarti
+            sorulan={sorulan}
+            sorulanTurler={sorulanTurler}
+            yukleniyor={yukleniyor}
+            ajan={ajan}
+            uzunBekleme={uzunBekleme}
+            akiyor={akiyor}
+            sonuc={sonuc}
+            hata={hata}
+            ilgiliSorular={ilgiliSorular}
+            onKaynakAc={kaynakAc}
+            onSoruyuDuzenle={soruyuDuzenle}
+            onIlgiliSor={(s) => {
+              setGirdi(s);
+              baslat(s);
+            }}
+          />
+        )}
+      </div>
+
+      {seciliKaynak && (
+        <KaynakPaneli
+          secili={seciliKaynak}
+          veri={kaynakVerisi}
+          yukleniyor={kaynakYukleniyor}
+          hata={kaynakHata}
+          onKapat={panelKapat}
+          onAnahtarSec={(yeniAnahtar) => anahtarlaKaynakAc(yeniAnahtar, yeniAnahtar)}
+        />
+      )}
+    </SiteKabugu>
   );
 }

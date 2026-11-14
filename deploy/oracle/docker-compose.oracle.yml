@@ -30,6 +30,7 @@ services:
       CITELEX_CORS: https://${ALAN_ADI},http://tauri.localhost,https://tauri.localhost,tauri://localhost
       CITELEX_WEB_DIR: /app/web/out
       CITELEX_IZ_DOSYA: /app/logs/izler.jsonl
+      CITELEX_ILISKI: /app/data/store/iliskiler.json   # paketle store/ içinde gelir
     volumes:
       - hf_cache:/models                    # bge-m3 ilk açılışta bir kez iner (~2,3 GB)
       - ../../store:/app/data/store:ro      # sürüm deposu + farklar (/degisiklikler, son kontrol)

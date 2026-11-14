@@ -10,29 +10,33 @@ export function GenisKatmanBolumu({ veri }: { veri?: GenisKatmanVerisi | null })
   return (
     <section aria-labelledby="genis-katman-pano-baslik" className="min-w-0 space-y-4">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <div className="flex flex-wrap items-center gap-2">
-          <h2 id="genis-katman-pano-baslik" className="text-base font-semibold">
-            Geniş katman (~900 kanun)
-          </h2>
-          <span
-            role="note"
-            className="rounded border border-warn-ink/30 bg-warn-bg px-2 py-0.5 text-[11px] font-medium text-warn-ink"
-          >
-            TASLAK soru seti
-          </span>
+        <div>
+          <span className="text-[11px] font-semibold tracking-wider text-subtle uppercase">Bölüm 5</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 id="genis-katman-pano-baslik" className="font-serif text-xl font-medium text-ink">
+              Geniş katman (~900 kanun)
+            </h2>
+            <span
+              role="note"
+              className="rounded-full border border-warn-border bg-warn-bg px-2.5 py-0.5 text-[11px] font-semibold text-warn-ink"
+            >
+              TASLAK soru seti
+            </span>
+          </div>
         </div>
         <p className="text-xs text-muted">Derin katman eşiği geçemediğinde devreye giren yedek kanal</p>
       </div>
 
-      <p role="note" className="rounded-md bg-warn-bg px-3 py-2 text-xs leading-relaxed text-warn-ink">
+      <p role="note" className="rounded-xl border border-warn-border bg-warn-bg px-4 py-3 text-xs leading-relaxed text-warn-ink">
         Geniş katman soru seti (<code>eval/genis_sorular.jsonl</code>: 15 kapsam içi + 3 kapsam dışı) ve açık eval
         beklenen cevapları <strong>TASLAK</strong> olup hukuki doğrulama bekler; eşik ve yönlendirme bu sete göre
         ayarlanmamıştır. Bilinen tasarım sınırı: derin katman benzer bir soruyu yakalarsa geniş katmana hiç gidilmez
-        (ör. <code>g13</code> devlet memuru analık izni → İş Kanunu m. 74 ile 0,717 eşleşmesi).
+        (ör. <code>g13</code> devlet memuru analık izni → İş Kanunu m. 74 ile 0,717 eşleşmesi; 0,05 fark kuralı sonrası
+        yönlendirildi).
       </p>
 
       {arama && (
-        <div className="space-y-3 rounded-lg border border-line bg-panel p-4">
+        <div className="space-y-3 rounded-xl border border-line bg-panel p-4 shadow-xs">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h3 className="text-sm font-semibold text-ink">
               Arama ölçümü (<code>{arama.dosya}</code> · LLM yok)
@@ -43,16 +47,16 @@ export function GenisKatmanBolumu({ veri }: { veri?: GenisKatmanVerisi | null })
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-left text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-line text-xs text-muted">
-                  <th className="px-3 py-2 font-medium">Ölçüt</th>
-                  <th className="px-3 py-2 text-right font-medium">Değer</th>
+                <tr className="border-b border-line bg-bg/50 text-xs text-muted">
+                  <th className="px-3.5 py-2 font-medium">Ölçüt</th>
+                  <th className="px-3.5 py-2 text-right font-medium">Değer</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-line tabular-nums">
                 {arama.ozet.map((o) => (
                   <tr key={o.olcut} className="hover:bg-bg/60">
-                    <td className="px-3 py-1.5 text-ink">{o.olcut}</td>
-                    <td className="px-3 py-1.5 text-right font-semibold whitespace-nowrap text-ink">{o.deger}</td>
+                    <td className="px-3.5 py-2 text-ink">{o.olcut}</td>
+                    <td className="px-3.5 py-2 text-right font-semibold whitespace-nowrap text-ink">{o.deger}</td>
                   </tr>
                 ))}
               </tbody>
@@ -98,7 +102,7 @@ export function GenisKatmanBolumu({ veri }: { veri?: GenisKatmanVerisi | null })
       )}
 
       {acik_eval.map((ev) => (
-        <div key={ev.dosya} className="space-y-3 rounded-lg border border-line bg-panel p-4">
+        <div key={ev.dosya} className="space-y-3 rounded-xl border border-line bg-panel p-4 shadow-xs">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h3 className="text-sm font-semibold text-ink">
               Açık değerlendirme — {ev.model ?? ev.dosya} (<code>{ev.dosya}</code>)
@@ -109,20 +113,20 @@ export function GenisKatmanBolumu({ veri }: { veri?: GenisKatmanVerisi | null })
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-left text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-line text-xs text-muted">
-                  <th className="px-3 py-2 font-medium">Ölçüt</th>
-                  <th className="px-3 py-2 text-right font-medium">Tümü</th>
-                  <th className="px-3 py-2 text-right font-medium">Mevzuat</th>
-                  <th className="px-3 py-2 text-right font-medium">Karar</th>
+                <tr className="border-b border-line bg-bg/50 text-xs text-muted">
+                  <th className="px-3.5 py-2 font-medium">Ölçüt</th>
+                  <th className="px-3.5 py-2 text-right font-medium">Tümü</th>
+                  <th className="px-3.5 py-2 text-right font-medium">Mevzuat</th>
+                  <th className="px-3.5 py-2 text-right font-medium">Karar</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-line tabular-nums">
                 {ev.olcutler.map((o) => (
                   <tr key={o.olcut} className="hover:bg-bg/60">
-                    <td className="px-3 py-1.5 font-medium text-ink">{o.olcut}</td>
-                    <td className="px-3 py-1.5 text-right whitespace-nowrap text-ink">{o.tumu}</td>
-                    <td className="px-3 py-1.5 text-right whitespace-nowrap text-muted">{o.mevzuat}</td>
-                    <td className="px-3 py-1.5 text-right whitespace-nowrap text-muted">{o.karar}</td>
+                    <td className="px-3.5 py-2 font-medium text-ink">{o.olcut}</td>
+                    <td className="px-3.5 py-2 text-right whitespace-nowrap text-ink">{o.tumu}</td>
+                    <td className="px-3.5 py-2 text-right whitespace-nowrap text-muted">{o.mevzuat}</td>
+                    <td className="px-3.5 py-2 text-right whitespace-nowrap text-muted">{o.karar}</td>
                   </tr>
                 ))}
               </tbody>
