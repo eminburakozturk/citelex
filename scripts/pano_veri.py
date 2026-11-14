@@ -471,8 +471,8 @@ def build_pano() -> dict:
             "tam": True,
         }
         gecmis.append(entry)
-        if not genis:
-            latest_tam[anahtar] = entry
+        # Geniş katmanlı yapılandırmalar da tabloya girer: yayındaki yapılandırma "ajan + geniş"tir.
+        latest_tam[anahtar] = entry
 
     modeller: list[dict] = []
     raw_by_key: dict[str, dict[str, dict]] = {}

@@ -1,5 +1,5 @@
 {
-  "uretim_tarihi": "2026-11-14T17:56:48+00:00",
+  "uretim_tarihi": "2026-11-14T17:57:13+00:00",
   "modeller": [
     {
       "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan",
@@ -39,6 +39,73 @@
         "desteksiz": 0,
         "n_iddia": 185,
         "destekli_orani": 0.9784
+      }
+    },
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "reranker+ajan+genis",
+      "yapilandirma_adi": "reranker + ajan + geniş",
+      "rerank": true,
+      "ajan": true,
+      "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_rerank_genis",
+      "tarih": "2026-11-14T00:02",
+      "commit": "2f828ba",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 46,
+      "atif": 46,
+      "icerik": 49,
+      "dogru": 45,
+      "dogru_orani": 0.9,
+      "yanlis_ret": 0,
+      "yanlis_ret_orani": 0.0,
+      "yanlis_ret_katmanlari": {},
+      "dogru_ret": 5,
+      "dogru_ret_orani": 0.8333,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 5.47,
+      "sadakat": null
+    },
+    {
+      "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis",
+      "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+      "yapilandirma": "ajan+genis",
+      "yapilandirma_adi": "ajan + geniş",
+      "rerank": false,
+      "ajan": true,
+      "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_genis",
+      "tarih": "2026-11-14T20:51",
+      "commit": "453b9e0",
+      "n_ic": 50,
+      "n_dis": 6,
+      "baglam": 46,
+      "atif": 45,
+      "icerik": 47,
+      "dogru": 44,
+      "dogru_orani": 0.88,
+      "yanlis_ret": 0,
+      "yanlis_ret_orani": 0.0,
+      "yanlis_ret_katmanlari": {},
+      "dogru_ret": 4,
+      "dogru_ret_orani": 0.6667,
+      "gecersiz_atif": 0,
+      "hata": 0,
+      "medyan_sure_sn": 2.23,
+      "sadakat": {
+        "hakem": "anthropic/claude-haiku-5.5",
+        "dosya": "sadakat_openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_genis__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl",
+        "cevap": 50,
+        "sadik": 49,
+        "sadik_orani": 0.98,
+        "tam_destekli": 47,
+        "tam_destekli_orani": 0.94,
+        "destekli": 194,
+        "kismen": 2,
+        "desteksiz": 1,
+        "n_iddia": 197,
+        "destekli_orani": 0.9848
       }
     },
     {
@@ -427,6 +494,73 @@
             "desteksiz": 0,
             "n_iddia": 185,
             "destekli_orani": 0.9784
+          }
+        },
+        {
+          "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis",
+          "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+          "yapilandirma": "reranker+ajan+genis",
+          "yapilandirma_adi": "reranker + ajan + geniş",
+          "rerank": true,
+          "ajan": true,
+          "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_rerank_genis",
+          "tarih": "2026-11-14T00:02",
+          "commit": "2f828ba",
+          "n_ic": 50,
+          "n_dis": 6,
+          "baglam": 46,
+          "atif": 46,
+          "icerik": 49,
+          "dogru": 45,
+          "dogru_orani": 0.9,
+          "yanlis_ret": 0,
+          "yanlis_ret_orani": 0.0,
+          "yanlis_ret_katmanlari": {},
+          "dogru_ret": 5,
+          "dogru_ret_orani": 0.8333,
+          "gecersiz_atif": 0,
+          "hata": 0,
+          "medyan_sure_sn": 5.47,
+          "sadakat": null
+        },
+        {
+          "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis",
+          "llm": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+          "yapilandirma": "ajan+genis",
+          "yapilandirma_adi": "ajan + geniş",
+          "rerank": false,
+          "ajan": true,
+          "tag": "openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_genis",
+          "tarih": "2026-11-14T20:51",
+          "commit": "453b9e0",
+          "n_ic": 50,
+          "n_dis": 6,
+          "baglam": 46,
+          "atif": 45,
+          "icerik": 47,
+          "dogru": 44,
+          "dogru_orani": 0.88,
+          "yanlis_ret": 0,
+          "yanlis_ret_orani": 0.0,
+          "yanlis_ret_katmanlari": {},
+          "dogru_ret": 4,
+          "dogru_ret_orani": 0.6667,
+          "gecersiz_atif": 0,
+          "hata": 0,
+          "medyan_sure_sn": 2.23,
+          "sadakat": {
+            "hakem": "anthropic/claude-haiku-5.5",
+            "dosya": "sadakat_openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_genis__hakem_openrouter_anthropic_claude_haiku_5.5.jsonl",
+            "cevap": 50,
+            "sadik": 49,
+            "sadik_orani": 0.98,
+            "tam_destekli": 47,
+            "tam_destekli_orani": 0.94,
+            "destekli": 194,
+            "kismen": 2,
+            "desteksiz": 1,
+            "n_iddia": 197,
+            "destekli_orani": 0.9848
           }
         }
       ]
@@ -1308,6 +1442,26 @@
           "sure_sn": 34.33,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 44.88,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 28.15,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1383,6 +1537,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 6.19,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.76,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.31,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -1462,6 +1636,26 @@
           "sure_sn": 3.0,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.63,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.48,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1537,6 +1731,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.38,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.96,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.1,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -1616,6 +1830,26 @@
           "sure_sn": 2.86,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.5,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.6,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1691,6 +1925,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.7,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.56,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.71,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -1770,6 +2024,26 @@
           "sure_sn": 3.05,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.54,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 0.99,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1847,6 +2121,26 @@
           "sure_sn": 3.32,
           "tam_destekli": false
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.91,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.65,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -1922,6 +2216,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.84,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.18,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.24,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -2001,6 +2315,26 @@
           "sure_sn": 3.46,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 8.92,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.52,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2076,6 +2410,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.74,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.24,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.58,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -2155,6 +2509,26 @@
           "sure_sn": 3.72,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.44,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.66,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2230,6 +2604,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.88,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.58,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.34,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -2309,6 +2703,26 @@
           "sure_sn": 2.91,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.94,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.61,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2384,6 +2798,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.25,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.24,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.43,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -2463,6 +2897,26 @@
           "sure_sn": 5.33,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.55,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.9,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2540,6 +2994,26 @@
           "sure_sn": 4.16,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.62,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.74,
+          "tam_destekli": false
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2615,6 +3089,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.71,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.83,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.27,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -2694,6 +3188,26 @@
           "sure_sn": 3.78,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.11,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.16,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2769,6 +3283,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.76,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.71,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.02,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -2848,6 +3382,26 @@
           "sure_sn": 3.17,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.18,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.39,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -2923,6 +3477,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.63,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.75,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.47,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -3002,6 +3576,26 @@
           "sure_sn": 2.94,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.59,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.56,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3077,6 +3671,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 6.15,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 7.53,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.72,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -3156,6 +3770,26 @@
           "sure_sn": 5.72,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.27,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.31,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": false,
@@ -3231,6 +3865,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.66,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.05,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.35,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -3310,6 +3964,26 @@
           "sure_sn": 5.85,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.81,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.71,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": false,
@@ -3385,6 +4059,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.46,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.8,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.93,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -3464,6 +4158,26 @@
           "sure_sn": 4.3,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.63,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.78,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3539,6 +4253,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.49,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.0,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.42,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -3618,6 +4352,26 @@
           "sure_sn": 3.56,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.01,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.24,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3693,6 +4447,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.98,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.76,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.89,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -3772,6 +4546,26 @@
           "sure_sn": 4.94,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.55,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.33,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -3847,6 +4641,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.53,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.49,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.93,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -3926,6 +4740,26 @@
           "sure_sn": 6.54,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 14.07,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.93,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -4001,6 +4835,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 2.96,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.57,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.7,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -4080,6 +4934,26 @@
           "sure_sn": 5.69,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 11.37,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": false,
+          "baglam": false,
+          "atif": false,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.99,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": false,
           "baglam": false,
@@ -4155,6 +5029,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.2,
+          "tam_destekli": false
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": false,
+          "baglam": true,
+          "atif": true,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.91,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": false,
+          "baglam": true,
+          "atif": true,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.23,
           "tam_destekli": false
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -4234,6 +5128,26 @@
           "sure_sn": 10.3,
           "tam_destekli": false
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.82,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": false,
+          "baglam": true,
+          "atif": false,
+          "icerik": false,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.37,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -4309,6 +5223,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 5.93,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.71,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.07,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -4388,6 +5322,26 @@
           "sure_sn": 5.83,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.93,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.73,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -4463,6 +5417,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 7.22,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.39,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.79,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -4542,6 +5516,26 @@
           "sure_sn": 5.12,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.35,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.17,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -4617,6 +5611,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 4.11,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.92,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.15,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -4696,6 +5710,26 @@
           "sure_sn": 3.94,
           "tam_destekli": false
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.0,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.32,
+          "tam_destekli": false
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -4771,6 +5805,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.59,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 9.35,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.93,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -4850,6 +5904,26 @@
           "sure_sn": 5.65,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.47,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 1.51,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -4925,6 +5999,26 @@
           "yanlis_ret": false,
           "katman": null,
           "sure_sn": 3.97,
+          "tam_destekli": true
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 5.07,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 2.08,
           "tam_destekli": true
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
@@ -5004,6 +6098,26 @@
           "sure_sn": 6.81,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 10.82,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 4.08,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -5081,6 +6195,26 @@
           "sure_sn": 3.77,
           "tam_destekli": true
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 6.09,
+          "tam_destekli": null
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "baglam": true,
+          "atif": true,
+          "icerik": true,
+          "yanlis_ret": false,
+          "katman": null,
+          "sure_sn": 3.91,
+          "tam_destekli": true
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "baglam": true,
@@ -5154,6 +6288,18 @@
           "katman": "llm",
           "sure_sn": 5.07
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 9.72
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 4.02
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,
@@ -5202,6 +6348,18 @@
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 4.06
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": false,
+          "dogru_ret": false,
+          "katman": null,
+          "sure_sn": 4.61
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": false,
+          "dogru_ret": false,
+          "katman": null,
+          "sure_sn": 1.58
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
@@ -5252,6 +6410,18 @@
           "katman": "llm",
           "sure_sn": 5.4
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 8.63
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "arama_esigi",
+          "sure_sn": 1.27
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,
@@ -5300,6 +6470,18 @@
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 5.81
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 10.66
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": false,
+          "dogru_ret": false,
+          "katman": null,
+          "sure_sn": 3.29
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
@@ -5350,6 +6532,18 @@
           "katman": "arama_esigi",
           "sure_sn": 6.12
         },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 10.36
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 3.64
+        },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
           "dogru_ret": true,
@@ -5398,6 +6592,18 @@
           "dogru_ret": true,
           "katman": "arama_esigi",
           "sure_sn": 3.84
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 8.47
+        },
+        "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan+genis": {
+          "dogru": true,
+          "dogru_ret": true,
+          "katman": "llm",
+          "sure_sn": 6.21
         },
         "openrouter:deepseek/deepseek-v4.1-flash-1017|ajan": {
           "dogru": true,
