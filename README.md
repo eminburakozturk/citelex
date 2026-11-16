@@ -36,7 +36,7 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 
 | Model (yapılandırma) | Doğru | Tam destekli sadakat | İddia desteği | Yanlış "bilmiyorum" | Kapsam dışı ret | Medyan süre |
 |---|---:|---:|---:|---:|---:|---:|
-| **`openrouter:deepseek/deepseek-v4.1-flash-1017` (yayın: ajan + geniş katman, reranker kapalı)** | **44/50 (%88)** | **45/50 (%90)** | — | 0/50 (%0) | 5/6 (%83)¹ | 2,23 sn |
+| **`openrouter:deepseek/deepseek-v4.1-flash-1017` (yayın: ajan + geniş katman, reranker kapalı)** | **44/50 (%88)** | **45/50 (%90)** | 184/190 (%97) | 0/50 (%0) | 5/6 (%83)¹ | 2,23 sn |
 | `openrouter:deepseek/deepseek-v4.1-flash-1017` (ajan + reranker) | 45/50 (%90) | 46/50 (%92) | 181/185 (%98) | 0/50 (%0) | 6/6 (%100) | 3,98 sn |
 | `openrouter:deepseek/deepseek-v4.1-flash-1017` (ajan) | 44/50 (%88) | 46/49 (%94) | 177/182 (%97) | 1/50 (%2) | 6/6 (%100) | 2,42 sn |
 | `openrouter:deepseek/deepseek-v4.1-flash-1017` (reranker) | 40/50 (%80) | — | — | 7/50 (%14) | 6/6 (%100) | 3,66 sn |
