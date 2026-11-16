@@ -58,12 +58,12 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 
 | Yöntem (geri getirme) | Alt küme | R@1 | R@3 | R@5 | MRR |
 |---|---|---:|---:|---:|---:|
-| Hibrit (bge-m3 + BM25, RRF k=60) | Mevzuat (`n=51`) | 43/51 | 48/51 | 48/51 | 0,898 |
+| Hibrit (bge-m3 + BM25, RRF k=60) | Mevzuat (`n=51`) | 44/51 | 48/51 | 48/51 | 0,908 |
 | Hibrit + reranker (`30` aday) | Mevzuat (`n=51`) | 48/51 | 49/51 | 50/51 | 0,957 |
 | Hibrit | KVKK kararı (`n=12`) | 11/12 | 12/12 | 12/12 | 0,958 |
 | Hibrit + reranker (`30` aday) | KVKK kararı (`n=12`) | 12/12 | 12/12 | 12/12 | 1,000 |
 
-*Kaynak: `results/rerank_compare.md` (GPU fp16 medyan `0,74 sn/sorgu`). Parçalama × yöntem ve BM25 vs `bge-m3` sparse karşılaştırmaları `results/compare_retrieval.md` dosyasındadır.*
+*Kaynak: `results/rerank_compare.md` (GPU fp16 medyan `0,74–1,45 sn/sorgu`, iki koşu). Parçalama × yöntem ve BM25 vs `bge-m3` sparse karşılaştırmaları `results/compare_retrieval.md` dosyasındadır.*
 
 ### CI arama kapısı temel değerleri
 

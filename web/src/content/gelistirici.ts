@@ -85,7 +85,7 @@ export const GELISTIRICI_VERISI = {
       baslik: "Reranker'ı yayında kapalı, ajan modunu varsayılan açık tuttum",
       tarih: "13 Kasım · KARARLAR.md",
       gerekce:
-        "bge-reranker-v2-m3 sıralamayı iyileştirse de (R@1 43→48/51) 16 çekirdek CPU'da soru başına 43–119 sn sürdüğü ve tek adımda uçtan uca doğruluğu değiştirmediği (40/50) için yayında kapalı bırakıldı. Ajan moduysa doğruluğu %80'den %88'e (44/50) çıkardığı için varsayılan açıldı.",
+        "bge-reranker-v2-m3 sıralamayı iyileştirse de (R@1 44→48/51) 16 çekirdek CPU'da soru başına 43–119 sn sürdüğü ve tek adımda uçtan uca doğruluğu değiştirmediği (40/50) için yayında kapalı bırakıldı. Ajan moduysa doğruluğu %80'den %88'e (44/50) çıkardığı için varsayılan açıldı.",
     },
   ] as KararOgesi[],
   kronoloji: [

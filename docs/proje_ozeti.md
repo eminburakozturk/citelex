@@ -24,7 +24,7 @@ Citelex; Türk iş hukuku, İSG ve kişisel verilerin korunması mevzuatı (`52`
 
 **Citelex — Citation-Grounded, Self-Updating RAG for Turkish Legislation**
 
-Citelex is a citation-grounded legal RAG system over Turkish labor, occupational safety, and data-protection law (`52` core documents), backed by an `895`-statute (`44,854`-chunk) broad fallback index. It indexes articles and paragraphs in Qdrant using `bge-m3` dense vectors and Turkish `BM25` sparse search (`RRF`). When a `0.637` threshold (calibrated on a separate `30`-question set) or evidence check fails, a `LangGraph` agent rewrites the query once using statutory terminology, while post-generation verification strips invalid `[n]` citations or abstains.
+Citelex is a citation-grounded legal RAG system over Turkish labor, occupational safety, and data-protection law (`52` core documents), backed by an `895`-statute (`44,843`-chunk) broad fallback index. It indexes articles and paragraphs in Qdrant using `bge-m3` dense vectors and Turkish `BM25` sparse search (`RRF`). When a `0.637` threshold (calibrated on a separate `30`-question set) or evidence check fails, a `LangGraph` agent rewrites the query once using statutory terminology, while post-generation verification strips invalid `[n]` citations or abstains.
 
 On a `56`-question evaluation, agent mode improved accuracy from `80%` (`40/50`) to `88%` (`44/50`, `90%` with GPU reranking), achieving `94%` (`46/49`) fully supported faithfulness via an external `claude-haiku-5.5` judge and `0` invalid citations. Includes SQLite version diffs, OpenTelemetry + Jaeger tracing, an `MCP` server, and `Next.js` / `Tauri 2` clients.
 

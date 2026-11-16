@@ -1,5 +1,5 @@
 {
-  "uretim_tarihi": "2026-11-14T20:00:42+00:00",
+  "uretim_tarihi": "2026-11-16T19:00:57+00:00",
   "modeller": [
     {
       "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan",
@@ -573,10 +573,10 @@
         "kanal": "mevzuat",
         "yontem": "hibrit",
         "n": 51,
-        "r1": 43,
+        "r1": 44,
         "r3": 48,
         "r5": 48,
-        "mrr": 0.898
+        "mrr": 0.908
       },
       {
         "kanal": "mevzuat",
@@ -606,7 +606,7 @@
         "mrr": 1.0
       }
     ],
-    "not": "Rerank süresi: medyan 0.74 sn/sorgu (30 aday, GPU fp16)."
+    "not": "Rerank süresi: medyan 1.45 sn/sorgu (30 aday, GPU fp16)."
   },
   "arama_deneyleri": {
     "dosya": "compare_retrieval.md",

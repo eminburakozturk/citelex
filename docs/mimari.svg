@@ -91,7 +91,7 @@
   <rect class="card-accent" x="568" y="40" width="154" height="106" />
   <text class="h" x="580" y="62">İndeks (Qdrant)</text>
   <text class="s" x="580" y="82">• Derin (17 MB) + Geniş</text>
-  <text class="s" x="580" y="98">  (44.854 parça, 323 MB)</text>
+  <text class="s" x="580" y="98">  (44.843 parça, 323 MB)</text>
   <text class="s" x="580" y="114">• bge-m3 + BM25 (TR)</text>
   <text class="s" x="580" y="130">• Emb. önbelleği (SQLite)</text>
 
