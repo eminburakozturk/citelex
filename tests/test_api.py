@@ -170,7 +170,7 @@ def test_openrouter_devre_kesici(monkeypatch):
         if model == "ucretsiz":
             return httpx.Response(429, json={"error": {"message": "Rate limit exceeded: free-models-per-day"}})
         return httpx.Response(200, json={"model": model, "choices": [{"message": {"content": "tamam"}}]})
-    o = llm_mod.OpenRouterLLM()
+    o = llm_mod.OpenRouterLLM("ucretsiz")  # .env'den bağımsız (CI'da OPENROUTER_MODELS yok)
     o.models = ["ucretsiz", "ucretli"]
     o._http = httpx.Client(transport=httpx.MockTransport(handler))
     assert o.generate("s", "u") == "tamam" and cagri == ["ucretsiz", "ucretli"]
