@@ -1,4 +1,4 @@
-# Citelex — 5 Dakikalık Mülakat Demosu
+# Citelex — 5 Dakikalık Demo Turu
 
 > **Ön hazırlık:** `docker compose --profile izleme up -d` ile Qdrant (`6333`), API + statik arayüz (`http://127.0.0.1:8000/`) ve Jaeger (`http://127.0.0.1:16686/`) açık olmalı. Her adımın altında canlı API/LLM kotası yanıt vermezse kullanılacak yedek plan yer alır.
 
@@ -67,7 +67,7 @@
 
 ---
 
-## Sık Sorulan Mülakat Soruları
+## Sık Sorulan Sorular
 
 ### 1. Neden çekirdeği LangChain'e taşımadın?
 Çalışan ve tek adımlı eval setinde ölçülmüş hibrit arama (`bge-m3` + Türkçe `BM25`, `RRF k=60`) ve kod tarafı atıf doğrulama hattını soyutlama katmanına taşımak kalite kazandırmayıp gerileme riski yaratıyordu. Yalnızca "bilmiyorum" durumunda soruyu yeniden yazıp ikinci kez arayan döngüye ihtiyaç duyulduğunda `LangGraph` eklendi ve tek adımlı hatla aynı `56` soruluk sette yan yana ölçüldü (`KARARLAR.md`).

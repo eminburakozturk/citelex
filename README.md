@@ -1,4 +1,4 @@
-[![CI](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml)
+[![CI](https://github.com/eminburakozturk/citelex/actions/workflows/ci.yml/badge.svg)](https://github.com/eminburakozturk/citelex/actions/workflows/ci.yml) [![Lisans: MIT](https://img.shields.io/badge/lisans-MIT-blue.svg)](LICENSE)
 
 # Citelex — Türk Mevzuatı için Kaynak Gösteren RAG
 
@@ -109,10 +109,11 @@ Kaynak sitelere istekler `robots.txt` kurallarına uyularak, tanımlayıcı bir 
 ### 1. Ortam ve bağımlılıklar
 
 ```bash
-conda activate citelex
-# veya temiz Python 3.11 ortamında (önce donanıma uygun torch, ardından requirements.txt):
-# pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cu126   # CPU için: .../whl/cpu
-# pip install -r requirements.txt
+git clone https://github.com/eminburakozturk/citelex.git && cd citelex
+conda create -n citelex python=3.11 -y && conda activate citelex
+# Önce donanıma uygun torch, ardından requirements.txt:
+pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cu126   # CPU için: .../whl/cpu
+pip install -r requirements.txt
 ```
 
 `.env` dosyasını `.env.example` şablonundan oluşturun (`cp .env.example .env`) ve değerleri kendi anahtarlarınızla doldurun:
