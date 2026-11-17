@@ -53,6 +53,7 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 
 - **Yerel (GPU) vs yayın (CPU) varsayılanı:** En yüksek ölçüm **ajan + reranker** (`45/50`, `KARARLAR.md`) olduğundan yerel GPU ortamında ikisi birlikte varsayılan açıktır. Ancak `bge-reranker-v2-m3` 16 çekirdek CPU'da sorgu başına `43,0–118,9 sn` (`43,0 / 118,9 / 42,9 sn`, `KARARLAR.md`) sürdüğü için `docker-compose.yml` / CPU yayında `CITELEX_RERANK=0` ile kapalı tutulur ve yalnızca **ajan modu** (`44/50`, medyan `2,42 sn`) varsayılan çalışır.
 - **OpenRouter zinciri ve devre kesici:** `OPENROUTER_MODELS` içindeki modeller sırayla denenir (ör. ücretsiz kota dolunca ücretli yedeğe geçer). Günlük kota `429` hatasında ilgili model `1 saat`, diğer `429`'larda `60 sn` devre dışı bırakılır (`KARARLAR.md`).
+- **Canlı demo zinciri:** `nemotron-3-ultra:free → qwen3.7-flash → deepseek-v4.1-flash` (önce ücretsiz, kota dolunca en ucuz ücretli model). Tablodaki "yayın" satırı `deepseek` ile ölçüldü; canlı demoda cevabı çoğunlukla ücretsiz model verir ve bu modelle ajan + geniş katman yapılandırması ayrıca ölçülmedi (tek adımda `39/50`, tam destekli sadakat `%83`). Ücretli modele düşülürse maliyet: gerçek iz kayıtlarında soru başına medyan `~4.500` girdi / `~200` çıktı token'ı; OpenRouter fiyatlarıyla (17 Kas 2026) soru başına `qwen` `~$0,00017`, `deepseek` `~$0,00028`; günlük `300` soru tavanında ayda `~$1,5` / `~$2,5`.
 
 ### Reranker geri getirme ölçümü ve arama deneyleri
 
@@ -74,13 +75,13 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 
 ## Değerlendirme Yöntemi ve Sınırlar
 
-- **Taslak soru seti ve içerik ölçütü:** `56` soruluk sette beklenen cevaplar taslaktır (hukuki doğrulama bekler); `icerik` ölçütü anahtar kelime eşleşmesine dayanır (`KARARLAR.md`).
+- **Soru seti ve içerik ölçütü:** `56` soruluk ana set ile `18` soruluk geniş setin beklenen kaynak ve kanıtları resmî metinle elle doğrulandı (`74/74`, `eval/DOGRULAMA.md`; geliştirici kontrolü, hukukçu incelemesi değildir); `icerik` ölçütü anahtar kelime eşleşmesine dayanır (`KARARLAR.md`).
 - **Hakem kararlılığı:** LLM hakem (`anthropic/claude-haiku-5.5`) üzerindeki `10` kararlık elle kontrolde `9` uyum görülmüştür; asıl sadakat ölçütü tüm iddiaların desteklendiği `tam_destekli` oranıdır (`KARARLAR.md`).
 - **Eşik tercihi:** Kalibrasyon `30` soruluk ayrı sette yapılmış; `0,574` yerine `0,637` eşiği seçilmiştir (`KARARLAR.md`, `results/calibration.md`). Tutucu eşik kısa/genel kapsam içi soruları reddedebilir; ajan modu bu oranı `7/50`'den `1/50`'ye düşürür.
 - **Geniş katman (`895` kanun, `44.843` parça; HF korpusu, Temmuz 2025'e kadar):** doğruluğu tam setle ölçülmedi, cevaplar `"Geniş katman · doğruluğu ölçülmedi"` rozetiyle döner (`CITELEX_GENIS=0` kapatır).
   - *Yönlendirme:* derin katman `0,637` eşiğini geçemezse **veya** geniş katman derin katmandan `0,05`'ten fazla öndeyse. `0,05`, eval setlerinden bağımsız `eval/calibration.jsonl` üzerinde derin katman sorularında görülen en büyük geniş üstünlüğün (`+0,021`) yaklaşık iki katıdır.
   - *Derin katmana etkisi (56 soru):* kapsam içi `45/50` değişmedi. Kapsam dışı ret `6/6 -> 5/6`: "kapsam dışı" etiketli `d03` artık geniş katmandaki `7036` s. Kanun m.3'ten **doğru ve atıflı** cevaplanıyor (etiket geçersizleşti, uydurma değil). Medyan süre `3,98 -> 5,47 sn`.
-  - *Taslak geniş set (`eval/genis_sorular.jsonl`, 15 + 3 soru, `results/genis_check.md`):* R@1 `8/15`, R@5 `14/15`, yönlendirme `14/15`, beklenen madde bağlamda `13/15`, kapsam dışı ret `3/3`. Kalan sınırlar: `g02` eşiğin hemen altında (`0,629`), `g08` ilk 5'te yok. `g13` fark kuralını bulduran örnek olduğu için set bu kural açısından bağımsız değildir.
+  - *Geniş set, küçük örneklem (`eval/genis_sorular.jsonl`, 15 + 3 soru, `results/genis_check.md`):* R@1 `8/15`, R@5 `14/15`, yönlendirme `14/15`, beklenen madde bağlamda `13/15`, kapsam dışı ret `3/3`. Kalan sınırlar: `g02` eşiğin hemen altında (`0,629`), `g08` ilk 5'te yok. `g13` fark kuralını bulduran örnek olduğu için set bu kural açısından bağımsız değildir.
 
 ## Kendini güncelleme
 

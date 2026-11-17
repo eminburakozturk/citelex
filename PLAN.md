@@ -109,9 +109,10 @@ Stitch editoryal arayüz (/, /pano, /degisiklikler, /yontem, /gelistirici; Light
 Tauri EXE/APK, CI (cssselect düzeltildi), README son hali, sunucuda günlük güncelleme (kapsayıcıda doğrulandı).
 Sürenler (Antigravity): sohbet 1 = masaüstü CSP + web/out üzerine yazmama; sohbet 2 = Playwright uçtan uca testleri
 (ci.yml'deki Playwright adımları onun testleri commit'lenince commit'lenecek).
+17 Kas: eval doğrulaması 74/74 (kullanıcı), geliştirici sayfası CV'den dolduruldu, public öncesi denetim temiz (gizli değer yok).
 KALAN: (1) Oracle yayını — kullanıcı hesap/VM açıp IP verecek; sonra paket yeniden üretilir (scripts/yayin_oracle.py),
-kurulum.sh + duman testi. (2) Kullanıcıdan: geliştirici sayfası bilgileri (web/src/content/gelistirici.ts), eval
-doğrulaması (eval/DOGRULAMA.md, 74 soru), repo public kararı (yazar e-postası, CLAUDE.md/AGENTS.md, .claude/launch.json).
+kurulum.sh + duman testi. (2) Kullanıcıdan: kod lisansı (LICENSE yok), demo zincirinde ücretli yedek (qwen en ucuz / deepseek
+daha sadık), repo'yu public açma (push ve ayar kullanıcıda).
 
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)
 Hedef rol: yapay zekâ / ürün geliştirici. Sıra CV değerine göre: önce canlı ve ölçülen sistem, sonra
@@ -138,7 +139,7 @@ Kendini güncelleme ve değerlendirme setinden VAZGEÇİLMEZ.
 - Geniş katman (~900 kanun, HF corpus) kurulmadı; Qdrant Cloud ücretsiz katmanına (1 GB) sığıp sığmadığı ölçülmeli.
 - `sources/resmigazete.py` (erken uyarı) ve `sources/hf_corpus.py` yazılmadı.
 - Mevzuat PDF'i değişiklik yolu canlı test edilmedi.
-- Eval seti kullanıcı doğrulaması bekliyor.
+- ~~Eval seti kullanıcı doğrulaması bekliyor.~~ 17 Kas: 74/74 doğrulandı.
 - Gemini ile tam eval yapılamadı (ücretsiz kota günde 20 istek); model/faturalama kararı kullanıcıda.
 - madde/fikra koleksiyonları 6331 ve bent parçalamasıyla güncellenmedi (19 Kas'ta yeniden kurulacak).
 - Günlük toplam istek tavanı (CITELEX_GUNLUK_TOPLAM) yayından önce Gemini günlük kotasına göre ayarlanmalı.
