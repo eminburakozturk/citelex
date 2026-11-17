@@ -26,7 +26,7 @@ echo "== 3/6 .env (gizli değerler)"
 if [ ! -f .env ]; then
   read -rsp "OPENROUTER_API_KEY: " KEY; echo
   read -rp  "OPENROUTER_MODELS (virgüllü; boş = önerilen zincir): " MODELS
-  MODELS="${MODELS:-nvidia/nemotron-3-ultra-550b-a55b:free,qwen/qwen3.7-flash,deepseek/deepseek-v4.1-flash-1017}"
+  MODELS="${MODELS:-nvidia/nemotron-3-ultra-550b-a55b:free,deepseek/deepseek-v4.1-flash-1017,qwen/qwen3.7-flash}"
   umask 077
   printf 'CITELEX_LLM=openrouter\nOPENROUTER_API_KEY=%s\nOPENROUTER_MODELS=%s\nALAN_ADI=%s\n' "$KEY" "$MODELS" "$ALAN_ADI" > .env
 else
