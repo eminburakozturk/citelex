@@ -24,16 +24,16 @@ export interface BaglantiOgesi {
 
 export const GELISTIRICI_VERISI = {
   kimlik: {
-    basHarfler: "AD",
-    adSoyad: "[Ad Soyad]",
-    unvan: "[Ünvan / Hedef Rol]",
-    altBaslik: "[Şehir · İletişim / E-posta]",
+    basHarfler: "EB",
+    adSoyad: "Emin Burak Öztürk",
+    unvan: "Yapay Zekâ Operatörlüğü Öğrencisi & AI Geliştirici",
+    altBaslik: "Balıkesir / Ankara · eminburak1410@gmail.com",
     biyografi:
-      "[Kısa biyografi: 2-3 cümle — Türkçe mevzuat için ölçülebilir, atıf doğrulamalı soru-cevap sistemi Citelex hakkında geliştirici notu buraya gelecek.]",
+      "Balıkesir Üniversitesi Yapay Zekâ Operatörlüğü 2. sınıf öğrencisiyim; makine öğrenmesi, açıklanabilir yapay zekâ ve karar destek sistemleri üzerine projeler geliştiriyorum. Citelex'i, kaynak gösteren bir RAG sisteminin veriden yayına kadar ölçülerek nasıl kurulacağını göstermek için yaptım: her cevap madde atfıyla doğrulanıyor, kanıt yetmezse sistem 'bilmiyorum' diyor. Şubat–Haziran 2027'de Ankara veya Balıkesir'de tam zamanlı iş yeri eğitimi (staj) yapacağım.",
     baglantilar: [
-      { etiket: "GitHub", href: "#github-ekle", yerTutucu: true },
-      { etiket: "LinkedIn", href: "#linkedin-ekle", yerTutucu: true },
-      { etiket: "CV (PDF)", href: "#cv-ekle", yerTutucu: true },
+      { etiket: "GitHub", href: "https://github.com/eminburakozturk", yerTutucu: false },
+      { etiket: "LinkedIn", href: "https://www.linkedin.com/in/emin-burak-%C3%B6zt%C3%BCrk", yerTutucu: false },
+      { etiket: "E-posta", href: "mailto:eminburak1410@gmail.com", yerTutucu: false },
     ] as BaglantiOgesi[],
   },
   odaklar: [

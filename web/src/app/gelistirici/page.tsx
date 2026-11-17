@@ -35,8 +35,7 @@ export default function GelistiriciSayfasi() {
           <p className="mt-4 font-serif text-[15px] leading-relaxed text-ink">{kimlik.biyografi}</p>
 
           <p role="note" className="mt-3 rounded-lg bg-warn-bg px-3 py-2 text-xs text-warn-ink">
-            Kişisel bilgiler yer tutucudur; <code className="font-mono">web/src/content/gelistirici.ts</code> dosyasından
-            doldurulabilir. Kararlar, tarihler ve teknoloji listesi gerçek proje kayıtlarından alınmıştır.
+            Kararlar, tarihler ve teknoloji listesi gerçek proje kayıtlarından (KARARLAR.md) alınmıştır.
           </p>
 
           <div className="mt-4 grid grid-cols-3 gap-2 border-t border-line pt-4">
@@ -45,6 +44,8 @@ export default function GelistiriciSayfasi() {
                 key={b.etiket}
                 href={b.href}
                 aria-disabled={b.yerTutucu ? "true" : undefined}
+                target={b.href.startsWith("http") ? "_blank" : undefined}
+                rel={b.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 onClick={b.yerTutucu ? (e) => e.preventDefault() : undefined}
                 title={b.yerTutucu ? "gelistirici.ts içinden bağlantı ekleyin" : b.etiket}
                 className={`inline-flex min-h-[44px] items-center justify-center rounded-lg border px-3 py-2 text-xs font-medium transition-colors ${
