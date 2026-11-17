@@ -194,3 +194,7 @@ citelex/
 - **Fark JSON'unun önceden hesaplanması:** `src/update/diff.py` değişiklik anında kelime farkını `data/store/farklar/<fark_id>.json` olarak yazar; canlıda ham sürüm dosyası tutulmaz (`KARARLAR.md`).
 - **Çekirdeği LangChain'e taşımama:** Hazır hibrit + RRF + atıf doğrulama hattı gerileme riski yaratmamak için sade bırakıldı; LangGraph yalnızca ajan modunda kullanılır (`KARARLAR.md`).
 - **OpenTelemetry + Jaeger seçimi:** Langfuse harici hesap veya ağır yan servisler gerektirdiğinden satıcı bağımsız OTel + `logs/izler.jsonl` seçildi (`KARARLAR.md`).
+
+## Lisans
+
+Kod [MIT lisansı](LICENSE) ile yayımlanır. Bu lisans yalnız bu depodaki kodu kapsar: mevzuat metinleri ve KVKK kararları kendi kaynaklarına aittir, geniş katman verisi (`hasankursun/turkish-legislation-corpus`) **CC-BY-4.0** ile lisanslıdır ve atıf gerektirir (bkz. [Veri kaynakları](#veri-kaynakları)). Sistem hukuki tavsiye vermez.
