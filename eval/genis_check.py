@@ -1,11 +1,11 @@
-"""Geniş katman arama ölçümü (LLM yok): eval/genis_sorular.jsonl (TASLAK; kullanıcı doğrulaması bekliyor).
+"""Geniş katman arama ölçümü (LLM yok): eval/genis_sorular.jsonl (resmî metinle elle doğrulandı).
 
 Her soru için:
   yonlendirme : üretim yolu (build_context) soruyu geniş katmana yönlendirdi mi (derin katman eşiği geçilemedi ve
                 geniş katman eşiği geçildi) — kapsam dışı sorularda hiçbir kanala gitmemesi beklenir
   bağlam      : beklenen "belge_id:madde_no" üretim yolunun bağlamında mı
   R@1 / R@5   : doğrudan geniş katman hibrit aramasında beklenen maddenin sırası (madde düzeyinde)
-Küçük örneklem (15 + 3); taslak set olduğu için sonuçlar gösterge niteliğindedir.
+Küçük örneklem (15 + 3); küçük örneklem olduğu için sonuçlar gösterge niteliğindedir.
 
 Kullanım: python -m eval.genis_check
 """
@@ -38,8 +38,8 @@ def main() -> None:
     ic = [r for r in rows if r["tur"] != "kapsam_disi"]
     dis = [r for r in rows if r["tur"] == "kapsam_disi"]
     yon = sum(r["kanallar"] == ["genis"] for r in ic)
-    L = ["# Geniş katman arama ölçümü (taslak set, LLM yok)", "",
-         f"Eşik {esik}. Soru: {len(ic)} kapsam içi + {len(dis)} kapsam dışı (eval/genis_sorular.jsonl, TASLAK).", "",
+    L = ["# Geniş katman arama ölçümü (küçük örneklem, LLM yok)", "",
+         f"Eşik {esik}. Soru: {len(ic)} kapsam içi + {len(dis)} kapsam dışı (eval/genis_sorular.jsonl, elle doğrulandı).", "",
          "| Ölçüt | Değer |", "|---|---|",
          f"| Geniş katmana yönlendirildi | {yon}/{len(ic)} |",
          f"| Beklenen madde üretim bağlamında | {sum(r['baglamda'] for r in ic)}/{len(ic)} |",

@@ -2,7 +2,7 @@
 
 Tarih: 2026-11-12 22:44 | commit: 9755794 | eşik: 0.574 | soru: 52 (46 kapsam içi, 6 kapsam dışı) | hata: 0
 
-Beklenen cevaplar TASLAK (kullanıcı doğrulaması bekliyor). `icerik` anahtar kelime eşleşmesidir; kesin doğruluk için ham cevaplar elle okunmalı.
+Beklenen cevaplar resmî metinle elle doğrulandı (74/74; geliştirici kontrolü, hukukçu incelemesi değildir) (2026-11-17). `icerik` anahtar kelime eşleşmesidir; kesin doğruluk için ham cevaplar elle okunmalı.
 
 ## Kapsam içi
 

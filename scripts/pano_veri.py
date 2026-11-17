@@ -319,7 +319,7 @@ def parse_genis_check() -> dict | None:
         return None
     return {
         "dosya": path.name,
-        "taslak": True,
+        "taslak": False,
         "not": aciklama,
         "ozet": ozet,
         "sorular": sorular,

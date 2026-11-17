@@ -132,7 +132,7 @@ export default function PanoSayfasi() {
         )}
 
         <p role="note" className="rounded-xl border border-warn-border bg-warn-bg px-4 py-3 text-xs leading-relaxed text-warn-ink">
-          Beklenen cevaplar ve arama altın etiketleri taslaktır; kapsamlı hukuki doğrulama bekler.{" "}
+          Beklenen cevaplar ve arama altın etiketleri resmî metinle elle doğrulandı (74/74; geliştirici kontrolü, hukukçu incelemesi değildir).{" "}
           <strong>Sadakat:</strong> LLM hakem (<code>claude-haiku-5.5</code>) cevabın her iddiasının atıf yaptığı
           kaynakla desteklenip desteklenmediğini ölçer; <em>tam destekli</em> oranı hem <code>kısmen = 0</code> hem{" "}
           <code>desteksiz = 0</code> olan cevapları sayar (10 kararda 9 elle uyum).

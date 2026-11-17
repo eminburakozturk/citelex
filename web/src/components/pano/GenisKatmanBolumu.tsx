@@ -20,7 +20,7 @@ export function GenisKatmanBolumu({ veri }: { veri?: GenisKatmanVerisi | null })
               role="note"
               className="rounded-full border border-warn-border bg-warn-bg px-2.5 py-0.5 text-[11px] font-semibold text-warn-ink"
             >
-              TASLAK soru seti
+              Küçük örneklem
             </span>
           </div>
         </div>
@@ -29,7 +29,7 @@ export function GenisKatmanBolumu({ veri }: { veri?: GenisKatmanVerisi | null })
 
       <p role="note" className="rounded-xl border border-warn-border bg-warn-bg px-4 py-3 text-xs leading-relaxed text-warn-ink">
         Geniş katman soru seti (<code>eval/genis_sorular.jsonl</code>: 15 kapsam içi + 3 kapsam dışı) ve açık
-        değerlendirme beklenen cevapları <strong>TASLAK</strong> olup hukuki doğrulama bekler; eşik ve yönlendirme bu sete
+        değerlendirme beklenen cevapları resmî metinle elle doğrulandı; küçük örneklem olduğundan sonuçlar gösterge niteliğindedir; eşik ve yönlendirme bu sete
         göre ayarlanmamıştır. Yönlendirme: derin katman eşiği geçemezse ya da geniş katman derin katmandan 0,05'ten fazla
         önde ise geniş katmana gidilir (0,05 ayrı kalibrasyon setinden seçildi; bu kural <code>g13</code> — devlet memuru
         analık izninin İş Kanunu m. 74'e gitmesi — üzerine eklendiği için geniş set bu kural açısından bağımsız değildir).

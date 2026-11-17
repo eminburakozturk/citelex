@@ -12,7 +12,7 @@ Kapsam dışı sorularda:
 SINIRLAR (README'de de yazılmalı):
   - icerik anahtar kelime eşleşmesidir: doğru kelimeyi yanlış bağlamda yazan cevap geçer, doğru cevabı
     farklı kelimeyle yazan cevap kalır. Ham cevaplar .jsonl'de; şüpheli olanlar elle okunmalı.
-  - Beklenen cevaplar taslaktır (eval/validate_questions.py yalnız derlemdeki metne dayandığını doğrular);
+  - Beklenen cevaplar resmî metinle elle doğrulandı (eval/DOGRULAMA.md, 74/74); eval/validate_questions.py ayrıca yalnız derlemdeki metne dayandığını doğrular);
     kullanıcı doğrulaması bekliyor.
   - Eşik ve prompt bu set üzerinde AYARLANMAZ (kalibrasyon ayrı sette).
 
@@ -124,7 +124,7 @@ def main() -> None:
     L = [f"# Değerlendirme — {ans.llm.name}", "",
          f"Tarih: {datetime.now():%Y-%m-%d %H:%M} | commit: {commit} | eşik: {ans.cfg.get('esik')} | reranker: {'açık' if ans.searcher.rerank else 'kapalı'} | soru: {len(rows)} "
          f"({len(ic)} kapsam içi, {len(dis)} kapsam dışı) | hata: {errors}", "",
-         "Beklenen cevaplar TASLAK (kullanıcı doğrulaması bekliyor). `icerik` anahtar kelime eşleşmesidir; "
+         "Beklenen cevaplar resmî metinle elle doğrulandı (74/74; geliştirici kontrolü, hukukçu incelemesi değildir). `icerik` anahtar kelime eşleşmesidir; "
          "kesin doğruluk için ham cevaplar elle okunmalı.", "",
          "## Kapsam içi", "", "| Ölçüt | Tümü | Mevzuat | Karar |", "|---|---|---|---|"]
     for k, ad in [("baglam", "Beklenen kaynak bağlamda"), ("atif", "Beklenen kaynağa atıf"), ("icerik", "Cevap içeriği (anahtar)"),

@@ -1,5 +1,5 @@
 {
-  "uretim_tarihi": "2026-11-16T19:00:57+00:00",
+  "uretim_tarihi": "2026-11-17T00:01:31+00:00",
   "modeller": [
     {
       "anahtar": "openrouter:deepseek/deepseek-v4.1-flash-1017|reranker+ajan",
@@ -722,8 +722,8 @@
   "genis_katman": {
     "arama": {
       "dosya": "genis_check.md",
-      "taslak": true,
-      "not": "Eşik 0.637. Soru: 15 kapsam içi + 3 kapsam dışı (eval/genis_sorular.jsonl, TASLAK).",
+      "taslak": false,
+      "not": "Eşik 0.637. Soru: 15 kapsam içi + 3 kapsam dışı (eval/genis_sorular.jsonl, elle doğrulandı 2026-11-17).",
       "ozet": [
         {
           "olcut": "Geniş katmana yönlendirildi",
@@ -916,7 +916,7 @@
         "dosya": "eval_openrouter_deepseek_deepseek_v4.1_flash_1017_ajan_genis.md",
         "model": "openrouter:deepseek/deepseek-v4.1-flash-1017",
         "bilgi": "Tarih: 2026-11-14 22:55 | commit: 001896b | eşik: 0.637 | reranker: kapalı | soru: 56 (50 kapsam içi, 6 kapsam dışı) | hata: 0",
-        "taslak_not": "Beklenen cevaplar TASLAK (kullanıcı doğrulaması bekliyor). `icerik` anahtar kelime eşleşmesidir; kesin doğruluk için ham cevaplar elle okunmalı.",
+        "taslak_not": "Beklenen cevaplar resmî metinle elle doğrulandı (74/74; geliştirici kontrolü, hukukçu incelemesi değildir) (2026-11-17). `icerik` anahtar kelime eşleşmesidir; kesin doğruluk için ham cevaplar elle okunmalı.",
         "olcutler": [
           {
             "olcut": "Beklenen kaynak bağlamda",
@@ -1028,7 +1028,7 @@
         "dosya": "eval_openrouter_deepseek_deepseek_v4.1_flash_1017_rerank_ajan_genis.md",
         "model": "openrouter:deepseek/deepseek-v4.1-flash-1017",
         "bilgi": "Tarih: 2026-11-14 00:02 | commit: 2f828ba | eşik: 0.637 | reranker: açık | soru: 56 (50 kapsam içi, 6 kapsam dışı) | hata: 0",
-        "taslak_not": "Beklenen cevaplar TASLAK (kullanıcı doğrulaması bekliyor). `icerik` anahtar kelime eşleşmesidir; kesin doğruluk için ham cevaplar elle okunmalı.",
+        "taslak_not": "Beklenen cevaplar resmî metinle elle doğrulandı (74/74; geliştirici kontrolü, hukukçu incelemesi değildir) (2026-11-17). `icerik` anahtar kelime eşleşmesidir; kesin doğruluk için ham cevaplar elle okunmalı.",
         "olcutler": [
           {
             "olcut": "Beklenen kaynak bağlamda",

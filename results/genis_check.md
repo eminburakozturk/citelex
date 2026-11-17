@@ -1,6 +1,6 @@
-# Geniş katman arama ölçümü (taslak set, LLM yok)
+# Geniş katman arama ölçümü (küçük örneklem, LLM yok)
 
-Eşik 0.637. Soru: 15 kapsam içi + 3 kapsam dışı (eval/genis_sorular.jsonl, TASLAK).
+Eşik 0.637. Soru: 15 kapsam içi + 3 kapsam dışı (eval/genis_sorular.jsonl, elle doğrulandı 2026-11-17).
 
 | Ölçüt | Değer |
 |---|---|

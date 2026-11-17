@@ -193,9 +193,9 @@ export default function YontemSayfasi() {
           </h2>
           <ul className="list-disc space-y-2 pl-5 text-xs leading-relaxed text-muted">
             <li>
-              <strong className="text-ink">Taslak altın etiketler:</strong> 56 soruluk derin katman seti ile{" "}
-              {genisArama ? `${genisArama.sorular.length} soruluk ` : ""}geniş katman taslak soru setinin beklenen
-              cevapları hukuki doğrulama bekler; kalibrasyon eşiği (0,637) test setine değil ayrı kalibrasyon setine göre
+              <strong className="text-ink">Altın etiketler:</strong> 56 soruluk derin katman seti ile{" "}
+              {genisArama ? `${genisArama.sorular.length} soruluk ` : ""}geniş katman soru setinin beklenen
+              cevapları resmî metinle elle doğrulandı (hukukçu incelemesi değildir); kalibrasyon eşiği (0,637) test setine değil ayrı kalibrasyon setine göre
               ayarlanmıştır.
             </li>
             <li>
