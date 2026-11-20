@@ -110,8 +110,8 @@ Tauri EXE/APK, CI (cssselect düzeltildi), README son hali, sunucuda günlük g�
 Sürenler (Antigravity): sohbet 1 = masaüstü CSP + web/out üzerine yazmama; sohbet 2 = Playwright uçtan uca testleri
 (ci.yml'deki Playwright adımları onun testleri commit'lenince commit'lenecek).
 17 Kas: eval doğrulaması 74/74 (kullanıcı), geliştirici sayfası CV'den dolduruldu, public öncesi denetim temiz (gizli değer yok).
-KALAN: (1) Oracle yayını — kullanıcı hesap/VM açıp IP verecek; sonra paket yeniden üretilir (scripts/yayin_oracle.py),
-kurulum.sh + duman testi. (2) Repo'yu eminburakozturk hesabında public açma (Claude in Chrome ile, kullanıcı başlatınca); lisans MIT eklendi (push ve ayar kullanıcıda).
+21 Kas: YAYINDA https://89-168-74-245.sslip.io (Oracle A1 4/24, Frankfurt); duman testi 9/9, sunucuda günlük güncelleme
+52/52 hatasız, cron 03:00. Repo public: github.com/eminburakozturk/citelex. Takvimdeki işler bitti; kalan iş yok.
 
 ### Takvim v2 (2026-11-13; 16–17 Kas satırlarının yerine geçer)
 Hedef rol: yapay zekâ / ürün geliştirici. Sıra CV değerine göre: önce canlı ve ölçülen sistem, sonra

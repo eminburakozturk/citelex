@@ -10,7 +10,9 @@ Tek sanal makinede Qdrant + API + Caddy (otomatik HTTPS). Yayın yapılandırmas
    - Shape: **VM.Standard.A1.Flex** (Ampere ARM), **4 OCPU, 24 GB RAM** (Always Free sınırı içinde)
    - Boot volume: 100 GB yeterli (Always Free toplam 200 GB)
    - SSH anahtarı: kendi açık anahtarını yükle (ya da Oracle'ın ürettiğini indir).
-   "Out of capacity" hatası alırsan bir süre sonra tekrar dene ya da başka erişilebilirlik alanı seç.
+   "Out of capacity" hatası alırsan (Frankfurt'ta üç AD de doluydu): OCI API anahtarı oluştur (`~/.oci/config`) ve
+   `python deploy/oracle/a1_dene.py --subnet <ocid> --image <ocid> --ssh ~/.ssh/id_ed25519.pub` ile kapasite açılana
+   kadar otomatik dene.
 3. Networking → VCN → Security List → Ingress Rules: **TCP 80** ve **TCP 443**, kaynak `0.0.0.0/0` ekle.
 4. Makinenin **genel IP**'sini not et. Alan adın yoksa adres: `<ip-tireli>.sslip.io`
    (ör. IP 129.146.10.20 -> `129-146-10-20.sslip.io`); sertifikayı Caddy kendisi alır.
@@ -26,7 +28,7 @@ Paket: commit'lenmiş kod + Qdrant anlık görüntüleri (derin + geniş katman)
 ## 3. Sunucuda kur
 ```bash
 ssh ubuntu@<IP>
-tar xzf citelex_paket.tar.gz
+sudo tar xzf citelex_paket.tar.gz   # sudo: kapsayıcı verisi uid 1000'e aittir
 bash citelex/deploy/oracle/kurulum.sh <ip-tireli>.sslip.io
 ```
 Betik Docker'ı kurar, 80/443'ü iptables'ta açar, OpenRouter anahtarını sorar (`.env`, yalnız sahibi okur), indeksi
@@ -42,7 +44,7 @@ geri yükler, API'yi derler (ARM'de ilk derleme ~10-15 dk; bge-m3 ilk açılış
 - Günlükler: `sudo docker compose -f citelex/deploy/oracle/docker-compose.oracle.yml logs -f api`
 
 ## Güncelleme
-Yeni sürüm: paketi yeniden üret, kopyala, `tar xzf` (üzerine yazar; `.env` korunur), `kurulum.sh` yeniden çalıştır.
+Yeni sürüm: paketi yeniden üret, kopyala, `sudo tar xzf` (üzerine yazar; `.env` korunur), `kurulum.sh` yeniden çalıştır.
 **Günlük otomatik güncelleme sunucuda kuruludur** (kurulum.sh cron'a ekler; her gün 03:00):
 kaynakları (mevzuat.gov.tr, kvkk.gov.tr) kontrol eder, değişen belgeyi yeniden ayrıştırır, Qdrant'ı artımlı günceller
 (yalnız değişen parçalar embed edilir), madde farkını üretir (/degisiklikler), Resmî Gazete erken uyarısını yazar ve

@@ -4,6 +4,8 @@
 
 **Citelex**, Türk iş hukuku ve kişisel verilerin korunması alanındaki derin katman mevzuatını (`12` mevzuat belgesi ve `40` seçili KVKK Kurul kararı; toplam `52` belge) ve gerektiğinde `895` kanunluk (`44.843` parça) geniş katmanı madde/fıkra düzeyinde dizinleyip her iddiayı resmi kaynağa dayandırarak yanıtlayan, kaynak değiştikçe kendini güncelleyebilen ve kanıt yetersiz kaldığında `"bilmiyorum"` diyebilen bir RAG sistemidir.
 
+**Canlı demo:** https://89-168-74-245.sslip.io (Oracle Cloud Always Free, ARM; günlük soru sınırı vardır)
+
 > **Uyarı:** Bu sistem hukuki tavsiye vermez; yalnızca dizinlenen mevzuat ve kurul kararları üzerinden kaynak göstererek bilgi sunar.
 
 ## Mimari
@@ -91,7 +93,7 @@ Diğer ekranlar: [Kapsam dışı ret](docs/ekran/03_bilmiyorum.png) · [Mobil g�
 
 ## Yayın
 
-Tek sanal makinede (Oracle Cloud Always Free, ARM): Qdrant + API + Caddy (otomatik HTTPS) ve gece çalışan güncelleme servisi. Paketleme, kurulum ve duman testi: [deploy/oracle/README.md](deploy/oracle/README.md). Yayında reranker kapalıdır (CPU'da ~43 sn/sorgu); ajan ve geniş katman açıktır.
+Canlı adres: https://89-168-74-245.sslip.io. Tek sanal makinede (Oracle Cloud Always Free, ARM, 4 OCPU / 24 GB): Qdrant + API + Caddy (otomatik HTTPS) ve gece çalışan güncelleme servisi. Paketleme, kurulum ve duman testi: [deploy/oracle/README.md](deploy/oracle/README.md). Yayında reranker kapalıdır (CPU'da ~43 sn/sorgu); ajan ve geniş katman açıktır.
 
 ## Veri kaynakları
 
