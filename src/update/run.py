@@ -38,7 +38,7 @@ import httpx
 import pdfplumber
 
 from src.sources import kvkk
-from src.sources.http import FetchError, get
+from src.sources.http import FetchError, get, istemci
 from src.store import db
 from src.update import diff as fark
 
@@ -122,7 +122,7 @@ def init(con) -> None:
 
 def check(con, run_id: str, docs: list[dict], fake: dict[str, str]) -> tuple[list[dict], int]:
     changed, errors = [], 0
-    with httpx.Client() as client:
+    with istemci() as client:
         for doc in docs:
             try:
                 raw = Path(fake[doc["doc_key"]]).read_bytes() if doc["doc_key"] in fake else fetch_raw(doc, client)

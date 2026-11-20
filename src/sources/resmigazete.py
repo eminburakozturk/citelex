@@ -26,7 +26,7 @@ import httpx
 import pdfplumber
 from lxml import html as lhtml
 
-from src.sources.http import FetchError, get
+from src.sources.http import FetchError, get, istemci
 
 BASE = "https://www.resmigazete.gov.tr"
 FIHRIST_URL = BASE + "/eskiler/{gun:%Y/%m/%Y%m%d}.htm"
@@ -273,7 +273,7 @@ def kontrol_et(
         sources = load_sources()
     url = FIHRIST_URL.format(gun=gun)
     own_client = client is None
-    cl = client or httpx.Client()
+    cl = client or istemci()
     try:
         try:
             resp = get(url, client=cl)
@@ -345,7 +345,7 @@ def main() -> int:
     errors = 0
     t0 = time.monotonic()
 
-    with httpx.Client() as cl:
+    with istemci() as cl:
         for d in days:
             try:
                 recs = kontrol_et(d, client=cl, sources=sources)

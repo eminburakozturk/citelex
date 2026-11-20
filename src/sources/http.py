@@ -7,8 +7,10 @@
 """
 from __future__ import annotations
 
+import ssl
 import time
 import urllib.robotparser
+from pathlib import Path
 from urllib.parse import urlsplit
 
 import httpx
@@ -21,6 +23,25 @@ _robots: dict[str, urllib.robotparser.RobotFileParser] = {}
 
 class FetchError(RuntimeError):
     pass
+
+
+# Bazı resmî siteler (kvkk.gov.tr) yalnız kendi sertifikasını gönderip ara sertifikayı göndermiyor. Windows eksik
+# ara sertifikayı kendisi indirir, Linux/OpenSSL indirmez -> CERTIFICATE_VERIFY_FAILED. Doğrulama KAPATILMAZ: eksik
+# ara sertifikalar (kökü certifi deposunda olan) güven deposuna eklenir, zincir yine köke kadar doğrulanır.
+EK_SERTIFIKALAR = Path(__file__).resolve().parents[2] / "configs" / "certs" / "eksik_ara_sertifikalar.pem"
+
+
+def ssl_baglami() -> ssl.SSLContext:
+    import certifi
+    ctx = ssl.create_default_context(cafile=certifi.where())
+    if EK_SERTIFIKALAR.exists():
+        ctx.load_verify_locations(cafile=str(EK_SERTIFIKALAR))
+    return ctx
+
+
+def istemci(**kw) -> httpx.Client:
+    """Kaynak siteler için httpx istemcisi (eksik ara sertifikalarla)."""
+    return httpx.Client(verify=ssl_baglami(), **kw)
 
 
 def _allowed(url: str, client: httpx.Client) -> bool:
@@ -38,7 +59,7 @@ def _allowed(url: str, client: httpx.Client) -> bool:
 
 def get(url: str, client: httpx.Client | None = None, timeout: float = 60) -> httpx.Response:
     own = client is None
-    client = client or httpx.Client()
+    client = client or istemci()
     try:
         if not _allowed(url, client):
             raise FetchError(f"robots.txt izin vermiyor: {url}")

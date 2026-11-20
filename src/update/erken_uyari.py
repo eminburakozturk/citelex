@@ -14,7 +14,7 @@ from pathlib import Path
 
 import httpx
 
-from src.sources.http import FetchError
+from src.sources.http import FetchError, istemci
 from src.sources.resmigazete import kontrol_et, load_sources
 
 LOG_PATH = Path("logs/erken_uyari.jsonl")
@@ -56,7 +56,7 @@ def kontrol_ve_kaydet(
     yeni: list[dict] = []
 
     own_client = client is None
-    cl = client or httpx.Client()
+    cl = client or istemci()
     try:
         for d in days:
             try:

@@ -33,6 +33,10 @@ else
   grep -q '^ALAN_ADI=' .env || echo "ALAN_ADI=$ALAN_ADI" >> .env
 fi
 mkdir -p logs store veri/results
+# Kapsayıcı uid 1000 (Dockerfile) ile çalışır; Oracle Ubuntu'da 'ubuntu' kullanıcısı 1001 olabilir.
+# store/ ve veri/ yalnız kapsayıcı yazar; logs/'a hem kapsayıcı hem sunucudaki cron yazar.
+sudo chown -R 1000:1000 store veri
+sudo chmod -R a+rwX logs
 export ALAN_ADI
 
 COMPOSE="$DOCKER compose --env-file .env -f deploy/oracle/docker-compose.oracle.yml"
@@ -57,7 +61,8 @@ $COMPOSE up -d --build api caddy
 echo "== Günlük güncelleme (cron, her gün 03:00; günlük: logs/guncelle.log)"
 mkdir -p veri/results
 CRON="0 3 * * * cd $KOK && $COMPOSE --profile guncelle run --rm guncelle >> $KOK/logs/guncelle.log 2>&1"
-( crontab -l 2>/dev/null | grep -v 'run --rm guncelle' ; echo "$CRON" ) | crontab -
+# İlk kurulumda crontab yoktur: crontab -l / grep -v boş girdide 1 döner, set -euo pipefail betiği durdururdu.
+( { crontab -l 2>/dev/null || true; } | { grep -v 'run --rm guncelle' || true; } ; echo "$CRON" ) | crontab -
 # Sudo gerektiren docker komutu cron'da çalışsın diye kullanıcı docker grubundaysa sudo'suz sürüm kullanılır.
 if id -nG "$USER" | grep -qw docker; then crontab -l | sed 's/sudo docker/docker/' | crontab -; fi
 

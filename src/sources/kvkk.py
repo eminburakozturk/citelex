@@ -15,7 +15,7 @@ from pathlib import Path
 import httpx
 from lxml import html as lhtml
 
-from src.sources.http import get
+from src.sources.http import get, istemci
 
 BASE = "https://www.kvkk.gov.tr"
 _WS = re.compile(r"[ \t \r\n]+")
@@ -86,7 +86,7 @@ def main() -> None:
         return
     cfg = json.load(open("configs/kvkk_kararlar.json", encoding="utf-8"))["kararlar"]
     same = diff = 0
-    with httpx.Client() as cl:
+    with istemci() as cl:
         for k in cfg:
             local = Path("data/raw/kvkk_karar") / k["dosya"].replace(".html", ".txt")
             got = fetch_decision(k["url"], cl)
